@@ -11,6 +11,7 @@ let
 in
 {
   imports = [
+    ./ez-config.nix
     ./overlays.nix
   ];
 
@@ -38,7 +39,7 @@ in
         pkgs = import inputs.nixpkgs {
           inherit system;
           inherit (sharedNixpkgs) config;
-          overlays = (lib.attrValues inputs.self.overlays) ++ [ ];
+          overlays = lib.attrValues inputs.self.overlays ++ [ ];
         };
       };
     };
