@@ -1,0 +1,2 @@
+*.sops.yaml diff=sopsdiffer
+secrets/*.sops.norg diff=sopsdiffer

@@ -1,0 +1,128 @@
+let
+  icons = {
+    archlinux = "";
+    bookmark = "";
+    bottom = "↓";
+    box_drawing_up = "│";
+    box_drawing_up_right = "└";
+    bug = "";
+    camera = "";
+    checkmark = "✔";
+    chevron_down = "";
+    chevron_right = "";
+    chevron_left = "";
+    chevron_up = "";
+    circle_left = "";
+    circle_left_1 = "";
+    circle_right = "";
+    circle_right_1 = "";
+    clipboard = "󰅇";
+    cloud = "";
+    code = "󰘦";
+    cross = "󰅖";
+    cross_1 = "󰅗";
+    cross_2 = "󰅘";
+    cross_3 = "";
+    cross_4 = "";
+    database = "";
+    dot = "•";
+    eol = "↩";
+    face = "󰏚";
+    file = "";
+    file_code = "";
+    file_text = "";
+    file_tree = "󰙅";
+    files = "";
+    find_replace = "󰛔";
+    folder = "";
+    folder_close = "";
+    folder_open = "";
+    folder_empty = "";
+    folder_root = "";
+    folder_root_open = "";
+    free_bsd = "";
+    function = "";
+    gear = "";
+    gear_sm = "⛭";
+    git = "";
+    github = "";
+    hint = "";
+    horizontal = "─";
+    house = "";
+    indent = "▎";
+    info = "ℹ";
+    info_1 = "";
+    info_2 = "";
+    journal = "";
+    lang_neovim = "";
+    lang_nix = "󱄅";
+    lang_org = "";
+    lang_reason = "";
+    lang_vim = "";
+    lightbulb = "";
+    lightning = "";
+    linux = "";
+    list_group = "󱡠";
+    markdown = "";
+    minus = "";
+    minus_1 = "";
+    minus_2 = "";
+    minus_3 = "";
+    notes = "󱇗";
+    org = "";
+    package = "";
+    paste = "";
+    philosopher = "󱅻";
+    pipe = "┃";
+    plus = "";
+    plus_1 = "";
+    plus_2 = "洛";
+    plus_3 = "";
+    plus_4 = "⊕";
+    recent = "";
+    refresh = "";
+    reload = "";
+    resource = "";
+    right = "→";
+    robot_face = " ";
+    rocket = "";
+    save = "";
+    secret = "";
+    server = "";
+    settings = "";
+    star = "";
+    still = "";
+    tab = "⦙";
+    table = "󰓫";
+    table_multiple = "󱏈";
+    telescope = "";
+    terminal = "";
+    terminal_dev = "";
+    toggle = "";
+    top = "↑";
+    vertical = "│";
+    wand = "";
+    warning = "";
+    warning_1 = "";
+    warning_2 = "";
+    warning_3 = "";
+    word = "󰈭";
+  };
+
+  withLabel = name: label: "${icons.${name}} ${label}";
+  withSpace = {
+    right = name: "${icons.${name}} ";
+    left = name: " ${icons.${name}}";
+  };
+  withCollapsed = name: "${icons.chevron_right} ${icons.${name}} ";
+  withExpanded = name: "${icons.chevron_down} ${icons.${name}} ";
+in
+icons
+// {
+  inherit
+    withLabel
+    withSpace
+    withCollapsed
+    withExpanded
+    ;
+}
