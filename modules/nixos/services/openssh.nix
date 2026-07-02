@@ -1,0 +1,32 @@
+{ config, lib, ... }:
+
+let
+  cfg = config.nixosServicesModules.openssh;
+  masterEnable = config.nixosServicesModules.enable;
+in
+{
+  options.nixosServicesModules.openssh = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "activate openssh service";
+      default = true;
+    };
+
+    settings = lib.mkOption {
+      type = lib.types.attrs;
+      description = "extra openssh settings";
+      default = { };
+    };
+  };
+
+  config = lib.mkIf (masterEnable && cfg.enable) {
+    services.openssh = lib.mkMerge [
+      {
+        enable = true;
+        ports = lib.mkDefault [ 22 ];
+        settings.PermitRootLogin = lib.mkDefault "no";
+      }
+      cfg.settings
+    ];
+  };
+}
