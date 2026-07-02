@@ -1,34 +1,32 @@
 { config, lib, ... }:
 
 let
-  cfg = config.nixosCoreModules.i18n;
+  cfg = config.nixosCoreModules.networking;
   masterEnable = config.nixosCoreModules.enable;
 in
 {
-  options.nixosCoreModules.i18n = {
+  options.nixosCoreModules.networking = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      description = "activate i18n";
+      description = "activate networking";
       default = true;
     };
 
     settings = lib.mkOption {
       type = lib.types.attrs;
-      description = "extra i18n settings";
+      description = "extra networking settings";
       default = { };
     };
   };
 
   config = lib.mkIf (masterEnable && cfg.enable) {
-    i18n = lib.mkMerge [
+    networking = lib.mkMerge [
       {
-        defaultLocale = lib.mkDefault "en_US.UTF-8";
+        hostName = lib.mkDefault "nixos";
+        networkmanager.enable = lib.mkDefault true;
+        firewall.allowedTCPPorts = lib.mkDefault [ ];
       }
       cfg.settings
     ];
-
-    console = {
-      keyMap = "us";
-    };
   };
 }
