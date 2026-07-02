@@ -21,9 +21,33 @@
     ];
   };
 
-  nix.settings.trusted-users = [
-    "syaikhu"
-  ];
+  nix = {
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+
+      trusted-users = [
+        "syaikhu"
+      ];
+    };
+
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+  };
+
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowBroken = false;
+      contentAddressedByDefault = false;
+      tarball-ttl = 0;
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     git
