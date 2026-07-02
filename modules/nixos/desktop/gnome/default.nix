@@ -15,16 +15,17 @@ in
   };
 
   config = lib.mkIf (masterEnable && isGnome) {
+    services.desktopManager = {
+      gnome.enable = true;
+    };
+
+    services.displayManager = {
+      gdm.enable = true;
+    };
+
     services.xserver = lib.mkMerge [
       {
         enable = true;
-        desktopManager = {
-          gnome.enable = true;
-        };
-        displayManager = {
-          gdm.enable = true;
-        };
-
         xkb = {
           layout = "us";
           variant = "";
