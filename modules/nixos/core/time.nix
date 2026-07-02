@@ -1,30 +1,28 @@
 { config, lib, ... }:
 
 let
-  cfg = config.nixosCoreModules.boot;
+  cfg = config.nixosCoreModules.time;
   masterEnable = config.nixosCoreModules.enable;
 in
 {
-  options.nixosCoreModules.boot = {
+  options.nixosCoreModules.time = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      description = "activate systemd-boot bootloader";
+      description = "activate time";
       default = true;
     };
 
     settings = lib.mkOption {
       type = lib.types.attrs;
-      description = "extra boot settings";
+      description = "extra time settings";
       default = { };
     };
   };
 
   config = lib.mkIf (masterEnable && cfg.enable) {
-    boot = lib.mkMerge [
+    time = lib.mkMerge [
       {
-        loader.systemd-boot.enable = true;
-        loader.efi.canTouchEfiVariables = true;
-        tmp.cleanOnBoot = true;
+        timeZone = lib.mkDefault "Asia/Jakarta";
       }
       cfg.settings
     ];
