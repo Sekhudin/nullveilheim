@@ -12,7 +12,7 @@
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "activate core modules";
-      default = false;
+      default = true;
     };
   };
 }

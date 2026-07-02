@@ -21,6 +21,9 @@
 
   ezConfigs.darwin = { };
 
-  ezConfigs.home = { };
+  ezConfigs.home = {
+    modulesDirectory = ../modules/home;
+    configurationsDirectory = ../configurations/home;
+  };
 
 }

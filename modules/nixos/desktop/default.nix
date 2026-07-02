@@ -15,7 +15,7 @@
     };
 
     use = lib.mkOption {
-      types = lib.types.enum [
+      type = lib.types.enum [
         "gnome"
         "hyprland"
       ];

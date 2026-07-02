@@ -18,9 +18,11 @@ in
     services.xserver = lib.mkMerge [
       {
         enable = true;
+        desktopManager = {
+          gnome.enable = true;
+        };
         displayManager = {
           gdm.enable = true;
-          gnome.enable = true;
         };
 
         xkb = {

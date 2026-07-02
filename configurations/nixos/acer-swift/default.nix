@@ -1,9 +1,12 @@
-{ pkgs, ezModules, ... }:
+{
+  pkgs,
+  lib,
+  ezModules,
+  ...
+}:
 
 {
-  imports = [
-    ezModules
-
+  imports = lib.attrValues ezModules ++ [
     ./hardware-configuration.nix
   ];
 
@@ -29,9 +32,9 @@
   nixosCoreModules = {
     networking = {
       settings = {
-        hostname = "nixos";
+        hostName = "nixos";
         networkmanager.enable = true;
-        firewall.allowedTCPPosrts = [ 22 ];
+        firewall.allowedTCPPorts = [ 22 ];
       };
     };
   };

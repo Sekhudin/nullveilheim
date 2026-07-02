@@ -27,13 +27,26 @@ in
       color = sharedColors.mkColor { inherit lib; } "carbon";
       icons = sharedIcons;
       fonts = sharedFonts.mkFont { inherit pkgs; };
+      extraLib = {
+        getHomeDir = username: if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
+      };
     in
     {
       _module.args = {
-        inherit color icons fonts;
+        inherit
+          color
+          icons
+          fonts
+          extraLib
+          ;
 
         extraModuleArgs = {
-          inherit color icons fonts;
+          inherit
+            color
+            icons
+            fonts
+            extraLib
+            ;
         };
 
         pkgs = import inputs.nixpkgs {
