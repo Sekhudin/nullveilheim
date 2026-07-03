@@ -12,6 +12,21 @@ in
       default = true;
     };
 
+    use = lib.mkOption {
+      type = lib.types.enum [
+        "pulseaudio"
+        "pipewire"
+      ];
+      description = "audio server";
+      default = "pipewire";
+    };
+
+    rtkit = lib.mkOption {
+      type = lib.types.attrs;
+      description = "rtkit settings";
+      default = { };
+    };
+
     pulseaudio = lib.mkOption {
       type = lib.types.attrs;
       description = "pulseaudio settings";
@@ -26,17 +41,23 @@ in
   };
 
   config = lib.mkIf (masterEnable && cfg.enable) {
-    services.rtkit.enable = true;
-    services.pulseaudio = lib.mkMerge [
+    security.rtkit = lib.mkMerge [
       {
         enable = true;
+      }
+      cfg.rtkit
+    ];
+
+    services.pulseaudio = lib.mkMerge [
+      {
+        enable = (cfg.use == "pulseaudio");
       }
       cfg.pulseaudio
     ];
 
     services.pipewire = lib.mkMerge [
       {
-        enable = true;
+        enable = (cfg.use == "pipewire");
         alsa = {
           enable = true;
           support32Bit = true;

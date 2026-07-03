@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   ezModules,
   ...
@@ -12,18 +11,16 @@
 
   system.stateVersion = "26.05";
 
-  users.users.syaikhu = {
-    isNormalUser = true;
-    description = "syaikhu";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
+  users.users = {
+    syaikhu = {
+      isNormalUser = true;
+      description = "syaikhu";
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
+    };
   };
-
-  environment.systemPackages = with pkgs; [
-    git
-  ];
 
   nixosCoreModules = {
     nix = {

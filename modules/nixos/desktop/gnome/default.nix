@@ -7,15 +7,15 @@ let
 in
 {
   options.nixosDesktopModules.desktop = {
-    desktopManager = lib.mkOption {
+    gnome = lib.mkOption {
       type = lib.types.attrs;
       description = "gnome settings";
       default = { };
     };
 
-    displayManager = lib.mkOption {
+    gdm = lib.mkOption {
       type = lib.types.attrs;
-      description = "display manager settings";
+      description = "gdm settings";
       default = { };
     };
 
@@ -27,19 +27,23 @@ in
   };
 
   config = lib.mkIf (masterEnable && isGnome) {
-    services.desktopManager = lib.mkMerge [
-      {
-        gnome.enable = true;
-      }
-      cfg.desktopManager
-    ];
+    services.desktopManager = {
+      gnome = lib.mkMerge [
+        {
+          enable = true;
+        }
+        cfg.gnome
+      ];
+    };
 
-    services.displayManager = lib.mkMerge [
-      {
-        gdm.enable = true;
-      }
-      cfg.displayManager
-    ];
+    services.displayManager = {
+      gdm = lib.mkMerge [
+        {
+          enable = true;
+        }
+        cfg.gdm
+      ];
+    };
 
     services.xserver = lib.mkMerge [
       {

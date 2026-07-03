@@ -3,6 +3,7 @@
 {
   imports = [
     ./boot.nix
+    ./home-manager.nix
     ./i18n.nix
     ./networking.nix
     ./nix.nix
