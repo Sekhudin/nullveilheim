@@ -9,7 +9,10 @@ let
   cfg = config.nixosProgramsModules;
 in
 {
-  imports = [ ];
+  imports = [
+    ./steam.nix
+    ./zsh.nix
+  ];
 
   options.nixosProgramsModules = {
     enable = lib.mkOption {
@@ -20,11 +23,20 @@ in
   };
 
   config = {
+    programs.nh = {
+      enable = true;
+      clean = {
+        enable = true;
+        extraArgs = "--keep-since 4d --keep 1";
+      };
+    };
+
     environment = lib.mkIf cfg.enable {
       systemPackages = with pkgs; [
+        nh
+        git
         curl
         wget
-        git
         fastfetch
         pciutils
         usbutils
@@ -41,6 +53,9 @@ in
         btop
         ripgrep
         fd
+        xsel
+        (writeScriptBin "copy" "xsel -ib")
+        (writeScriptBin "paste" "xsel -ob")
       ];
     };
   };

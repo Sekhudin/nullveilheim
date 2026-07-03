@@ -45,6 +45,12 @@
     };
   };
 
+  nixosProgramsModules = {
+    steam = {
+      enable = true;
+    };
+  };
+
   nixosServicesModules = {
     openssh = {
       settings = {

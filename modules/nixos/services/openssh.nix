@@ -28,6 +28,8 @@ in
         settings = {
           PasswordAuthentication = lib.mkDefault false;
           PermitRootLogin = lib.mkDefault "no";
+          X11Forwarding = lib.mkDefault true;
+          X11DisplayOffset = lib.mkDefault 10;
         };
       }
       cfg.settings
