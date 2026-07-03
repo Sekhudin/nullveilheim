@@ -9,7 +9,7 @@ in
   options.nixosDesktopModules.hyprland = {
     settings = lib.mkOption {
       type = lib.types.attrs;
-      description = "extra hyprland settings";
+      description = "hyprland settings";
       default = { };
     };
   };

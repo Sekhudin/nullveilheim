@@ -10,7 +10,7 @@
   options.nixosDesktopModules = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      description = "activate desktop modules";
+      description = "enable desktop modules";
       default = true;
     };
 

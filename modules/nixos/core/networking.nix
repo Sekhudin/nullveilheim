@@ -8,13 +8,13 @@ in
   options.nixosCoreModules.networking = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      description = "activate networking";
+      description = "enable networking";
       default = true;
     };
 
     settings = lib.mkOption {
       type = lib.types.attrs;
-      description = "extra networking settings";
+      description = "networking settings";
       default = { };
     };
   };

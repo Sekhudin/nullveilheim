@@ -21,42 +21,26 @@
     ];
   };
 
-  nix = {
-    settings = {
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-
-      trusted-users = [
-        "syaikhu"
-      ];
-    };
-
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
-  };
-
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowBroken = false;
-      contentAddressedByDefault = false;
-      tarball-ttl = 0;
-    };
-  };
-
   environment.systemPackages = with pkgs; [
     git
   ];
 
   nixosCoreModules = {
+    nix = {
+      settings = {
+        settings.trusted-users = [ "syaikhu" ];
+      };
+    };
+
+    nixpkgs = {
+      config = {
+        allowUnfree = true;
+      };
+    };
+
     networking = {
       settings = {
-        hostName = "nixos";
+        hostName = "acer-swift";
         networkmanager.enable = true;
         firewall.allowedTCPPorts = [ 22 ];
       };
@@ -66,6 +50,7 @@
   nixosServicesModules = {
     openssh = {
       settings = {
+        ports = [ 22 ];
         settings.PasswordAuthentication = true;
         settings.PermitRootLogin = "no";
       };

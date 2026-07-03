@@ -8,13 +8,13 @@ in
   options.nixosCoreModules.i18n = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      description = "activate i18n";
+      description = "enable i18n";
       default = true;
     };
 
     settings = lib.mkOption {
       type = lib.types.attrs;
-      description = "extra i18n settings";
+      description = "i18n settings";
       default = { };
     };
   };

@@ -8,13 +8,13 @@ in
   options.nixosServicesModules.openssh = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      description = "activate openssh service";
+      description = "enable openssh service";
       default = true;
     };
 
     settings = lib.mkOption {
       type = lib.types.attrs;
-      description = "extra openssh settings";
+      description = "openssh settings";
       default = { };
     };
   };

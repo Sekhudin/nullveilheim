@@ -8,13 +8,13 @@ in
   options.nixosServicesModules.printing = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      description = "activate printing service";
+      description = "enable printing service";
       default = true;
     };
 
     settings = lib.mkOption {
       type = lib.types.attrs;
-      description = "extra printing settings";
+      description = "printing settings";
       default = { };
     };
   };

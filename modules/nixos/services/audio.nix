@@ -8,7 +8,7 @@ in
   options.nixosServicesModules.audio = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      description = "activate audio services";
+      description = "enable audio services";
       default = true;
     };
 

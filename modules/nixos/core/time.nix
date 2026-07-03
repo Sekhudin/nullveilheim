@@ -8,13 +8,13 @@ in
   options.nixosCoreModules.time = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      description = "activate time";
+      description = "enable time";
       default = true;
     };
 
     settings = lib.mkOption {
       type = lib.types.attrs;
-      description = "extra time settings";
+      description = "time settings";
       default = { };
     };
   };

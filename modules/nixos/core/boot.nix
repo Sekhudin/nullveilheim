@@ -8,13 +8,13 @@ in
   options.nixosCoreModules.boot = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      description = "activate systemd-boot bootloader";
+      description = "enable boot";
       default = true;
     };
 
     settings = lib.mkOption {
       type = lib.types.attrs;
-      description = "extra boot settings";
+      description = "boot settings";
       default = { };
     };
   };
@@ -24,7 +24,7 @@ in
       {
         loader.systemd-boot.enable = true;
         loader.efi.canTouchEfiVariables = true;
-        tmp.cleanOnBoot = true;
+        tmp.cleanOnBoot = lib.mkDefault true;
       }
       cfg.settings
     ];
