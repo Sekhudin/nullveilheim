@@ -28,7 +28,7 @@
   nixosCoreModules = {
     nix = {
       settings = {
-        settings.trusted-users = [ "syaikhu" ];
+        trusted-users = [ "syaikhu" ];
       };
     };
 
@@ -41,8 +41,9 @@
     networking = {
       settings = {
         hostName = "acer-swift";
-        networkmanager.enable = true;
-        firewall.allowedTCPPorts = [ 22 ];
+        firewall = {
+          allowedTCPPorts = [ 22 ];
+        };
       };
     };
   };
@@ -51,8 +52,10 @@
     openssh = {
       settings = {
         ports = [ 22 ];
-        settings.PasswordAuthentication = true;
-        settings.PermitRootLogin = "no";
+        settings = {
+          PasswordAuthentication = true;
+          PermitRootLogin = "no";
+        };
       };
     };
   };

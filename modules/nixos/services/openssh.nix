@@ -24,7 +24,11 @@ in
       {
         enable = true;
         ports = lib.mkDefault [ 22 ];
-        settings.PermitRootLogin = lib.mkDefault "no";
+        openFirewall = lib.mkDefault false;
+        settings = {
+          PasswordAuthentication = lib.mkDefault false;
+          PermitRootLogin = lib.mkDefault "no";
+        };
       }
       cfg.settings
     ];

@@ -23,8 +23,14 @@ in
     networking = lib.mkMerge [
       {
         hostName = lib.mkDefault "nixos";
-        networkmanager.enable = lib.mkDefault true;
-        firewall.allowedTCPPorts = lib.mkDefault [ ];
+        networkmanager = {
+          enable = lib.mkDefault true;
+        };
+
+        firewall = {
+          enable = true;
+          allowedTCPPorts = lib.mkDefault [ ];
+        };
       }
       cfg.settings
     ];
