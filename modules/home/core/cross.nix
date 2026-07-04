@@ -18,8 +18,8 @@ in
     };
   };
 
-  config = {
-    programs = lib.mkIf (masterEnable && cfg.enable) {
+  config = lib.mkIf (masterEnable && cfg.enable) {
+    programs = {
       direnv = {
         enable = true;
         silent = true;
@@ -45,7 +45,7 @@ in
       };
     };
 
-    home = lib.mkIf (masterEnable && cfg.enable) {
+    home = {
       packages = with pkgs; [
         home-manager
         coreutils

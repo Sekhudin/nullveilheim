@@ -22,7 +22,7 @@ in
     };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     programs.nh = {
       enable = true;
       clean = {
@@ -31,7 +31,7 @@ in
       };
     };
 
-    environment = lib.mkIf cfg.enable {
+    environment = {
       systemPackages = with pkgs; [
         nh
         git
