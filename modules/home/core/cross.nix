@@ -56,6 +56,24 @@ in
         tree
         ack
         fswatch
+
+        # multi-media
+        asciinema
+        asciinema-agg
+        ffmpeg
+        imagemagick
+
+        # productivity
+        fzf
+        fzy
+        dust
+        fd
+        jq
+        iamb
+        ripgrep
+        docker
+        starship
+        nixfmt
       ];
     };
   };

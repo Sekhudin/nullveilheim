@@ -24,7 +24,6 @@ in
       {
         enable = true;
         enableCompletion = lib.mkDefault true;
-        enableAutosuggestions = lib.mkDefault true;
         histSize = lib.mkDefault 5000;
         histFile = lib.mkDefault "$HOME/.zsh_history";
         promptInit = ''
@@ -33,6 +32,10 @@ in
 
           PROMPT='%F{110}%n%f%F{244}@%f%F{109}%m%f %F{150}%~%f %(?.%F{108}.%F{167})>%f '
         '';
+
+        autosuggestions = {
+          enable = lib.mkDefault true;
+        };
 
         syntaxHighlighting = {
           enable = true;
