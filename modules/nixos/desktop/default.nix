@@ -11,7 +11,7 @@
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable desktop modules";
-      default = true;
+      default = false;
     };
 
     use = lib.mkOption {

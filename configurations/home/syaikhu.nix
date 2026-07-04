@@ -16,4 +16,8 @@
     packages = [
     ];
   };
+
+  homePackagesModules = {
+    enable = true;
+  };
 }

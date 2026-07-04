@@ -11,7 +11,7 @@
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable service module";
-      default = true;
+      default = false;
     };
   };
 }

@@ -7,7 +7,7 @@
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable hardware modules";
-      default = true;
+      default = false;
     };
   };
 }
