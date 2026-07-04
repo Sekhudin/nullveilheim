@@ -43,7 +43,7 @@ in
 
         pkgs = import inputs.nixpkgs {
           inherit system;
-          config = shareable.nixpkgsConfig;
+          inherit (shareable.extraNixpkgs) config;
           overlays = lib.attrValues inputs.self.overlays ++ [ ];
         };
       };

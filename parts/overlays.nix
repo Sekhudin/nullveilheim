@@ -4,7 +4,7 @@
 }:
 
 let
-  sharedNixpkgs = import ../shared/nixpkgs.nix;
+  config = (import ../shared/nixpkgs.nix).nixpkgs.config;
   mkChannels =
     final: prev:
     prev.pipe inputs [
@@ -14,7 +14,7 @@ let
         prev.nameValuePair (prev.strings.removePrefix "nixpkgs-" name) (
           import channel {
             inherit (prev.stdenv.hostPlatform) system;
-            inherit (sharedNixpkgs) config;
+            inherit config;
           }
         )
       ))

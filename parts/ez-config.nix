@@ -21,7 +21,7 @@ in
         icon
         font
         extraLib
-        nixpkgsConfig
+        extraNixpkgs
         ;
       inherit
         inputs

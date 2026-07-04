@@ -14,6 +14,6 @@ in
       icon = sharedIcons;
       font = sharedFonts.mkFont { inherit pkgs; };
       extraLib = sharedLib.mkExtraLib { inherit pkgs lib; };
-      nixpkgsConfig = sharedNixpkgs.config;
+      extraNixpkgs = sharedNixpkgs.nixpkgs;
     };
 }
