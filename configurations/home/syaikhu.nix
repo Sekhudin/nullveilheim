@@ -17,7 +17,7 @@
     ];
   };
 
-  homePackagesModules = {
+  homeCoreModules = {
     enable = true;
   };
 }
