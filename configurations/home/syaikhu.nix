@@ -12,7 +12,7 @@
   home = rec {
     username = "syaikhu";
     stateVersion = "26.05";
-    homeDirectory = osConfig.users.users.${username}.home or (extraLib.getHomeDir username);
+    homeDirectory = extraLib.getHomeDir { inherit username osConfig; };
     packages = [
     ];
   };

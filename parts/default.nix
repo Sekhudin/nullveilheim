@@ -4,10 +4,7 @@
 }:
 
 let
-  sharedColors = import ../shared/colors.nix;
-  sharedIcons = import ../shared/icons.nix;
-  sharedFonts = import ../shared/fonts.nix;
-  sharedNixpkgs = import ../shared/nixpkgs.nix;
+  shared = import ../shared;
 in
 {
   imports = [
@@ -24,35 +21,29 @@ in
     }:
 
     let
-      color = sharedColors.mkColor { inherit lib; } "carbon";
-      icons = sharedIcons;
-      fonts = sharedFonts.mkFont { inherit pkgs; };
-      extraLib = {
-        getHomeDir = username: if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
-        nixpkgsConfig = sharedNixpkgs.config;
-      };
+      shareable = shared.mkShareable { inherit pkgs lib; };
     in
     {
       _module.args = {
-        inherit
+        inherit (shareable)
           color
-          icons
-          fonts
+          icon
+          font
           extraLib
           ;
 
         extraModuleArgs = {
-          inherit
+          inherit (shareable)
             color
-            icons
-            fonts
+            icon
+            font
             extraLib
             ;
         };
 
         pkgs = import inputs.nixpkgs {
           inherit system;
-          inherit (sharedNixpkgs) config;
+          config = shareable.nixpkgsConfig;
           overlays = lib.attrValues inputs.self.overlays ++ [ ];
         };
       };
