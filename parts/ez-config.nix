@@ -1,14 +1,21 @@
-{ inputs, ... }:
+{
+  inputs,
+  lib,
+  ...
+}:
 
 {
   imports = [
     inputs.ez-configs.flakeModule
   ];
 
-  ezConfigs.root = ./.;
-  ezConfigs.earlyModuleArgs = { };
-  ezConfigs.globalArgs = {
-
+  ezConfigs = {
+    root = ./.;
+    globalArgs = {
+      inherit
+        inputs
+        ;
+    };
   };
 
   ezConfigs.nixos = {
@@ -19,11 +26,31 @@
     };
   };
 
-  ezConfigs.darwin = { };
-
-  ezConfigs.home = {
-    modulesDirectory = ../modules/home;
-    configurationsDirectory = ../configurations/home;
+  ezConfigs.darwin = {
+    modulesDirectory = ../modules/darwin;
+    configurationsDirectory = ../configurations/darwin;
   };
+
+  ezConfigs.home =
+    let
+      overlays = lib.attrValues inputs.self.overlays ++ [
+        inputs.nixgl.overlay
+      ];
+    in
+    {
+      modulesDirectory = ../modules/home;
+      configurationsDirectory = ../configurations/home;
+      users = {
+        syaikhu = {
+          standalone = {
+            enable = true;
+            pkgs = import inputs.nixpkgs {
+              system = "x86_64-linux";
+              inherit overlays;
+            };
+          };
+        };
+      };
+    };
 
 }

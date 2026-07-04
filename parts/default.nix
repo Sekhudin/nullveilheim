@@ -29,6 +29,7 @@ in
       fonts = sharedFonts.mkFont { inherit pkgs; };
       extraLib = {
         getHomeDir = username: if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
+        nixpkgsConfig = sharedNixpkgs.config;
       };
     in
     {
