@@ -55,7 +55,6 @@ in
         wget
         tree
         ack
-        fswatch
 
         # multi-media
         asciinema
@@ -71,9 +70,9 @@ in
         jq
         iamb
         ripgrep
-        docker
         starship
         nixfmt
+        opencode
       ];
     };
   };

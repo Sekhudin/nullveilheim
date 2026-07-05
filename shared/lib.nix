@@ -1,10 +1,16 @@
 {
   mkExtraLib =
-    { pkgs, lib }:
+    { lib }:
 
+    let
+      isStandalone = osConfig: osConfig == null;
+    in
     {
+      inherit isStandalone;
+
       getHomeDir =
         {
+          pkgs,
           username,
           osConfig ? { },
         }:

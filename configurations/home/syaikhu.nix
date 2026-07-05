@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   ezModules,
   extraLib,
@@ -12,7 +13,9 @@
   home = rec {
     username = "syaikhu";
     stateVersion = "26.05";
-    homeDirectory = extraLib.getHomeDir { inherit username osConfig; };
+    homeDirectory = extraLib.getHomeDir {
+      inherit pkgs username osConfig;
+    };
     packages = [
     ];
   };

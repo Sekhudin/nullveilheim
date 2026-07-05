@@ -15,13 +15,12 @@ in
   perSystem =
     {
       system,
-      pkgs,
       lib,
       ...
     }:
 
     let
-      shareable = shared.mkShareable { inherit pkgs lib; };
+      shareable = shared.mkShareable { inherit lib; };
     in
     {
       _module.args = {

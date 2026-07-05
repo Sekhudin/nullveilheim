@@ -1,32 +1,28 @@
 {
   inputs,
-  pkgs,
   lib,
   ...
 }:
 
 let
-  shareable = (import ../shared).mkShareable { inherit pkgs lib; };
+  shareable = (import ../shared).mkShareable { inherit lib; };
 in
 {
   imports = [
     inputs.ez-configs.flakeModule
   ];
 
-  ezConfigs = {
+  ezConfigs = rec {
     root = ./.;
     globalArgs = {
+      inherit inputs;
       inherit (shareable)
         color
         icon
-        font
         extraLib
-        extraNixpkgs
-        ;
-      inherit
-        inputs
         ;
     };
+    earlyModuleArgs = globalArgs;
   };
 
   ezConfigs.nixos = {

@@ -7,13 +7,13 @@ let
 in
 {
   mkShareable =
-    { pkgs, lib }:
+    { lib }:
 
     {
       color = sharedColors.mkColor { inherit lib; } "carbon";
       icon = sharedIcons;
-      font = sharedFonts.mkFont { inherit pkgs; };
-      extraLib = sharedLib.mkExtraLib { inherit pkgs lib; };
+      font = sharedFonts;
+      extraLib = sharedLib.mkExtraLib { inherit lib; };
       extraNixpkgs = sharedNixpkgs.nixpkgs;
     };
 }
