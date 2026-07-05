@@ -21,6 +21,19 @@
         "networkmanager"
         "wheel"
       ];
+      subUidRanges = [
+        {
+          startUid = 100000;
+          count = 65536;
+        }
+      ];
+      subGidRanges = [
+        {
+          startGid = 100000;
+          count = 65536;
+        }
+      ];
+
     };
   };
 
@@ -81,6 +94,15 @@
         settings = {
           PasswordAuthentication = true;
           PermitRootLogin = "no";
+        };
+      };
+    };
+
+    virtualisation = {
+      enable = true;
+      settings = {
+        docker = {
+          enable = true;
         };
       };
     };
