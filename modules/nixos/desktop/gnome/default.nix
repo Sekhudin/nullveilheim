@@ -31,6 +31,10 @@ in
       gnome = lib.mkMerge [
         {
           enable = true;
+          extraGSettingsOverrides = ''
+            [org.gnome.desktop.wm.preferences]
+            button-layout='appmenu:minimize,maximize,close'
+          '';
         }
         cfg.gnome
       ];

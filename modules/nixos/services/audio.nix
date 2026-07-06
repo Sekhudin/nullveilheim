@@ -9,7 +9,7 @@ in
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable audio services";
-      default = false;
+      default = true;
     };
 
     use = lib.mkOption {

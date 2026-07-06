@@ -72,7 +72,6 @@ in
         ripgrep
         starship
         nixfmt
-        opencode
       ];
     };
   };

@@ -23,4 +23,8 @@
   homeCoreModules = {
     enable = true;
   };
+
+  homeProgramsModules = {
+    enable = true;
+  };
 }

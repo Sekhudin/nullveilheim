@@ -9,7 +9,7 @@ in
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable virtualisation";
-      default = false;
+      default = true;
     };
 
     settings = lib.mkOption {
