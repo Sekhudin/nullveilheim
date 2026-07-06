@@ -10,7 +10,7 @@
   options.homeProgramsModules = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      description = "enable multimedia";
+      description = "enable programs modules";
       default = false;
     };
 

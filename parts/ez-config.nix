@@ -16,6 +16,7 @@ in
     root = ./.;
     globalArgs = {
       inherit inputs;
+      inherit (inputs) self;
       inherit (shareable)
         color
         icon
@@ -40,7 +41,7 @@ in
 
   ezConfigs.home =
     let
-      overlays = lib.attrValues inputs.self.overlays ++ [
+      overlays = (lib.attrValues inputs.self.overlays) ++ [
         inputs.nixgl.overlay
       ];
     in

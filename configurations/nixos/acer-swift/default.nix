@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   ezModules,
   ...
 }:
@@ -16,7 +15,6 @@
     syaikhu = {
       description = "user syaikhu";
       isNormalUser = true;
-      shell = pkgs.zsh;
       extraGroups = [
         "networkmanager"
         "wheel"

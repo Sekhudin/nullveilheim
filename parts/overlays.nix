@@ -27,7 +27,7 @@ in
     ##############################
     # Branches
     ##############################
-    branches = mkChannels final prev;
+    branches = (mkChannels final prev);
 
     ##############################
     # Packages

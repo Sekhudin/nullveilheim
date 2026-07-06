@@ -15,6 +15,7 @@ in
   perSystem =
     {
       system,
+      inputs',
       lib,
       ...
     }:
@@ -23,6 +24,8 @@ in
       shareable = shared.mkShareable { inherit lib; };
     in
     {
+      formatter = inputs'.nixpkgs.legacyPackages.nixfmt;
+
       _module.args = {
         inherit (shareable)
           color
@@ -43,7 +46,7 @@ in
         pkgs = import inputs.nixpkgs {
           inherit system;
           inherit (shareable.extraNixpkgs) config;
-          overlays = lib.attrValues inputs.self.overlays ++ [ ];
+          overlays = (lib.attrValues inputs.self.overlays) ++ [ ];
         };
       };
     };

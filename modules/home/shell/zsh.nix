@@ -1,17 +1,12 @@
 { config, lib, ... }:
 
 let
-  cfg = config.nixosProgramsModules.zsh;
-  masterEnable = config.nixosProgramsModules.enable;
+  cfg = config.homeShellModules.zsh;
+  masterEnable = config.homeShellModules.enable;
+  isZsh = (config.homeShellModules.use == "zsh");
 in
 {
-  options.nixosProgramsModules.zsh = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
-      description = "enable zsh";
-      default = true;
-    };
-
+  options.homeShellModules.zsh = {
     settings = lib.mkOption {
       type = lib.types.attrs;
       description = "zsh settings";
@@ -19,21 +14,23 @@ in
     };
   };
 
-  config = lib.mkIf (masterEnable && cfg.enable) {
+  config = lib.mkIf (masterEnable && isZsh) {
     programs.zsh = lib.mkMerge [
       {
         enable = true;
         enableCompletion = lib.mkDefault true;
-        histSize = lib.mkDefault 5000;
-        histFile = lib.mkDefault "$HOME/.zsh_history";
-        promptInit = ''
+        completionInit = ''
           autoload -U colors && colors
           setopt prompt_subst
 
           PROMPT='%F{110}%n%f%F{244}@%f%F{109}%m%f %F{150}%~%f %(?.%F{108}.%F{167})>%f '
         '';
 
-        autosuggestions = {
+        history = {
+          size = lib.mkDefault 5000;
+        };
+
+        autosuggestion = {
           enable = lib.mkDefault true;
         };
 

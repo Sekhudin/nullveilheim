@@ -27,4 +27,9 @@
   homeProgramsModules = {
     enable = true;
   };
+
+  homeShellModules = {
+    enable = true;
+    use = "fish";
+  };
 }

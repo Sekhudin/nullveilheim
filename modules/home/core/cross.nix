@@ -70,7 +70,6 @@ in
         jq
         iamb
         ripgrep
-        starship
         nixfmt
       ];
     };

@@ -11,7 +11,6 @@ in
 {
   imports = [
     ./steam.nix
-    ./zsh.nix
   ];
 
   options.nixosProgramsModules = {
