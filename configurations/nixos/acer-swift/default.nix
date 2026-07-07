@@ -1,11 +1,12 @@
 {
   lib,
   ezModules,
+  commonModules,
   ...
 }:
 
 {
-  imports = lib.attrValues ezModules ++ [
+  imports = lib.attrValues (ezModules // commonModules) ++ [
     ./hardware-configuration.nix
   ];
 
@@ -35,20 +36,17 @@
     };
   };
 
-  nixosCoreModules = {
+  commonModules = {
     enable = true;
     nix = {
       settings = {
         trusted-users = [ "syaikhu" ];
       };
     };
+  };
 
-    nixpkgs = {
-      config = {
-        allowUnfree = true;
-      };
-    };
-
+  nixosCoreModules = {
+    enable = true;
     networking = {
       settings = {
         hostName = "acer-swift";

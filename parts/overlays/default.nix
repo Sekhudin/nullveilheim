@@ -1,44 +1,44 @@
-{
-  inputs,
-  ...
-}:
+{ inputs, lib, ... }:
 
 let
   mkChannels =
     {
-      prev,
-      nixpkgs,
+      inputs,
+      lib,
+      nixpkgsArgs,
       prefix ? "nixpkgs-",
     }:
-    prev.pipe inputs [
-      (prev.filterAttrs (name: _channel: prev.strings.hasPrefix prefix name))
-      (prev.mapAttrs' (
-        name: channel:
-        prev.nameValuePair (prev.strings.removePrefix prefix name) (
-          import channel {
-            inherit (prev.stdenv.hostPlatform) system;
-            inherit (nixpkgs) config;
-          }
-        )
+    lib.pipe inputs [
+      (lib.filterAttrs (name: _channel: lib.strings.hasPrefix prefix name))
+      (lib.mapAttrs' (
+        name: channel: lib.nameValuePair (lib.strings.removePrefix prefix name) (import channel nixpkgsArgs)
       ))
     ];
+
+  mkBranches =
+    system:
+    mkChannels {
+      inherit inputs lib;
+      nixpkgsArgs = {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+    };
 in
 {
   flake.overlays.default =
     final: prev:
 
     let
-      stdenvHostPlatform = (inputs.nixpkgs-stable.legacyPackages.${prev.stdenv.hostPlatform.system});
-      branches = mkChannels {
-        inherit prev;
-        inherit (inputs.self) nixpkgs;
-      };
+      branches = mkBranches prev.stdenv.hostPlatform.system;
+      mainBranch = branches.stable;
     in
     {
-      inherit (stdenvHostPlatform) nixd nixf nixt;
+      inherit (mainBranch) nixd nixf nixt;
       inherit branches;
 
-      nixfmt = prev.nixfmt-rfc-style;
       claude-code = branches.unstable.claude-code;
       gemini-cli = branches.unstable.gemini-cli;
       opencode = branches.unstable.opencode;
@@ -52,12 +52,11 @@ in
 
       vimPlugins = branches.unstable.vimPlugins.extend (
         _: __: {
-
         }
       );
 
       tree-sitter-grammars = prev.tree-sitter-grammars // {
-
       };
+
     };
 }

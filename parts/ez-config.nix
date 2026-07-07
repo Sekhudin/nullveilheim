@@ -19,6 +19,7 @@
         icon
         font
         extraLib
+        commonModules
         ;
     };
     earlyModuleArgs = globalArgs;
@@ -43,11 +44,8 @@
     users = {
       syaikhu = {
         standalone = {
+          inherit pkgs;
           enable = true;
-          pkgs = import inputs.nixpkgs {
-            system = "x86_64-linux";
-            inherit (inputs.self.nixpkgs) config overlays;
-          };
         };
       };
     };

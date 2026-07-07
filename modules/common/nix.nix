@@ -1,11 +1,11 @@
 { config, lib, ... }:
 
 let
-  cfg = config.nixosCoreModules.nix;
-  masterEnable = config.nixosCoreModules.enable;
+  cfg = config.commonModules.nix;
+  masterEnable = config.commonModules.enable;
 in
 {
-  options.nixosCoreModules.nix = {
+  options.commonModules.nix = {
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable nix config";

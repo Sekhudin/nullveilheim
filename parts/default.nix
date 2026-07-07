@@ -6,22 +6,12 @@ let
 in
 {
   imports = [
+    ./flake
     ./overlays
     ./ez-config.nix
   ];
 
   flake = {
-    nixpkgs = {
-      config = {
-        allowUnfree = true;
-        allowBroken = false;
-        contentAddressedByDefault = false;
-        tarball-ttl = 0;
-      };
-      overlays = lib.attrValues inputs.self.overlays ++ [
-      ];
-    };
-
     inherit (shareable)
       color
       icon
@@ -32,16 +22,12 @@ in
 
   perSystem =
     {
-      system,
       inputs',
       ...
     }:
 
-    let
-      formatter = inputs'.nixpkgs.legacyPackages.nixfmt;
-    in
     {
-      inherit formatter;
+      formatter = inputs'.nixpkgs.legacyPackages.nixfmt;
 
       _module.args = {
         inherit (inputs.self)
@@ -58,11 +44,6 @@ in
             font
             extraLib
             ;
-        };
-
-        pkgs = import inputs.nixpkgs {
-          inherit system;
-          inherit (inputs.self.nixpkgs) config overlays;
         };
       };
     };

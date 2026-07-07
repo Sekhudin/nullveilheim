@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   lib,
   ...
@@ -7,6 +8,10 @@
 let
   cfg = config.nixosCoreModules.nixpkgs;
   masterEnable = config.nixosCoreModules.enable;
+  nixpkgsConfig = lib.mkMerge [
+    { }
+    cfg.config
+  ];
 in
 {
   options.nixosCoreModules.nixpkgs = {
@@ -34,6 +39,8 @@ in
         }
         cfg.config
       ];
+
+      overlays = (lib.attrValues inputs.self.overlays) ++ [ ];
     };
   };
 }

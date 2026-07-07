@@ -24,7 +24,7 @@ in
       fish = lib.mkMerge [
         {
           enable = true;
-          plugins = with pkgs.fishPlugins; [ nix-env ]; # nix-env -- invalid, bug: overlays not set;
+          plugins = with pkgs.fishPlugins; [ nix-env ];
         }
         cfg.settings
       ];

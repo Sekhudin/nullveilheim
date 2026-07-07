@@ -6,8 +6,6 @@
     ./home-manager.nix
     ./i18n.nix
     ./networking.nix
-    ./nix.nix
-    ./nixpkgs.nix
     ./time.nix
   ];
 
