@@ -97,7 +97,11 @@ in
         }
         cfg.starship
       ];
+    };
 
+    home = {
+      sessionPath = [ "$HOME/.yarn/bin" ];
+      shellAliases = { };
     };
   };
 }

@@ -1,33 +1,50 @@
-{
-  inputs,
-  ...
-}:
+{ inputs, lib, ... }:
 
 let
   shared = import ../shared;
+  shareable = shared.mkShareable { inherit lib; };
 in
 {
   imports = [
+    ./overlays
     ./ez-config.nix
-    ./overlays.nix
   ];
+
+  flake = {
+    nixpkgs = {
+      config = {
+        allowUnfree = true;
+        allowBroken = false;
+        contentAddressedByDefault = false;
+        tarball-ttl = 0;
+      };
+      overlays = lib.attrValues inputs.self.overlays ++ [
+      ];
+    };
+
+    inherit (shareable)
+      color
+      icon
+      font
+      extraLib
+      ;
+  };
 
   perSystem =
     {
       system,
       inputs',
-      lib,
       ...
     }:
 
     let
-      shareable = shared.mkShareable { inherit lib; };
+      formatter = inputs'.nixpkgs.legacyPackages.nixfmt;
     in
     {
-      formatter = inputs'.nixpkgs.legacyPackages.nixfmt;
+      inherit formatter;
 
       _module.args = {
-        inherit (shareable)
+        inherit (inputs.self)
           color
           icon
           font
@@ -35,7 +52,7 @@ in
           ;
 
         extraModuleArgs = {
-          inherit (shareable)
+          inherit (inputs.self)
             color
             icon
             font
@@ -45,8 +62,7 @@ in
 
         pkgs = import inputs.nixpkgs {
           inherit system;
-          inherit (shareable.extraNixpkgs) config;
-          overlays = (lib.attrValues inputs.self.overlays) ++ [ ];
+          inherit (inputs.self.nixpkgs) config overlays;
         };
       };
     };

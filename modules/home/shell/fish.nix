@@ -24,14 +24,13 @@ in
       fish = lib.mkMerge [
         {
           enable = true;
-          plugins = [ ]; # nix-env -- invalid, bug: overlays not set;
+          plugins = with pkgs.fishPlugins; [ nix-env ]; # nix-env -- invalid, bug: overlays not set;
         }
         cfg.settings
       ];
     };
 
     home = {
-      sessionPath = [ "$HOME/.yarn/bin" ];
       packages = with pkgs; [
         babelfish
         fishPlugins.colored-man-pages
@@ -44,7 +43,6 @@ in
         fishPlugins.bass
       ];
 
-      shellAliases = { };
     };
 
   };

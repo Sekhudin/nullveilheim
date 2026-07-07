@@ -1,12 +1,9 @@
 {
   inputs,
-  lib,
+  pkgs,
   ...
 }:
 
-let
-  shareable = (import ../shared).mkShareable { inherit lib; };
-in
 {
   imports = [
     inputs.ez-configs.flakeModule
@@ -17,9 +14,10 @@ in
     globalArgs = {
       inherit inputs;
       inherit (inputs) self;
-      inherit (shareable)
+      inherit (inputs.self)
         color
         icon
+        font
         extraLib
         ;
     };
@@ -39,26 +37,20 @@ in
     configurationsDirectory = ../configurations/darwin;
   };
 
-  ezConfigs.home =
-    let
-      overlays = (lib.attrValues inputs.self.overlays) ++ [
-        inputs.nixgl.overlay
-      ];
-    in
-    {
-      modulesDirectory = ../modules/home;
-      configurationsDirectory = ../configurations/home;
-      users = {
-        syaikhu = {
-          standalone = {
-            enable = true;
-            pkgs = import inputs.nixpkgs {
-              system = "x86_64-linux";
-              inherit overlays;
-            };
+  ezConfigs.home = {
+    modulesDirectory = ../modules/home;
+    configurationsDirectory = ../configurations/home;
+    users = {
+      syaikhu = {
+        standalone = {
+          enable = true;
+          pkgs = import inputs.nixpkgs {
+            system = "x86_64-linux";
+            inherit (inputs.self.nixpkgs) config overlays;
           };
         };
       };
     };
+  };
 
 }
