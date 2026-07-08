@@ -12,12 +12,14 @@ in
   ];
 
   flake = {
-    inherit (shareable)
-      color
-      icon
-      font
-      extraLib
-      ;
+    nullveilheimConfigurations = {
+      inherit (shareable)
+        color
+        icon
+        font
+        extraLib
+        ;
+    };
   };
 
   perSystem =
@@ -30,7 +32,7 @@ in
       formatter = inputs'.nixpkgs.legacyPackages.nixfmt;
 
       _module.args = {
-        inherit (inputs.self)
+        inherit (inputs.self.nullveilheimConfigurations)
           color
           icon
           font
@@ -38,7 +40,7 @@ in
           ;
 
         extraModuleArgs = {
-          inherit (inputs.self)
+          inherit (inputs.self.nullveilheimConfigurations)
             color
             icon
             font

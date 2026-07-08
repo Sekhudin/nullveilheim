@@ -45,8 +45,11 @@ in
   };
 
   config = lib.mkIf (config.autoModules != { }) {
-    flake = lib.mapAttrs' (
-      name: value: lib.nameValuePair name (readModules value.dir)
-    ) config.autoModules;
+    flake = {
+      nullveilheimModules = lib.mapAttrs' (
+        name: value: lib.nameValuePair name (readModules value.dir)
+      ) config.autoModules;
+
+    };
   };
 }

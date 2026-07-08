@@ -3,7 +3,7 @@
   lib,
   ezModules,
   extraLib,
-  osConfig ? { },
+  osConfig,
   ...
 }:
 

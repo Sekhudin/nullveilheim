@@ -6,7 +6,7 @@
   ];
 
   autoModules = {
-    commonModules = {
+    common = {
       dir = ../../modules/common;
     };
   };

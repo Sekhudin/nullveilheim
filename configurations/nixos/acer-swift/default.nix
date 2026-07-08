@@ -1,12 +1,11 @@
 {
   lib,
   ezModules,
-  commonModules,
   ...
 }:
 
 {
-  imports = lib.attrValues (ezModules // commonModules) ++ [
+  imports = lib.attrValues ezModules ++ [
     ./hardware-configuration.nix
   ];
 
@@ -38,6 +37,10 @@
 
   commonModules = {
     enable = true;
+    nixpkgs = {
+      enableOverlays = true;
+    };
+
     nix = {
       settings = {
         trusted-users = [ "syaikhu" ];

@@ -14,12 +14,11 @@
     globalArgs = {
       inherit inputs;
       inherit (inputs) self;
-      inherit (inputs.self)
+      inherit (inputs.self.nullveilheimConfigurations)
         color
         icon
         font
         extraLib
-        commonModules
         ;
     };
     earlyModuleArgs = globalArgs;

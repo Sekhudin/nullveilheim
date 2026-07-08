@@ -2,23 +2,28 @@
   inputs,
   config,
   lib,
+  extraLib,
   ...
 }:
 
 let
-  cfg = config.nixosCoreModules.nixpkgs;
-  masterEnable = config.nixosCoreModules.enable;
-  nixpkgsConfig = lib.mkMerge [
-    { }
-    cfg.config
-  ];
+  cfg = config.commonModules.nixpkgs;
+  master = config.commonModules;
+  masterEnable = master.enable;
+  isStandalone = (extraLib.isStandalone master.osConfig);
 in
 {
-  options.nixosCoreModules.nixpkgs = {
+  options.commonModules.nixpkgs = {
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable nixpkgs config";
       default = true;
+    };
+
+    enableOverlays = lib.mkOption {
+      type = lib.types.bool;
+      description = "enable nixpkgs overlays";
+      default = false;
     };
 
     config = lib.mkOption {
@@ -40,7 +45,15 @@ in
         cfg.config
       ];
 
-      overlays = (lib.attrValues inputs.self.overlays) ++ [ ];
+      overlays = lib.optionals cfg.enableOverlays (
+        (lib.attrValues inputs.self.overlays)
+        ++ [
+        ]
+        ++ lib.optionals isStandalone [
+          inputs.nixgl.overlay
+        ]
+      );
+
     };
   };
 }
