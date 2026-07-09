@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -101,7 +102,42 @@ in
 
     home = {
       sessionPath = [ "$HOME/.yarn/bin" ];
-      shellAliases = { };
+      shellAliases = {
+        rm = "rm -i";
+
+        # common
+        cat = "${pkgs.bat}/bin/bat";
+        du = "${pkgs.dust}/bin/dust";
+        grep = "${pkgs.ripgrep}/bin/rg";
+
+        # criptography
+        age = "${pkgs.rage}/bin/rage";
+
+        # gpg export
+        gpg-bp = "gpg --export-options backup --export";
+        gpg-bs = "gpg --export-options backup --export-secret-keys";
+        gpg-r = "gpg --export-options restore --import";
+        gpg-bt = "gpg --export-ownertrust";
+        gpg-rt = "gpg --import-ownertrust";
+
+        # git
+        g = "git";
+        g-d = "git diff";
+        g-s = "git status";
+        g-l = "git log --graph --oneline --all";
+        g-ls = "git log --graph --oneline --all --show-signature";
+        g-ld = "git log --graph --oneline --all --decorate --stat";
+        g-lf = "git log --oneline --all --pretty=format:\"%h%x09%an%x09%ad%x09%s\"";
+        g-fa = "git fetch --all";
+        g-rc = "git rebase --continue";
+        g-ri = "git rebase --interactive";
+        g-tmp = "git commit -m \"temp\" --no-verify";
+        g-plh = "git pull origin (git rev-parse --abbrev-ref HEAD)";
+        g-psh = "git push origin (git rev-parse --abbrev-ref HEAD)";
+
+        # git-flow
+        gf = "git-flow-next";
+      };
     };
   };
 }

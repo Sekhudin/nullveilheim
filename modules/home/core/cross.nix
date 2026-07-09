@@ -54,6 +54,7 @@ in
         curl
         wget
         tree
+        rage
         ack
 
         # multi-media
