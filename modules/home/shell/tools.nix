@@ -134,9 +134,6 @@ in
         g-tmp = "git commit -m \"temp\" --no-verify";
         g-plh = "git pull origin (git rev-parse --abbrev-ref HEAD)";
         g-psh = "git push origin (git rev-parse --abbrev-ref HEAD)";
-
-        # git-flow
-        gf = "git-flow-next";
       };
     };
   };

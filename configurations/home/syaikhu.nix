@@ -26,6 +26,16 @@
 
   homeProgramsModules = {
     enable = true;
+    vcs = {
+      jujutsu = {
+        settings = {
+          user = {
+            name = "sekhudin";
+            email = "sekhudinuap@gmail.com";
+          };
+        };
+      };
+    };
   };
 
   homeShellModules = {

@@ -5,6 +5,7 @@
   imports = [
     ./multimedia.nix
     ./productivity.nix
+    ./vcs.nix
   ];
 
   options.homeProgramsModules = {
