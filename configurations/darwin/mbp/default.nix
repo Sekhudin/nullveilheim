@@ -16,21 +16,24 @@
   users.users = {
     syaikhu = {
       home = "/Users/syaikhu";
-      shell = pkgs.fish;
+      # shell = pkgs.fish;
     };
   };
 
-  darwinCoreModules = {
+  commonModules = {
+    enable = true;
+    nixpkgs = {
+      enableOverlays = true;
+    };
+
     nix = {
       settings = {
         trusted-users = [ "syaikhu" ];
       };
     };
+  };
 
-    nixpkgs = {
-      config = {
-        allowUnfree = true;
-      };
-    };
+  darwinCoreModules = {
+    enable = true;
   };
 }

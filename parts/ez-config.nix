@@ -1,6 +1,6 @@
 {
   inputs,
-  pkgs,
+  lib,
   ...
 }:
 
@@ -43,8 +43,10 @@
     users = {
       syaikhu = {
         standalone = {
-          inherit pkgs;
           enable = true;
+          pkgs = import inputs.nixpkgs {
+            overlays = (lib.attrValues inputs.self.overlays) ++ [ ];
+          };
         };
       };
     };

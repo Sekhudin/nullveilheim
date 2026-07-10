@@ -42,4 +42,12 @@
     enable = true;
     use = "fish";
   };
+
+  homeTerminalModules = {
+    enable = true;
+    use = "ghostty";
+    ghostty = {
+      theme = "zenwritten_dark";
+    };
+  };
 }
