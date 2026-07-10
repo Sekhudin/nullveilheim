@@ -23,6 +23,9 @@ let
         inherit system;
         config = {
           allowUnfree = true;
+          allowBroken = false;
+          contentAddressedByDefault = false;
+          tarball-ttl = 0;
         };
       };
     };
@@ -38,6 +41,10 @@ in
     {
       inherit (mainBranch) nixd nixf nixt;
       inherit branches;
+
+      slack = branches.stable.slack;
+      discord = branches.stable.discord;
+      wpsoffice = branches.stable.wpsoffice;
 
       claude-code = branches.unstable.claude-code;
       gemini-cli = branches.unstable.gemini-cli;

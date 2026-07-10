@@ -20,16 +20,6 @@ in
   };
 
   config = lib.mkIf (masterEnable && isFish) {
-    programs = {
-      fish = lib.mkMerge [
-        {
-          enable = true;
-          plugins = with pkgs.fishPlugins; [ nix-env ];
-        }
-        cfg.settings
-      ];
-    };
-
     home = {
       packages = with pkgs; [
         babelfish
@@ -42,8 +32,16 @@ in
         fishPlugins.fifc
         fishPlugins.bass
       ];
-
     };
 
+    programs = {
+      fish = lib.mkMerge [
+        {
+          enable = true;
+          plugins = with pkgs.fishPlugins; [ nix-env ];
+        }
+        cfg.settings
+      ];
+    };
   };
 }

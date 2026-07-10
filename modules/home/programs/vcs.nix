@@ -43,39 +43,20 @@ in
   };
 
   config = lib.mkIf (masterEnable && cfg.enable) {
+    home = {
+      packages = with pkgs; [
+        git-filter-repo
+      ];
+    };
+
     programs = {
       git = lib.mkMerge [
         {
           enable = true;
-          aliases = {
-            a = "add";
-            aa = "add .";
-
-            c = "commit";
-            ca = "commit --amend";
-            can = "commit --amend --no-edit";
-
-            r = "rebase";
-            ri = "rebase -i";
-            rc = "rebase --continue";
-            ra = "rebase --abort";
-            ro = "rebase origin/main";
-
-            f = "fetch";
-            fa = "fetch --all";
-
-            co-a = "!f() { git checkout --ours -- \"\${@:-.}\"; git add -u \"\${@:-.}\"; }; f";
-            co-e = "!f() { git checkout --theirs -- \"\${@:-.}\"; git add -u \"\${@:-.}\"; }; f";
-
-            b = "branch";
-            bs = ''
-              branch --sort=-committerdate --format='%(HEAD)%(color:yellow) %(refname:short)
-              | %(color:bold red)%(committername) | %(color:bold green)%(committerdate:relative)
-              | %(color:blue)%(subject)%(color:reset)' --color=always
-            '';
-          };
-
-          extraConfig = {
+          settings = {
+            init = {
+              defaultBranch = "main";
+            };
             gpg = {
               program = "gpg";
             };
@@ -83,7 +64,7 @@ in
               enable = true;
             };
             commit = {
-              gpgSign = true;
+              # gpgSign = true;
             };
             pull = {
               ff = "only";
@@ -107,6 +88,33 @@ in
               "git@bitbucket.org:" = {
                 insteadOf = "https://bitbucket.org/";
               };
+            };
+            alias = {
+              a = "add";
+              aa = "add .";
+
+              c = "commit";
+              ca = "commit --amend";
+              can = "commit --amend --no-edit";
+
+              r = "rebase";
+              ri = "rebase -i";
+              rc = "rebase --continue";
+              ra = "rebase --abort";
+              ro = "rebase origin/main";
+
+              f = "fetch";
+              fa = "fetch --all";
+
+              co-a = "!f() { git checkout --ours -- \"\${@:-.}\"; git add -u \"\${@:-.}\"; }; f";
+              co-e = "!f() { git checkout --theirs -- \"\${@:-.}\"; git add -u \"\${@:-.}\"; }; f";
+
+              b = "branch";
+              bs = ''
+                branch --sort=-committerdate --format='%(HEAD)%(color:yellow) %(refname:short)
+                | %(color:bold red)%(committername) | %(color:bold green)%(committerdate:relative)
+                | %(color:blue)%(subject)%(color:reset)' --color=always
+              '';
             };
           };
         }
@@ -139,12 +147,6 @@ in
           enable = true;
         }
         cfg.jujutsu
-      ];
-    };
-
-    home = {
-      packages = with pkgs; [
-        git-filter-repo
       ];
     };
   };

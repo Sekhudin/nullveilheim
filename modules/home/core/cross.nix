@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  font,
   ...
 }:
 
@@ -46,33 +47,36 @@ in
     };
 
     home = {
-      packages = with pkgs; [
-        home-manager
-        coreutils
-        gnused
-        gawk
-        curl
-        wget
-        tree
-        rage
-        ack
+      packages =
+        with pkgs;
+        [
+          home-manager
+          coreutils
+          gnused
+          gawk
+          curl
+          wget
+          tree
+          rage
+          ack
 
-        # multi-media
-        asciinema
-        asciinema-agg
-        ffmpeg
-        imagemagick
+          # multi-media
+          asciinema
+          asciinema-agg
+          ffmpeg
+          imagemagick
 
-        # productivity
-        fzf
-        fzy
-        dust
-        fd
-        jq
-        iamb
-        ripgrep
-        nixfmt
-      ];
+          # productivity
+          fzf
+          fzy
+          dust
+          fd
+          jq
+          iamb
+          ripgrep
+          nixfmt
+        ]
+        ++ (font.mkPackages pkgs);
     };
   };
 }
