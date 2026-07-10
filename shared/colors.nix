@@ -81,5 +81,5 @@ in
         lines = toColorLines themes.${name};
       };
     in
-    (mkTheme name) // { inherit mkTheme; };
+    (mkTheme name) // { inherit themes mkTheme; };
 }
