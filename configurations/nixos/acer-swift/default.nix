@@ -16,7 +16,6 @@
     syaikhu = {
       description = "user syaikhu";
       isNormalUser = true;
-      shell = pkgs.fish;
       extraGroups = [
         "networkmanager"
         "wheel"

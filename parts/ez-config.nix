@@ -35,6 +35,9 @@
   ezConfigs.darwin = {
     modulesDirectory = ../modules/darwin;
     configurationsDirectory = ../configurations/darwin;
+    hosts = {
+      mbp.userHomeModules = [ "syaikhu" ];
+    };
   };
 
   ezConfigs.home = {

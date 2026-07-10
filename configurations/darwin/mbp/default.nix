@@ -16,7 +16,6 @@
   users.users = {
     syaikhu = {
       home = "/Users/syaikhu";
-      # shell = pkgs.fish;
     };
   };
 
