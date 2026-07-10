@@ -1,4 +1,8 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 
 let
   cfg = config.commonModules.nix;
@@ -29,8 +33,6 @@ in
     nix = {
       gc = lib.mkMerge [
         {
-          automatic = lib.mkDefault false;
-          dates = lib.mkDefault "daily";
           options = lib.mkDefault "--delete-older-than 7d";
         }
         cfg.gc
