@@ -2,20 +2,18 @@
   config,
   pkgs,
   lib,
-  color,
   ...
 }:
 
 let
   cfg = config.homeProgramsModules.tmux;
   masterEnable = config.homeProgramsModules.enable;
-
   workspaces = {
     portfolio = {
-      session_name = "Portfolio";
+      session_name = "portfolio";
       windows = [
         {
-          window_name = "Neovim";
+          window_name = "neovim";
           layout = "tiled";
           shell_command_before = [ "cd ~/projects/portfolio" ];
           panes = [
@@ -23,18 +21,62 @@ let
           ];
         }
         {
-          window_name = "Terminal";
+          window_name = "terminal";
           layout = "main-vertical";
           shell_command_before = [ "cd ~/projects/portfolio" ];
           panes = [
-            ""
+            "echo happy working!"
             "nix run self#root"
             "npm run dev"
           ];
         }
       ];
     };
+
+    projects = {
+      session_name = "projects";
+      windows = [
+        {
+          window_name = "projects";
+          layout = "tiled";
+          shell_command_before = [ "cd ~/projects" ];
+          panes = [
+            "echo happy working!"
+          ];
+        }
+      ];
+    };
+
+    work = {
+      session_name = "work";
+      windows = [
+        {
+          window_name = "work";
+          layout = "tiled";
+          shell_command_before = [ "cd ~/work" ];
+          panes = [
+            "echo happy working!"
+          ];
+        }
+      ];
+    };
   };
+
+  inherit (builtins) toFile toJSON;
+
+  mkTmuxpFile = name: ws: toFile "tmuxp-${name}.json" (toJSON ws);
+  mkShellAliases =
+    wss:
+
+    let
+      names = lib.attrNames wss;
+    in
+    builtins.listToAttrs (
+      map (name: {
+        name = "tmux-${name}";
+        value = "tmuxp load ${mkTmuxpFile name wss.${name}}";
+      }) names
+    );
 in
 {
   options.homeProgramsModules.tmux = {
@@ -42,6 +84,18 @@ in
       type = lib.types.bool;
       description = "enable tmux";
       default = true;
+    };
+
+    workspaces = lib.mkOption {
+      type = lib.types.attrs;
+      description = "List of tmux workspaces configurations";
+      default = { };
+      example = {
+        foo = {
+          session_name = "coding";
+          windows = [ { window_name = "nvim"; } ];
+        };
+      };
     };
 
     settings = lib.mkOption {
@@ -117,10 +171,17 @@ in
             set -g @continuum-boot on
 
             bind " " choose-tree -Zw
+            bind s setw synchronize-panes on
+            bind S setw synchronize-panes off
+
             bind a new-session
             bind A kill-session
+
             bind w new-window
             bind W kill-window
+
+            bind v split-pane -h
+            bind V split-pane -v
             bind x kill-pane
 
             bind n previous-window
@@ -131,8 +192,6 @@ in
 
             bind \? list-keys 
 
-            bind v split-pane -h
-            bind V split-pane -v
 
             # Temporary workaround for tmux sensible issue
             set -gu default-command
@@ -148,9 +207,7 @@ in
     };
 
     home = {
-      shellAliases = {
-
-      };
+      shellAliases = (mkShellAliases (workspaces // cfg.workspaces));
     };
   };
 }
