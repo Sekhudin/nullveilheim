@@ -21,7 +21,6 @@
       extraGroups = [
         "networkmanager"
         "wheel"
-        "docker"
       ];
       subUidRanges = [
         {
