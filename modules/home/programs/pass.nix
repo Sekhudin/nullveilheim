@@ -7,6 +7,7 @@
 
 let
   cfg = config.homeProgramsModules.pass;
+  masterEnable = config.homeProgramsModules.enable;
 in
 {
   options.homeProgramsModules.pass = {
@@ -17,7 +18,7 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (masterEnable && cfg.enable) {
     home.packages = [ pkgs.gnupg ];
 
     programs = {
@@ -36,6 +37,5 @@ in
         browsers = [ "firefox" ];
       };
     };
-
   };
 }
