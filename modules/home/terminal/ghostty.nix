@@ -14,7 +14,7 @@ let
   openGLEnable = (openGL.enable && openGL.use != "default");
   isGhostty = (master.use == "ghostty");
 
-  mkThemeGhostty = name: themeColor: {
+  mkThemeGhostty = themeColor: {
     background = themeColor.scheme.base00;
     foreground = themeColor.scheme.base07;
     cursor-color = themeColor.scheme.base06;
@@ -27,7 +27,7 @@ let
   themeNames = lib.attrNames color.themes;
   themesColor = lib.genAttrs themeNames (name: color.mkTheme name);
 
-  themesGhostty = lib.genAttrs themeNames (name: mkThemeGhostty name themesColor.${name});
+  themesGhostty = lib.genAttrs themeNames (name: mkThemeGhostty themesColor.${name});
   colorGhostty = themesColor.${cfg.theme};
 in
 {

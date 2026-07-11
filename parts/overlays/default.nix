@@ -32,7 +32,7 @@ let
 in
 {
   flake.overlays.default =
-    final: prev:
+    _: prev:
 
     let
       branches = mkBranches prev.stdenv.hostPlatform.system;
