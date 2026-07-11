@@ -7,7 +7,7 @@
 
 let
   cfg = config.homeOpenGLModules;
-  isOpenGL = (cfg.openGL != "default");
+  isOpenGL = (cfg.use != "default");
 in
 {
   options.homeOpenGLModules = {

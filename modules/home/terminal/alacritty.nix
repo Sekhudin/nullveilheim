@@ -1,18 +1,16 @@
 {
   config,
   lib,
-  osConfig,
-  extraLib,
   ...
 }:
 
 let
   cfg = config.homeTerminalModules.alacritty;
   master = config.homeTerminalModules;
+  openGL = config.homeOpenGLModules;
   masterEnable = master.enable;
-  useOpenGL = (master.openGL != "default");
+  openGLEnable = (openGL.enable && openGL.use != "default");
   isAlacritty = (master.use == "alacritty");
-  isStandalone = extraLib.isStandalone osConfig;
 in
 {
   options.homeTerminalModules.alacritty = {
@@ -47,18 +45,18 @@ in
       ];
     };
 
-    xdg.desktopEntries = lib.mkIf (useOpenGL && isStandalone) {
+    xdg.desktopEntries = lib.mkIf openGLEnable {
       Alacritty = {
         name = "Alacritty";
         genericName = "Terminal";
         type = "Application";
         icon = "Alacritty";
-        exec = "${master.openGL} alacritty";
+        exec = "${openGL.use} alacritty";
         comment = "A fast, cross-platform, OpenGL terminal emulator";
         startupNotify = true;
         terminal = false;
         actions.new.name = "New Terminal";
-        actions.new.exec = "${master.openGL} alacritty";
+        actions.new.exec = "${openGL.use} alacritty";
         settings.StartupWMClass = "Alacritty";
         categories = [
           "System"

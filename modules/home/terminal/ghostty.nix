@@ -8,7 +8,7 @@
 
 let
   cfg = config.homeTerminalModules.ghostty;
-  master = config.homeProgramsModules;
+  master = config.homeTerminalModules;
   openGL = config.homeOpenGLModules;
   masterEnable = master.enable;
   openGLEnable = (openGL.enable && openGL.use != "default");
