@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   ezModules,
   ...
 }:
@@ -44,7 +43,9 @@
 
     nix = {
       settings = {
-        trusted-users = [ "syaikhu" ];
+        settings = {
+          trusted-users = [ "syaikhu" ];
+        };
       };
     };
   };

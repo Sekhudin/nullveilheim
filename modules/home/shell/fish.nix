@@ -22,7 +22,7 @@ in
   config = lib.mkIf (masterEnable && isFish) {
     home = {
       packages = with pkgs; [
-        babelfish
+        branches.stable.babelfish
         fishPlugins.colored-man-pages
         fishPlugins.done
         fishPlugins.foreign-env

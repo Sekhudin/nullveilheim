@@ -16,12 +16,6 @@ in
       default = true;
     };
 
-    gc = lib.mkOption {
-      type = lib.types.attrs;
-      description = "gc nix settings";
-      default = { };
-    };
-
     settings = lib.mkOption {
       type = lib.types.attrs;
       description = "nix settings";
@@ -30,23 +24,20 @@ in
   };
 
   config = lib.mkIf (masterEnable && cfg.enable) {
-    nix = {
-      gc = lib.mkMerge [
-        {
+    nix = lib.mkMerge [
+      {
+        gc = {
           options = lib.mkDefault "--delete-older-than 7d";
-        }
-        cfg.gc
-      ];
+        };
 
-      settings = lib.mkMerge [
-        {
+        settings = {
           experimental-features = [
             "nix-command"
             "flakes"
           ];
-        }
-        cfg.settings
-      ];
-    };
+        };
+      }
+      cfg.settings
+    ];
   };
 }
