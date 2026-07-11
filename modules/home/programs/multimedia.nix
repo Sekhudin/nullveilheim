@@ -50,7 +50,6 @@ in
         {
           enable = true;
           config = {
-            ao = "pipewire";
             audio-buffer = "0.5";
             autofit = "35%";
             border = "no";
@@ -58,7 +57,6 @@ in
             demuxer-max-back-bytes = "100M";
             demuxer-max-bytes = "500M";
             geometry = "30%x30%+100%+100%";
-            gpu-api = "vulkan";
             gpu-context = "auto";
             hwdec = "auto";
             keep-open = "yes";
