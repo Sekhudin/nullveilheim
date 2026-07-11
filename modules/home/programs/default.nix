@@ -7,6 +7,7 @@
     ./multimedia.nix
     ./pass.nix
     ./productivity.nix
+    ./tmux.nix
     ./vcs.nix
   ];
 

@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   ezModules,
   ...
 }:
@@ -15,6 +16,8 @@
     syaikhu = {
       description = "user syaikhu";
       isNormalUser = true;
+      shell = pkgs.fish;
+      ignoreShellProgramCheck = true;
       extraGroups = [
         "networkmanager"
         "wheel"

@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   ezModules,
   ...
@@ -15,6 +16,8 @@
   users.users = {
     syaikhu = {
       home = "/Users/syaikhu";
+      shell = pkgs.fish;
+      ignoreShellProgramCheck = true;
     };
   };
 

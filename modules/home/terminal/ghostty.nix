@@ -51,7 +51,6 @@ in
         {
           enable = true;
           enableFishIntegration = config.programs.fish.enable;
-          enableBashIntegration = config.programs.bash.enable;
           enableZshIntegration = config.programs.zsh.enable;
           settings = {
             theme = cfg.theme;
@@ -69,7 +68,7 @@ in
             macos-window-shadow = lib.mkDefault false;
             macos-titlebar-style = lib.mkDefault "transparent";
             window-decoration = lib.mkDefault false;
-            window-padding-x = lib.mkDefault 6;
+            window-padding-x = lib.mkDefault 0;
             window-padding-y = lib.mkDefault 0;
             window-padding-balance = lib.mkDefault true;
             window-padding-color = lib.mkDefault "extend";
@@ -86,7 +85,7 @@ in
           border: 2px solid ${colorGhostty.scheme.base08};
           border-radius: 8px;
           margin: 4px;
-        }
+      }
     '';
 
     xdg.desktopEntries = lib.mkIf openGLEnable {
