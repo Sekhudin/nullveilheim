@@ -5,6 +5,7 @@
   imports = [
     ./gpg.nix
     ./multimedia.nix
+    ./pass.nix
     ./productivity.nix
     ./vcs.nix
   ];
