@@ -21,15 +21,5 @@
       description = "choose terminal";
       default = "ghostty";
     };
-
-    openGL = lib.mkOption {
-      type = lib.types.enum [
-        "default"
-        "nixGLMesa"
-        "nixGLIntel"
-      ];
-      description = "choose opengl";
-      default = "default";
-    };
   };
 }

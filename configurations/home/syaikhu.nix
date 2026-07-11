@@ -50,4 +50,9 @@
       theme = "zenwritten_dark";
     };
   };
+
+  homeOpenGLModules = {
+    enable = true;
+    use = "default";
+  };
 }

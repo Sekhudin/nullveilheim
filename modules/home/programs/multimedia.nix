@@ -2,17 +2,15 @@
   config,
   pkgs,
   lib,
-  osConfig,
-  extraLib,
   ...
 }:
 
 let
   cfg = config.homeProgramsModules.multimedia;
   master = config.homeProgramsModules;
+  openGL = config.homeOpenGLModules;
   masterEnable = master.enable;
-  useOpenGL = (master.openGL != "default");
-  isStandalone = extraLib.isStandalone osConfig;
+  openGLEnable = (openGL.enable && openGL.use != "default");
 in
 {
   options.homeProgramsModules.multimedia = {
@@ -94,12 +92,12 @@ in
       ];
     };
 
-    xdg.desktopEntries = lib.mkIf (useOpenGL && isStandalone) {
+    xdg.desktopEntries = lib.mkIf openGLEnable {
       "com.obsproject.Studio" = {
         name = "OBS Studio";
         type = "Application";
         icon = "com.obsproject.Studio";
-        exec = "${master.openGL} obs";
+        exec = "${openGL.use} obs";
         comment = "Free and Open Source Streaming/Recording Software";
         terminal = false;
         settings.StartupNotify = "true";
@@ -115,7 +113,7 @@ in
         name = "MPV player";
         type = "Application";
         icon = "mpv";
-        exec = "${master.openGL} mpv --player-operation-mode=pseudo-gui -- %U";
+        exec = "${openGL.use} mpv --player-operation-mode=pseudo-gui -- %U";
         comment = "Play movies and songs";
         terminal = false;
         settings.Keywords = "limiter;compressor;reverberation;equalizer;autovolume;";

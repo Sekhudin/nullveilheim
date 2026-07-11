@@ -2,17 +2,15 @@
   config,
   pkgs,
   lib,
-  osConfig,
-  extraLib,
   ...
 }:
 
 let
   cfg = config.homeProgramsModules.productivity;
   master = config.homeProgramsModules;
+  openGL = config.homeOpenGLModules;
   masterEnable = master.enable;
-  useOpenGL = (master.openGL != "default");
-  isStandalone = extraLib.isStandalone osConfig;
+  openGLEnable = (openGL.enable && openGL.use != "default");
 in
 {
   options.homeProgramsModules.productivity = {
@@ -83,16 +81,16 @@ in
       ];
     };
 
-    xdg.desktopEntries = lib.mkIf (useOpenGL && isStandalone) {
+    xdg.desktopEntries = lib.mkIf openGLEnable {
       "org.telegram.desktop" = {
         name = "Telegram";
         type = "Application";
         icon = "org.telegram.desktop";
-        exec = "${cfg.openGL} telegram-desktop %u";
+        exec = "${openGL.use} telegram-desktop %u";
         comment = "New era of messaging";
         terminal = false;
         actions.quit.name = "Quit Telegram";
-        actions.quit.exec = "${cfg.openGL} telegram-desktop -quit";
+        actions.quit.exec = "${openGL.use} telegram-desktop -quit";
         actions.quit.icon = "application-exit";
         settings.SingleMainWindow = "true";
         settings.StartupWMClass = "TelegramDesktop";
@@ -115,7 +113,7 @@ in
         name = "Slack";
         type = "Application";
         icon = "slack";
-        exec = "${cfg.openGL} ${pkgs.slack}/bin/slack --no-sandbox -s %u";
+        exec = "${openGL.use} ${pkgs.slack}/bin/slack --no-sandbox -s %u";
         comment = "Slack Desktop";
         mimeType = [ "x-scheme-handler/slack" ];
         settings.StartupWMClass = "Slack";
@@ -131,7 +129,7 @@ in
         name = "Discord";
         type = "Application";
         icon = "discord";
-        exec = "${cfg.openGL} discord --no-sandbox";
+        exec = "${openGL.use} discord --no-sandbox";
         comment = "All-in-one cross-platform voice and text chat for gamers";
         mimeType = [ "x-scheme-handler/discord" ];
         settings.StartupWMClass = "discord";
@@ -145,7 +143,7 @@ in
         name = "DBeaver";
         type = "Application";
         icon = "dbeaver";
-        exec = "${cfg.openGL} dbeaver";
+        exec = "${openGL.use} dbeaver";
         comment = "Universal Database Manager and SQL Client";
         terminal = false;
         settings.StartupWMClass = "DBeaver";

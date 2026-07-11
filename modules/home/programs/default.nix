@@ -3,6 +3,7 @@
 {
 
   imports = [
+    ./gpg.nix
     ./multimedia.nix
     ./productivity.nix
     ./vcs.nix
@@ -13,16 +14,6 @@
       type = lib.types.bool;
       description = "enable programs modules";
       default = false;
-    };
-
-    openGL = lib.mkOption {
-      type = lib.types.enum [
-        "default"
-        "nixGLMesa"
-        "nixGLIntel"
-      ];
-      description = "choose opengl";
-      default = "default";
     };
   };
 }

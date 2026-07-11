@@ -1,8 +1,6 @@
 {
   config,
   lib,
-  osConfig,
-  extraLib,
   color,
   font,
   ...
@@ -10,11 +8,11 @@
 
 let
   cfg = config.homeTerminalModules.ghostty;
-  master = config.homeTerminalModules;
+  master = config.homeProgramsModules;
+  openGL = config.homeOpenGLModules;
   masterEnable = master.enable;
-  useOpenGL = (master.openGL != "default");
+  openGLEnable = (openGL.enable && openGL.use != "default");
   isGhostty = (master.use == "ghostty");
-  isStandalone = extraLib.isStandalone osConfig;
 
   mkThemeGhostty = name: themeColor: {
     background = themeColor.scheme.base00;
@@ -91,17 +89,17 @@ in
         }
     '';
 
-    xdg.desktopEntries = lib.mkIf (useOpenGL && isStandalone) {
+    xdg.desktopEntries = lib.mkIf openGLEnable {
       "com.mitchellh.ghostty" = {
         name = "Ghostty";
         type = "Application";
         icon = "com.mitchellh.ghostty";
-        exec = "${master.openGL} ghostty";
+        exec = "${openGL.use} ghostty";
         comment = "A terminal emulator";
         terminal = false;
         startupNotify = true;
         actions.new-window.name = "New Window";
-        actions.new-window.exec = "${master.openGL} ghostty";
+        actions.new-window.exec = "${openGL.use} ghostty";
         settings.Keywords = "terminal;tty;pty";
         settings.StartupWMClass = "com.mitchellh.ghostty";
         settings.X-GNOME-UsesNotifications = "true";
