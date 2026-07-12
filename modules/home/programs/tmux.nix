@@ -2,68 +2,21 @@
   config,
   pkgs,
   lib,
+  color,
   ...
 }:
 
 let
   cfg = config.homeProgramsModules.tmux;
+  terminal = config.homeTerminalModules;
   masterEnable = config.homeProgramsModules.enable;
-  workspaces = {
-    portfolio = {
-      session_name = "portfolio";
-      windows = [
-        {
-          window_name = "neovim";
-          layout = "tiled";
-          shell_command_before = [ "cd ~/projects/portfolio" ];
-          panes = [
-            "nvim ."
-          ];
-        }
-        {
-          window_name = "terminal";
-          layout = "main-vertical";
-          shell_command_before = [ "cd ~/projects/portfolio" ];
-          panes = [
-            "echo happy working!"
-            "nix run self#root"
-            "npm run dev"
-          ];
-        }
-      ];
-    };
 
-    projects = {
-      session_name = "projects";
-      windows = [
-        {
-          window_name = "projects";
-          layout = "tiled";
-          shell_command_before = [ "cd ~/projects" ];
-          panes = [
-            "echo happy working!"
-          ];
-        }
-      ];
-    };
-
-    work = {
-      session_name = "work";
-      windows = [
-        {
-          window_name = "work";
-          layout = "tiled";
-          shell_command_before = [ "cd ~/work" ];
-          panes = [
-            "echo happy working!"
-          ];
-        }
-      ];
-    };
-  };
+  themesColor = lib.genAttrs (lib.attrNames color.themes) (name: color.mkTheme name);
+  colorTerminal = themesColor.${terminal.theme};
 
   inherit (builtins) toFile toJSON;
 
+  mkTmuxColor = f: b: "fg=${f},bg=${b}";
   mkTmuxpFile = name: ws: toFile "tmuxp-${name}.json" (toJSON ws);
   mkShellAliases =
     wss:
@@ -77,6 +30,121 @@ let
         value = "tmuxp load ${mkTmuxpFile name wss.${name}}";
       }) names
     );
+
+  layouts = {
+    tiled = "tiled";
+    even-horizontal = "even-horizontal";
+    even-vertical = "even-vertical";
+    main-horizontal = "main-horizontal";
+    main-vertical = "main-vertical";
+  };
+
+  mkWindow =
+    {
+      start_directory,
+      panes ? [ ],
+      overrides ? { },
+    }:
+
+    {
+      inherit start_directory;
+      window_name = "services";
+      layout = layouts.main-vertical;
+      panes = [
+        {
+          focus = true;
+        }
+        { }
+        { }
+      ]
+      ++ panes;
+    }
+    // overrides;
+
+  mkEditorWindow =
+    {
+      editor,
+      start_directory,
+      panes ? [ ],
+      overrides ? { },
+    }:
+
+    {
+      inherit start_directory;
+      window_name = "editor";
+      layout = layouts.tiled;
+      panes = [
+        {
+          focus = true;
+          shell_command = [ "${editor} ." ];
+        }
+      ]
+      ++ panes;
+    }
+    // overrides;
+
+  workspaces = {
+    work = {
+      session_name = "work";
+      windows = [
+        (mkEditorWindow {
+          editor = "nvim";
+          start_directory = "~/work";
+          overrides = {
+            focus = true;
+          };
+        })
+
+        (mkWindow {
+          start_directory = "~/work";
+        })
+      ];
+    };
+
+    projects = {
+      session_name = "projects";
+      windows = [
+        (mkEditorWindow {
+          editor = "nvim";
+          start_directory = "~/projects";
+          overrides = {
+            focus = true;
+          };
+        })
+
+        (mkWindow {
+          start_directory = "~/projects";
+        })
+      ];
+    };
+
+    portfolio = {
+      session_name = "portfolio";
+      windows = [
+        (mkEditorWindow {
+          editor = "nvim";
+          start_directory = "~/projects/portfolio";
+          overrides = {
+            focus = true;
+          };
+        })
+
+        (mkWindow {
+          start_directory = "~/projects/portfolio";
+          overrides = {
+            panes = [
+              {
+                focus = true;
+                shell_command = "echo happy working!";
+              }
+              { shell_command = "nix run self#root"; }
+              { shell_command = "npm run dev"; }
+            ];
+          };
+        })
+      ];
+    };
+  };
 in
 {
   options.homeProgramsModules.tmux = {
@@ -161,11 +229,8 @@ in
           extraConfig = ''
             set -g status off
 
-            set -g pane-border-style "fg=colour235,bg=default"
-            set -g pane-active-border-style "fg=colour235,bg=default"
-            set -g pane-border-lines heavy
-            set -g pane-border-status off
-            set -g pane-border-format ""
+            set -g pane-border-style "${(mkTmuxColor colorTerminal.scheme.base08 "default")}"
+            set -g pane-active-border-style "${(mkTmuxColor colorTerminal.scheme.base08 "default")}"
             set -sg escape-time 10 
 
             set -g @continuum-boot on
