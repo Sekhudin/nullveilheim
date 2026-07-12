@@ -29,6 +29,11 @@ in
         excludes = [
           "go_1_23"
         ];
+        extends = {
+          go = mkShell {
+            name = "go";
+          };
+        };
       };
     };
 }

@@ -23,13 +23,10 @@ in
         };
     in
     {
-      devShells = extraLib-ds.mkShells {
-        inherit pkgs mkShell;
-        prefix = "nodejs_";
-        excludes = [
-          "nodejs_20"
-          "nodejs_25"
-        ];
+      devShells = {
+        bun = mkShell {
+          name = "bun";
+        };
       };
     };
 }
