@@ -18,17 +18,18 @@ in
           name = "${name}-dev-shell";
           packages = [ pkgs.${name} ] ++ extraPackages;
           shellHook = ''
-            echo "Entering ${name} development environment..."
-
-            corepack enable --install-directory=$PWD/.corepack
-            export PATH=$PWD/.corepack:$PATH
+            echo -e "${extraLib-ds.fmt.green "${name}"} ready!"
           '';
         };
     in
     {
       devShells = extraLib-ds.mkShells {
         inherit pkgs mkShell;
-        name = "nodejs_";
+        prefix = "nodejs_";
+        excludes = [
+          "nodejs_20"
+          "nodejs_25"
+        ];
       };
     };
 }
