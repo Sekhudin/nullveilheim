@@ -28,6 +28,20 @@ in
 
         history = {
           size = lib.mkDefault 5000;
+          ignoreSpace = true;
+          ignoreAllDups = true;
+          ignorePatterns = [
+            "ls"
+            "ll"
+            "cd"
+            "cd .."
+            "clear"
+            "exit"
+            "history"
+            "jobs"
+            "rm -rf /"
+            "kill -9*"
+          ];
         };
 
         autosuggestion = {

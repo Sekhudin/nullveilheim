@@ -51,6 +51,7 @@ in
             background-opacity = lib.mkDefault 0.9;
             bold-is-bright = lib.mkDefault true;
             confirm-close-surface = lib.mkDefault false;
+            shell-integration-features = "no-cursor";
             cursor-style = lib.mkDefault "underline";
             cursor-click-to-move = lib.mkDefault false;
             cursor-style-blink = lib.mkDefault true;

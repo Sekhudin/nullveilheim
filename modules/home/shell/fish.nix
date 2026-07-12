@@ -48,6 +48,8 @@ in
             set -U fish_color_error EC7279 --bold
             set -U fish_color_param 6CB6EB
             set fish_greeting
+
+            set -U fish_history_ignore "ls" "ll" "cd" "cd .." "clear" "exit" "history" "jobs" "rm -rf /" "kill -9*"
           '';
           functions = {
             g-ignore = "curl -sL https://www.gitignore.io/api/$argv";
