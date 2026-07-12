@@ -49,6 +49,7 @@
           pkgs,
           prefix,
           excludes ? [ ],
+          extends ? { },
           mkShell,
         }:
         builtins.listToAttrs (
@@ -62,6 +63,7 @@
                 pkgName: lib.hasPrefix prefix pkgName && !(lib.any (ex: lib.hasPrefix ex pkgName) excludes)
               ) (builtins.attrNames pkgs)
             )
-        );
+        )
+        // extends;
     };
 }

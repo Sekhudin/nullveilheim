@@ -7,6 +7,7 @@
 {
   imports = [
     inputs.pre-commit-hooks.flakeModule
+    ./go.nix
     ./node.nix
   ];
 

@@ -25,20 +25,10 @@ in
     {
       devShells = extraLib-ds.mkShells {
         inherit pkgs mkShell;
-        prefix = "nodejs_";
+        prefix = "go_";
         excludes = [
-          "nodejs_20"
-          "nodejs_25"
+          "go_1_23"
         ];
-        extends = {
-          go = pkgs.mkShell {
-            name = "go-dev-shell";
-            packages = with pkgs; [ go ];
-            shellHook = ''
-              echo -e "${extraLib-ds.fmt.green "go"} ready!"
-            '';
-          };
-        };
       };
     };
 }
