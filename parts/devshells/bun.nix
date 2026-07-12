@@ -1,13 +1,12 @@
-{ inputs, ... }:
+{ ... }:
 
-let
-  inherit (inputs.self.nullveilheimConfigurations.extraLib.devshell) fmt;
-in
 {
   perSystem =
-    { pkgs, ... }:
+    { pkgs, extraLib, ... }:
 
     let
+      inherit (extraLib.devshell) fmt;
+
       mkShell =
         {
           name,

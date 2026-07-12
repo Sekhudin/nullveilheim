@@ -9,6 +9,7 @@ in
     ./devshells
     ./flake
     ./overlays
+    ./packages
     ./ez-config.nix
   ];
 

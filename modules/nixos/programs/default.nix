@@ -48,7 +48,7 @@ in
         brightnessctl
         wireplumber
         pavucontrol
-        neovim
+        # neovim
         btop
         ripgrep
         fd
