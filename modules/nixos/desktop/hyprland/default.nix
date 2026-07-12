@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 let
-  cfg = config.nixosDesktopModules.desktop;
+  # cfg = config.nixosDesktopModules.desktop;
   isHyprland = config.nixosDesktopModules.use == "hyprland";
   masterEnable = config.nixosDesktopModules.enable;
 in

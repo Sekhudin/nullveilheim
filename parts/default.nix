@@ -6,6 +6,7 @@ let
 in
 {
   imports = [
+    ./devshells
     ./flake
     ./overlays
     ./ez-config.nix
@@ -18,6 +19,7 @@ in
         icon
         font
         extraLib
+        extraLib-ds
         ;
     };
   };
