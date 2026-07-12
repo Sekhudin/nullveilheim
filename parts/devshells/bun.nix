@@ -1,7 +1,7 @@
 { inputs, ... }:
 
 let
-  inherit (inputs.self.nullveilheimConfigurations) extraLib-ds;
+  inherit (inputs.self.nullveilheimConfigurations.extraLib.devshell) fmt;
 in
 {
   perSystem =
@@ -18,7 +18,7 @@ in
           name = "${name}-dev-shell";
           packages = [ pkgs.${name} ] ++ extraPackages;
           shellHook = ''
-            echo -e "${extraLib-ds.fmt.green "${name}"} ready!"
+            echo -e "${fmt.green "${name}"} ready!"
           '';
         };
     in

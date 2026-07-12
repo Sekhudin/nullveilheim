@@ -19,7 +19,6 @@ in
         icon
         font
         extraLib
-        extraLib-ds
         ;
     };
   };

@@ -1,3 +1,7 @@
+let
+  devshell = import ./devshell.nix;
+  tmux = import ./tmux.nix;
+in
 {
   mkExtraLib =
     { lib }:
@@ -7,6 +11,10 @@
     in
     {
       inherit isStandalone;
+
+      devshell = devshell.mkExtraLib { inherit lib; };
+
+      tmux = tmux.mkExtraLib { inherit lib; };
 
       getHomeDir =
         {
