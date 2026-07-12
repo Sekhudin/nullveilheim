@@ -7,6 +7,9 @@ in
   perSystem =
     {
       system,
+      color,
+      font,
+      extraLib,
       ...
     }:
 
