@@ -14,30 +14,24 @@ let
   openGLEnable = (openGL.enable && openGL.use != "default");
   isGhostty = (master.use == "ghostty");
 
-  mkThemeGhostty = themeColor: {
-    background = themeColor.scheme.base00;
-    foreground = themeColor.scheme.base07;
-    cursor-color = themeColor.scheme.base06;
-    cursor-text = themeColor.scheme.base07;
-    selection-background = themeColor.scheme.base08;
-    selection-foreground = themeColor.scheme.base0F;
-    palette = themeColor.lines;
+  mkThemeGhostty = c: {
+    background = c.scheme.base00;
+    foreground = c.scheme.base07;
+    cursor-color = c.scheme.base06;
+    cursor-text = c.scheme.base07;
+    selection-background = c.scheme.base08;
+    selection-foreground = c.scheme.base0F;
+    palette = c.lines;
   };
 
   themeNames = lib.attrNames color.themes;
   themesColor = lib.genAttrs themeNames (name: color.mkTheme name);
 
   themesGhostty = lib.genAttrs themeNames (name: mkThemeGhostty themesColor.${name});
-  colorGhostty = themesColor.${cfg.theme};
+  colorTerminal = themesColor.${master.theme};
 in
 {
   options.homeTerminalModules.ghostty = {
-    theme = lib.mkOption {
-      type = lib.types.enum themeNames;
-      description = "theme settings";
-      default = builtins.elemAt themeNames 0;
-    };
-
     settings = lib.mkOption {
       type = lib.types.attrs;
       description = "ghostty settings";
@@ -53,22 +47,23 @@ in
           enableFishIntegration = config.programs.fish.enable;
           enableZshIntegration = config.programs.zsh.enable;
           settings = {
-            theme = cfg.theme;
+            theme = master.theme;
             background-opacity = lib.mkDefault 0.9;
-            cursor-style = lib.mkDefault "underline";
             bold-is-bright = lib.mkDefault true;
             confirm-close-surface = lib.mkDefault false;
+            cursor-style = lib.mkDefault "underline";
             cursor-click-to-move = lib.mkDefault false;
             cursor-style-blink = lib.mkDefault true;
             custom-shader-animation = lib.mkDefault true;
             desktop-notifications = lib.mkDefault true;
             font-family = font.family.monospace;
+            font-size = font.sizes.terminal;
             font-feature = lib.mkDefault "liga,calt,dlig";
             font-thicken = lib.mkDefault true;
             macos-window-shadow = lib.mkDefault false;
             macos-titlebar-style = lib.mkDefault "transparent";
             window-decoration = lib.mkDefault false;
-            window-padding-x = lib.mkDefault 0;
+            window-padding-x = lib.mkDefault 4;
             window-padding-y = lib.mkDefault 0;
             window-padding-balance = lib.mkDefault true;
             window-padding-color = lib.mkDefault "extend";
@@ -82,7 +77,7 @@ in
 
     xdg.configFile."ghostty/style.css".text = ''
       window {
-          border: 2px solid ${colorGhostty.scheme.base08};
+          border: 2px solid ${colorTerminal.scheme.base08};
           border-radius: 8px;
           margin: 4px;
       }

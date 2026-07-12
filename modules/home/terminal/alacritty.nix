@@ -1,6 +1,8 @@
 {
   config,
   lib,
+  color,
+  font,
   ...
 }:
 
@@ -11,6 +13,9 @@ let
   masterEnable = master.enable;
   openGLEnable = (openGL.enable && openGL.use != "default");
   isAlacritty = (master.use == "alacritty");
+
+  themesColor = lib.genAttrs (lib.attrNames color.themes) (name: color.mkTheme name);
+  colorTerminal = themesColor.${master.theme};
 in
 {
   options.homeTerminalModules.alacritty = {
@@ -28,6 +33,10 @@ in
           enable = true;
           settings = {
             window = {
+              startup_mode = "Windowed";
+              decorations = "none";
+              opacity = 0.95;
+              blur = true;
               dimensions = {
                 columns = 0;
                 lines = 0;
@@ -36,8 +45,52 @@ in
                 x = 0;
                 y = 0;
               };
-              opacity = 0.9;
-              startup_mode = "Windowed";
+            };
+
+            font = {
+              size = font.sizes.terminal;
+              normal = {
+                family = font.family.monospace;
+                style = "Regular";
+              };
+              bold = {
+                family = font.family.monospace;
+                style = "Bold";
+              };
+              italic = {
+                family = font.family.monospace;
+                style = "Italic";
+              };
+              bold_italic = {
+                family = font.family.monospace;
+                style = "Bold Italic";
+              };
+            };
+
+            colors = {
+              primary = {
+                background = colorTerminal.scheme.base00;
+                foreground = colorTerminal.scheme.base07;
+              };
+              cursor = {
+                cursor = colorTerminal.scheme.base06;
+                text = colorTerminal.scheme.base07;
+              };
+              selection = {
+                text = colorTerminal.scheme.base0F;
+                background = colorTerminal.scheme.base08;
+              };
+            };
+
+            cursor = {
+              style = {
+                shape = "Underline";
+                blinking = "On";
+              };
+            };
+
+            mouse = {
+              hide_when_typing = true;
             };
           };
         }

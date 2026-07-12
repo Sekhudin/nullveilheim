@@ -1,5 +1,8 @@
-{ lib, ... }:
+{ lib, color, ... }:
 
+let
+  themeNames = lib.attrNames color.themes;
+in
 {
   imports = [
     ./alacritty.nix
@@ -20,6 +23,12 @@
       ];
       description = "choose terminal";
       default = "ghostty";
+    };
+
+    theme = lib.mkOption {
+      type = lib.types.enum themeNames;
+      description = "theme settings";
+      default = builtins.elemAt themeNames 0;
     };
   };
 }

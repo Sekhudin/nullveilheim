@@ -46,9 +46,7 @@
   homeTerminalModules = {
     enable = true;
     use = "ghostty";
-    ghostty = {
-      theme = "zenwritten_dark";
-    };
+    theme = "zenwritten_dark";
   };
 
   homeOpenGLModules = {
