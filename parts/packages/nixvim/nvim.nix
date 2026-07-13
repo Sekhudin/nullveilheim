@@ -1,10 +1,15 @@
-{ ... }:
+{ extraLib, ... }:
 
+let
+  inherit (extraLib.nixvim) importModules;
+in
 {
-  imports = [
-    ./config
-    ./plugins
-  ];
+  imports = importModules {
+    modules = [
+      ./config
+      ./plugins
+    ];
+  };
 
   configModules = {
     autocmd = {
