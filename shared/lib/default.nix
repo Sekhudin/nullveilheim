@@ -15,7 +15,7 @@ in
 
       devshell = devshell.mkExtraLib { inherit lib; };
 
-      nixvim = nixvim.mkExtraLib;
+      nixvim = nixvim.mkExtraLib { inherit lib; };
 
       tmux = tmux.mkExtraLib { inherit lib; };
 

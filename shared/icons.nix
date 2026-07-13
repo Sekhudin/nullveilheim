@@ -110,10 +110,8 @@ let
   };
 
   withLabel = name: label: "${icons.${name}} ${label}";
-  withSpace = {
-    right = name: "${icons.${name}} ";
-    left = name: " ${icons.${name}}";
-  };
+  withRightSpace = name: "${icons.${name}} ";
+  withLeftSpace = name: " ${icons.${name}}";
   withCollapsed = name: "${icons.chevron_right} ${icons.${name}} ";
   withExpanded = name: "${icons.chevron_down} ${icons.${name}} ";
 in
@@ -121,7 +119,8 @@ icons
 // {
   inherit
     withLabel
-    withSpace
+    withRightSpace
+    withLeftSpace
     withCollapsed
     withExpanded
     ;
