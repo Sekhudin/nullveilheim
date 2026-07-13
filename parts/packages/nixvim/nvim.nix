@@ -18,5 +18,9 @@
       enable = true;
       scheme = "nightfox";
     };
+
+    usercommands = {
+      enable = true;
+    };
   };
 }

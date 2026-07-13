@@ -1,5 +1,6 @@
 let
   devshell = import ./devshell.nix;
+  nixvim = import ./nixvim.nix;
   tmux = import ./tmux.nix;
 in
 {
@@ -13,6 +14,8 @@ in
       inherit isStandalone;
 
       devshell = devshell.mkExtraLib { inherit lib; };
+
+      nixvim = nixvim.mkExtraLib;
 
       tmux = tmux.mkExtraLib { inherit lib; };
 
