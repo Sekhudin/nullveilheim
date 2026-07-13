@@ -4,7 +4,7 @@
 
     let
       importAsAttrs =
-        { lib, src }:
+        { src }:
 
         lib.pipe (builtins.readDir src) [
           (lib.mapAttrsToList (
@@ -22,9 +22,36 @@
           (lib.foldl lib.recursiveUpdate { })
         ];
 
+      importModules =
+        { modules }:
+        let
+          scan =
+            src:
+            let
+              files = builtins.readDir src;
+            in
+            lib.concatMap (
+              name:
+              let
+                path = "${src}/${name}";
+              in
+              if builtins.match ".*\.nix" name != null then
+                [ (import path) ]
+              else if builtins.pathExists "${path}/default.nix" then
+                [ (import path) ]
+              else if builtins.pathExists path && builtins.readDir path != { } then
+                scan path
+              else
+                [ ]
+            ) (builtins.attrNames files);
+        in
+        lib.concatMap scan modules;
+
       splitAscii = ascii: lib.lists.filter (s: s != "") (lib.strings.splitString "\n" ascii);
     in
     {
+      inherit importModules;
+
       mkLuaFun = lua: ''
         function()
           ${lua}
@@ -38,7 +65,6 @@
       '';
 
       asciiArts = importAsAttrs {
-        inherit lib;
         src = ./ascii;
       };
 
