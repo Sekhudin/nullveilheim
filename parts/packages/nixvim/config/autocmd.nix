@@ -3,7 +3,7 @@
 let
   cfg = config.configModules.autocmd;
   mkAutosave =
-    { enable, pattern }:
+    { enable, patterns }:
 
     lib.mkIf enable {
       event = [
@@ -22,7 +22,7 @@ let
           "*.ts"
           "*.tsx"
         ]
-        ++ pattern
+        ++ patterns
       );
     };
 in
@@ -43,14 +43,14 @@ in
             description = "enable autosave";
           };
 
-          pattern = lib.mkOption {
+          patterns = lib.mkOption {
             type = lib.types.listOf lib.types.str;
             description = "file patterns";
             default = [ ];
           };
         };
       };
-      description = "colorschemes settings";
+      description = "autocmd settings";
       default = { };
     };
 

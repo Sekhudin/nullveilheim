@@ -19,10 +19,9 @@ in
 
     commands = lib.mkOption {
       type = lib.types.attrs;
-      description = "extracommands";
+      description = "extra commands";
       default = { };
     };
-
   };
 
   config = lib.mkIf cfg.enable {

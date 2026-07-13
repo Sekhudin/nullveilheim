@@ -19,6 +19,7 @@ in
         "nightfox"
         "oxocarbon"
         "poimandres"
+        "tokyonight"
         "catppuccin"
       ];
       description = "choose scheme";
