@@ -14,22 +14,22 @@ let
   asciiArtNames = builtins.attrNames asciiArts;
   shortcut = [
     {
-      key = "fn";
+      key = "Fn";
       icon = (icon.withRightSpace "plus_1");
       desc = "New File ";
       action = "new";
     }
     {
-      key = "ff";
+      key = "Ff";
       icon = (icon.withRightSpace "file");
       desc = "Find File ";
       action = "Telescope find_files";
     }
     {
-      key = "cn";
-      icon = (icon.withRightSpace "lang_nix");
-      desc = "Nix Config ";
-      action = "Neotree dir=${cfg.configDir}";
+      key = "Fw";
+      icon = "${icon.word} ";
+      desc = "Find Word ";
+      action = "Telescope live_grep";
     }
   ];
 
