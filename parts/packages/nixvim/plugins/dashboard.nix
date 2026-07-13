@@ -8,9 +8,55 @@
 
 let
   cfg = config.pluginsModules.dashboard;
-  inherit (extraLib.nixvim) asciiArts mkAsciiHeader;
+  inherit (extraLib.nixvim) asciiArts mkAsciiHeader mkAsciiFooter;
 
   isTheme = theme: cfg.theme == theme;
+  asciiArtNames = builtins.attrNames asciiArts;
+  shortcut = [
+    {
+      key = "fn";
+      icon = (icon.withRightSpace "plus_1");
+      desc = "New File ";
+      action = "new";
+    }
+    {
+      key = "ff";
+      icon = (icon.withRightSpace "file");
+      desc = "Find File ";
+      action = "Telescope find_files";
+    }
+    {
+      key = "cn";
+      icon = (icon.withRightSpace "lang_nix");
+      desc = "Nix Config ";
+      action = "Neotree dir=${cfg.configDir}";
+    }
+  ];
+
+  mkSpacer = gap: lib.lists.replicate gap "";
+  header =
+    (
+      if cfg.banner.header.custom != null then
+        cfg.banner.header.custom
+      else
+        (mkAsciiHeader {
+          inherit (cfg.banner.header) head;
+          ascii = asciiArts.${cfg.banner.header.ascii}.art;
+        })
+    )
+    ++ (mkSpacer cfg.banner.header.gap);
+
+  footer =
+    (mkSpacer cfg.banner.header.gap)
+    ++ (
+      if cfg.banner.footer.custom != null then
+        cfg.banner.footer.custom
+      else
+        (mkAsciiFooter {
+          inherit (cfg.banner.footer) tail;
+          ascii = asciiArts.${cfg.banner.footer.ascii}.art;
+        })
+    );
 in
 {
   options.pluginsModules.dashboard = {
@@ -35,6 +81,66 @@ in
       default = "~";
     };
 
+    banner = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          header = lib.mkOption {
+            type = lib.types.submodule {
+              options = {
+                ascii = lib.mkOption {
+                  type = lib.types.enum asciiArtNames;
+                  description = "choose ascii art";
+                  default = "absolute_cinema";
+                };
+                head = lib.mkOption {
+                  type = lib.types.nullOr lib.types.int;
+                  description = "asciii selector";
+                  default = 15;
+                };
+                gap = lib.mkOption {
+                  type = lib.types.int;
+                  description = "bottom gap";
+                  default = 0;
+                };
+                custom = lib.mkOption {
+                  type = lib.types.nullOr (lib.types.listOf lib.types.str);
+                  description = "custom header";
+                  default = null;
+                };
+              };
+            };
+          };
+
+          footer = lib.mkOption {
+            type = lib.types.submodule {
+              options = {
+                ascii = lib.mkOption {
+                  type = lib.types.enum asciiArtNames;
+                  description = "choose ascii art";
+                  default = "absolute_cinema";
+                };
+                tail = lib.mkOption {
+                  type = lib.types.nullOr lib.types.int;
+                  description = "ascii selector";
+                  default = 5;
+                };
+                gap = lib.mkOption {
+                  type = lib.types.int;
+                  description = "bottom gap";
+                  default = 0;
+                };
+                custom = lib.mkOption {
+                  type = lib.types.nullOr (lib.types.listOf lib.types.str);
+                  description = "custom footer";
+                  default = null;
+                };
+              };
+            };
+          };
+        };
+      };
+    };
+
     settings = lib.mkOption {
       type = lib.types.attrs;
       description = "dashboard settings";
@@ -55,31 +161,11 @@ in
               winbar = lib.mkDefault true;
             };
             config = {
+              inherit header footer;
               disable_move = lib.mkDefault true;
-              header = lib.mkDefault (mkAsciiHeader asciiArts.hydra.art);
               week_header = {
                 enable = lib.mkDefault false;
               };
-              center = [
-                {
-                  key = "fn";
-                  icon = (icon.withRightSpace "plus_1");
-                  desc = "New File ";
-                  action = "new";
-                }
-                {
-                  key = "ff";
-                  icon = (icon.withRightSpace "file");
-                  desc = "Find File ";
-                  action = "Telescope find_files";
-                }
-                {
-                  key = "cn";
-                  icon = (icon.withRightSpace "lang_nix");
-                  desc = "Nix Config ";
-                  action = "Neotree dir=${cfg.configDir}";
-                }
-              ];
             };
           };
         }
@@ -87,7 +173,8 @@ in
         (lib.mkIf (isTheme "doom") {
           settings = {
             config = {
-              vertical_center = true;
+              vertical_center = lib.mkDefault true;
+              center = shortcut;
             };
           };
         })
@@ -95,19 +182,21 @@ in
         (lib.mkIf (isTheme "hyper") {
           settings = {
             config = {
+              inherit shortcut;
+
               project = {
-                enable = true;
-                limit = 3;
+                enable = lib.mkDefault true;
+                limit = lib.mkDefault 3;
               };
 
               mru = {
-                enable = true;
-                limit = 5;
-                cwd_only = true;
+                enable = lib.mkDefault true;
+                limit = lib.mkDefault 3;
+                cwd_only = lib.mkDefault true;
               };
 
               packages = {
-                enable = false;
+                enable = lib.mkDefault false;
               };
             };
           };
