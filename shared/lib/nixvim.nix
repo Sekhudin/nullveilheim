@@ -21,6 +21,8 @@
           ))
           (lib.foldl lib.recursiveUpdate { })
         ];
+
+      splitAscii = ascii: lib.lists.filter (s: s != "") (lib.strings.splitString "\n" ascii);
     in
     {
       mkLuaFun = lua: ''
@@ -40,8 +42,24 @@
         src = ./ascii;
       };
 
-      mkAsciiHeader = ascii: lib.strings.splitString "\n" ascii;
+      mkAsciiHeader =
+        {
+          ascii,
+          head ? null,
+        }:
+        let
+          list = splitAscii ascii;
+        in
+        if head != null then lib.take head list else list;
 
-      mkAsciiFooter = ascii: lib.strings.splitString "\n" ascii;
+      mkAsciiFooter =
+        {
+          ascii,
+          tail ? null,
+        }:
+        let
+          list = splitAscii ascii;
+        in
+        if tail != null then lib.lists.reverseList (lib.take tail (lib.lists.reverseList list)) else list;
     };
 }
