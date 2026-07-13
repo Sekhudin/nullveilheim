@@ -18,7 +18,13 @@ in
         nvim = buildNixvimWith {
           inherit system;
 
-          modules = [ ./config ];
+          extraSpecialArgs = {
+            inherit color font extraLib;
+          };
+
+          modules = [
+            ./nvim.nix
+          ];
         };
       };
 
@@ -26,7 +32,13 @@ in
         nvim = testNixvimWith {
           inherit system;
 
-          modules = [ ./config ];
+          extraSpecialArgs = {
+            inherit color font extraLib;
+          };
+
+          modules = [
+            ./nvim.nix
+          ];
         };
       };
     };

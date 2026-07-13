@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   lib,
   ezModules,
@@ -7,6 +8,9 @@
   ...
 }:
 
+let
+  selfPkgs = inputs.self.packages.${pkgs.stdenv.system};
+in
 {
   imports = lib.attrValues ezModules ++ [ ];
 
@@ -17,7 +21,11 @@
       inherit pkgs username osConfig;
     };
     packages = [
+      selfPkgs.nvim
     ];
+    sessionVariables = {
+      EDITOR = (lib.getExe' selfPkgs.nvim "nvim");
+    };
   };
 
   homeCoreModules = {
