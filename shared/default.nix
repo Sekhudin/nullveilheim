@@ -9,9 +9,17 @@ in
     { lib }:
 
     {
-      extraLib = sharedLib.mkExtraLib { inherit lib; };
-      color = sharedColors.mkColor { inherit lib; } "carbon";
-      icon = sharedIcons;
-      font = sharedFonts;
+      extraLib = sharedLib.mkExtraLib {
+        inherit lib;
+      };
+
+      color = sharedColors.mkColor {
+        inherit lib;
+        theme = "carbon";
+      };
+
+      icon = sharedIcons.mkIcon;
+
+      font = sharedFonts.mkFont;
     };
 }

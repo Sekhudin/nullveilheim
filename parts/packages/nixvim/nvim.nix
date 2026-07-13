@@ -23,4 +23,11 @@
       enable = true;
     };
   };
+
+  pluginsModules = {
+    dashboard = {
+      theme = "hyper";
+      configDir = "~/nullveilheim";
+    };
+  };
 }

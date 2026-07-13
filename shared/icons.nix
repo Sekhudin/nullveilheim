@@ -108,20 +108,18 @@ let
     warning_3 = "";
     word = "󰈭";
   };
-
-  withLabel = name: label: "${icons.${name}} ${label}";
-  withRightSpace = name: "${icons.${name}} ";
-  withLeftSpace = name: " ${icons.${name}}";
-  withCollapsed = name: "${icons.chevron_right} ${icons.${name}} ";
-  withExpanded = name: "${icons.chevron_down} ${icons.${name}} ";
 in
-icons
-// {
-  inherit
-    withLabel
-    withRightSpace
-    withLeftSpace
-    withCollapsed
-    withExpanded
-    ;
+{
+  mkIcon = {
+    withLabel = name: label: "${icons.${name}} ${label}";
+
+    withRightSpace = name: "${icons.${name}} ";
+
+    withLeftSpace = name: " ${icons.${name}}";
+
+    withCollapsed = name: "${icons.chevron_right} ${icons.${name}} ";
+
+    withExpanded = name: "${icons.chevron_down} ${icons.${name}} ";
+  }
+  // icons;
 }

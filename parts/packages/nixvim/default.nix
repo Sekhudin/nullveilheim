@@ -8,6 +8,7 @@ in
     {
       system,
       color,
+      icon,
       font,
       extraLib,
       ...
@@ -19,7 +20,12 @@ in
           inherit system;
 
           extraSpecialArgs = {
-            inherit color font extraLib;
+            inherit
+              color
+              icon
+              font
+              extraLib
+              ;
           };
 
           modules = [

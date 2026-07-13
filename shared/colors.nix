@@ -60,8 +60,7 @@ let
 in
 {
   mkColor =
-    { lib }:
-    name:
+    { lib, theme }:
 
     let
       formatColorLine = index: color: "${toString index}=${color}";
@@ -76,10 +75,10 @@ in
         lib.attrsets.listToAttrs
       ];
 
-      mkTheme = name: {
-        scheme = toColorScheme themes.${name};
-        lines = toColorLines themes.${name};
+      mkTheme = theme: {
+        scheme = toColorScheme themes.${theme};
+        lines = toColorLines themes.${theme};
       };
     in
-    (mkTheme name) // { inherit themes mkTheme; };
+    (mkTheme theme) // { inherit themes mkTheme; };
 }
