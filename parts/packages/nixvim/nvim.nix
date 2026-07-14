@@ -70,6 +70,9 @@ in
       indent = {
         use = "indent-blankline";
       };
+      motion = {
+        use = "smear-cursor";
+      };
       status = {
         use = "lualine";
       };
