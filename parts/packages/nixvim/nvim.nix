@@ -31,6 +31,7 @@ in
 
   pluginsModules = {
     dashboard = {
+      enable = true;
       theme = "hyper";
       configDir = "~/nullveilheim";
       banner = rec {
@@ -47,8 +48,21 @@ in
       };
     };
 
+    treesitter = {
+      enable = true;
+    };
+
+    which-key = {
+      enable = true;
+    };
+
     sidebar = {
+      enable = true;
       use = "neo-tree";
+    };
+
+    ui = {
+      enable = true;
     };
   };
 }

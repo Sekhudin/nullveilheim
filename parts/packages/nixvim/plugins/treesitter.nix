@@ -19,7 +19,7 @@ in
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable treesitter";
-      default = true;
+      default = false;
     };
   };
 

@@ -13,7 +13,7 @@ in
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable which-key";
-      default = true;
+      default = false;
     };
 
     settings = lib.mkOption {

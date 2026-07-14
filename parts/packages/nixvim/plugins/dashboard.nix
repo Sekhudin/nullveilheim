@@ -63,7 +63,7 @@ in
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable dashboard";
-      default = true;
+      default = false;
     };
 
     theme = lib.mkOption {
