@@ -7,9 +7,10 @@
 
 let
   cfg = config.pluginsModules.sidebar;
+  isNeotree = (cfg.use == "neo-tree");
 in
 {
-  plugins = lib.mkIf (cfg.enable && cfg.use == "neo-tree") {
+  plugins = lib.mkIf (cfg.enable && isNeotree) {
     neo-tree = {
       enable = true;
       settings = {

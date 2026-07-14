@@ -6,14 +6,15 @@
 
 let
   cfg = config.pluginsModules.sidebar;
+  isNvimTree = (cfg.use == "nvim-tree");
 in
 {
-  globals = lib.mkIf (cfg.use == "nvim-tree") {
+  globals = lib.mkIf isNvimTree {
     loaded_netrw = 1;
     loaded_netrwPlugin = 1;
   };
 
-  plugins = lib.mkIf (cfg.enable && cfg.use == "nvim-tree") {
+  plugins = lib.mkIf (cfg.enable && isNvimTree) {
     nvim-tree = {
       enable = true;
       settings = {

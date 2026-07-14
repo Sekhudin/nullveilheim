@@ -10,11 +10,12 @@
 
     use = lib.mkOption {
       type = lib.types.enum [
+        "none"
         "neo-tree"
         "nvim-tree"
       ];
       description = "enable sidebar";
-      default = true;
+      default = "none";
     };
   };
 }
