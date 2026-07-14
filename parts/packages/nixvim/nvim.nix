@@ -46,5 +46,9 @@ in
         };
       };
     };
+
+    sidebar = {
+      use = "neo-tree";
+    };
   };
 }
