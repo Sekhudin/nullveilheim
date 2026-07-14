@@ -76,6 +76,12 @@ in
       status = {
         use = "lualine";
       };
+      syntax = {
+        use = "rainbow-delimiters";
+      };
+      tab = {
+        use = "bufferline";
+      };
     };
   };
 }
