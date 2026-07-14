@@ -8,6 +8,36 @@
       default = true;
     };
 
+    diagnostic = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "none"
+              "trouble"
+            ];
+            description = "choose diagnostic";
+            default = "none";
+          };
+        };
+      };
+    };
+
+    fold = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "none"
+              "nvim-ufo"
+            ];
+            description = "choose fold";
+            default = "none";
+          };
+        };
+      };
+    };
+
     indent = lib.mkOption {
       type = lib.types.submodule {
         options = {
@@ -32,6 +62,21 @@
               "smear-cursor"
             ];
             description = "choose motion";
+            default = "none";
+          };
+        };
+      };
+    };
+
+    overlay = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "none"
+              "noice"
+            ];
+            description = "choose overlay";
             default = "none";
           };
         };

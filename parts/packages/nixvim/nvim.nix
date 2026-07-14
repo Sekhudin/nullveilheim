@@ -67,11 +67,20 @@ in
 
     ui = {
       enable = true;
+      diagnostic = {
+        use = "trouble";
+      };
+      fold = {
+        use = "nvim-ufo";
+      };
       indent = {
         use = "indent-blankline";
       };
       motion = {
         use = "smear-cursor";
+      };
+      overlay = {
+        use = "noice";
       };
       status = {
         use = "lualine";
