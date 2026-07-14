@@ -23,6 +23,21 @@
       };
     };
 
+    motion = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "none"
+              "smear-cursor"
+            ];
+            description = "choose motion";
+            default = "none";
+          };
+        };
+      };
+    };
+
     status = lib.mkOption {
       type = lib.types.submodule {
         options = {
@@ -53,15 +68,15 @@
       };
     };
 
-    motion = lib.mkOption {
+    tab = lib.mkOption {
       type = lib.types.submodule {
         options = {
           use = lib.mkOption {
             type = lib.types.enum [
               "none"
-              "smear-cursor"
+              "bufferline"
             ];
-            description = "choose motion";
+            description = "choose tab";
             default = "none";
           };
         };
