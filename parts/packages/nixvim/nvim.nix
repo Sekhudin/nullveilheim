@@ -63,6 +63,9 @@ in
 
     ui = {
       enable = true;
+      indent = {
+        use = "indent-blankline";
+      };
     };
   };
 }
