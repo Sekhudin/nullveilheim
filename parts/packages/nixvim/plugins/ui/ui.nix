@@ -7,5 +7,66 @@
       description = "enable sidebar";
       default = true;
     };
+
+    indent = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "none"
+              "indent-blankline"
+            ];
+            description = "choose indent";
+            default = "none";
+          };
+        };
+      };
+    };
+
+    status = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "none"
+              "lualine"
+            ];
+            description = "choose status";
+            default = "none";
+          };
+        };
+      };
+    };
+
+    syntax = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "none"
+              "rainbow-delimiters"
+            ];
+            description = "choose syntax highlighting";
+            default = "none";
+          };
+        };
+      };
+    };
+
+    motion = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "none"
+              "smear-cursor"
+            ];
+            description = "choose motion";
+            default = "none";
+          };
+        };
+      };
+    };
+
   };
 }

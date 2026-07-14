@@ -48,6 +48,10 @@ in
       };
     };
 
+    lz-n = {
+      enable = true;
+    };
+
     treesitter = {
       enable = true;
     };
@@ -65,6 +69,9 @@ in
       enable = true;
       indent = {
         use = "indent-blankline";
+      };
+      status = {
+        use = "lualine";
       };
     };
   };
