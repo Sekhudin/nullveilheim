@@ -30,7 +30,6 @@ in
               "dbui",
               "dbout",
               "help",
-              "lazy",
               "mason",
               "neo-tree",
               "neo-tree-popup",
@@ -38,7 +37,6 @@ in
               "notify",
               "spectre_panel",
               "sql",
-              "qf",
               "toggleterm",
               "Outline",
               "TelescopePrompt",
@@ -51,6 +49,17 @@ in
             return { "treesitter", "indent" }
           end
         '';
+      };
+    };
+
+    which-key = {
+      settings = {
+        spec = [
+          {
+            __unkeyed-1 = "z";
+            group = "fold";
+          }
+        ];
       };
     };
   };

@@ -1,4 +1,8 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 
 let
   cfg = config.pluginsModules.ui;
@@ -63,6 +67,13 @@ in
         filetype = { };
         lsp = { };
         os = { };
+      };
+    };
+
+    which-key = {
+      settings = {
+        spec = [
+        ];
       };
     };
   };

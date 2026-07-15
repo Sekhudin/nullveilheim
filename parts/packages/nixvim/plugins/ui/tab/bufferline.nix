@@ -82,6 +82,11 @@ in
             desc = "last buffer";
           }
           {
+            __unkeyed-1 = "<leader>bo";
+            __unkeyed-2 = "<cmd>BufferLineCloseOthers<cr>";
+            desc = "close other buffers";
+          }
+          {
             __unkeyed-1 = "<leader>w";
             __unkeyed-2 = "gt";
             desc = "next workspace";
@@ -90,11 +95,6 @@ in
             __unkeyed-1 = "<leader>W";
             __unkeyed-2 = "gT";
             desc = "prev workspace";
-          }
-          {
-            __unkeyed-1 = "<leader>bo";
-            __unkeyed-2 = "<cmd>BufferLineCloseOthers<cr>";
-            desc = "close other buffers";
           }
         ];
       };
