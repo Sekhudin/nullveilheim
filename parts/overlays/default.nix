@@ -36,19 +36,20 @@ in
 
     let
       branches = mkBranches prev.stdenv.hostPlatform.system;
-      mainBranch = branches.stable;
+      stable = branches.stable;
+      unstable = branches.unstable;
     in
     {
-      inherit (mainBranch) nixd nixf nixt;
+      inherit (stable) nixd nixf nixt;
       inherit branches;
 
-      slack = branches.stable.slack;
-      discord = branches.stable.discord;
-      wpsoffice = branches.stable.wpsoffice;
+      slack = stable.slack;
+      discord = stable.discord;
+      wpsoffice = stable.wpsoffice;
 
-      claude-code = branches.unstable.claude-code;
-      gemini-cli = branches.unstable.gemini-cli;
-      opencode = branches.unstable.opencode;
+      claude-code = unstable.claude-code;
+      gemini-cli = unstable.gemini-cli;
+      opencode = unstable.opencode;
 
       fishPlugins = prev.fishPlugins // {
         nix-env = {
@@ -57,12 +58,12 @@ in
         };
       };
 
-      vimPlugins = branches.unstable.vimPlugins.extend (
+      vimPlugins = unstable.vimPlugins.extend (
         _: __: {
         }
       );
 
-      tree-sitter-grammars = prev.tree-sitter-grammars // {
+      tree-sitter-grammars = stable.tree-sitter-grammars // {
       };
 
     };
