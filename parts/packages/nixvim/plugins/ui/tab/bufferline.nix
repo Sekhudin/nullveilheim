@@ -92,11 +92,6 @@ in
             desc = "prev workspace";
           }
           {
-            __unkeyed-1 = "<leader>bd";
-            __unkeyed-2 = "<cmd>lua require('mini.bufremove').wipeout()<cr>";
-            desc = "close buffer";
-          }
-          {
             __unkeyed-1 = "<leader>bo";
             __unkeyed-2 = "<cmd>BufferLineCloseOthers<cr>";
             desc = "close other buffers";

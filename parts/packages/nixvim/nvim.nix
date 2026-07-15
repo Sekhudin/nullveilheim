@@ -65,6 +65,18 @@ in
       use = "neo-tree";
     };
 
+    tools = {
+      buffer = {
+        use = "mini-bufremove";
+      };
+      motion = {
+        use = "hop";
+      };
+      pairs = {
+        use = "nvim-autopairs";
+      };
+    };
+
     ui = {
       enable = true;
       diagnostic = {
