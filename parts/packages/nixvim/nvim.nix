@@ -69,11 +69,23 @@ in
       buffer = {
         use = "mini-bufremove";
       };
+      comment = {
+        use = "comment";
+      };
+      markdown = {
+        use = "markdown-preview";
+      };
+      media = {
+        use = "image";
+      };
       motion = {
         use = "hop";
       };
       pairs = {
         use = "nvim-autopairs";
+      };
+      picker = {
+        use = "telescope";
       };
       tag = {
         use = "ts-autotag";

@@ -23,6 +23,51 @@
       };
     };
 
+    comment = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "none"
+              "comment"
+            ];
+            description = "choose comment";
+            default = "none";
+          };
+        };
+      };
+    };
+
+    markdown = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "none"
+              "markdown-preview"
+            ];
+            description = "choose markdown";
+            default = "none";
+          };
+        };
+      };
+    };
+
+    media = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "none"
+              "image"
+            ];
+            description = "choose media";
+            default = "none";
+          };
+        };
+      };
+    };
+
     motion = lib.mkOption {
       type = lib.types.submodule {
         options = {
@@ -47,6 +92,21 @@
               "nvim-autopairs"
             ];
             description = "choose diagnostic";
+            default = "none";
+          };
+        };
+      };
+    };
+
+    picker = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "none"
+              "telescope"
+            ];
+            description = "choose picker";
             default = "none";
           };
         };
