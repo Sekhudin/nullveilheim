@@ -38,6 +38,21 @@
       };
     };
 
+    encrypt = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "none"
+              "sops"
+            ];
+            description = "choose encrypt";
+            default = "none";
+          };
+        };
+      };
+    };
+
     markdown = lib.mkOption {
       type = lib.types.submodule {
         options = {

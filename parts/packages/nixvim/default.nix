@@ -14,42 +14,31 @@ in
       ...
     }:
 
+    let
+      extraSpecialArgs = {
+        inherit
+          inputs
+          color
+          icon
+          font
+          extraLib
+          ;
+      };
+
+      modules = [
+        ./nvim.nix
+      ];
+    in
     {
       packages = {
         nvim = buildNixvimWith {
-          inherit system;
-
-          extraSpecialArgs = {
-            inherit
-              color
-              icon
-              font
-              extraLib
-              ;
-          };
-
-          modules = [
-            ./nvim.nix
-          ];
+          inherit system modules extraSpecialArgs;
         };
       };
 
       checks = {
         nvim = testNixvimWith {
-          inherit system;
-
-          extraSpecialArgs = {
-            inherit
-              color
-              icon
-              font
-              extraLib
-              ;
-          };
-
-          modules = [
-            ./nvim.nix
-          ];
+          inherit system modules extraSpecialArgs;
         };
       };
     };

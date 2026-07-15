@@ -16,11 +16,6 @@
             group = "database";
           }
           {
-            __unkeyed-1 = "<leader>e";
-            icon = icon.secret;
-            group = "secret";
-          }
-          {
             __unkeyed-1 = "<leader>l";
             group = "lsp";
             icon = icon.code;

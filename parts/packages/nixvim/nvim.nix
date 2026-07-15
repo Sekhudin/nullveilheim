@@ -93,6 +93,9 @@ in
       vcs = {
         use = "git";
       };
+      encrypt = {
+        use = "sops";
+      };
     };
 
     ui = {
