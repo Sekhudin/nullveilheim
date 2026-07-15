@@ -23,6 +23,21 @@
       };
     };
 
+    focus = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "none"
+              "zen-mode"
+            ];
+            description = "choose focus";
+            default = "none";
+          };
+        };
+      };
+    };
+
     fold = lib.mkOption {
       type = lib.types.submodule {
         options = {

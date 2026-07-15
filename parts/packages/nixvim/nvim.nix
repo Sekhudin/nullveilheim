@@ -75,12 +75,18 @@ in
       pairs = {
         use = "nvim-autopairs";
       };
+      tag = {
+        use = "ts-autotag";
+      };
     };
 
     ui = {
       enable = true;
       diagnostic = {
         use = "trouble";
+      };
+      focus = {
+        use = "zen-mode";
       };
       fold = {
         use = "nvim-ufo";
