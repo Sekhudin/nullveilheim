@@ -147,6 +147,25 @@ in
     which-key = {
       settings = {
         spec = [
+          # group
+          {
+            __unkeyed-1 = "<leader>f";
+            group = "telescope";
+          }
+          {
+            __unkeyed-1 = "<leader>fg";
+            group = "git";
+          }
+          {
+            __unkeyed-1 = "<leader>fG";
+            group = "github";
+          }
+          {
+            __unkeyed-1 = "<leader>fl";
+            group = "lsp";
+          }
+
+          # keymaps
           {
             __unkeyed-1 = "<leader>ft";
             __unkeyed-2 = "<cmd>Telescope<cr>";

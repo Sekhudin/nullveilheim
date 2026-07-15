@@ -27,6 +27,13 @@ in
     which-key = {
       settings = {
         spec = [
+          # group
+          {
+            __unkeyed-1 = "<leader>n";
+            group = "noice";
+          }
+
+          # keymaps
           {
             __unkeyed-1 = "<leader>nt";
             __unkeyed-2 = "<cmd>Noice<cr>";

@@ -59,6 +59,13 @@ in
     which-key = {
       settings = {
         spec = [
+          # group
+          {
+            __unkeyed-1 = "<leader>b";
+            group = "buffer";
+          }
+
+          # keymaps
           {
             __unkeyed-1 = "<Tab>";
             __unkeyed-2 = "<cmd>BufferLineCycleNext<cr>";

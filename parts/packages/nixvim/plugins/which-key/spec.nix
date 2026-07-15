@@ -1,4 +1,4 @@
-{ ... }:
+{ icon, ... }:
 
 {
   plugins = {
@@ -25,6 +25,32 @@
           ];
         };
         spec = [
+          # common
+          {
+            __unkeyed-1 = "<Esc><Esc>";
+            __unkeyed-2 = "<C-\\><C-n>";
+            desc = "normal mode";
+            mode = [ "t" ];
+          }
+          {
+            __unkeyed-1 = "<leader><Esc>";
+            __unkeyed-2 = "<cmd>nohlsearch<cr>";
+            desc = "clear Search Highlight";
+            mode = [ "n" ];
+          }
+          {
+            __unkeyed-1 = "<leader>qq";
+            __unkeyed-2 = "<cmd>qa!<cr>";
+            desc = "quit all";
+            icon = icon.cross;
+          }
+          {
+            __unkeyed-1 = "<leader>qw";
+            __unkeyed-2 = "<cmd>wqa<cr>";
+            desc = "save & quit all";
+            icon = icon.cross;
+          }
+
           # window
           {
             __unkeyed-1 = "<C-h>";

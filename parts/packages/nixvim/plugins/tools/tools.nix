@@ -127,5 +127,20 @@
         };
       };
     };
+
+    vcs = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "none"
+              "git"
+            ];
+            description = "choose vcs";
+            default = "none";
+          };
+        };
+      };
+    };
   };
 }

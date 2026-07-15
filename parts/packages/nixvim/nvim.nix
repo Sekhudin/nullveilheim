@@ -90,6 +90,9 @@ in
       tag = {
         use = "ts-autotag";
       };
+      vcs = {
+        use = "git";
+      };
     };
 
     ui = {

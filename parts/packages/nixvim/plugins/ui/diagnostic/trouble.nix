@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  icon,
   ...
 }:
 
@@ -23,6 +24,14 @@ in
     which-key = {
       settings = {
         spec = [
+          # group
+          {
+            __unkeyed-1 = "<leader>x";
+            group = "diagnotics";
+            icon = icon.warning;
+          }
+
+          # keymaps
           {
             __unkeyed-1 = "<leader>xx";
             __unkeyed-2 = "<cmd>Trouble<cr>";
