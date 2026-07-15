@@ -38,11 +38,6 @@ in
             __unkeyed-2 = "<cmd>Trouble workspace_diagnostics toggle<cr>";
             desc = "workspace diagnostics";
           }
-          {
-            __unkeyed-1 = "<leader>xs";
-            __unkeyed-2 = ''<cmd>lua require("wtf").search()<cr>'';
-            desc = "search diagnostic (web)";
-          }
         ];
       };
     };
