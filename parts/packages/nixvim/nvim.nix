@@ -43,6 +43,10 @@ in
       };
     };
 
+    database = {
+      enable = true;
+    };
+
     language-server = {
       enable = true;
       formatter = {

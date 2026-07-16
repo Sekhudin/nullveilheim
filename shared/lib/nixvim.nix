@@ -64,6 +64,17 @@
         end
       '';
 
+      ftMatches = fs: ''
+        function()
+          for _, v in ipairs({${builtins.concatStringsSep ", " (map (b: "\"${b}\"") fs)}}) do
+            if vim.bo.filetype == v then
+              return true
+            end
+          end
+          return false
+        end
+      '';
+
       asciiArts = importAsAttrs {
         src = ./ascii;
       };
