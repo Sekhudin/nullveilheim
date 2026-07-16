@@ -32,6 +32,15 @@ in
   pluginsModules = {
     completion = {
       enable = true;
+      engine = {
+        use = "cmp";
+      };
+      icon = {
+        use = "lspkind";
+      };
+      snippet = {
+        use = "luasnip";
+      };
     };
 
     language-server = {
