@@ -30,33 +30,11 @@ in
   };
 
   pluginsModules = {
-    dashboard = {
-      enable = true;
-      theme = "hyper";
-      configDir = "~/nullveilheim";
-      banner = rec {
-        header = {
-          ascii = "absolute_cinema";
-          head = 16;
-          gap = 1;
-        };
-        footer = {
-          ascii = header.ascii;
-          tail = 8;
-          gap = 1;
-        };
-      };
-    };
-
-    lz-n = {
+    completion = {
       enable = true;
     };
 
-    treesitter = {
-      enable = true;
-    };
-
-    which-key = {
+    language-server = {
       enable = true;
     };
 
@@ -66,6 +44,7 @@ in
     };
 
     tools = {
+      enable = true;
       buffer = {
         use = "mini-bufremove";
       };
@@ -127,6 +106,36 @@ in
       tab = {
         use = "bufferline";
       };
+    };
+
+    which-key = {
+      enable = true;
+    };
+
+    dashboard = {
+      enable = true;
+      theme = "hyper";
+      configDir = "~/nullveilheim";
+      banner = rec {
+        header = {
+          ascii = "absolute_cinema";
+          head = 16;
+          gap = 1;
+        };
+        footer = {
+          ascii = header.ascii;
+          tail = 8;
+          gap = 1;
+        };
+      };
+    };
+
+    lz-n = {
+      enable = true;
+    };
+
+    treesitter = {
+      enable = true;
     };
   };
 }

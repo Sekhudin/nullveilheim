@@ -5,7 +5,7 @@
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable tools";
-      default = true;
+      default = false;
     };
 
     buffer = lib.mkOption {

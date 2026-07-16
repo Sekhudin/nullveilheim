@@ -5,7 +5,7 @@
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable sidebar";
-      default = true;
+      default = false;
     };
 
     use = lib.mkOption {
