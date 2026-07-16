@@ -30,18 +30,26 @@ in
           };
         };
         sections = {
-          lualine_a = [ "mode" ];
+          lualine_a = [
+            "mode"
+          ];
           lualine_b = [
             "branch"
             "diff"
           ];
-          lualine_c = [ "diagnostics" ];
+          lualine_c = [
+            "diagnostics"
+          ];
           lualine_x = [
             "searchcount"
             "selectcount"
           ];
-          lualine_y = [ "lsp_status" ];
-          lualine_z = [ "location" ];
+          lualine_y = [
+            "lsp_status"
+          ];
+          lualine_z = [
+            "location"
+          ];
         };
       };
     };

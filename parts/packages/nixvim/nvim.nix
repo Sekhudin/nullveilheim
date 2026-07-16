@@ -21,7 +21,7 @@ in
 
     colorschemes = {
       enable = true;
-      scheme = "nightfox";
+      scheme = "oxocarbon";
     };
 
     usercommands = {
