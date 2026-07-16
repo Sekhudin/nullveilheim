@@ -36,6 +36,12 @@ in
 
     language-server = {
       enable = true;
+      formatter = {
+        use = "conform-nvim";
+      };
+      interaction = {
+        use = "lspsaga";
+      };
     };
 
     sidebar = {

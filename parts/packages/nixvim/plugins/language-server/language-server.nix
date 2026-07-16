@@ -14,9 +14,24 @@
           use = lib.mkOption {
             type = lib.types.enum [
               "none"
-              "conform"
+              "conform-nvim"
             ];
             description = "choose formatter";
+            default = "none";
+          };
+        };
+      };
+    };
+
+    interaction = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "none"
+              "lspsaga"
+            ];
+            description = "choose interaction";
             default = "none";
           };
         };
