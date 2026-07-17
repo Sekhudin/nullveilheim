@@ -10,6 +10,7 @@ in
     ./flake
     ./overlays
     ./packages
+    ./proces-compose
     ./ez-config.nix
   ];
 
