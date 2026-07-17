@@ -21,7 +21,7 @@ in
 
     colorschemes = {
       enable = true;
-      scheme = "oxocarbon";
+      scheme = "kanagawa";
     };
 
     usercommands = {
@@ -137,13 +137,13 @@ in
       configDir = "~/nullveilheim";
       banner = rec {
         header = {
-          ascii = "absolute_cinema";
+          ascii = "prabski_sawit";
           head = 16;
           gap = 1;
         };
         footer = {
           ascii = header.ascii;
-          tail = 8;
+          tail = 5;
           gap = 1;
         };
       };
