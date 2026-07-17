@@ -156,9 +156,9 @@ in
           settings = {
             theme = cfg.theme;
             hide = {
-              tabline = lib.mkDefault true;
-              statusline = lib.mkDefault true;
-              winbar = lib.mkDefault true;
+              tabline = true;
+              statusline = true;
+              winbar = true;
             };
             config = {
               inherit header footer;
