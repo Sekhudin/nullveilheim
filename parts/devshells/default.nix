@@ -23,6 +23,14 @@
         };
         settings = {
           hooks = {
+            check-secrets-encrypted = {
+              enable = true;
+              name = "Check if secrets are encrypted";
+              description = "make sure the file include sops metadata";
+              entry = "${pkgs.gnugrep}/bin/grep -q 'sops_version'";
+              files = "^secrets/.*";
+              pass_filenames = true;
+            };
             actionlint = {
               enable = true;
             };
