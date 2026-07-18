@@ -38,7 +38,7 @@ in
     };
 
     sops = {
-      defaultSopsFile = "${inputs.self}/secrets/default.yaml";
+      defaultSopsFile = "${inputs.self}/secrets/secrets.yaml";
       gnupg = {
         home = "~/.gnupg";
         sshKeyPaths = [ ];
