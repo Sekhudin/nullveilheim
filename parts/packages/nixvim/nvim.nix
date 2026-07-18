@@ -70,6 +70,9 @@ in
       comment = {
         use = "comment";
       };
+      encrypt = {
+        use = "sops";
+      };
       markdown = {
         use = "markdown-preview";
       };
@@ -90,9 +93,6 @@ in
       };
       vcs = {
         use = "git";
-      };
-      encrypt = {
-        use = "sops";
       };
     };
 

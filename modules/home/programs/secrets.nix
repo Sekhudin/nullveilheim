@@ -31,7 +31,10 @@ in
 
   config = lib.mkIf (masterEnable && cfg.enable) {
     home = {
-      packages = [ pkgs.gnupg ];
+      packages = with pkgs; [
+        sops
+        gnupg
+      ];
     };
 
     sops = {
