@@ -64,7 +64,7 @@ in
               enable = true;
             };
             commit = {
-              # gpgSign = true;
+              gpgSign = true;
             };
             pull = {
               ff = "only";
