@@ -8,6 +8,7 @@
 let
   cfg = config.homeProgramsModules.gpg;
   masterEnable = config.homeProgramsModules.enable;
+  pinentryPkg = if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-curses;
 in
 {
   options.homeProgramsModules.gpg = {
@@ -37,22 +38,18 @@ in
       ];
     };
 
-    home.file.".gnupg/gpg-agent.conf" = lib.mkMerge [
-      (lib.mkIf pkgs.stdenv.isDarwin {
-        text = ''
-          pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
-          default-cache-ttl 3600
-          max-cache-ttl 999999
-        '';
-      })
-
-      (lib.mkIf pkgs.stdenv.isLinux {
-        text = ''
-          pinentry-program ${pkgs.pinentry-curses}/bin/pinentry-curses
-          default-cache-ttl 3600
-          max-cache-ttl 999999
-        '';
-      })
-    ];
+    services = {
+      gpg-agent = {
+        enable = true;
+        enableFishIntegration = config.programs.fish.enable;
+        enableZshIntegration = config.programs.zsh.enable;
+        enableSshSupport = true;
+        defaultCacheTtl = 3600;
+        maxCacheTtl = 999999;
+        pinentry = {
+          package = pinentryPkg;
+        };
+      };
+    };
   };
 }
