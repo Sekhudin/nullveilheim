@@ -1,2 +1,2 @@
-*.sops.yaml diff=sopsdiffer
-secrets/*.sops.norg diff=sopsdiffer
+secrets/*.yaml diff=sopsdiffer
+secrets/*.norg diff=sopsdiffer

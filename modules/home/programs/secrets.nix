@@ -40,12 +40,11 @@ in
     sops = {
       defaultSopsFile = "${inputs.self}/secrets/secrets.yaml";
       gnupg = {
-        home = "~/.gnupg";
+        home = "${config.home.homeDirectory}/.gnupg";
         sshKeyPaths = [ ];
       };
       secrets = lib.mkMerge [
         {
-
         }
         cfg.secrets
       ];
