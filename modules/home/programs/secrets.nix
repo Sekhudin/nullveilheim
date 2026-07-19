@@ -3,12 +3,14 @@
   config,
   pkgs,
   lib,
+  extraLib,
   ...
 }:
 
 let
   cfg = config.homeProgramsModules.secrets;
   masterEnable = config.homeProgramsModules.enable;
+  inherit (extraLib.sops) mkSecretAttrs;
 in
 {
   imports = [
@@ -44,8 +46,32 @@ in
         sshKeyPaths = [ ];
       };
       secrets = lib.mkMerge [
-        {
-        }
+        (mkSecretAttrs {
+          path = "gpg_keys.personal";
+          fields = [
+            "email"
+            "private_key"
+            "owner_trust"
+          ];
+        })
+        (mkSecretAttrs {
+          path = "ssh_keys.personal";
+          fields = [
+            "path"
+            "private_key"
+          ];
+        })
+        (mkSecretAttrs {
+          path = "git_identities.personal";
+          fields = [
+            "name"
+            "email"
+            "signing_key"
+            "ssh_key"
+            "gitdirs/projects"
+            "gitdirs/opensource"
+          ];
+        })
         cfg.secrets
       ];
     };

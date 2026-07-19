@@ -1,6 +1,7 @@
 let
   devshell = import ./devshell.nix;
   nixvim = import ./nixvim.nix;
+  sops = import ./sops.nix;
   tmux = import ./tmux.nix;
 in
 {
@@ -16,6 +17,8 @@ in
       devshell = devshell.mkExtraLib { inherit lib; };
 
       nixvim = nixvim.mkExtraLib { inherit lib; };
+
+      sops = sops.mkExtraLib;
 
       tmux = tmux.mkExtraLib { inherit lib; };
 
