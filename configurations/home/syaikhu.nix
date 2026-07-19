@@ -34,6 +34,14 @@ in
 
   homeProgramsModules = {
     enable = true;
+    secrets = {
+      secretProfiles = rec {
+        gpgKey = [ "personal" ];
+        sshKey = gpgKey;
+        gitIdentity = gpgKey;
+      };
+    };
+
     vcs = {
       jujutsu = {
         settings = {

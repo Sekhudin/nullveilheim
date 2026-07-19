@@ -18,7 +18,7 @@ in
 
       nixvim = nixvim.mkExtraLib { inherit lib; };
 
-      sops = sops.mkExtraLib;
+      sops = sops.mkExtraLib { inherit lib; };
 
       tmux = tmux.mkExtraLib { inherit lib; };
 

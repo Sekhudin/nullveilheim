@@ -10,7 +10,13 @@
 let
   cfg = config.homeProgramsModules.secrets;
   masterEnable = config.homeProgramsModules.enable;
-  inherit (extraLib.sops) mkSecretAttrs;
+  secretProfiles = cfg.secretProfiles;
+
+  inherit (extraLib.sops)
+    mkGPGKeySecrets
+    mkSSHKeySecrets
+    mkGitIdentitySecrets
+    ;
 in
 {
   imports = [
@@ -22,6 +28,32 @@ in
       type = lib.types.bool;
       description = "enable secrets";
       default = true;
+    };
+
+    secretProfiles = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          gpgKey = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
+            description = "gpg key profiles";
+            default = [ ];
+          };
+
+          sshKey = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
+            description = "ssh key profiles";
+            default = [ ];
+          };
+
+          gitIdentity = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
+            description = "git identity profiles";
+            default = [ ];
+          };
+        };
+      };
+      description = "gpg profiles";
+      default = { };
     };
 
     secrets = lib.mkOption {
@@ -46,32 +78,9 @@ in
         sshKeyPaths = [ ];
       };
       secrets = lib.mkMerge [
-        (mkSecretAttrs {
-          path = "gpg_keys.personal";
-          fields = [
-            "email"
-            "private_key"
-            "owner_trust"
-          ];
-        })
-        (mkSecretAttrs {
-          path = "ssh_keys.personal";
-          fields = [
-            "path"
-            "private_key"
-          ];
-        })
-        (mkSecretAttrs {
-          path = "git_identities.personal";
-          fields = [
-            "name"
-            "email"
-            "signing_key"
-            "ssh_key"
-            "gitdirs/projects"
-            "gitdirs/opensource"
-          ];
-        })
+        (mkGPGKeySecrets secretProfiles.gpgKey)
+        (mkSSHKeySecrets secretProfiles.sshKey)
+        (mkGitIdentitySecrets secretProfiles.gitIdentity)
         cfg.secrets
       ];
     };
