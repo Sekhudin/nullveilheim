@@ -28,6 +28,10 @@ in
     };
   };
 
+  activationModules = {
+    enable = true;
+  };
+
   homeCoreModules = {
     enable = true;
   };
