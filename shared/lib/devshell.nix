@@ -24,7 +24,7 @@
         cs:
         builtins.mapAttrs (
           _: c: text:
-          "echo -e ${c}${text}${cs.reset}"
+          ''echo -e "${c}${text}${cs.reset}"''
         ) cs;
 
       mapFirst = f: s: if s == "" then "" else f (lib.substring 0 1 s) + lib.substring 1 (-1) s;
