@@ -1,9 +1,7 @@
 keys:
   - &syaikhu 48421358C2E5F6B33CCA847BA4A54E9831C7FA5F
-  - &t14 BFAF1A20D3FA99B7C303D5076000F3E62D7D6AB8
 creation_rules:
   - path_regex: secrets/(?:[^/]+/)*[^/]+\.(yaml|json|env|ini|norg)$
     key_groups:
       - pgp:
           - *syaikhu
-          - *t14
