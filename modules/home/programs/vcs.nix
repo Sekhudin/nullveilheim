@@ -79,7 +79,7 @@ in
               tool = "vimdiff";
             };
             include = {
-              path = "~/.config/git/identities.gitconfig";
+              path = "${config.home.homeDirectory}/.config/git/identities.gitconfig";
             };
             url = {
               "git@gitlab.com:" = {
