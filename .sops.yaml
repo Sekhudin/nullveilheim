@@ -1,5 +1,5 @@
 keys:
-  - &syaikhu 48421358C2E5F6B33CCA847BA4A54E9831C7FA5F
+  - &syaikhu 9EC02F23F1F2689DD568B54A6E88F0E1A15AB76B
 creation_rules:
   - path_regex: secrets/(?:[^/]+/)*[^/]+\.(yaml|json|env|ini|norg)$
     key_groups:
