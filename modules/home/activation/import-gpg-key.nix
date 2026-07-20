@@ -8,7 +8,16 @@
 let
   cfg = config.activationModules.import-gpg-key;
   masterEnable = config.activationModules.enable;
+
   gpgKeyProfiles = config.homeProgramsModules.secrets.secretProfiles.gpgKey;
+
+  gpg = "${pkgs.gnupg}/bin/gpg";
+  mkIdentity = profile: ''
+    import_identity \
+      "${config.sops.secrets."gpg_keys_${profile}_email".path}" \
+      "${config.sops.secrets."gpg_keys_${profile}_private_key".path}" \
+      "${config.sops.secrets."gpg_keys_${profile}_owner_trust".path}"
+  '';
 in
 {
   options.activationModules.import-gpg-key = {
@@ -21,86 +30,76 @@ in
 
   config = lib.mkIf (masterEnable && cfg.enable) {
     home = {
-      activation =
-        let
-          gpg = "${pkgs.gnupg}/bin/gpg";
-          mkImport = id: ''
-            import_identity \
-              "${config.sops.secrets."gpg_keys_${id}_email".path}" \
-              "${config.sops.secrets."gpg_keys_${id}_private_key".path}" \
-              "${config.sops.secrets."gpg_keys_${id}_owner_trust".path}"
-          '';
-        in
-        {
-          importGPGKey = lib.hm.dag.entryAfter [ "writeBoundary" "setupSecrets" ] ''
-            set -euo pipefail
+      activation = {
+        importGPGKey = lib.hm.dag.entryAfter [ "writeBoundary" "setupSecrets" ] ''
+          set -euo pipefail
 
-            export GPG_TTY="$(tty || true)"
+          export GPG_TTY="$(tty || true)"
 
-            log() {
-              echo "[INFO][import-gpg-key] $*"
+          log() {
+            echo "[INFO][import-gpg-key] $*"
+          }
+
+          warn() {
+            echo "[WARN][import-gpg-key] $*"
+          }
+
+          fatal() {
+            echo "[ERROR][import-gpg-key] $*" >&2
+            exit 1
+          }
+
+          import_key() {
+            local key_file="$1"
+
+            ${gpg} --batch --import "$key_file"
+          }
+
+          import_ownertrust() {
+            local trust_file="$1"
+
+            ${gpg} --batch --import-ownertrust "$trust_file"
+          }
+
+          import_identity() {
+            local email_file="$1"
+            local key_file="$2"
+            local trust_file="$3"
+
+            [[ -f "$email_file" ]] || {
+              fatal "Missing email secret: $email_file" >&2
             }
 
-            warn() {
-              echo "[WARN][import-gpg-key] $*"
+            [[ -f "$key_file" ]] || {
+              fatal "Missing private key secret: $key_file" >&2
             }
 
-            fatal() {
-              echo "[ERROR][import-gpg-key] $*" >&2
-              exit 1
+            [[ -f "$trust_file" ]] || {
+              fatal "Missing ownertrust secret: $trust_file" >&2
             }
 
-            import_key() {
-              local key_file="$1"
+            local email
+            email="$(<"$email_file")"
 
-              ${gpg} --batch --import "$key_file"
+            [[ -n "$email" ]] || {
+              fatal "Missing email value" >&2
             }
 
-            import_ownertrust() {
-              local trust_file="$1"
+            log "Checking GPG identity: $email"
+            if ${gpg} --list-secret-keys "$email" >/dev/null 2>&1; then
+              log "GPG identity already exists: $email"
+              return
+            fi
 
-              ${gpg} --batch --import-ownertrust "$trust_file"
-            }
+            log "Importing GPG identity: $email"
 
-            import_identity() {
-              local email_file="$1"
-              local key_file="$2"
-              local trust_file="$3"
+            import_key "$key_file"
+            import_ownertrust "$trust_file"
+          }
 
-              [[ -f "$email_file" ]] || {
-                fatal "Missing email secret: $email_file" >&2
-              }
-
-              [[ -f "$key_file" ]] || {
-                fatal "Missing private key secret: $key_file" >&2
-              }
-
-              [[ -f "$trust_file" ]] || {
-                fatal "Missing ownertrust secret: $trust_file" >&2
-              }
-
-              local email
-              email="$(<"$email_file")"
-
-              [[ -n "$email" ]] || {
-                fatal "Missing email value" >&2
-              }
-
-              log "Checking GPG identity: $email"
-              if ${gpg} --list-secret-keys "$email" >/dev/null 2>&1; then
-                log "GPG identity already exists: $email"
-                return
-              fi
-
-              log "Importing GPG identity: $email"
-
-              import_key "$key_file"
-              import_ownertrust "$trust_file"
-            }
-
-            ${(lib.concatMapStringsSep "\n" mkImport gpgKeyProfiles)}
-          '';
-        };
+          ${(lib.concatMapStringsSep "\n" mkIdentity gpgKeyProfiles)}
+        '';
+      };
     };
   };
 }
