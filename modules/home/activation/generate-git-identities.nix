@@ -29,7 +29,7 @@ let
 
   sshPath = profile: config.sops.secrets."ssh_keys_${profile}_path".path;
 
-  mkGenerate = profile: ''
+  mkIdentity = profile: ''
       generate_identity \
         "${profile}" \
         "${config.sops.secrets."git_identities_${profile}_name".path}" \
@@ -210,7 +210,7 @@ in
 
           reset_configs
 
-          ${lib.concatMapStringsSep "\n" mkGenerate secretProfiles.gitIdentities}
+          ${lib.concatMapStringsSep "\n" mkIdentity secretProfiles.gitIdentities}
         '';
       };
     };
