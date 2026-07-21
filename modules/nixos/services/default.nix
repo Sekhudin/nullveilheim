@@ -5,6 +5,7 @@
     ./audio.nix
     ./openssh.nix
     ./printing.nix
+    ./tailscale.nix
     ./virtualisation.nix
   ];
 

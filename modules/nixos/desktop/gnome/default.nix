@@ -27,37 +27,39 @@ in
   };
 
   config = lib.mkIf (masterEnable && isGnome) {
-    services.desktopManager = {
-      gnome = lib.mkMerge [
+    services = {
+      desktopManager = {
+        gnome = lib.mkMerge [
+          {
+            enable = true;
+            extraGSettingsOverrides = ''
+              [org.gnome.desktop.wm.preferences]
+              button-layout='appmenu:minimize,maximize,close'
+            '';
+          }
+          cfg.gnome
+        ];
+      };
+
+      displayManager = {
+        gdm = lib.mkMerge [
+          {
+            enable = true;
+          }
+          cfg.gdm
+        ];
+      };
+
+      xserver = lib.mkMerge [
         {
           enable = true;
-          extraGSettingsOverrides = ''
-            [org.gnome.desktop.wm.preferences]
-            button-layout='appmenu:minimize,maximize,close'
-          '';
+          xkb = {
+            layout = "us";
+            variant = "";
+          };
         }
-        cfg.gnome
+        cfg.xserver
       ];
     };
-
-    services.displayManager = {
-      gdm = lib.mkMerge [
-        {
-          enable = true;
-        }
-        cfg.gdm
-      ];
-    };
-
-    services.xserver = lib.mkMerge [
-      {
-        enable = true;
-        xkb = {
-          layout = "us";
-          variant = "";
-        };
-      }
-      cfg.xserver
-    ];
   };
 }

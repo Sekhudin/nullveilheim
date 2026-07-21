@@ -41,32 +41,36 @@ in
   };
 
   config = lib.mkIf (masterEnable && cfg.enable) {
-    security.rtkit = lib.mkMerge [
-      {
-        enable = true;
-      }
-      cfg.rtkit
-    ];
-
-    services.pulseaudio = lib.mkMerge [
-      {
-        enable = (cfg.use == "pulseaudio");
-      }
-      cfg.pulseaudio
-    ];
-
-    services.pipewire = lib.mkMerge [
-      {
-        enable = (cfg.use == "pipewire");
-        alsa = {
+    security = {
+      rtkit = lib.mkMerge [
+        {
           enable = true;
-          support32Bit = true;
-        };
-        pulse = {
-          enable = true;
-        };
-      }
-      cfg.pipewire
-    ];
+        }
+        cfg.rtkit
+      ];
+    };
+
+    services = {
+      pulseaudio = lib.mkMerge [
+        {
+          enable = (cfg.use == "pulseaudio");
+        }
+        cfg.pulseaudio
+      ];
+
+      pipewire = lib.mkMerge [
+        {
+          enable = (cfg.use == "pipewire");
+          alsa = {
+            enable = true;
+            support32Bit = true;
+          };
+          pulse = {
+            enable = true;
+          };
+        }
+        cfg.pipewire
+      ];
+    };
   };
 }

@@ -20,19 +20,21 @@ in
   };
 
   config = lib.mkIf (masterEnable && cfg.enable) {
-    services.openssh = lib.mkMerge [
-      {
-        enable = true;
-        ports = lib.mkDefault [ 22 ];
-        openFirewall = lib.mkDefault false;
-        settings = {
-          PasswordAuthentication = lib.mkDefault false;
-          PermitRootLogin = lib.mkDefault "no";
-          X11Forwarding = lib.mkDefault true;
-          X11DisplayOffset = lib.mkDefault 10;
-        };
-      }
-      cfg.settings
-    ];
+    services = {
+      openssh = lib.mkMerge [
+        {
+          enable = true;
+          ports = lib.mkDefault [ 22 ];
+          openFirewall = lib.mkDefault false;
+          settings = {
+            PasswordAuthentication = lib.mkDefault false;
+            PermitRootLogin = lib.mkDefault "no";
+            X11Forwarding = lib.mkDefault true;
+            X11DisplayOffset = lib.mkDefault 10;
+          };
+        }
+        cfg.settings
+      ];
+    };
   };
 }
