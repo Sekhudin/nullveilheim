@@ -6,7 +6,7 @@
 }:
 
 let
-  cfg = config.activationModules.import-gpg-key;
+  cfg = config.activationModules.importGPGKey;
   masterEnable = config.activationModules.enable;
 
   inherit (config.homeProgramsModules.secrets) secretProfiles;
@@ -20,7 +20,7 @@ let
   '';
 in
 {
-  options.activationModules.import-gpg-key = {
+  options.activationModules.importGPGKey = {
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable activation modules";
@@ -31,7 +31,7 @@ in
   config = lib.mkIf (masterEnable && cfg.enable) {
     home = {
       activation = {
-        importGPGKey = lib.hm.dag.entryAfter [ "writeBoundary" "setupSecrets" ] ''
+        importGPGKey = lib.hm.dag.entryAfter [ "writeBoundary" "setupSecrets" "installSSHKey" ] ''
           set -euo pipefail
 
           export GPG_TTY="$(tty || true)"
