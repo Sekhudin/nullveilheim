@@ -20,17 +20,19 @@ in
   };
 
   config = lib.mkIf (masterEnable && cfg.enable) {
-    programs.steam = lib.mkMerge [
-      {
-        enable = true;
-        remotePlay = {
-          openFirewall = lib.mkDefault true;
-        };
-        dedicatedServer = {
-          openFirewall = lib.mkDefault true;
-        };
-      }
-      cfg.settings
-    ];
+    programs = {
+      steam = lib.mkMerge [
+        {
+          enable = true;
+          remotePlay = {
+            openFirewall = lib.mkDefault true;
+          };
+          dedicatedServer = {
+            openFirewall = lib.mkDefault true;
+          };
+        }
+        cfg.settings
+      ];
+    };
   };
 }

@@ -22,11 +22,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.nh = {
-      enable = true;
-      clean = {
+    programs = {
+      nh = {
         enable = true;
-        extraArgs = "--keep-since 4d --keep 1";
+        clean = {
+          enable = true;
+          extraArgs = "--keep-since 4d --keep 1";
+        };
       };
     };
 

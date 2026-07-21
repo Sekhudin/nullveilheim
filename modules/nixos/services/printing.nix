@@ -20,11 +20,13 @@ in
   };
 
   config = lib.mkIf (masterEnable && cfg.enable) {
-    services.printing = lib.mkMerge [
-      {
-        enable = true;
-      }
-      cfg.settings
-    ];
+    services = {
+      printing = lib.mkMerge [
+        {
+          enable = true;
+        }
+        cfg.settings
+      ];
+    };
   };
 }
