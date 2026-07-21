@@ -9,9 +9,7 @@ let
   cfg = config.activationModules.generate-git-identities;
   masterEnable = config.activationModules.enable;
 
-  gitIdentityProfiles = config.homeProgramsModules.secrets.secretProfiles.gitIdentity;
-  gpgKeyProfiles = config.homeProgramsModules.secrets.secretProfiles.gpgKey;
-  sshKeyProfiles = config.homeProgramsModules.secrets.secretProfiles.sshKey;
+  inherit (config.homeProgramsModules.secrets) secretProfiles;
 
   includesFile = config.programs.git.settings.include.path;
   dirname = "${pkgs.coreutils}/bin/dirname";
@@ -52,7 +50,7 @@ in
   config = lib.mkIf (masterEnable && cfg.enable) {
     home = {
       activation = {
-        generateGitIdentities = lib.hm.dag.entryAfter [ "writeBoundary" "setupSecrets" ] ''
+        generateGitIdentities = lib.hm.dag.entryAfter [ "writeBoundary" "setupSecrets" "importGPGKey" ] ''
           set -euo pipefail
 
           log() {
@@ -109,7 +107,7 @@ in
             ${profile})
               read_secret "${gpgEmailPath profile}"
               ;;
-          '') gpgKeyProfiles}
+          '') secretProfiles.gpgKey}
               *)
                 fatal "Unknown GPG profile: $profile"
                 ;;
@@ -124,7 +122,7 @@ in
             ${profile})
               read_secret "${sshPath profile}"
               ;;
-          '') sshKeyProfiles}
+          '') secretProfiles.sshKey}
               *)
                 fatal "Unknown SSH profile: $profile"
                 ;;
@@ -243,7 +241,7 @@ in
 
           reset_configs
 
-          ${lib.concatMapStringsSep "\n" mkGenerate gitIdentityProfiles}
+          ${lib.concatMapStringsSep "\n" mkGenerate secretProfiles.gitIdentity}
         '';
       };
     };
