@@ -1,9 +1,5 @@
-{ inputs, lib, ... }:
+{ inputs, ... }:
 
-let
-  shared = import ../shared;
-  shareable = shared.mkShareable { inherit lib; };
-in
 {
   imports = [
     ./devshells
@@ -12,18 +8,8 @@ in
     ./packages
     ./proces-compose
     ./ez-config.nix
+    ./nullveilheim.nix
   ];
-
-  flake = {
-    nullveilheimConfigurations = {
-      inherit (shareable)
-        color
-        icon
-        font
-        extraLib
-        ;
-    };
-  };
 
   perSystem =
     {

@@ -21,12 +21,7 @@ let
       inherit inputs lib;
       nixpkgsArgs = {
         inherit system;
-        config = {
-          allowUnfree = true;
-          allowBroken = false;
-          contentAddressedByDefault = false;
-          tarball-ttl = 0;
-        };
+        inherit (inputs.self.nullveilheimConfigurations.nixpkgs) config;
       };
     };
 in
@@ -43,9 +38,11 @@ in
       inherit (stable) nixd nixf nixt;
       inherit branches;
 
-      slack = stable.slack;
-      discord = stable.discord;
-      wpsoffice = stable.wpsoffice;
+      slack = unstable.slack;
+      discord = unstable.discord;
+      wpsoffice = unstable.wpsoffice;
+
+      android-studio-full = unstable.android-studio-full;
 
       claude-code = unstable.claude-code;
       gemini-cli = unstable.gemini-cli;

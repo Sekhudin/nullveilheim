@@ -1,15 +1,8 @@
 { inputs, lib, ... }:
 
 {
-
   nixpkgs = {
-    config = {
-      allowBroken = false;
-      allowUnfree = true;
-      contentAddressedByDefault = false;
-      tarball-ttl = 0;
-    };
-
+    inherit (inputs.self.nullveilheimConfigurations.nixpkgs) config;
     overlays = (lib.attrValues inputs.self.overlays);
   };
 }

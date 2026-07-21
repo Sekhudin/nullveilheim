@@ -36,12 +36,7 @@ in
   config = lib.mkIf (masterEnable && cfg.enable) {
     nixpkgs = {
       config = lib.mkMerge [
-        {
-          allowUnfree = lib.mkDefault true;
-          allowBroken = lib.mkDefault false;
-          contentAddressedByDefault = lib.mkDefault false;
-          tarball-ttl = lib.mkDefault 0;
-        }
+        inputs.self.nullveilheimConfigurations.nixpkgs.config
         cfg.config
       ];
 
