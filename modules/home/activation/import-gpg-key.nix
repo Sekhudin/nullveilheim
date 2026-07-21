@@ -9,7 +9,7 @@ let
   cfg = config.activationModules.import-gpg-key;
   masterEnable = config.activationModules.enable;
 
-  gpgKeyProfiles = config.homeProgramsModules.secrets.secretProfiles.gpgKey;
+  inherit (config.homeProgramsModules.secrets) secretProfiles;
 
   gpg = "${pkgs.gnupg}/bin/gpg";
   mkIdentity = profile: ''
@@ -97,7 +97,7 @@ in
             import_ownertrust "$trust_file"
           }
 
-          ${(lib.concatMapStringsSep "\n" mkIdentity gpgKeyProfiles)}
+          ${(lib.concatMapStringsSep "\n" mkIdentity secretProfiles.gpgKey)}
         '';
       };
     };
