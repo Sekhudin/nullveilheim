@@ -37,6 +37,8 @@
         }:
 
         let
+          cat = "${pkgs.coreutils}/bin/cat";
+          chmod = "${pkgs.coreutils}/bin/chmod";
           dirname = "${pkgs.coreutils}/bin/dirname";
           mkdir = "${pkgs.coreutils}/bin/mkdir";
           rm = "${pkgs.coreutils}/bin/rm";
@@ -71,6 +73,8 @@
 
           inherit (fmt) log warn fatal;
           inherit
+            cat
+            chmod
             dirname
             mkdir
             rm
