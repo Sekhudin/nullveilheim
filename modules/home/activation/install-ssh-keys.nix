@@ -57,7 +57,7 @@ in
 
             ${h.ensureParent} "$path"
 
-            printf '%s' "$private_key" > "$path"
+            cat "$private_key_file" > "$path"
 
             ${h.chmod} 700 "$(${pkgs.coreutils}/bin/dirname "$path")"
             ${h.chmod} 600 "$path"
