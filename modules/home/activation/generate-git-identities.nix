@@ -2,19 +2,20 @@
   pkgs,
   config,
   lib,
+  extraLib,
   ...
 }:
 
 let
   cfg = config.activationModules.generateGitIdentities;
   masterEnable = config.activationModules.enable;
-
   inherit (config.homeProgramsModules.secrets) secretProfiles;
 
   includesFile = config.programs.git.settings.include.path;
-  dirname = "${pkgs.coreutils}/bin/dirname";
-  mkdir = "${pkgs.coreutils}/bin/mkdir";
-  rm = "${pkgs.coreutils}/bin/rm";
+  h = extraLib.activation.mkHelper {
+    context = "generate-git-identities";
+    inherit pkgs;
+  };
 
   gitdirPaths =
     profile:
@@ -50,54 +51,22 @@ in
   config = lib.mkIf (masterEnable && cfg.enable) {
     home = {
       activation = {
-        generateGitIdentities = lib.hm.dag.entryAfter [ "writeBoundary" "setupSecrets" "importGPGKey" ] ''
+        generateGitIdentities = lib.hm.dag.entryAfter [ "writeBoundary" "setupSecrets" "importGPGKeys" ] ''
           set -euo pipefail
 
-          log() {
-            echo "[INFO][generate-git-identities] $*"
-          }
-
-          warn() {
-            echo "[WARN][generate-git-identities] $*"
-          }
-
-          fatal() {
-            echo "[ERROR][generate-git-identities] $*" >&2
-            exit 1
-          }
-
-          expand_home() {
-            printf '%s\n' "''${1/#\~/$HOME}"
-          }
-
-          ensure_parent() {
-            ${mkdir} -p "$(${dirname} "$1")"
-          }
+          ${h.shell}
 
           reset_configs() {
-            ensure_parent "$INCLUDES_FILE"
+            ${h.ensureParent} "$INCLUDES_FILE"
 
-            ${mkdir} -p "$GITCONFIG_D"
+            ${h.mkdir} -p "$GITCONFIG_D"
 
             : > "$INCLUDES_FILE"
-            ${rm} -f "$GITCONFIG_D"/*.conf 2>/dev/null || true
+            ${h.rm} -f "$GITCONFIG_D"/*.conf 2>/dev/null || true
           }
 
-          INCLUDES_FILE="$(expand_home "${includesFile}")"
-          GITCONFIG_D="$(${dirname} "$INCLUDES_FILE")/config.d"
-
-          read_secret() {
-            local file="$1"
-
-            [[ -f "$file" ]] || fatal "Missing secret: $file"
-
-            local value
-            value="$(<"$file")"
-
-            [[ -n "$value" ]] || fatal "Empty secret: $file"
-
-            printf '%s' "$value"
-          }
+          INCLUDES_FILE="$(${h.expandHome} "${includesFile}")"
+          GITCONFIG_D="$(${h.dirname} "$INCLUDES_FILE")/config.d"
 
           read_gpg_email() {
             local profile="$1"
@@ -105,11 +74,11 @@ in
             case "$profile" in
           ${lib.concatMapStringsSep "\n" (profile: ''
             ${profile})
-              read_secret "${gpgEmailPath profile}"
+              ${h.readSecret} "${gpgEmailPath profile}"
               ;;
           '') secretProfiles.gpgKey}
               *)
-                fatal "Unknown GPG profile: $profile"
+                ${h.fatal} "Unknown GPG profile: $profile"
                 ;;
             esac
           }
@@ -120,11 +89,11 @@ in
             case "$profile" in
           ${lib.concatMapStringsSep "\n" (profile: ''
             ${profile})
-              read_secret "${sshPath profile}"
+              ${h.readSecret} "${sshPath profile}"
               ;;
           '') secretProfiles.sshKey}
               *)
-                fatal "Unknown SSH profile: $profile"
+                ${h.fatal} "Unknown SSH profile: $profile"
                 ;;
             esac
           }
@@ -142,7 +111,7 @@ in
               "    signingKey = $signing_key" \
               "" \
               "[core]" \
-              "    sshCommand = ssh -i $(expand_home "$ssh_key") -o IdentitiesOnly=yes"
+              "    sshCommand = ssh -i $(${h.expandHome} "$ssh_key") -o IdentitiesOnly=yes"
           }
 
           generate_config() {
@@ -162,7 +131,7 @@ in
              "$ssh_key" \
              > "$config_file"
 
-            log "Generated config: $config_file"
+            ${h.log} "Generated config: $config_file"
           }
 
           write_include_config() {
@@ -179,12 +148,12 @@ in
             local profile="$1"
             local gitdir="$2"
 
-            log "Registering gitdir '$gitdir' -> $profile"
+            ${h.log} "Registering gitdir '$gitdir' -> $profile"
 
-            gitdir="$(expand_home "$gitdir")"
+            gitdir="$(${h.expandHome} "$gitdir")"
             gitdir="''${gitdir%/}/"
 
-            ${mkdir} -p "$gitdir"
+            ${h.mkdir} -p "$gitdir"
 
             write_include_config \
               "$gitdir" \
@@ -201,9 +170,9 @@ in
 
             shift 5
 
-            (($# > 0)) || fatal "No gitdir configured for profile: $profile"
+            (($# > 0)) || ${h.fatal} "No gitdir configured for profile: $profile"
 
-            log "Generating Git identity: $profile"
+            ${h.log} "Generating Git identity: $profile"
 
             local signing_key_profile
             local ssh_key_profile
@@ -213,11 +182,11 @@ in
             local signing_key
             local ssh_key
 
-            signing_key_profile="$(read_secret "$signing_key_file")"
-            ssh_key_profile="$(read_secret "$ssh_key_file")"
+            signing_key_profile="$(${h.readSecret} "$signing_key_file")"
+            ssh_key_profile="$(${h.readSecret} "$ssh_key_file")"
 
-            name="$(read_secret "$name_file")"
-            email="$(read_secret "$email_file")"
+            name="$(${h.readSecret} "$name_file")"
+            email="$(${h.readSecret} "$email_file")"
             signing_key="$(read_gpg_email "$signing_key_profile")"
             ssh_key="$(read_ssh_path "$ssh_key_profile")"
 
@@ -231,12 +200,12 @@ in
             while (($#)); do
               append_include \
                 "$profile" \
-                "$(read_secret "$1")"
+                "$(${h.readSecret} "$1")"
             
               shift
             done
 
-            log "Git identity '$profile' generated"
+            ${h.log} "Git identity '$profile' generated"
           }
 
           reset_configs

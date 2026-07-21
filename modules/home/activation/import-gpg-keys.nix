@@ -2,16 +2,21 @@
   pkgs,
   config,
   lib,
+  extraLib,
   ...
 }:
 
 let
-  cfg = config.activationModules.importGPGKey;
+  cfg = config.activationModules.importGPGKeys;
   masterEnable = config.activationModules.enable;
-
   inherit (config.homeProgramsModules.secrets) secretProfiles;
 
   gpg = "${pkgs.gnupg}/bin/gpg";
+  f = extraLib.activation.mkHelper {
+    context = "import-gpg-keys";
+    inherit pkgs;
+  };
+
   mkIdentity = profile: ''
     import_identity \
       "${config.sops.secrets."gpg_keys_${profile}_email".path}" \
@@ -20,7 +25,7 @@ let
   '';
 in
 {
-  options.activationModules.importGPGKey = {
+  options.activationModules.importGPGKeys = {
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable activation modules";
@@ -31,23 +36,12 @@ in
   config = lib.mkIf (masterEnable && cfg.enable) {
     home = {
       activation = {
-        importGPGKey = lib.hm.dag.entryAfter [ "writeBoundary" "setupSecrets" "installSSHKey" ] ''
+        importGPGKeys = lib.hm.dag.entryAfter [ "writeBoundary" "setupSecrets" "installSSHKeys" ] ''
           set -euo pipefail
 
           export GPG_TTY="$(tty || true)"
 
-          log() {
-            echo "[INFO][import-gpg-key] $*"
-          }
-
-          warn() {
-            echo "[WARN][import-gpg-key] $*"
-          }
-
-          fatal() {
-            echo "[ERROR][import-gpg-key] $*" >&2
-            exit 1
-          }
+          ${f.shell}
 
           import_key() {
             local key_file="$1"
@@ -67,31 +61,31 @@ in
             local trust_file="$3"
 
             [[ -f "$email_file" ]] || {
-              fatal "Missing email secret: $email_file" >&2
+              ${f.fatal} "Missing email secret: $email_file" >&2
             }
 
             [[ -f "$key_file" ]] || {
-              fatal "Missing private key secret: $key_file" >&2
+              ${f.fatal} "Missing private key secret: $key_file" >&2
             }
 
             [[ -f "$trust_file" ]] || {
-              fatal "Missing ownertrust secret: $trust_file" >&2
+              ${f.fatal} "Missing ownertrust secret: $trust_file" >&2
             }
 
             local email
             email="$(<"$email_file")"
 
             [[ -n "$email" ]] || {
-              fatal "Missing email value" >&2
+              ${f.fatal} "Missing email value" >&2
             }
 
-            log "Checking GPG identity: $email"
+            ${f.log} "Checking GPG identity: $email"
             if ${gpg} --list-secret-keys "$email" >/dev/null 2>&1; then
-              log "GPG identity already exists: $email"
+              ${f.log} "GPG identity already exists: $email"
               return
             fi
 
-            log "Importing GPG identity: $email"
+            ${f.log} "Importing GPG identity: $email"
 
             import_key "$key_file"
             import_ownertrust "$trust_file"

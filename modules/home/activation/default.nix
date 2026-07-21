@@ -6,8 +6,8 @@
 {
   imports = [
     ./generate-git-identities.nix
-    ./import-gpg-key.nix
-    ./install-ssh-key.nix
+    ./import-gpg-keys.nix
+    ./install-ssh-keys.nix
   ];
 
   options.activationModules = {
