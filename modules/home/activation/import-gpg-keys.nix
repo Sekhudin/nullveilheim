@@ -91,7 +91,7 @@ in
             import_ownertrust "$trust_file"
           }
 
-          ${(lib.concatMapStringsSep "\n" mkIdentity secretProfiles.gpgKey)}
+          ${(lib.concatMapStringsSep "\n" mkIdentity secretProfiles.gpgKeys)}
         '';
       };
     };

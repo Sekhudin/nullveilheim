@@ -33,19 +33,19 @@ in
     secretProfiles = lib.mkOption {
       type = lib.types.submodule {
         options = {
-          gpgKey = lib.mkOption {
+          gpgKeys = lib.mkOption {
             type = lib.types.listOf lib.types.str;
             description = "gpg key profiles";
             default = [ ];
           };
 
-          sshKey = lib.mkOption {
+          sshKeys = lib.mkOption {
             type = lib.types.listOf lib.types.str;
             description = "ssh key profiles";
             default = [ ];
           };
 
-          gitIdentity = lib.mkOption {
+          gitIdentities = lib.mkOption {
             type = lib.types.listOf lib.types.str;
             description = "git identity profiles";
             default = [ ];
@@ -78,9 +78,9 @@ in
         sshKeyPaths = [ ];
       };
       secrets = lib.mkMerge [
-        (mkGPGKeySecrets secretProfiles.gpgKey)
-        (mkSSHKeySecrets secretProfiles.sshKey)
-        (mkGitIdentitySecrets secretProfiles.gitIdentity)
+        (mkGPGKeySecrets secretProfiles.gpgKeys)
+        (mkSSHKeySecrets secretProfiles.sshKeys)
+        (mkGitIdentitySecrets secretProfiles.gitIdentities)
         cfg.secrets
       ];
     };
