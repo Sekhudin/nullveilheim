@@ -76,7 +76,7 @@ in
             ${profile})
               ${h.readSecret} "${gpgEmailPath profile}"
               ;;
-          '') secretProfiles.gpgKey}
+          '') secretProfiles.gpgKeys}
               *)
                 ${h.fatal} "Unknown GPG profile: $profile"
                 ;;
@@ -91,7 +91,7 @@ in
             ${profile})
               ${h.readSecret} "${sshPath profile}"
               ;;
-          '') secretProfiles.sshKey}
+          '') secretProfiles.sshKeys}
               *)
                 ${h.fatal} "Unknown SSH profile: $profile"
                 ;;
@@ -210,7 +210,7 @@ in
 
           reset_configs
 
-          ${lib.concatMapStringsSep "\n" mkGenerate secretProfiles.gitIdentity}
+          ${lib.concatMapStringsSep "\n" mkGenerate secretProfiles.gitIdentities}
         '';
       };
     };

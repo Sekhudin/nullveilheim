@@ -40,9 +40,9 @@ in
     enable = true;
     secrets = {
       secretProfiles = rec {
-        gpgKey = [ "personal" ];
-        sshKey = gpgKey;
-        gitIdentity = gpgKey;
+        gpgKeys = [ "personal" ];
+        sshKeys = gpgKeys;
+        gitIdentities = gpgKeys;
       };
     };
 
