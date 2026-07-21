@@ -1,4 +1,5 @@
 let
+  activation = import ./activation.nix;
   devshell = import ./devshell.nix;
   nixvim = import ./nixvim.nix;
   sops = import ./sops.nix;
@@ -13,6 +14,8 @@ in
     in
     {
       inherit isStandalone;
+
+      activation = activation.mkExtraLib { };
 
       devshell = devshell.mkExtraLib { inherit lib; };
 
