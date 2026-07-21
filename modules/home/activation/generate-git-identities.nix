@@ -6,7 +6,7 @@
 }:
 
 let
-  cfg = config.activationModules.generate-git-identities;
+  cfg = config.activationModules.generateGitIdentities;
   masterEnable = config.activationModules.enable;
 
   inherit (config.homeProgramsModules.secrets) secretProfiles;
@@ -39,7 +39,7 @@ let
   '';
 in
 {
-  options.activationModules.generate-git-identities = {
+  options.activationModules.generateGitIdentities = {
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable activation modules";
