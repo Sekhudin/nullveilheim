@@ -36,7 +36,7 @@ in
   config = lib.mkIf (masterEnable && cfg.enable) {
     home = {
       activation = {
-        importGPGKeys = lib.hm.dag.entryAfter [ "writeBoundary" "setupSecrets" "installSSHKeys" ] ''
+        importGPGKeys = lib.hm.dag.entryAfter [ "installSSHKeys" ] ''
           set -euo pipefail
 
           export GPG_TTY="$(tty || true)"

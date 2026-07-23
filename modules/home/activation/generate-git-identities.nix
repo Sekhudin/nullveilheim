@@ -51,7 +51,7 @@ in
   config = lib.mkIf (masterEnable && cfg.enable) {
     home = {
       activation = {
-        generateGitIdentities = lib.hm.dag.entryAfter [ "writeBoundary" "setupSecrets" "importGPGKeys" ] ''
+        generateGitIdentities = lib.hm.dag.entryAfter [ "importGPGKeys" ] ''
           set -euo pipefail
 
           ${h.shell}

@@ -36,7 +36,7 @@ in
   config = lib.mkIf (masterEnable && cfg.enable) {
     home = {
       activation = {
-        installSSHKeys = lib.hm.dag.entryAfter [ "writeBoundary" "setupSecrets" ] ''
+        installSSHKeys = lib.hm.dag.entryAfter [ "installPackages" "sops-nix" ] ''
             set -euo pipefail
 
             ${h.shell}
