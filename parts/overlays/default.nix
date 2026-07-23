@@ -35,18 +35,24 @@ in
       unstable = branches.unstable;
     in
     {
-      inherit (stable) nixd nixf nixt;
       inherit branches;
 
-      slack = unstable.slack;
-      discord = unstable.discord;
-      wpsoffice = unstable.wpsoffice;
+      inherit (stable) nixd nixf nixt;
 
-      android-studio-full = unstable.android-studio-full;
+      inherit (unstable)
+        slack
+        discord
+        wpsoffice
 
-      claude-code = unstable.claude-code;
-      gemini-cli = unstable.gemini-cli;
-      opencode = unstable.opencode;
+        claude-code
+        gemini-cli
+        opencode
+
+        androidenv
+        android-tools
+        android-studio
+        android-studio-full
+        ;
 
       fishPlugins = prev.fishPlugins // {
         nix-env = {
@@ -62,6 +68,5 @@ in
 
       tree-sitter-grammars = stable.tree-sitter-grammars // {
       };
-
     };
 }

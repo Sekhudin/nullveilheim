@@ -1,8 +1,10 @@
-{ inputs, lib, ... }:
+{ inputs, ... }:
 
+let
+  inherit (inputs.self.nullveilheimConfigurations.nixpkgs) config overlays;
+in
 {
   nixpkgs = {
-    inherit (inputs.self.nullveilheimConfigurations.nixpkgs) config;
-    overlays = (lib.attrValues inputs.self.overlays);
+    inherit config overlays;
   };
 }
