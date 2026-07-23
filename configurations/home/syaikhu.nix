@@ -46,6 +46,10 @@ in
       };
     };
 
+    ssh = {
+      enableShellAliases = true;
+    };
+
     vcs = {
       jujutsu = {
         settings = {

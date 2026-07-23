@@ -8,6 +8,7 @@
     ./pass.nix
     ./productivity.nix
     ./secrets.nix
+    ./ssh.nix
     ./tmux.nix
     ./vcs.nix
   ];
