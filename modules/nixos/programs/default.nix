@@ -10,6 +10,7 @@ let
 in
 {
   imports = [
+    ./android-studio.nix
     ./steam.nix
   ];
 
