@@ -2,7 +2,6 @@
   inputs,
   config,
   lib,
-  extraLib,
   ...
 }:
 
@@ -10,7 +9,8 @@ let
   cfg = config.commonModules.nixpkgs;
   master = config.commonModules;
   masterEnable = master.enable;
-  isStandalone = (extraLib.isStandalone master.osConfig);
+
+  inherit (inputs.self.nullveilheimConfigurations) nixpkgs;
 in
 {
   options.commonModules.nixpkgs = {
@@ -36,19 +36,11 @@ in
   config = lib.mkIf (masterEnable && cfg.enable) {
     nixpkgs = {
       config = lib.mkMerge [
-        inputs.self.nullveilheimConfigurations.nixpkgs.config
+        nixpkgs.config
         cfg.config
       ];
 
-      overlays = lib.optionals cfg.enableOverlays (
-        (lib.attrValues inputs.self.overlays)
-        ++ [
-        ]
-        ++ lib.optionals isStandalone [
-          inputs.nixgl.overlay
-        ]
-      );
-
+      overlays = lib.optionals cfg.enableOverlays nixpkgs.overlays;
     };
   };
 }

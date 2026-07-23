@@ -41,21 +41,16 @@ in
 
   config = lib.mkIf (masterEnable && cfg.enable) {
     home = {
-      packages =
-        with pkgs;
-        [
-          telegram-desktop
-          slack
-          wpsoffice
+      packages = with pkgs; [
+        telegram-desktop
+        slack
+        wpsoffice
 
-          #ai
-          opencode
-          gemini-cli
-          claude-code
-        ]
-        ++ lib.optionals stdenv.isLinux [
-          # android-studio-full
-        ];
+        #ai
+        opencode
+        gemini-cli
+        claude-code
+      ];
     };
 
     programs = {

@@ -21,6 +21,7 @@
       extraGroups = [
         "networkmanager"
         "wheel"
+        "kvm"
       ];
       subUidRanges = [
         {
@@ -55,6 +56,11 @@
 
   nixosCoreModules = {
     enable = true;
+    boot = {
+      settings = {
+        kernelModules = [ "kvm-intel" ];
+      };
+    };
     networking = {
       settings = {
         hostName = "acer-swift";

@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ inputs, lib, ... }:
 
 let
   shared = import ../shared;
@@ -24,6 +24,10 @@ in
             accept_license = true;
           };
         };
+
+        overlays = lib.attrValues inputs.self.overlays ++ [
+          inputs.nixgl.overlay
+        ];
       };
     };
   };
