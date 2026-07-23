@@ -1,6 +1,5 @@
 {
   inputs,
-  lib,
   ...
 }:
 
@@ -48,7 +47,10 @@
         standalone = {
           enable = true;
           pkgs = import inputs.nixpkgs {
-            overlays = (lib.attrValues inputs.self.overlays) ++ [ ];
+            inherit (inputs.self.nullveilheimConfigurations)
+              config
+              overlays
+              ;
           };
         };
       };

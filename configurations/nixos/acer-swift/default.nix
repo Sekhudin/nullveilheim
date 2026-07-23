@@ -22,6 +22,7 @@
         "networkmanager"
         "wheel"
         "kvm"
+        "adbusers"
       ];
       subUidRanges = [
         {
