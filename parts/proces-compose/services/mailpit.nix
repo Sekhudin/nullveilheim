@@ -17,7 +17,7 @@ let
           value = builtins.getEnv key;
         }) (builtins.attrNames env)
       );
-      validSysEnv = lib.filterAttrs (n: v: v != "") sysEnv;
+      validSysEnv = lib.filterAttrs (_: v: v != "") sysEnv;
     in
     env // validSysEnv;
 

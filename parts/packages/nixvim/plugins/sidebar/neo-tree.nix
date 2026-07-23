@@ -15,6 +15,7 @@ in
       enable = true;
       settings = {
         hide_root_node = true;
+        log_to_file = false;
         close_if_last_window = false;
         default_component_configs = {
           indent = {
