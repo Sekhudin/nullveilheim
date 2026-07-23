@@ -39,6 +39,8 @@ in
         installSSHKeys = lib.hm.dag.entryAfter [ "installPackages" "sops-nix" ] ''
             set -euo pipefail
 
+            export GPG_TTY=$(tty)
+
             ${h.shell}
 
             install_ssh_key() {

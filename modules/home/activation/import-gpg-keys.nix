@@ -39,8 +39,6 @@ in
         importGPGKeys = lib.hm.dag.entryAfter [ "installSSHKeys" ] ''
           set -euo pipefail
 
-          export GPG_TTY="$(tty || true)"
-
           ${f.shell}
 
           import_key() {
