@@ -33,6 +33,9 @@ in
       branches = mkBranches prev.stdenv.hostPlatform.system;
       stable = branches.stable;
       unstable = branches.unstable;
+
+      vimPlugins = unstable.vimPlugins;
+      tree-sitter-grammars = stable.tree-sitter-grammars;
     in
     {
       inherit branches;
@@ -61,12 +64,12 @@ in
         };
       };
 
-      vimPlugins = unstable.vimPlugins.extend (
+      vimPlugins = vimPlugins.extend (
         _: __: {
         }
       );
 
-      tree-sitter-grammars = stable.tree-sitter-grammars // {
+      tree-sitter-grammars = tree-sitter-grammars // {
       };
     };
 }
