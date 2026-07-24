@@ -48,9 +48,7 @@
 
     nix = {
       settings = {
-        settings = {
-          trusted-users = [ "syaikhu" ];
-        };
+        trusted-users = [ "syaikhu" ];
       };
     };
   };
