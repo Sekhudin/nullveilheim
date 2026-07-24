@@ -2,19 +2,16 @@
   config,
   pkgs,
   lib,
-  osConfig,
-  extraLib,
   ...
 }:
 
 let
-  masterEnable = config.homeCoreModules.enable;
-  isStandalone = extraLib.isStandalone osConfig;
+  master = config.homeCoreModules;
 in
 {
   options.homeCoreModules.linux = { };
 
-  config = lib.mkIf (masterEnable && pkgs.stdenv.isLinux) {
+  config = lib.mkIf (master.enable && pkgs.stdenv.isLinux) {
     home = {
       packages =
         with pkgs;
@@ -25,7 +22,7 @@ in
           (writeScriptBin "copy" "xsel -ib")
           (writeScriptBin "paste" "xsel -ob")
         ]
-        ++ lib.optionals (!isStandalone) (
+        ++ lib.optionals (!master.enableStandalone) (
           with pkgs;
           [
             docker

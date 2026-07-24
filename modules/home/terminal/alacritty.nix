@@ -9,9 +9,9 @@
 let
   cfg = config.homeTerminalModules.alacritty;
   master = config.homeTerminalModules;
-  openGL = config.homeOpenGLModules;
+  openGL = config.homeCoreModules.openGL;
   masterEnable = master.enable;
-  openGLEnable = (openGL.enable && openGL.use != "default");
+  openGLEnable = (openGL.use != "default");
   isAlacritty = (master.use == "alacritty");
 
   themesColor = lib.genAttrs (lib.attrNames color.themes) (name: color.mkTheme name);

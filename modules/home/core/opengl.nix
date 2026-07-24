@@ -6,17 +6,11 @@
 }:
 
 let
-  cfg = config.homeOpenGLModules;
+  cfg = config.homeCoreModules.openGL;
   isOpenGL = (cfg.use != "default");
 in
 {
-  options.homeOpenGLModules = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
-      description = "enable openGL modules";
-      default = false;
-    };
-
+  options.homeCoreModules.openGL = {
     use = lib.mkOption {
       type = lib.types.enum [
         "default"
@@ -28,7 +22,7 @@ in
     };
   };
 
-  config = lib.mkIf (isOpenGL && cfg.enable) {
+  config = lib.mkIf isOpenGL {
     home = {
       packages = [
         pkgs.nixgl.${cfg.use}

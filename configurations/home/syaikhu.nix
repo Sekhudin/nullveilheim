@@ -3,8 +3,8 @@
   pkgs,
   lib,
   ezModules,
-  extraLib,
   osConfig,
+  extraLib,
   ...
 }:
 
@@ -34,6 +34,10 @@ in
 
   homeCoreModules = {
     enable = true;
+    enableStandalone = (extraLib.isStandalone osConfig);
+    openGL = {
+      use = "default";
+    };
   };
 
   homeProgramsModules = {
@@ -71,10 +75,5 @@ in
     enable = true;
     use = "ghostty";
     theme = "zenwritten_dark";
-  };
-
-  homeOpenGLModules = {
-    enable = true;
-    use = "default";
   };
 }
