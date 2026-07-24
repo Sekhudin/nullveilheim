@@ -27,7 +27,9 @@
     modulesDirectory = ../modules/nixos;
     configurationsDirectory = ../configurations/nixos;
     hosts = {
-      acer-swift.userHomeModules = [ "syaikhu" ];
+      acer-swift = {
+        userHomeModules = [ "syaikhu" ];
+      };
     };
   };
 
@@ -35,26 +37,32 @@
     modulesDirectory = ../modules/darwin;
     configurationsDirectory = ../configurations/darwin;
     hosts = {
-      mbp.userHomeModules = [ "syaikhu" ];
-    };
-  };
-
-  ezConfigs.home = {
-    modulesDirectory = ../modules/home;
-    configurationsDirectory = ../configurations/home;
-    users = {
-      syaikhu = {
-        standalone = {
-          enable = true;
-          pkgs = import inputs.nixpkgs {
-            inherit (inputs.self.nullveilheimConfigurations)
-              config
-              overlays
-              ;
-          };
-        };
+      mbp = {
+        userHomeModules = [ "syaikhu" ];
       };
     };
   };
+
+  ezConfigs.home =
+    let
+      standalone = {
+        enable = true;
+        pkgs = import inputs.nixpkgs {
+          inherit (inputs.self.nullveilheimConfigurations.nixpkgs)
+            config
+            overlays
+            ;
+        };
+      };
+    in
+    {
+      modulesDirectory = ../modules/home;
+      configurationsDirectory = ../configurations/home;
+      users = {
+        syaikhu = {
+          inherit standalone;
+        };
+      };
+    };
 
 }
