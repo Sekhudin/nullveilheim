@@ -2,19 +2,16 @@
   config,
   pkgs,
   lib,
-  osConfig,
-  extraLib,
   ...
 }:
 
 let
-  masterEnable = config.homeCoreModules.enable;
-  isStandalone = extraLib.isStandalone osConfig;
+  master = config.homeCoreModules;
 in
 {
   options.homeCoreModules.darwin = { };
 
-  config = lib.mkIf (masterEnable && pkgs.stdenv.isDarwin) {
+  config = lib.mkIf (master.enable && pkgs.stdenv.isDarwin) {
     home = {
       packages =
         with pkgs;
@@ -25,7 +22,7 @@ in
           (writeScriptBin "copy" "pbcopy")
           (writeScriptBin "paste" "pbpaste")
         ]
-        ++ lib.optionals (!isStandalone) (
+        ++ lib.optionals (!master.enableStandalone) (
           with pkgs;
           [
             docker

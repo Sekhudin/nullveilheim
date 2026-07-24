@@ -9,9 +9,9 @@
 let
   cfg = config.homeTerminalModules.ghostty;
   master = config.homeTerminalModules;
-  openGL = config.homeOpenGLModules;
+  openGL = config.homeCoreModules.openGL;
   masterEnable = master.enable;
-  openGLEnable = (openGL.enable && openGL.use != "default");
+  openGLEnable = (openGL.use != "default");
   isGhostty = (master.use == "ghostty");
 
   mkThemeGhostty = c: {

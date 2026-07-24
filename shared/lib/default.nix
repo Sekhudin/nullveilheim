@@ -9,12 +9,7 @@ in
   mkExtraLib =
     { lib }:
 
-    let
-      isStandalone = osConfig: osConfig == null;
-    in
     {
-      inherit isStandalone;
-
       activation = activation.mkExtraLib { };
 
       devshell = devshell.mkExtraLib { inherit lib; };
@@ -24,6 +19,8 @@ in
       sops = sops.mkExtraLib { inherit lib; };
 
       tmux = tmux.mkExtraLib { inherit lib; };
+
+      isStandalone = cfg: cfg == null || builtins.attrNames cfg == [ ];
 
       getHomeDir =
         {

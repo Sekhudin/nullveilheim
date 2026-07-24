@@ -8,9 +8,9 @@
 let
   cfg = config.homeProgramsModules.multimedia;
   master = config.homeProgramsModules;
-  openGL = config.homeOpenGLModules;
+  openGL = config.homeCoreModules.openGL;
   masterEnable = master.enable;
-  openGLEnable = (openGL.enable && openGL.use != "default");
+  openGLEnable = (openGL.use != "default");
 in
 {
   options.homeProgramsModules.multimedia = {
