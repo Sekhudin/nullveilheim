@@ -37,7 +37,9 @@ in
   options.autoModules = lib.mkOption {
     type = lib.types.lazyAttrsOf (
       lib.types.submodule {
-        options.dir = lib.mkOption { type = lib.types.path; };
+        options = {
+          dir = lib.mkOption { type = lib.types.path; };
+        };
       }
     );
     default = { };
