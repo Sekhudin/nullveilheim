@@ -1,18 +1,12 @@
 { config, lib, ... }:
 
 let
-  cfg = config.nixosDesktopModules.desktop;
-  isGnome = config.nixosDesktopModules.use == "gnome";
+  cfg = config.nixosDesktopModules.gnome;
   masterEnable = config.nixosDesktopModules.enable;
+  isGnome = config.nixosDesktopModules.use == "gnome";
 in
 {
-  options.nixosDesktopModules.desktop = {
-    gnome = lib.mkOption {
-      type = lib.types.attrs;
-      description = "gnome settings";
-      default = { };
-    };
-
+  options.nixosDesktopModules.gnome = {
     gdm = lib.mkOption {
       type = lib.types.attrs;
       description = "gdm settings";
@@ -24,23 +18,16 @@ in
       description = "xserver settings";
       default = { };
     };
+
+    settings = lib.mkOption {
+      type = lib.types.attrs;
+      description = "gnome settings";
+      default = { };
+    };
   };
 
   config = lib.mkIf (masterEnable && isGnome) {
     services = {
-      desktopManager = {
-        gnome = lib.mkMerge [
-          {
-            enable = true;
-            extraGSettingsOverrides = ''
-              [org.gnome.desktop.wm.preferences]
-              button-layout='appmenu:minimize,maximize,close'
-            '';
-          }
-          cfg.gnome
-        ];
-      };
-
       displayManager = {
         gdm = lib.mkMerge [
           {
@@ -60,6 +47,19 @@ in
         }
         cfg.xserver
       ];
+
+      desktopManager = {
+        gnome = lib.mkMerge [
+          {
+            enable = true;
+            extraGSettingsOverrides = ''
+              [org.gnome.desktop.wm.preferences]
+              button-layout='appmenu:minimize,maximize,close'
+            '';
+          }
+          cfg.settings
+        ];
+      };
     };
   };
 }

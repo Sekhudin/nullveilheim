@@ -24,20 +24,29 @@ in
   };
 
   config = lib.mkIf (masterEnable && cfg.enable) {
-    nix = lib.mkMerge [
-      {
-        gc = {
-          options = lib.mkDefault "--delete-older-than 7d";
-        };
+    nix = {
+      gc = {
+        options = lib.mkDefault "--delete-older-than 7d";
+      };
 
-        settings = {
+      settings = lib.mkMerge [
+        {
           experimental-features = [
             "nix-command"
             "flakes"
           ];
-        };
-      }
-      cfg.settings
-    ];
+          substituters = [
+            "https://hyprland.cachix.org"
+          ];
+          trusted-substituters = [
+            "https://hyprland.cachix.org"
+          ];
+          trusted-public-keys = [
+            "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+          ];
+        }
+        cfg.settings
+      ];
+    };
   };
 }
