@@ -44,6 +44,12 @@ in
           show_battery = false;
         };
       };
+
+      man = {
+        enable = false;
+        package = pkgs.man;
+        generateCaches = false;
+      };
     };
 
     home = {
