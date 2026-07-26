@@ -5,12 +5,6 @@ let
 in
 {
   imports = [
-    ./animation.nix
-    ./decoration.nix
-    ./general.nix
-    ./input.nix
-    ./monitor.nix
-    ./variable.nix
   ];
 
   config = lib.mkIf cfg.enable {
