@@ -2,8 +2,8 @@
 
 let
   cfg = config.nixosDesktopModules.gnome;
-  masterEnable = config.nixosDesktopModules.enable;
-  isGnome = config.nixosDesktopModules.use == "gnome";
+  master = config.nixosDesktopModules;
+  enableGnome = (master.enable && master.use == "gnome");
 in
 {
   options.nixosDesktopModules.gnome = {
@@ -26,7 +26,7 @@ in
     };
   };
 
-  config = lib.mkIf (masterEnable && isGnome) {
+  config = lib.mkIf enableGnome {
     services = {
       displayManager = {
         gdm = lib.mkMerge [
