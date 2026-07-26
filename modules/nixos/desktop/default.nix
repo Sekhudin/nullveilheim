@@ -10,8 +10,8 @@
   options.nixosDesktopModules = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      description = "enable desktop modules";
-      default = false;
+      description = "enable desktop";
+      default = true;
     };
 
     use = lib.mkOption {
@@ -22,5 +22,6 @@
       description = "choose wayland compositor";
       default = "gnome";
     };
+
   };
 }

@@ -1,26 +1,36 @@
 { config, lib, ... }:
 
 let
-  isHyprland = config.nixosDesktopModules.use == "hyprland";
-  masterEnable = config.nixosDesktopModules.enable;
+  cfg = config.nixosDesktopModules.hyprland;
+  master = config.nixosDesktopModules;
+  isHyprland = (master.enable && master.use == "hyprland");
 in
 {
   options.nixosDesktopModules.hyprland = {
     settings = lib.mkOption {
       type = lib.types.attrs;
-      description = "hyprland settings";
+      description = "gdm settings";
       default = { };
     };
   };
 
-  config = lib.mkIf (masterEnable && isHyprland) {
+  config = lib.mkIf isHyprland {
     programs = {
-      hyprland = {
-        enable = true;
-        withUWSM = true;
-        xwayland.enable = true;
-        systemd.setPath.enable = true;
-      };
+      hyprland = lib.mkMerge [
+        {
+          enable = true;
+          withUWSM = lib.mkDefault true;
+          xwayland = {
+            enable = lib.mkDefault true;
+          };
+          systemd = {
+            setPath = {
+              enable = lib.mkDefault true;
+            };
+          };
+        }
+        cfg.settings
+      ];
     };
   };
 }
