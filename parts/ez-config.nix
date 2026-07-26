@@ -48,7 +48,7 @@
     configurationsDirectory = ../configurations/home;
     users = {
       syaikhu = {
-        nameFunction = (host: "syaikhu_${host})");
+        nameFunction = (host: "syaikhu_${host}");
       };
     };
   };
