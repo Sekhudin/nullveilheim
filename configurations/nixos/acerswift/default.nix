@@ -71,6 +71,11 @@
     };
   };
 
+  nixosDesktopModules = {
+    enable = true;
+    use = "hyprland";
+  };
+
   nixosHardwareModules = {
     enable = true;
   };

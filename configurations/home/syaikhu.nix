@@ -10,6 +10,16 @@
 
 let
   selfPkgs = inputs.self.packages.${pkgs.stdenv.system};
+  enableConfig = path: lib.attrByPath path false osConfig;
+
+  enableHyprland = (
+    pkgs.stdenv.isLinux
+    && enableConfig [
+      "programs"
+      "hyprland"
+      "enable"
+    ]
+  );
 in
 {
   imports = lib.attrValues ezModules ++ [ ];
@@ -41,6 +51,9 @@ in
   };
 
   homeDesktopModules = {
+    hyprland = {
+      enable = enableHyprland;
+    };
   };
 
   homeProgramsModules = {
