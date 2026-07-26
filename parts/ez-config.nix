@@ -43,26 +43,9 @@
     };
   };
 
-  ezConfigs.home =
-    let
-      standalone = {
-        enable = true;
-        pkgs = import inputs.nixpkgs {
-          inherit (inputs.self.nullveilheimConfigurations.nixpkgs)
-            config
-            overlays
-            ;
-        };
-      };
-    in
-    {
-      modulesDirectory = ../modules/home;
-      configurationsDirectory = ../configurations/home;
-      users = {
-        syaikhu = {
-          inherit standalone;
-        };
-      };
-    };
+  ezConfigs.home = {
+    modulesDirectory = ../modules/home;
+    configurationsDirectory = ../configurations/home;
+  };
 
 }

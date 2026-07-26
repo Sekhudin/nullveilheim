@@ -60,6 +60,7 @@
         kernelModules = [ "kvm-intel" ];
       };
     };
+
     networking = {
       settings = {
         hostName = "acer-swift";
@@ -68,11 +69,6 @@
         };
       };
     };
-  };
-
-  nixosDesktopModules = {
-    enable = true;
-    use = "gnome";
   };
 
   nixosHardwareModules = {

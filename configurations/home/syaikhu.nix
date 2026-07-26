@@ -40,6 +40,10 @@ in
     };
   };
 
+  homeDesktopModules = {
+    inherit (osConfig.commonModules.desktop) gnome hyprland;
+  };
+
   homeProgramsModules = {
     enable = true;
     secrets = {
