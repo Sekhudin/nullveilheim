@@ -23,6 +23,13 @@ let
       "${config.sops.secrets."ssh_keys_${profile}_path".path}" \
       "${config.sops.secrets."ssh_keys_${profile}_private_key".path}"
   '';
+
+  entryList = [
+    "installPackages"
+    "sops-nix"
+    "reloadSystemd"
+    "onFilesChange"
+  ];
 in
 {
   options.activationModules.installSSHKeys = {
@@ -36,7 +43,7 @@ in
   config = lib.mkIf (masterEnable && cfg.enable) {
     home = {
       activation = {
-        installSSHKeys = lib.hm.dag.entryAfter [ "installPackages" "sops-nix" ] ''
+        installSSHKeys = lib.hm.dag.entryAfter entryList ''
             set -euo pipefail
 
             export GPG_TTY=$(tty)
