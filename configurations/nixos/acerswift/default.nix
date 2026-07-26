@@ -63,7 +63,7 @@
 
     networking = {
       settings = {
-        hostName = "acer-swift";
+        hostName = "acerswift";
         firewall = {
           allowedTCPPorts = [ 22 ];
         };

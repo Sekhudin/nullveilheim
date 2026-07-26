@@ -27,7 +27,7 @@
     modulesDirectory = ../modules/nixos;
     configurationsDirectory = ../configurations/nixos;
     hosts = {
-      acer-swift = {
+      acerswift = {
         userHomeModules = [ "syaikhu" ];
       };
     };
@@ -46,6 +46,11 @@
   ezConfigs.home = {
     modulesDirectory = ../modules/home;
     configurationsDirectory = ../configurations/home;
+    users = {
+      syaikhu = {
+        nameFunction = (host: "syaikhu_${host})");
+      };
+    };
   };
 
 }
