@@ -30,6 +30,13 @@ in
           })
 
           (mkBind {
+            type = "exec_cmd";
+            raw = true;
+            key = combos.mod "B";
+            dispatcher = "browser";
+          })
+
+          (mkBind {
             type = "submap";
             key = combos.alt "R";
             dispatcher = "resize";
