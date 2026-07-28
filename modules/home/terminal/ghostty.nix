@@ -29,8 +29,8 @@ let
   themeNames = lib.attrNames color.themes;
   themesColor = lib.genAttrs themeNames (name: color.mkTheme name);
 
+  themeColor = themesColor.${master.theme};
   themesGhostty = lib.genAttrs themeNames (name: mkThemeGhostty themesColor.${name});
-  colorTerminal = themesColor.${master.theme};
 in
 {
   options.homeTerminalModules.ghostty = {
@@ -79,13 +79,13 @@ in
     };
 
     xdg.configFile."ghostty/style.css".text = (
-      whenCustomWM ''
+      whenCustomWM "" ''
         window {
-            border: 2px solid ${colorTerminal.scheme.base08};
+            border: 2px solid ${themeColor.scheme.base08};
             border-radius: 8px;
             margin: 4px;
         }
-      '' ""
+      ''
     );
 
     xdg.desktopEntries = lib.mkIf openGLEnable {

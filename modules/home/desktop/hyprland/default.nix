@@ -1,5 +1,13 @@
-{ lib, ... }:
+{
+  config,
+  lib,
+  color,
+  ...
+}:
 
+let
+  themeNames = lib.attrNames color.themes;
+in
 {
   imports = [ ./core ];
 
@@ -8,6 +16,12 @@
       type = lib.types.bool;
       description = "enable hyprland modules";
       default = false;
+    };
+
+    theme = lib.mkOption {
+      type = lib.types.enum themeNames;
+      description = "theme settings";
+      default = config.homeCoreModules.theme;
     };
 
     bar = lib.mkOption {

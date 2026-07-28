@@ -1,8 +1,12 @@
 {
   lib,
+  color,
   ...
 }:
 
+let
+  themeNames = lib.attrNames color.themes;
+in
 {
   imports = [
     ./cross.nix
@@ -22,6 +26,12 @@
       type = lib.types.bool;
       description = "enable standalone";
       default = false;
+    };
+
+    theme = lib.mkOption {
+      type = lib.types.enum themeNames;
+      description = "theme settings";
+      default = builtins.elemAt themeNames 0;
     };
   };
 
