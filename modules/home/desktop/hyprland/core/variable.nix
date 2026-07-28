@@ -1,26 +1,25 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  extraLib,
+  ...
+}:
 
 let
   cfg = config.homeDesktopModules.hyprland;
-
-  terminal = {
-    _var = config.homeTerminalModules.use;
-  };
+  inherit (extraLib.hyprland) variables mkVar;
 in
 {
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {
-      settings = {
-        inherit terminal;
-
-        mod = {
-          _var = "SUPER";
-        };
-
-        browser = {
-          _var = "firefox";
-        };
-      };
+      settings = lib.mkMerge [
+        {
+          terminal = (mkVar config.homeTerminalModules.use);
+          browser = (mkVar "firefox");
+          editor = (mkVar "nvim");
+        }
+        variables
+      ];
     };
   };
 }
