@@ -7,10 +7,10 @@ in
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       settings.config = {
-        general = {
+        general = rec {
           border_size = 1;
           gaps_in = 4;
-          gaps_out = 4;
+          gaps_out = gaps_in;
           layout = "dwindle";
           snap = {
             enabled = false;

@@ -9,11 +9,10 @@
 
 let
   cfg = config.homeProgramsModules.tmux;
-  terminal = config.homeTerminalModules;
   masterEnable = config.homeProgramsModules.enable;
 
-  themesColor = lib.genAttrs (lib.attrNames color.themes) (name: color.mkTheme name);
-  colorTerminal = themesColor.${terminal.theme};
+  themeNames = lib.attrNames color.themes;
+  themeColor = (color.mkTheme cfg.theme);
 
   inherit (extraLib.tmux)
     mkWindow
@@ -93,6 +92,12 @@ in
       default = true;
     };
 
+    theme = lib.mkOption {
+      type = lib.types.enum themeNames;
+      description = "theme settings";
+      default = config.homeCoreModules.theme;
+    };
+
     workspaces = lib.mkOption {
       type = lib.types.attrs;
       description = "List of tmux workspaces configurations";
@@ -168,8 +173,8 @@ in
           extraConfig = ''
             set -g status off
 
-            set -g pane-border-style "${(mkTmuxColor colorTerminal.scheme.base08 "default")}"
-            set -g pane-active-border-style "${(mkTmuxColor colorTerminal.scheme.base08 "default")}"
+            set -g pane-border-style "${(mkTmuxColor themeColor.scheme.base08 "default")}"
+            set -g pane-active-border-style "${(mkTmuxColor themeColor.scheme.base08 "default")}"
             set -sg escape-time 10 
 
             set -g @continuum-boot on

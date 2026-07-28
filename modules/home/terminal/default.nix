@@ -1,4 +1,9 @@
-{ lib, color, ... }:
+{
+  config,
+  lib,
+  color,
+  ...
+}:
 
 let
   themeNames = lib.attrNames color.themes;
@@ -34,7 +39,7 @@ in
     theme = lib.mkOption {
       type = lib.types.enum themeNames;
       description = "theme settings";
-      default = builtins.elemAt themeNames 0;
+      default = config.homeCoreModules.theme;
     };
   };
 }

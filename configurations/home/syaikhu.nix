@@ -45,6 +45,7 @@ in
   homeCoreModules = {
     enable = true;
     enableStandalone = (extraLib.isStandalone osConfig);
+    theme = "zenwritten_dark";
     openGL = {
       use = "default";
     };
@@ -90,6 +91,6 @@ in
   homeTerminalModules = {
     enable = true;
     use = "ghostty";
-    theme = "zenwritten_dark";
+    enableCustomWM = enableHyprland;
   };
 }
