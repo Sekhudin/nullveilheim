@@ -43,6 +43,26 @@
           ];
         };
 
+      mkMonitor =
+        {
+          output,
+          mode ? "preferred",
+          position ? "auto",
+          scale ? 1,
+          settings ? { },
+        }:
+        lib.mkMerge [
+          {
+            inherit
+              output
+              mode
+              position
+              scale
+              ;
+          }
+          settings
+        ];
+
       mkComboKey =
         modifiers: key:
         if lib.length modifiers == 0 then
@@ -77,6 +97,7 @@
       inherit
         mkVar
         mkBind
+        mkMonitor
         variables
         keys
         combos

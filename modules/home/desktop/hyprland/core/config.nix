@@ -9,8 +9,8 @@ in
       settings.config = {
         general = {
           border_size = 1;
-          gaps_in = 5;
-          gaps_out = 20;
+          gaps_in = 4;
+          gaps_out = 4;
           layout = "dwindle";
           snap = {
             enabled = false;
@@ -18,7 +18,7 @@ in
         };
 
         decoration = {
-          rounding = 10;
+          rounding = 8;
           shadow = {
             enabled = true;
           };
@@ -98,7 +98,7 @@ in
         };
 
         cursor = {
-          invisible = true;
+          invisible = false;
         };
 
         ecosystem = {
