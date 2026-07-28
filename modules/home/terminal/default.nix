@@ -16,6 +16,12 @@ in
       default = false;
     };
 
+    enableCustomWM = lib.mkOption {
+      type = lib.types.bool;
+      description = "enable custom window manager";
+      default = false;
+    };
+
     use = lib.mkOption {
       type = lib.types.enum [
         "ghostty"
