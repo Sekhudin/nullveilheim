@@ -14,6 +14,8 @@ let
   openGLEnable = (openGL.use != "default");
   isGhostty = (master.use == "ghostty");
 
+  whenCustomWM = value: fallback: if master.enableCustomWM then value else fallback;
+
   mkThemeGhostty = c: {
     background = c.scheme.base00;
     foreground = c.scheme.base07;
@@ -76,13 +78,15 @@ in
       ];
     };
 
-    xdg.configFile."ghostty/style.css".text = ''
-      window {
-          border: 2px solid ${colorTerminal.scheme.base08};
-          border-radius: 8px;
-          margin: 4px;
-      }
-    '';
+    xdg.configFile."ghostty/style.css".text = (
+      whenCustomWM ''
+        window {
+            border: 2px solid ${colorTerminal.scheme.base08};
+            border-radius: 8px;
+            margin: 4px;
+        }
+      '' ""
+    );
 
     xdg.desktopEntries = lib.mkIf openGLEnable {
       "com.mitchellh.ghostty" = {
