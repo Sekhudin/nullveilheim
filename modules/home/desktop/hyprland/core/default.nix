@@ -5,6 +5,7 @@ let
 in
 {
   imports = [
+    ./bind.nix
     ./config.nix
     ./variable.nix
   ];

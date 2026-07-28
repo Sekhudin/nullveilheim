@@ -2,6 +2,7 @@ let
   activation = import ./activation.nix;
   devshell = import ./devshell.nix;
   nixvim = import ./nixvim.nix;
+  hyprland = import ./hyprland.nix;
   sops = import ./sops.nix;
   tmux = import ./tmux.nix;
 in
@@ -13,6 +14,8 @@ in
       activation = activation.mkExtraLib { };
 
       devshell = devshell.mkExtraLib { inherit lib; };
+
+      hyprland = hyprland.mkExtraLib { inherit lib; };
 
       nixvim = nixvim.mkExtraLib { inherit lib; };
 
