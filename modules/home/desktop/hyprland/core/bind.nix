@@ -7,7 +7,7 @@
 
 let
   cfg = config.homeDesktopModules.hyprland;
-  inherit (extraLib.hyprland) mkBind combos;
+  inherit (extraLib.hyprland) mkBind dsp combos;
 in
 {
   config = lib.mkIf cfg.enable {
@@ -16,30 +16,24 @@ in
         bind = [
           (mkBind {
             key = combos.mod "Q";
-            dispatcher = "hl.dsp.window.close()";
+            dispatcher = dsp.window.close { };
             flags = {
               locked = true;
             };
           })
 
           (mkBind {
-            type = "exec_cmd";
-            raw = true;
             key = combos.mod "RETURN";
-            dispatcher = "terminal";
+            dispatcher = dsp.exec_cmd {
+              cmd = "terminal";
+            };
           })
 
           (mkBind {
-            type = "exec_cmd";
-            raw = true;
             key = combos.mod "B";
-            dispatcher = "browser";
-          })
-
-          (mkBind {
-            type = "submap";
-            key = combos.alt "R";
-            dispatcher = "resize";
+            dispatcher = dsp.exec_cmd {
+              cmd = "browser";
+            };
           })
         ];
       };
