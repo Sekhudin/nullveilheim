@@ -9,8 +9,8 @@ let
   cfg = config.homeDesktopModules.hyprland;
   inherit (extraLib.hyprland) getVar;
 
-  active_border = getVar "active_border";
-  inactive_border = getVar "inactive_border";
+  active_border = (getVar "active_border");
+  inactive_border = (getVar "inactive_border");
 in
 {
   config = lib.mkIf cfg.enable {

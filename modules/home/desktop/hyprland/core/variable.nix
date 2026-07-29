@@ -24,14 +24,16 @@ in
     wayland.windowManager.hyprland = {
       settings = lib.mkMerge [
         {
-          layouts = (
-            mkVar [
-              "dwindle"
-              "master"
-              "scrolling"
-              "monocle"
-            ]
-          );
+          layouts = mkVar [
+            "dwindle"
+            "master"
+            "scrolling"
+            "monocle"
+          ];
+
+          submap = mkVar {
+            resize = "resize";
+          };
 
           cursor_theme = (mkVar "Bibata-Modern-Ice");
           cursor_size = (mkVar 24);
