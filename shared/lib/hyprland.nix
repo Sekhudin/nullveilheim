@@ -5,40 +5,42 @@
     let
       inherit (lib.generators) mkLuaInline;
 
+      mkLua = lib.generators.toLua { };
+
+      mkCall =
+        {
+          func,
+          args ? [ ],
+        }:
+        let
+          args' = builtins.filter (arg: arg != null) args;
+        in
+        "${func}(${lib.concatStringsSep ", " args'})";
+
+      mkCallAttrs =
+        {
+          func,
+          attrs ? { },
+        }:
+        let
+          attrs' = lib.filterAttrs (_: value: value != null) attrs;
+        in
+        if attrs' == { } then "${func}()" else "${func}(${mkLua attrs'})";
+
       mkVar = v: {
         _var = v;
       };
-
-      mkDispatcher =
-        {
-          type ? "plain",
-          raw ? false,
-          dispatcher,
-        }:
-        let
-          value = if raw then dispatcher else ''"${dispatcher}"'';
-        in
-        if type == "exec_cmd" then
-          mkLuaInline "hl.dsp.exec_cmd(${value})"
-        else if type == "submap" then
-          mkLuaInline "hl.dsp.submap(${value})"
-        else
-          mkLuaInline dispatcher;
 
       mkBind =
         {
           key,
           dispatcher,
-          type ? "plain",
-          raw ? false,
           flags ? { },
         }:
         {
           _args = [
             key
-            (mkDispatcher {
-              inherit type raw dispatcher;
-            })
+            (mkLuaInline dispatcher)
             flags
           ];
         };
@@ -92,15 +94,60 @@
         ctrl = mkComboKey [ keys.ctrl ];
         shift = mkComboKey [ keys.shift ];
       };
+
+      directions = {
+        left = "l";
+        right = "r";
+        up = "u";
+        down = "d";
+      };
+
+      dsp = {
+        exec_cmd =
+          p:
+          mkCall {
+            func = "hl.dsp.exec_cmd";
+            args = [
+              p.cmd
+              (p.rules or null)
+            ];
+          };
+
+        submap =
+          p:
+          mkCall {
+            func = "hl.dsp.submap";
+            args = [ p.name ];
+          };
+      };
+
+      dsp.window = {
+        close =
+          p:
+          mkCallAttrs {
+            func = "hl.dsp.window.close";
+            attrs = p;
+          };
+
+        fullscreen =
+          p:
+          mkCallAttrs {
+            func = "hl.dsp.window.fullscreen";
+            attrs = p;
+          };
+      };
     in
     {
       inherit
+        mkLuaInline
         mkVar
         mkBind
         mkMonitor
         variables
         keys
         combos
+        directions
+        dsp
         ;
     };
 }

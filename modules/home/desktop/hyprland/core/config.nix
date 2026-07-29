@@ -1,7 +1,13 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  extraLib,
+  ...
+}:
 
 let
   cfg = config.homeDesktopModules.hyprland;
+  inherit (extraLib.hyprland) mkLuaInline;
 in
 {
   config = lib.mkIf cfg.enable {
@@ -12,6 +18,11 @@ in
           gaps_in = 4;
           gaps_out = gaps_in;
           layout = "dwindle";
+          resize_on_border = true;
+          col = {
+            active_border = mkLuaInline "active_border";
+            inactive_border = mkLuaInline "inactive_border";
+          };
           snap = {
             enabled = false;
           };
@@ -19,6 +30,9 @@ in
 
         decoration = {
           rounding = 8;
+          active_opacity = 1.0;
+          inactive_opacity = 1.0;
+          dim_modal = true;
           shadow = {
             enabled = true;
           };
@@ -38,6 +52,9 @@ in
           kb_layout = "us";
           sensitivity = 0.0;
           follow_mouse = 1;
+          natural_scroll = true;
+          repeat_rate = 45;
+          repeat_delay = 300;
           touchpad = {
             natural_scroll = false;
             tap_to_click = true;

@@ -15,7 +15,6 @@ in
 
       color = sharedColors.mkColor {
         inherit lib;
-        theme = "carbon";
       };
 
       icon = sharedIcons.mkIcon;

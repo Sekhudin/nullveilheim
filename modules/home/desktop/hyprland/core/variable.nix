@@ -21,8 +21,8 @@ in
           browser = (mkVar "firefox");
           editor = (mkVar "nvim");
 
-          active_border = (mkVar themeColor.scheme.base09);
-          inacti_border = (mkVar themeColor.scheme.base08);
+          active_border = (mkVar themeColor.scheme.base08);
+          inactive_border = (mkVar themeColor.scheme.base00);
         }
         variables
       ];
