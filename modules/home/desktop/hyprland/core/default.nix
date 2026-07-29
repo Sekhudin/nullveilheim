@@ -5,7 +5,7 @@ let
 in
 {
   imports = [
-    ./bind.nix
+    ./binds
     ./config.nix
     ./env.nix
     ./monitor.nix
