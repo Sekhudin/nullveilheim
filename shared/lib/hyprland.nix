@@ -211,14 +211,14 @@
             config = {
               decoration = {
                 shadow = {
-                  enabled = true;
+                  enabled = false;
                 };
                 blur = {
-                  enabled = true;
+                  enabled = false;
                 };
               };
               animations = {
-                enabled = true;
+                enabled = false;
               };
             };
           in
