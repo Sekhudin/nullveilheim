@@ -139,6 +139,55 @@ in
               direction = directions.right;
             };
           })
+
+          # window resize
+          (mkBind {
+            key = combos.of [
+              keys.mod
+              keys.ctrl
+            ] "H";
+            dispatcher = dsp.window.resize {
+              x = -10;
+              y = 0;
+              relative = true;
+            };
+          })
+
+          (mkBind {
+            key = combos.of [
+              keys.mod
+              keys.ctrl
+            ] "J";
+            dispatcher = dsp.window.resize {
+              x = 0;
+              y = 10;
+              relative = true;
+            };
+          })
+
+          (mkBind {
+            key = combos.of [
+              keys.mod
+              keys.ctrl
+            ] "K";
+            dispatcher = dsp.window.resize {
+              x = 0;
+              y = -10;
+              relative = true;
+            };
+          })
+
+          (mkBind {
+            key = combos.of [
+              keys.mod
+              keys.ctrl
+            ] "L";
+            dispatcher = dsp.window.resize {
+              x = 10;
+              y = 0;
+              relative = true;
+            };
+          })
         ];
       };
     };
