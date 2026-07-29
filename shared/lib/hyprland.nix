@@ -37,6 +37,8 @@
         _var = value;
       };
 
+      getVar = name: mkLuaInline name;
+
       mkEnv = key: value: {
         _args = [
           key
@@ -55,6 +57,18 @@
             key
             (mkLuaInline dispatcher)
             flags
+          ];
+        };
+
+      mkSubmap =
+        {
+          name,
+          lua,
+        }:
+        {
+          _args = [
+            name
+            (mkLuaInline (mkLuaFunc lua))
           ];
         };
 
@@ -243,12 +257,12 @@
     in
     {
       inherit
-        mkLuaInline
-        mkLuaFunc
         mkVar
         mkEnv
         mkBind
+        mkSubmap
         mkMonitor
+        getVar
         variables
         keys
         combos

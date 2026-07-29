@@ -7,21 +7,21 @@
 
 let
   cfg = config.homeDesktopModules.hyprland;
-  inherit (extraLib.hyprland) mkLuaInline mkEnv;
+  inherit (extraLib.hyprland) getVar mkEnv;
 
-  cursorTheme = (mkLuaInline "cursor_theme");
-  cursorSize = (mkLuaInline "cursor_size");
+  cursor_theme = (getVar "cursor_theme");
+  cursor_size = (getVar "cursor_size");
 in
 {
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       settings = {
         env = [
-          (mkEnv "HYPRCURSOR_THEME" cursorTheme)
-          (mkEnv "HYPRCURSOR_SIZE" cursorSize)
+          (mkEnv "HYPRCURSOR_THEME" cursor_theme)
+          (mkEnv "HYPRCURSOR_SIZE" cursor_size)
 
-          (mkEnv "XCURSOR_THEME" cursorTheme)
-          (mkEnv "XCURSOR_SIZE" cursorSize)
+          (mkEnv "XCURSOR_THEME" cursor_theme)
+          (mkEnv "XCURSOR_SIZE" cursor_size)
         ];
       };
     };

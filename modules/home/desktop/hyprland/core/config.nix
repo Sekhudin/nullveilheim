@@ -7,7 +7,10 @@
 
 let
   cfg = config.homeDesktopModules.hyprland;
-  inherit (extraLib.hyprland) mkLuaInline;
+  inherit (extraLib.hyprland) getVar;
+
+  active_border = getVar "active_border";
+  inactive_border = getVar "inactive_border";
 in
 {
   config = lib.mkIf cfg.enable {
@@ -20,8 +23,10 @@ in
           layout = "dwindle";
           resize_on_border = true;
           col = {
-            active_border = mkLuaInline "active_border";
-            inactive_border = mkLuaInline "inactive_border";
+            inherit
+              active_border
+              inactive_border
+              ;
           };
           snap = {
             enabled = false;
