@@ -56,7 +56,7 @@ in
           repeat_rate = 45;
           repeat_delay = 300;
           touchpad = {
-            natural_scroll = false;
+            natural_scroll = true;
             tap_to_click = true;
           };
           touchdevice = {

@@ -23,6 +23,9 @@ in
 
           active_border = (mkVar themeColor.scheme.base08);
           inactive_border = (mkVar themeColor.scheme.base00);
+
+          cursor_theme = (mkVar "Bibata-Modern-Ice");
+          cursor_size = (mkVar 24);
         }
         variables
       ];

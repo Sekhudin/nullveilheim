@@ -27,8 +27,15 @@
         in
         if attrs' == { } then "${func}()" else "${func}(${mkLua attrs'})";
 
-      mkVar = v: {
-        _var = v;
+      mkVar = value: {
+        _var = value;
+      };
+
+      mkEnv = key: value: {
+        _args = [
+          key
+          value
+        ];
       };
 
       mkBind =
@@ -141,6 +148,7 @@
       inherit
         mkLuaInline
         mkVar
+        mkEnv
         mkBind
         mkMonitor
         variables

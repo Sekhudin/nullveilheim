@@ -7,6 +7,7 @@ in
   imports = [
     ./bind.nix
     ./config.nix
+    ./env.nix
     ./monitor.nix
     ./variable.nix
   ];
