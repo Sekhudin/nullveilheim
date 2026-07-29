@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   lib,
   extraLib,
@@ -15,12 +14,6 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    home = {
-      packages = with pkgs; [
-        bibata-cursors
-      ];
-    };
-
     wayland.windowManager.hyprland = {
       settings = {
         env = [

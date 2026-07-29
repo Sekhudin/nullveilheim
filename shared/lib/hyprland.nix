@@ -7,6 +7,12 @@
 
       mkLua = lib.generators.toLua { };
 
+      mkLuaFunc = lua: ''
+        function()
+          ${lua}
+        end
+      '';
+
       mkCall =
         {
           func,
@@ -120,6 +126,13 @@
             ];
           };
 
+        focus =
+          p:
+          mkCallAttrs {
+            func = "hl.dsp.focus";
+            attrs = p;
+          };
+
         submap =
           p:
           mkCall {
@@ -136,12 +149,89 @@
             attrs = p;
           };
 
+        float =
+          p:
+          mkCallAttrs {
+            func = "hl.dsp.window.float";
+            attrs = p;
+          };
+
         fullscreen =
           p:
           mkCallAttrs {
             func = "hl.dsp.window.fullscreen";
             attrs = p;
           };
+
+        move =
+          p:
+          mkCallAttrs {
+            func = "hl.dsp.window.move";
+            attrs = p;
+          };
+
+        swap =
+          p:
+          mkCallAttrs {
+            func = "hl.dsp.window.swap";
+            attrs = p;
+          };
+      };
+
+      dsp.extra = {
+        layout_toggle =
+          p:
+          mkLuaFunc ''
+            local workspace =
+                hl.get_active_special_workspace()
+                or hl.get_active_workspace()
+
+            if not workspace then
+                return
+            end
+
+            local next_layout = ${p.var_layouts}[1]
+
+            for i, layout in ipairs(${p.var_layouts}) do
+                if layout == workspace.tiled_layout then
+                    next_layout = ${p.var_layouts}[(i % #${p.var_layouts}) + 1]
+                    break
+                end
+            end
+
+            hl.workspace_rule({
+                workspace = tostring(workspace.special and workspace.name or workspace.id),
+                layout = next_layout,
+            })
+          '';
+
+        zen_mode =
+          p:
+          let
+            config = {
+              decoration = {
+                shadow = {
+                  enabled = true;
+                };
+                blur = {
+                  enabled = true;
+                };
+              };
+              animations = {
+                enabled = true;
+              };
+            };
+          in
+          mkLuaFunc ''
+            local zen_mode = (hl.get_config("animations.enabled") == false)
+
+            if zen_mode then
+                hl.exec_cmd("hyprctl reload")
+                return
+            end
+
+            hl.config(${mkLua (p // config)})
+          '';
       };
     in
     {

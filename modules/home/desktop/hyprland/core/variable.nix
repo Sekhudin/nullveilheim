@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   lib,
   extraLib,
@@ -14,18 +15,33 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
+    home = {
+      packages = with pkgs; [
+        bibata-cursors
+      ];
+    };
+
     wayland.windowManager.hyprland = {
       settings = lib.mkMerge [
         {
-          terminal = (mkVar config.homeTerminalModules.use);
-          browser = (mkVar "firefox");
-          editor = (mkVar "nvim");
+          layouts = (
+            mkVar [
+              "dwindle"
+              "master"
+              "scrolling"
+              "monocle"
+            ]
+          );
+
+          cursor_theme = (mkVar "Bibata-Modern-Ice");
+          cursor_size = (mkVar 24);
 
           active_border = (mkVar themeColor.scheme.base08);
           inactive_border = (mkVar themeColor.scheme.base00);
 
-          cursor_theme = (mkVar "Bibata-Modern-Ice");
-          cursor_size = (mkVar 24);
+          terminal = (mkVar config.homeTerminalModules.use);
+          browser = (mkVar "firefox");
+          editor = (mkVar "nvim");
         }
         variables
       ];
