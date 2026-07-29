@@ -170,6 +170,13 @@
             attrs = p;
           };
 
+        resize =
+          p:
+          mkCallAttrs {
+            func = "hl.dsp.window.resize";
+            attrs = p;
+          };
+
         swap =
           p:
           mkCallAttrs {
