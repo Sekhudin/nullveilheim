@@ -244,6 +244,7 @@
     {
       inherit
         mkLuaInline
+        mkLuaFunc
         mkVar
         mkEnv
         mkBind

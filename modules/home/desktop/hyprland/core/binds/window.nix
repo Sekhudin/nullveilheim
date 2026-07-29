@@ -72,6 +72,9 @@ in
               y = 0;
               relative = true;
             };
+            flags = {
+              repeating = true;
+            };
           })
 
           (mkBind {
@@ -83,6 +86,9 @@ in
               x = 0;
               y = 10;
               relative = true;
+            };
+            flags = {
+              repeating = true;
             };
           })
 
@@ -96,6 +102,9 @@ in
               y = -10;
               relative = true;
             };
+            flags = {
+              repeating = true;
+            };
           })
 
           (mkBind {
@@ -107,6 +116,9 @@ in
               x = 10;
               y = 0;
               relative = true;
+            };
+            flags = {
+              repeating = true;
             };
           })
         ];
