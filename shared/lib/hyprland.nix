@@ -22,8 +22,9 @@
         }:
         let
           args' = builtins.filter (arg: arg != null) args;
+          luaArgs = map mkLua args';
         in
-        "${func}(${lib.concatStringsSep ", " args'})";
+        "${func}(${lib.concatStringsSep ", " luaArgs})";
 
       mkCallAttrs =
         {
@@ -56,7 +57,7 @@
         }:
         {
           _args = [
-            key
+            (mkLuaInline key)
             (mkLuaInline dispatcher)
             flags
           ];
@@ -99,25 +100,37 @@
       mkSubmap =
         {
           name,
-          binds,
+          bind,
           escape ? true,
         }:
+
+        let
+          bind' = if builtins.isList bind then lib.concatStringsSep "\n" bind else bind;
+        in
         {
           _args = [
             name
             (mkLuaInline (
               mkLuaFunc (
                 if !escape then
-                  binds
+                  bind'
                 else
                   ''
-                    ${binds}
+                    ${bind'}
                     hl.bind("escape", hl.dsp.submap("reset"))
                   ''
               )
             ))
           ];
         };
+
+      mkSubmapBind =
+        {
+          key,
+          dispatcher,
+          flags ? { },
+        }:
+        "hl.bind(${key}, ${dispatcher}, ${mkLua flags})";
 
       mkMonitor =
         {
@@ -142,12 +155,12 @@
       mkComboKey =
         modifiers: key:
         if lib.length modifiers == 0 then
-          mkLuaInline (mkLuaStr key)
+          mkLuaStr key
         else
           let
             prefix = lib.concatStringsSep ''.. " + " .. '' modifiers;
           in
-          mkLuaInline ''${prefix} .. " + ${key}"'';
+          ''${prefix} .. " + ${key}"'';
 
       variables = {
         mod = (mkVar "SUPER");
@@ -289,6 +302,7 @@
         layout_toggle =
           p:
           mkLuaFunc ''
+            local layouts = ${mkLua p.layouts}
             local workspace =
                 hl.get_active_special_workspace()
                 or hl.get_active_workspace()
@@ -297,11 +311,11 @@
                 return
             end
 
-            local next_layout = ${p.var_layouts}[1]
+            local next_layout = layouts[1]
 
-            for i, layout in ipairs(${p.var_layouts}) do
+            for i, layout in ipairs(layouts) do
                 if layout == workspace.tiled_layout then
-                    next_layout = ${p.var_layouts}[(i % #${p.var_layouts}) + 1]
+                    next_layout = layouts[(i % #layouts) + 1]
                     break
                 end
             end
@@ -349,6 +363,7 @@
         mkBind
         mkWorkspaceBind
         mkSubmap
+        mkSubmapBind
         mkMonitor
         getVar
         variables

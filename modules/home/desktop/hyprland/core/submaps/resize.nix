@@ -10,13 +10,13 @@ let
   inherit (extraLib.hyprland)
     mkBind
     mkSubmap
+    mkSubmapBind
     getVar
-    combos
     dsp
+    combos
     ;
 
-  _var_resize = "submaps.resize";
-  resize = (getVar _var_resize);
+  resize = (getVar "submaps.resize");
 in
 {
   config = lib.mkIf cfg.enable {
@@ -26,7 +26,7 @@ in
           (mkBind {
             key = combos.alt "R";
             dispatcher = dsp.submap {
-              name = _var_resize;
+              name = resize;
             };
           })
         ];
@@ -35,12 +35,55 @@ in
           (mkSubmap {
             name = resize;
             escape = true;
-            binds = ''
-              hl.bind("H", hl.dsp.window.resize({ x = -10, y = 0, relative = true}), { repeating = true })
-              hl.bind("J", hl.dsp.window.resize({ x = 0, y = 10, relative = true}), { repeating = true })
-              hl.bind("K", hl.dsp.window.resize({ x = 0, y = -10, relative = true}), { repeating = true })
-              hl.bind("L", hl.dsp.window.resize({ x = 10, y = 0, relative = true}), { repeating = true })
-            '';
+            bind = [
+              (mkSubmapBind {
+                key = combos.plain "H";
+                dispatcher = dsp.window.resize {
+                  x = -10;
+                  y = 0;
+                  relative = true;
+                };
+                flags = {
+                  repeating = true;
+                };
+              })
+
+              (mkSubmapBind {
+                key = combos.plain "J";
+                dispatcher = dsp.window.resize {
+                  x = 0;
+                  y = 10;
+                  relative = true;
+                };
+                flags = {
+                  repeating = true;
+                };
+              })
+
+              (mkSubmapBind {
+                key = combos.plain "K";
+                dispatcher = dsp.window.resize {
+                  x = 0;
+                  y = -10;
+                  relative = true;
+                };
+                flags = {
+                  repeating = true;
+                };
+              })
+
+              (mkSubmapBind {
+                key = combos.plain "L";
+                dispatcher = dsp.window.resize {
+                  x = 10;
+                  y = 0;
+                  relative = true;
+                };
+                flags = {
+                  repeating = true;
+                };
+              })
+            ];
           })
         ];
       };

@@ -52,7 +52,12 @@ in
           (mkBind {
             key = combos.mod "SPACE";
             dispatcher = dsp.extra.layout_toggle {
-              var_layouts = "layouts";
+              layouts = [
+                "dwindle"
+                "master"
+                "scrolling"
+                "monocle"
+              ];
             };
           })
 

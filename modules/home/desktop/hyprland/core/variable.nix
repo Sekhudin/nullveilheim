@@ -37,6 +37,7 @@ in
           ];
 
           submaps = mkVar {
+            monitor = "monitor";
             resize = "resize";
           };
 
