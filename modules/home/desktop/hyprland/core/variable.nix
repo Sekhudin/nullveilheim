@@ -29,13 +29,6 @@ in
             hdmia_1 = "HDMI-A-1";
           };
 
-          layouts = mkVar [
-            "dwindle"
-            "master"
-            "scrolling"
-            "monocle"
-          ];
-
           submaps = mkVar {
             monitor = "monitor";
             resize = "resize";

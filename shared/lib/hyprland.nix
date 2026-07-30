@@ -5,6 +5,8 @@
     let
       inherit (lib.generators) mkLuaInline;
 
+      mergeAttrs = attrs: lib.foldl' lib.recursiveUpdate { } attrs;
+
       mkLua = lib.generators.toLua { };
 
       mkLuaStr = value: ''"${value}"'';
@@ -140,7 +142,7 @@
           scale ? 1,
           settings ? { },
         }:
-        lib.mkMerge [
+        mergeAttrs [
           {
             inherit
               output
@@ -162,14 +164,30 @@
           in
           ''${prefix} .. " + ${key}"'';
 
-      variables = {
+      var_keys = {
         mod = (mkVar "SUPER");
         alt = (mkVar "ALT");
         ctrl = (mkVar "CTRL");
         shift = (mkVar "SHIFT");
       };
 
-      keys = lib.mapAttrs (name: _: name) variables;
+      var_mouse = mkVar {
+        left = "mouse:272";
+        right = "mouse:273";
+        middle = "mouse:274";
+        back = "mouse:275";
+        forward = "mouse:276";
+      };
+
+      variables = mergeAttrs [
+        {
+          mouse = var_mouse;
+        }
+        var_keys
+      ];
+
+      keys = lib.mapAttrs (name: _: name) var_keys;
+      mouse = lib.mapAttrs (name: _: name) var_mouse._var;
 
       combos = {
         plain = mkComboKey [ ];
@@ -375,6 +393,7 @@
         getVar
         variables
         keys
+        mouse
         combos
         directions
         dsp
