@@ -24,6 +24,11 @@ in
     wayland.windowManager.hyprland = {
       settings = lib.mkMerge [
         {
+          monitors = mkVar {
+            edp_1 = "eDP-1";
+            hdmia_1 = "HDMI-A-1";
+          };
+
           layouts = mkVar [
             "dwindle"
             "master"
@@ -31,7 +36,7 @@ in
             "monocle"
           ];
 
-          submap = mkVar {
+          submaps = mkVar {
             resize = "resize";
           };
 
