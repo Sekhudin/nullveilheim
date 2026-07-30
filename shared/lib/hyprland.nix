@@ -200,6 +200,13 @@
             ];
           };
 
+        exit =
+          _:
+          mkCall {
+            func = "hl.dsp.exit";
+            args = [ ];
+          };
+
         focus =
           p:
           mkCallAttrs {
