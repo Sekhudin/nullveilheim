@@ -15,7 +15,7 @@ let
     dsp
     ;
 
-  _var_resize = "submap.resize";
+  _var_resize = "submaps.resize";
   resize = (getVar _var_resize);
 in
 {
