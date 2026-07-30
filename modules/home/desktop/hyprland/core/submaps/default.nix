@@ -1,5 +1,8 @@
 { ... }:
 
 {
-  imports = [ ./resize.nix ];
+  imports = [
+    ./monitor.nix
+    ./resize.nix
+  ];
 }

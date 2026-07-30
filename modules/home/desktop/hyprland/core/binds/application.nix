@@ -9,9 +9,13 @@ let
   cfg = config.homeDesktopModules.hyprland;
   inherit (extraLib.hyprland)
     mkBind
+    getVar
     dsp
     combos
     ;
+
+  terminal = (getVar "terminal");
+  browser = (getVar "browser");
 in
 {
   config = lib.mkIf cfg.enable {
@@ -21,14 +25,14 @@ in
           (mkBind {
             key = combos.mod "RETURN";
             dispatcher = dsp.exec_cmd {
-              cmd = "terminal";
+              cmd = terminal;
             };
           })
 
           (mkBind {
             key = combos.mod "B";
             dispatcher = dsp.exec_cmd {
-              cmd = "browser";
+              cmd = browser;
             };
           })
         ];
