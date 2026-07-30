@@ -16,6 +16,7 @@ in
 {
   imports = [
     ./application.nix
+    ./mouse.nix
     ./session.nix
     ./window.nix
     ./workspace.nix

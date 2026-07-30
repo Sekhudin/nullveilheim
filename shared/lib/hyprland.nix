@@ -42,6 +42,18 @@
         _var = value;
       };
 
+      mkAttrVarRef =
+        {
+          variables,
+          select ? null,
+        }:
+        let
+          mkRef =
+            path: value:
+            if lib.isAttrs value then lib.mapAttrs (name: value: mkRef "${path}.${name}" value) value else path;
+        in
+        if select == null then variables else mkRef select variables.${select}._var;
+
       getVar = name: mkLuaInline name;
 
       mkEnv = key: value: {
@@ -162,32 +174,34 @@
           let
             prefix = lib.concatStringsSep ''.. " + " .. '' modifiers;
           in
-          ''${prefix} .. " + ${key}"'';
+          if key == null then prefix else ''${prefix} .. " + ${key}"'';
 
-      var_keys = {
-        mod = (mkVar "SUPER");
-        alt = (mkVar "ALT");
-        ctrl = (mkVar "CTRL");
-        shift = (mkVar "SHIFT");
+      variables = {
+        mouse = mkVar {
+          left = "mouse:272";
+          right = "mouse:273";
+          middle = "mouse:274";
+          back = "mouse:275";
+          forward = "mouse:276";
+        };
+
+        keys = mkVar {
+          mod = "SUPER";
+          alt = "ALT";
+          ctrl = "CTRL";
+          shift = "SHIFT";
+        };
       };
 
-      var_mouse = mkVar {
-        left = "mouse:272";
-        right = "mouse:273";
-        middle = "mouse:274";
-        back = "mouse:275";
-        forward = "mouse:276";
+      keys = mkAttrVarRef {
+        inherit variables;
+        select = "keys";
       };
 
-      variables = mergeAttrs [
-        {
-          mouse = var_mouse;
-        }
-        var_keys
-      ];
-
-      keys = lib.mapAttrs (name: _: name) var_keys;
-      mouse = lib.mapAttrs (name: _: name) var_mouse._var;
+      mouse = mkAttrVarRef {
+        inherit variables;
+        select = "mouse";
+      };
 
       combos = {
         plain = mkComboKey [ ];
@@ -248,6 +262,13 @@
           mkCallAttrs {
             func = "hl.dsp.window.close";
             attrs = p;
+          };
+
+        drag =
+          _:
+          mkCall {
+            func = "hl.dsp.window.drag";
+            args = [ ];
           };
 
         float =

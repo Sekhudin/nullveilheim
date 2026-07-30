@@ -61,8 +61,13 @@ in
           repeat_rate = 45;
           repeat_delay = 300;
           touchpad = {
+            disable_while_typing = true;
+            clickfinger_behavior = false;
             natural_scroll = true;
             tap_to_click = true;
+            tap_and_drag = true;
+            drag_lock = 2;
+            middle_button_emulation = false;
           };
           touchdevice = {
             enabled = true;
@@ -105,6 +110,7 @@ in
 
         binds = {
           pass_mouse_when_bound = false;
+          drag_threshold = 10;
         };
 
         xwayland = {
