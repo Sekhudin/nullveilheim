@@ -20,6 +20,52 @@ in
     wayland.windowManager.hyprland = {
       settings = {
         bind = [
+          # focus navigation
+          (mkBind {
+            key = combos.mod "N";
+            dispatcher = dsp.focus {
+              direction = "+1";
+            };
+          })
+
+          (mkBind {
+            key = combos.of [
+              keys.mod
+              keys.shift
+            ] "N";
+            dispatcher = dsp.focus {
+              direction = "-1";
+            };
+          })
+
+          (mkBind {
+            key = combos.mod "H";
+            dispatcher = dsp.focus {
+              direction = directions.left;
+            };
+          })
+
+          (mkBind {
+            key = combos.mod "J";
+            dispatcher = dsp.focus {
+              direction = directions.down;
+            };
+          })
+
+          (mkBind {
+            key = combos.mod "K";
+            dispatcher = dsp.focus {
+              direction = directions.up;
+            };
+          })
+
+          (mkBind {
+            key = combos.mod "L";
+            dispatcher = dsp.focus {
+              direction = directions.right;
+            };
+          })
+
           # window swap
           (mkBind {
             key = combos.of [
