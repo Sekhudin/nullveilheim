@@ -22,23 +22,6 @@ in
         bind = [
           # focus navigation
           (mkBind {
-            key = combos.mod "N";
-            dispatcher = dsp.focus {
-              direction = "+1";
-            };
-          })
-
-          (mkBind {
-            key = combos.of [
-              keys.mod
-              keys.shift
-            ] "N";
-            dispatcher = dsp.focus {
-              direction = "-1";
-            };
-          })
-
-          (mkBind {
             key = combos.mod "H";
             dispatcher = dsp.focus {
               direction = directions.left;
