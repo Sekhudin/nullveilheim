@@ -62,6 +62,40 @@
           ];
         };
 
+      mkWorkspaceBind =
+        {
+          count,
+          extraBind ? [ ],
+        }:
+        (lib.flatten (
+          lib.genList (
+            i:
+            let
+              workspace = i + 1;
+              key = toString workspace;
+            in
+            [
+              (mkBind {
+                key = combos.mod key;
+                dispatcher = dsp.focus {
+                  inherit workspace;
+                };
+              })
+
+              (mkBind {
+                key = combos.of [
+                  keys.mod
+                  keys.shift
+                ] key;
+                dispatcher = dsp.window.move {
+                  inherit workspace;
+                };
+              })
+            ]
+          ) count
+        ))
+        ++ extraBind;
+
       mkSubmap =
         {
           name,
@@ -214,6 +248,43 @@
           };
       };
 
+      dsp.workspace = {
+        change_id =
+          p:
+          mkCallAttrs {
+            func = "hl.dsp.workspace.change_id";
+            attrs = p;
+          };
+
+        move =
+          p:
+          mkCallAttrs {
+            func = "hl.dsp.workspace.move";
+            attrs = p;
+          };
+
+        rename =
+          p:
+          mkCallAttrs {
+            func = "hl.dsp.workspace.rename";
+            attrs = p;
+          };
+
+        swap_monitors =
+          p:
+          mkCallAttrs {
+            func = "hl.dsp.workspace.swap_monitors";
+            attrs = p;
+          };
+
+        toggle_special =
+          p:
+          mkCallAttrs {
+            func = "hl.dsp.workspace.toggle_special";
+            attrs = p;
+          };
+      };
+
       dsp.extra = {
         layout_toggle =
           p:
@@ -276,6 +347,7 @@
         mkVar
         mkEnv
         mkBind
+        mkWorkspaceBind
         mkSubmap
         mkMonitor
         getVar
