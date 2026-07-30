@@ -7,6 +7,8 @@
 
       mkLua = lib.generators.toLua { };
 
+      mkLuaStr = value: ''"${value}"'';
+
       mkLuaFunc = lua: ''
         function()
           ${lua}
@@ -63,12 +65,23 @@
       mkSubmap =
         {
           name,
-          lua,
+          binds,
+          escape ? true,
         }:
         {
           _args = [
             name
-            (mkLuaInline (mkLuaFunc lua))
+            (mkLuaInline (
+              mkLuaFunc (
+                if !escape then
+                  binds
+                else
+                  ''
+                    ${binds}
+                    hl.bind("escape", hl.dsp.submap("reset"))
+                  ''
+              )
+            ))
           ];
         };
 
@@ -95,7 +108,7 @@
       mkComboKey =
         modifiers: key:
         if lib.length modifiers == 0 then
-          mkLuaInline ''"${key}"''
+          mkLuaInline (mkLuaStr key)
         else
           let
             prefix = lib.concatStringsSep ''.. " + " .. '' modifiers;
@@ -151,7 +164,9 @@
           p:
           mkCall {
             func = "hl.dsp.submap";
-            args = [ p.name ];
+            args = [
+              p.name
+            ];
           };
       };
 
@@ -257,6 +272,7 @@
     in
     {
       inherit
+        mkLuaStr
         mkVar
         mkEnv
         mkBind

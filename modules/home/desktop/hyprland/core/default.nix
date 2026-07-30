@@ -6,6 +6,7 @@ in
 {
   imports = [
     ./binds
+    ./submaps
     ./config.nix
     ./env.nix
     ./monitor.nix
