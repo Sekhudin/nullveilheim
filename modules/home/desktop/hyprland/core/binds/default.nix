@@ -11,7 +11,6 @@ let
     mkBind
     dsp
     combos
-    directions
     ;
 in
 {
@@ -26,18 +25,6 @@ in
     wayland.windowManager.hyprland = {
       settings = {
         bind = [
-          (mkBind {
-            key = combos.mod "SPACE";
-            dispatcher = dsp.extra.layout_toggle {
-              var_layouts = "layouts";
-            };
-          })
-
-          (mkBind {
-            key = combos.mod "Z";
-            dispatcher = dsp.extra.zen_mode { };
-          })
-
           (mkBind {
             key = combos.mod "Q";
             dispatcher = dsp.window.close { };
@@ -62,33 +49,16 @@ in
             };
           })
 
-          # focus navigation
           (mkBind {
-            key = combos.mod "H";
-            dispatcher = dsp.focus {
-              direction = directions.left;
+            key = combos.mod "SPACE";
+            dispatcher = dsp.extra.layout_toggle {
+              var_layouts = "layouts";
             };
           })
 
           (mkBind {
-            key = combos.mod "J";
-            dispatcher = dsp.focus {
-              direction = directions.down;
-            };
-          })
-
-          (mkBind {
-            key = combos.mod "K";
-            dispatcher = dsp.focus {
-              direction = directions.up;
-            };
-          })
-
-          (mkBind {
-            key = combos.mod "L";
-            dispatcher = dsp.focus {
-              direction = directions.right;
-            };
+            key = combos.mod "Z";
+            dispatcher = dsp.extra.zen_mode { };
           })
         ];
       };
