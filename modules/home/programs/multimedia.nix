@@ -31,6 +31,12 @@ in
       description = "mpv settings";
       default = { };
     };
+
+    yazi = lib.mkOption {
+      type = lib.types.attrs;
+      description = "mpv settings";
+      default = { };
+    };
   };
 
   config = lib.mkIf (masterEnable && cfg.enable) {
@@ -87,6 +93,16 @@ in
           };
         }
         cfg.mpv
+      ];
+
+      yazi = lib.mkMerge [
+        {
+          enable = true;
+          enableFishIntegration = config.programs.fish.enable;
+          enableZshIntegration = config.programs.zsh.enable;
+          settings = { };
+        }
+        cfg.yazi
       ];
     };
 
