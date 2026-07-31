@@ -14,7 +14,7 @@ let
   openGLEnable = (openGL.use != "default");
   isAlacritty = (master.use == "alacritty");
 
-  themeColor = (color.mkTheme cfg.theme);
+  theme = (color.mkTheme cfg.theme);
 in
 {
   options.homeTerminalModules.alacritty = {
@@ -68,16 +68,16 @@ in
 
             colors = {
               primary = {
-                background = themeColor.scheme.base00;
-                foreground = themeColor.scheme.base07;
+                background = theme.scheme.base00;
+                foreground = theme.scheme.base07;
               };
               cursor = {
-                cursor = themeColor.scheme.base06;
-                text = themeColor.scheme.base07;
+                cursor = theme.scheme.base06;
+                text = theme.scheme.base07;
               };
               selection = {
-                text = themeColor.scheme.base0F;
-                background = themeColor.scheme.base08;
+                text = theme.scheme.base0F;
+                background = theme.scheme.base08;
               };
             };
 

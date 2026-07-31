@@ -31,6 +31,10 @@ in
           extraArgs = "--keep-since 4d --keep 1";
         };
       };
+
+      fish = {
+        enable = true;
+      };
     };
 
     environment = {
