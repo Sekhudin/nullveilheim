@@ -10,6 +10,7 @@ in
     ./config.nix
     ./env.nix
     ./monitor.nix
+    ./portal.nix
     ./variable.nix
   ];
 
