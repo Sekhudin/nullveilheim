@@ -29,7 +29,7 @@ let
   themeNames = lib.attrNames color.themes;
   themesColor = lib.genAttrs themeNames (name: color.mkTheme name);
 
-  themeColor = themesColor.${master.theme};
+  theme = themesColor.${master.theme};
   themesGhostty = lib.genAttrs themeNames (name: mkThemeGhostty themesColor.${name});
 in
 {
@@ -81,7 +81,7 @@ in
     xdg.configFile."ghostty/style.css".text = (
       whenCustomWM "" ''
         window {
-            border: 2px solid ${themeColor.scheme.base08};
+            border: 2px solid ${theme.scheme.base08};
             border-radius: 8px;
             margin: 4px;
         }

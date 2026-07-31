@@ -12,7 +12,7 @@ let
   masterEnable = config.homeProgramsModules.enable;
 
   themeNames = lib.attrNames color.themes;
-  themeColor = (color.mkTheme cfg.theme);
+  theme = (color.mkTheme cfg.theme);
 
   inherit (extraLib.tmux)
     mkWindow
@@ -173,8 +173,8 @@ in
           extraConfig = ''
             set -g status off
 
-            set -g pane-border-style "${(mkTmuxColor themeColor.scheme.base08 "default")}"
-            set -g pane-active-border-style "${(mkTmuxColor themeColor.scheme.base08 "default")}"
+            set -g pane-border-style "${(mkTmuxColor theme.scheme.base08 "default")}"
+            set -g pane-active-border-style "${(mkTmuxColor theme.scheme.base08 "default")}"
             set -sg escape-time 10 
 
             set -g @continuum-boot on

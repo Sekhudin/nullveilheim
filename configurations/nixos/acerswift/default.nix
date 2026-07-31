@@ -84,6 +84,10 @@
     enable = true;
   };
 
+  nixosSecurityModules = {
+    enable = true;
+  };
+
   nixosServicesModules = {
     enable = true;
     openssh = {

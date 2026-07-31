@@ -9,7 +9,10 @@ let
   themeNames = lib.attrNames color.themes;
 in
 {
-  imports = [ ./core ];
+  imports = [
+    ./core
+    ./polkit
+  ];
 
   options.homeDesktopModules.hyprland = {
     enable = lib.mkOption {
@@ -179,7 +182,6 @@ in
         options = {
           use = lib.mkOption {
             type = lib.types.enum [
-              "none"
               "hyprpolkitagent"
             ];
             description = "choose polkit agent";

@@ -11,7 +11,7 @@ let
   cfg = config.homeDesktopModules.hyprland;
   inherit (extraLib.hyprland) variables mkVar;
 
-  themeColor = (color.mkTheme cfg.theme);
+  theme = (color.mkTheme cfg.theme);
 in
 {
   config = lib.mkIf cfg.enable {
@@ -37,8 +37,8 @@ in
           cursor_theme = (mkVar "Bibata-Modern-Ice");
           cursor_size = (mkVar 24);
 
-          active_border = (mkVar themeColor.scheme.base08);
-          inactive_border = (mkVar themeColor.scheme.base00);
+          active_border = (mkVar theme.scheme.base08);
+          inactive_border = (mkVar theme.scheme.base00);
 
           terminal = (mkVar config.homeTerminalModules.use);
           browser = (mkVar "firefox");
