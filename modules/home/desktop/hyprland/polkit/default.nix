@@ -1,6 +1,8 @@
 {
+  pkgs,
   config,
   lib,
+  extraLib,
   color,
   ...
 }:
@@ -8,14 +10,39 @@
 let
   cfg = config.homeDesktopModules.hyprland;
   isHyprpolkit = cfg.polkit.use == "hyprpolkitagent";
+  inherit (extraLib.hyprland) mkEvent events hl;
 
   _ = (color.mkTheme cfg.theme);
 in
 {
   config = lib.mkIf (cfg.enable && isHyprpolkit) {
-    services = {
-      hyprpolkitagent = {
-        enable = true;
+    home = {
+      packages = with pkgs; [
+        hyprpolkitagent
+      ];
+    };
+
+    wayland.windowManager.hyprland = {
+      settings = {
+        on = [
+          (mkEvent {
+            event = events.hyprland.start;
+            action = [
+              (hl.exec_cmd {
+                cmd = "systemctl --user start hyprpolkitagent.service";
+              })
+            ];
+          })
+
+          (mkEvent {
+            event = events.config.reloaded;
+            action = [
+              (hl.exec_cmd {
+                cmd = "systemctl --user restart hyprpolkitagent.service";
+              })
+            ];
+          })
+        ];
       };
     };
 
@@ -23,10 +50,10 @@ in
       "hyprpolkitagent/hyprpolkitagent.conf" = {
         text = ''
           general {
-              password_field_width = 340
-              window_width         = 520
-              window_height        = 440
-              show_details         = true
+              password_field_width = 10
+              window_width         = 10
+              window_height        = 10
+              show_details         = false
           }
         '';
       };
@@ -51,8 +78,8 @@ in
           font_family = Sans Serif
           font_family_monospace = monospace
 
-          rounding_large = 10
-          rounding_small = 5
+          rounding_large = 0
+          rounding_small = 0
         '';
       };
     };
