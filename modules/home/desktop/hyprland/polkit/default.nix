@@ -9,13 +9,13 @@
 
 let
   cfg = config.homeDesktopModules.hyprland;
-  isHyprpolkit = cfg.polkit.use == "hyprpolkitagent";
+  enableHyprpolkit = cfg.polkit.use == "hyprpolkitagent";
   inherit (extraLib.hyprland) mkEvent events hl;
 
   _ = (color.mkTheme cfg.theme);
 in
 {
-  config = lib.mkIf (cfg.enable && isHyprpolkit) {
+  config = lib.mkIf (cfg.enable && enableHyprpolkit) {
     home = {
       packages = with pkgs; [
         hyprpolkitagent
