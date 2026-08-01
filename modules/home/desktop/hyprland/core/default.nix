@@ -12,12 +12,16 @@ in
     ./monitor.nix
     ./portal.nix
     ./variable.nix
+    ./workspace-rule.nix
   ];
 
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       enable = true;
       configType = "lua";
+      systemd = {
+        enable = true;
+      };
     };
   };
 }
