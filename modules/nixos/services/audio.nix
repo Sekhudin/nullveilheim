@@ -53,22 +53,23 @@ in
     services = {
       pulseaudio = lib.mkMerge [
         {
-          enable = (cfg.use == "pulseaudio");
+          enable = cfg.use == "pulseaudio";
         }
         cfg.pulseaudio
       ];
 
       pipewire = lib.mkMerge [
-        {
-          enable = (cfg.use == "pipewire");
+        (lib.mkIf (cfg.use == "pipewire") {
+          enable = true;
           alsa = {
             enable = true;
             support32Bit = true;
           };
+
           pulse = {
             enable = true;
           };
-        }
+        })
         cfg.pipewire
       ];
     };
