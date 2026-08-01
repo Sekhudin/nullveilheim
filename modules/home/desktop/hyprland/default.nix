@@ -182,6 +182,7 @@ in
         options = {
           use = lib.mkOption {
             type = lib.types.enum [
+              "none"
               "hyprpolkitagent"
             ];
             description = "choose polkit agent";
