@@ -11,11 +11,20 @@
 
       mkLuaStr = value: ''"${value}"'';
 
-      mkLuaFunc = lua: ''
-        function()
-          ${lua}
-        end
-      '';
+      mkLuaFunc =
+        p:
+        if builtins.isString p then
+          ''
+            function()
+              ${p}
+            end
+          ''
+        else
+          ''
+            ${p.header or "function()"}
+              ${p.lua}
+            end
+          '';
 
       mkCall =
         {
@@ -145,6 +154,23 @@
           flags ? { },
         }:
         "hl.bind(${key}, ${dispatcher}, ${mkLua flags})";
+
+      mkEvent =
+        { event, action }:
+
+        let
+          event' = event {
+            lua = (if builtins.isList action then lib.concatStringsSep "\n" action else action);
+          };
+          name = builtins.elemAt event' 0;
+          callback = builtins.elemAt event' 1;
+        in
+        {
+          _args = [
+            name
+            (mkLuaInline callback)
+          ];
+        };
 
       mkMonitor =
         {
@@ -400,6 +426,40 @@
             hl.config(${mkLua (p // config)})
           '';
       };
+
+      hl = {
+        exec_cmd =
+          p:
+          mkCall {
+            func = "hl.exec_cmd";
+            args = [
+              p.cmd
+              (p.rules or null)
+            ];
+          };
+      };
+
+      events = {
+        config = {
+          reloaded = p: [
+            "config.reloaded"
+            (mkLuaFunc {
+              header = "function()";
+              lua = p.lua;
+            })
+          ];
+        };
+
+        hyprland = {
+          start = p: [
+            "hyprland.start"
+            (mkLuaFunc {
+              header = "function()";
+              lua = p.lua;
+            })
+          ];
+        };
+      };
     in
     {
       inherit
@@ -410,6 +470,7 @@
         mkWorkspaceBind
         mkSubmap
         mkSubmapBind
+        mkEvent
         mkMonitor
         getVar
         variables
@@ -418,6 +479,8 @@
         combos
         directions
         dsp
+        hl
+        events
         ;
     };
 }
