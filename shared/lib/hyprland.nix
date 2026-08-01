@@ -65,6 +65,14 @@
 
       getVar = name: mkLuaInline name;
 
+      getVarRef =
+        cfg: select:
+        let
+          inherit (cfg.wayland.windowManager.hyprland) settings;
+          ref = settings.${select};
+        in
+        ref._var;
+
       mkEnv = key: value: {
         _args = [
           key
@@ -473,6 +481,7 @@
         mkEvent
         mkMonitor
         getVar
+        getVarRef
         variables
         keys
         mouse

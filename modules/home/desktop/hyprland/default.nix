@@ -10,6 +10,7 @@ let
 in
 {
   imports = [
+    ./bar
     ./core
     ./polkit
   ];
@@ -33,10 +34,11 @@ in
           use = lib.mkOption {
             type = lib.types.enum [
               "none"
+              "ashell"
               "waybar"
             ];
             description = "choose status bar";
-            default = "waybar";
+            default = "ashell";
           };
         };
       };
