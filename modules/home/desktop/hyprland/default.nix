@@ -13,6 +13,7 @@ in
     ./bar
     ./core
     ./polkit
+    ./wallpaper
   ];
 
   options.homeDesktopModules.hyprland = {
