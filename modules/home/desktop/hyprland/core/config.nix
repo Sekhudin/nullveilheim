@@ -9,24 +9,25 @@ let
   cfg = config.homeDesktopModules.hyprland;
   inherit (extraLib.hyprland) getVar;
 
-  active_border = (getVar "active_border");
-  inactive_border = (getVar "inactive_border");
+  active_border = (getVar "styles.active_border");
+  inactive_border = (getVar "styles.inactive_border");
+  rounding = (getVar "styles.rounding");
+  gaps_in = (getVar "styles.gaps_in");
+  gaps_out = (getVar "styles.gaps_out");
 in
 {
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       settings.config = {
-        general = rec {
+        general = {
           border_size = 1;
-          gaps_in = 4;
-          gaps_out = gaps_in;
+          gaps_in = gaps_in;
+          gaps_out = gaps_out;
           layout = "dwindle";
           resize_on_border = true;
           col = {
-            inherit
-              active_border
-              inactive_border
-              ;
+            active_border = active_border;
+            inactive_border = inactive_border;
           };
           snap = {
             enabled = false;
@@ -34,7 +35,7 @@ in
         };
 
         decoration = {
-          rounding = 8;
+          rounding = rounding;
           active_opacity = 1.0;
           inactive_opacity = 1.0;
           dim_modal = true;

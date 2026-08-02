@@ -34,15 +34,24 @@ in
             resize = "resize";
           };
 
-          cursor_theme = (mkVar "Bibata-Modern-Ice");
-          cursor_size = (mkVar 24);
+          apps = mkVar {
+            terminal = config.homeTerminalModules.use;
+            browser = "firefox";
+            editor = "nvim";
+          };
 
-          active_border = (mkVar theme.scheme.base08);
-          inactive_border = (mkVar theme.scheme.base00);
+          cursor = mkVar {
+            theme = "Bibata-Modern-Ice";
+            size = 24;
+          };
 
-          terminal = (mkVar config.homeTerminalModules.use);
-          browser = (mkVar "firefox");
-          editor = (mkVar "nvim");
+          styles = mkVar {
+            active_border = theme.scheme.base08;
+            inactive_border = theme.scheme.base00;
+            gaps_in = 4;
+            gaps_out = 4;
+            rounding = 8;
+          };
         }
         variables
       ];
