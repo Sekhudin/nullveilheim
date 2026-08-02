@@ -50,6 +50,7 @@ in
         settings = {
           log_level = "warn";
           position = "Top";
+          layer = "Bottom";
           outputs = {
             Targets = [
               monitors.edp_1
