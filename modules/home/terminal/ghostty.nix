@@ -13,24 +13,27 @@ let
   masterEnable = master.enable;
   openGLEnable = (openGL.use != "default");
   isGhostty = (master.use == "ghostty");
+  inherit (color) mkTheme mkTokens;
 
   whenCustomWM = value: fallback: if master.enableCustomWM then value else fallback;
 
-  mkThemeGhostty = c: {
-    background = c.scheme.base00;
-    foreground = c.scheme.base07;
-    cursor-color = c.scheme.base06;
-    cursor-text = c.scheme.base07;
-    selection-background = c.scheme.base08;
-    selection-foreground = c.scheme.base0F;
-    palette = c.lines;
-  };
+  mkThemeGhostty =
+    {
+      tokens,
+      palette,
+    }:
+    {
+      background = tokens.bg;
+      foreground = tokens.fg;
+      cursor-color = tokens.secondary;
+      cursor-text = tokens.secondary_fg;
+      selection-background = tokens.muted;
+      selection-foreground = tokens.muted_fg;
+      palette = palette;
+    };
 
-  themeNames = lib.attrNames color.themes;
-  themesColor = lib.genAttrs themeNames (name: color.mkTheme name);
-
-  theme = themesColor.${master.theme};
-  themesGhostty = lib.genAttrs themeNames (name: mkThemeGhostty themesColor.${name});
+  theme = mkTheme master.theme;
+  tokens = mkTokens theme;
 in
 {
   options.homeTerminalModules.ghostty = {
@@ -72,7 +75,12 @@ in
             window-padding-color = lib.mkDefault "extend";
             gtk-custom-css = "${config.xdg.configHome}/ghostty/style.css";
           };
-          themes = themesGhostty;
+          themes = {
+            ${master.theme} = mkThemeGhostty {
+              inherit tokens;
+              palette = theme.lines;
+            };
+          };
         }
         cfg.settings
       ];
@@ -81,7 +89,7 @@ in
     xdg.configFile."ghostty/style.css".text = (
       whenCustomWM "" ''
         window {
-            border: 2px solid ${theme.scheme.base08};
+            border: 2px solid ${tokens.border};
             border-radius: 8px;
             margin: 4px;
         }

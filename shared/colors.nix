@@ -63,9 +63,9 @@ in
     { lib }:
 
     let
-      formatColorLine = index: color: "${toString index}=${color}";
-      formatColorScheme = index: color: {
-        name = "base${if index < 16 then "0${lib.toHexString index}" else lib.toHexString index}";
+      formatColorLine = i: color: "${toString i}=${color}";
+      formatColorScheme = i: color: {
+        name = "base" + (if i < 16 then "0${lib.toUpper (lib.toHexString i)}" else lib.toHexString i);
         value = color;
       };
 
@@ -74,13 +74,67 @@ in
         (lib.lists.imap0 formatColorScheme)
         lib.attrsets.listToAttrs
       ];
+
+      mkOpacity =
+        color: opacity:
+        let
+          alpha = lib.toHexString (builtins.floor (opacity * 255));
+          alpha' = if lib.stringLength alpha == 1 then "0${alpha}" else alpha;
+        in
+        "${color}${alpha'}";
+
+      mkTheme = name: {
+        scheme = toColorScheme themes.${name};
+        lines = toColorLines themes.${name};
+      };
+
+      mkTokens =
+        theme:
+
+        let
+          theme' = if builtins.isString theme then mkTheme theme else theme;
+          inherit (theme') scheme;
+        in
+        {
+          bg = scheme.base00;
+          fg = scheme.base07;
+
+          primary = scheme.base05;
+          primary_fg = scheme.base07;
+
+          secondary = scheme.base06;
+          secondary_fg = scheme.base07;
+
+          muted = scheme.base08;
+          muted_fg = scheme.base0F;
+
+          accent = scheme.base0D;
+          accent_fg = scheme.base07;
+
+          destructive = scheme.base01;
+          destructive_fg = scheme.base07;
+
+          success = scheme.base02;
+          success_fg = scheme.base07;
+
+          warning = scheme.base03;
+          warning_fg = scheme.base07;
+
+          info = scheme.base04;
+          info_fg = scheme.base07;
+
+          border = scheme.base08;
+          active_border = mkOpacity scheme.base05 0.85;
+
+          input = scheme.base08;
+          ring = scheme.base05;
+        };
     in
     {
-      inherit themes;
-
-      mkTheme = theme: {
-        scheme = toColorScheme themes.${theme};
-        lines = toColorLines themes.${theme};
-      };
+      inherit
+        themes
+        mkTheme
+        mkTokens
+        ;
     };
 }

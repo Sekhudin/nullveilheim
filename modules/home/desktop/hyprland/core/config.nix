@@ -9,12 +9,13 @@ let
   cfg = config.homeDesktopModules.hyprland;
   inherit (extraLib.hyprland) getVar;
 
-  active_border = getVar "styles.active_border";
-  inactive_border = getVar "styles.inactive_border";
   rounding = getVar "styles.rounding";
+  font_family = getVar "styles.font_family";
   gaps_in = getVar "styles.gaps_in";
   gaps_out = getVar "styles.gaps_out";
-  font_family = getVar "styles.font_family";
+
+  border = getVar "tokens.border";
+  active_border = getVar "tokens.active_border";
 in
 {
   config = lib.mkIf cfg.enable {
@@ -27,8 +28,8 @@ in
           layout = "dwindle";
           resize_on_border = true;
           col = {
-            active_border = active_border;
-            inactive_border = inactive_border;
+            active_border = border;
+            inactive_border = active_border;
           };
           snap = {
             enabled = false;
@@ -103,7 +104,7 @@ in
 
         misc = {
           font_family = font_family;
-          disable_hyprland_logo = false;
+          disable_hyprland_logo = true;
           disable_splash_rendering = true;
         };
 
