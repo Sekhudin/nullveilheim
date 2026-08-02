@@ -9,11 +9,12 @@ let
   cfg = config.homeDesktopModules.hyprland;
   inherit (extraLib.hyprland) getVar;
 
-  active_border = (getVar "styles.active_border");
-  inactive_border = (getVar "styles.inactive_border");
-  rounding = (getVar "styles.rounding");
-  gaps_in = (getVar "styles.gaps_in");
-  gaps_out = (getVar "styles.gaps_out");
+  active_border = getVar "styles.active_border";
+  inactive_border = getVar "styles.inactive_border";
+  rounding = getVar "styles.rounding";
+  gaps_in = getVar "styles.gaps_in";
+  gaps_out = getVar "styles.gaps_out";
+  font_family = getVar "styles.font_family";
 in
 {
   config = lib.mkIf cfg.enable {
@@ -101,6 +102,7 @@ in
         };
 
         misc = {
+          font_family = font_family;
           disable_hyprland_logo = false;
           disable_splash_rendering = true;
         };

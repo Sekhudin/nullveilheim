@@ -46,22 +46,22 @@ in
               };
             };
 
-            font = {
+            font = rec {
               size = font.sizes.terminal;
               normal = {
                 family = font.family.monospace;
                 style = "Regular";
               };
               bold = {
-                family = font.family.monospace;
+                family = normal.family;
                 style = "Bold";
               };
               italic = {
-                family = font.family.monospace;
+                family = normal.family;
                 style = "Italic";
               };
               bold_italic = {
-                family = font.family.monospace;
+                family = normal.family;
                 style = "Bold Italic";
               };
             };

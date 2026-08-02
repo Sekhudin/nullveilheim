@@ -4,6 +4,7 @@
   lib,
   extraLib,
   color,
+  font,
   ...
 }:
 
@@ -51,6 +52,7 @@ in
             gaps_in = 4;
             gaps_out = 4;
             rounding = 8;
+            font_family = font.family.sans_serif;
           };
         }
         variables

@@ -16,7 +16,7 @@ let
     combos
     ;
 
-  monitor = (getVar "submaps.monitor");
+  monitor = getVar "submaps.monitor";
 in
 {
   config = lib.mkIf cfg.enable {

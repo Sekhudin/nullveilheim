@@ -16,7 +16,7 @@ let
     combos
     ;
 
-  resize = (getVar "submaps.resize");
+  resize = getVar "submaps.resize";
 in
 {
   config = lib.mkIf cfg.enable {
