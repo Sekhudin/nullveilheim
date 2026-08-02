@@ -14,8 +14,8 @@ let
     combos
     ;
 
-  terminal = (getVar "apps.terminal");
-  browser = (getVar "apps.browser");
+  terminal = getVar "apps.terminal";
+  browser = getVar "apps.browser";
 in
 {
   config = lib.mkIf cfg.enable {

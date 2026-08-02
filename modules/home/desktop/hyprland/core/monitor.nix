@@ -9,8 +9,8 @@ let
   cfg = config.homeDesktopModules.hyprland;
   inherit (extraLib.hyprland) getVar mkMonitor;
 
-  edp_1 = (getVar "monitors.edp_1");
-  hdmia_1 = (getVar "monitors.hdmia_1");
+  edp_1 = getVar "monitors.edp_1";
+  hdmia_1 = getVar "monitors.hdmia_1";
 in
 {
   config = lib.mkIf cfg.enable {

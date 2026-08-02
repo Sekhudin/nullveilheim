@@ -39,7 +39,7 @@ in
               "waybar"
             ];
             description = "choose status bar";
-            default = "ashell";
+            default = "waybar";
           };
         };
       };

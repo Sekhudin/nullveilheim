@@ -9,8 +9,8 @@ let
   cfg = config.homeDesktopModules.hyprland;
   inherit (extraLib.hyprland) getVar mkEnv;
 
-  cursor_theme = (getVar "cursor.theme");
-  cursor_size = (getVar "cursor.size");
+  cursor_theme = getVar "cursor.theme";
+  cursor_size = getVar "cursor.size";
 in
 {
   config = lib.mkIf cfg.enable {

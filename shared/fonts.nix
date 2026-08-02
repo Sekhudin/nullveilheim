@@ -4,13 +4,15 @@
       pkgs: with pkgs; [
         inter
         nerd-fonts.jetbrains-mono
-        nerd-fonts.fira-code
+        noto-fonts
+        noto-fonts-color-emoji
+
         noto-fonts-cjk-sans
       ];
 
     family = {
       monospace = "JetBrainsMono Nerd Font";
-      sansSerif = "Inter";
+      sans_serif = "Inter";
       serif = "Noto Serif";
       emoji = "Noto Color Emoji";
     };
