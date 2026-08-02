@@ -10,9 +10,11 @@
 
 let
   cfg = config.homeDesktopModules.hyprland;
+  inherit (color) mkTokens;
   inherit (extraLib.hyprland) variables mkVar;
 
   theme = (color.mkTheme cfg.theme);
+  tokens = mkTokens cfg.theme;
 in
 {
   config = lib.mkIf cfg.enable {
@@ -46,9 +48,9 @@ in
             size = 24;
           };
 
+          tokens = mkVar tokens;
+
           styles = mkVar {
-            active_border = theme.scheme.base08;
-            inactive_border = theme.scheme.base00;
             gaps_in = 4;
             gaps_out = 4;
             rounding = 8;

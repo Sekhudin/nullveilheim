@@ -13,8 +13,9 @@ let
   masterEnable = master.enable;
   openGLEnable = (openGL.use != "default");
   isAlacritty = (master.use == "alacritty");
+  inherit (color) mkTokens;
 
-  theme = (color.mkTheme cfg.theme);
+  tokens = mkTokens cfg.name;
 in
 {
   options.homeTerminalModules.alacritty = {
@@ -68,16 +69,16 @@ in
 
             colors = {
               primary = {
-                background = theme.scheme.base00;
-                foreground = theme.scheme.base07;
+                background = tokens.bg;
+                foreground = tokens.fg;
               };
               cursor = {
-                cursor = theme.scheme.base06;
-                text = theme.scheme.base07;
+                cursor = tokens.secondary;
+                text = tokens.secondary_fg;
               };
               selection = {
-                text = theme.scheme.base0F;
-                background = theme.scheme.base08;
+                background = tokens.muted;
+                text = tokens.muted_fg;
               };
             };
 

@@ -10,9 +10,10 @@
 let
   cfg = config.homeProgramsModules.tmux;
   masterEnable = config.homeProgramsModules.enable;
+  inherit (color) mkTokens;
 
   themeNames = lib.attrNames color.themes;
-  theme = (color.mkTheme cfg.theme);
+  tokens = mkTokens cfg.theme;
 
   inherit (extraLib.tmux)
     mkWindow
@@ -173,8 +174,8 @@ in
           extraConfig = ''
             set -g status off
 
-            set -g pane-border-style "${(mkTmuxColor theme.scheme.base08 "default")}"
-            set -g pane-active-border-style "${(mkTmuxColor theme.scheme.base08 "default")}"
+            set -g pane-border-style "${(mkTmuxColor tokens.border "default")}"
+            set -g pane-active-border-style "${(mkTmuxColor tokens.active_border "default")}"
             set -sg escape-time 10 
 
             set -g @continuum-boot on
