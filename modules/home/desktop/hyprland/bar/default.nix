@@ -3,5 +3,6 @@
 {
   imports = [
     ./ashell
+    ./waybar
   ];
 }

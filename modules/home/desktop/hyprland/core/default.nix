@@ -16,6 +16,12 @@ in
   ];
 
   config = lib.mkIf cfg.enable {
+    wayland = {
+      systemd = {
+        target = "hyprland-session.target";
+      };
+    };
+
     wayland.windowManager.hyprland = {
       enable = true;
       configType = "lua";
