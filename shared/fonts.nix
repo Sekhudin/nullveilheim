@@ -20,7 +20,7 @@
     sizes = {
       terminal = 11.5;
       desktop = 10;
-      bar = 9.5;
+      bar = 10;
     };
   };
 }

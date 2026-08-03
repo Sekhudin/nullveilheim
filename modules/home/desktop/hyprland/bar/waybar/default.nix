@@ -42,6 +42,7 @@ in
 {
   imports = [
     ./window.nix
+    ./workspaces.nix
   ];
 
   config = lib.mkIf (cfg.enable && enableWaybar) {
@@ -72,11 +73,13 @@ in
             name = "main";
             layer = "bottom";
             position = "top";
+            fixed-center = true;
             tooltip = false;
             output = [
               monitors.edp_1
               monitors.hdmia_1
             ];
+            height = styles.min_height;
             margin-top = styles.gaps_out;
             margin-left = styles.gaps_out;
             margin-right = styles.gaps_out;
@@ -97,6 +100,7 @@ in
         style = composeStyle {
           includes = [
             ./window-style.nix
+            ./workspaces-style.nix
           ];
           args = {
             inherit
@@ -107,17 +111,26 @@ in
           style = ''
             ${toTokenCss tokens}
 
-            * {
+            window#waybar {
+              color: @fg;
+              background: transparent;
               border: none;
               border-radius: 0px;
               font-family: ${font.family.monospace};
               font-size: ${toString font.sizes.bar}px;
             }
 
-            window#waybar {
-              border-radius: ${toString styles.rounding}px;
-              background-color: transparent;
-              color: @fg;
+            window#waybar button {
+              color: inherit;
+              background: transparent;
+              border: none;
+              border-radius: 0;
+              box-shadow: none;
+              padding: 0;
+              margin: 0;
+              min-width: 0;
+              min-height: 0;
+              text-shadow: none;
             }
 
             tooltip {

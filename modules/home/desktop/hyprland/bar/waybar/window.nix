@@ -1,14 +1,12 @@
 {
   config,
   lib,
-  extraLib,
   ...
 }:
 
 let
   cfg = config.homeDesktopModules.hyprland;
   enableWaybar = (cfg.bar.use == "waybar");
-  inherit (extraLib.hyprland) dsp;
 in
 {
   config = lib.mkIf (cfg.enable && enableWaybar) {
@@ -21,6 +19,7 @@ in
           icon = false;
           icon-size = 12;
           expand = false;
+          tooltip = false;
         };
       };
     };
