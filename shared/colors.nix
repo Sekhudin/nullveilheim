@@ -75,6 +75,8 @@ in
         lib.attrsets.listToAttrs
       ];
 
+      isRgba = color: builtins.match "^#[0-9A-Fa-f]{8}$" color != null;
+
       mkOpacity =
         color: opacity:
         let
@@ -82,6 +84,19 @@ in
           alpha' = if lib.stringLength alpha == 1 then "0${alpha}" else alpha;
         in
         "${color}${alpha'}";
+
+      mkGtkColor =
+        color:
+        if (isRgba color) then
+          let
+            rgb = lib.substring 0 7 color;
+            alphaHex = lib.substring 7 2 color;
+            alpha = lib.fromHexString alphaHex;
+            opacity = builtins.floor ((alpha / 255.0) * 100 + 0.5) / 100;
+          in
+          "alpha(${rgb}, ${toString opacity})"
+        else
+          color;
 
       mkTheme = name: {
         scheme = toColorScheme themes.${name};
@@ -124,7 +139,7 @@ in
           info_fg = scheme.base07;
 
           border = scheme.base08;
-          active_border = mkOpacity scheme.base05 0.85;
+          active_border = scheme.base05;
 
           input = scheme.base08;
           ring = scheme.base05;
@@ -135,6 +150,8 @@ in
         themes
         mkTheme
         mkTokens
+        mkGtkColor
+        mkOpacity
         ;
     };
 }

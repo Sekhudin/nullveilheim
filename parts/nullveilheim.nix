@@ -19,7 +19,7 @@ in
           allowUnfree = true;
           allowBroken = false;
           contentAddressedByDefault = false;
-          tarball-ttl = 0;
+          tarball-ttl = 86400;
           android_sdk = {
             accept_license = true;
           };

@@ -34,6 +34,7 @@ let
     file_tree = "󰙅";
     files = "";
     find_replace = "󰛔";
+    firefox = "󰈹";
     folder = "";
     folder_close = "";
     folder_open = "";
@@ -44,6 +45,7 @@ let
     function = "";
     gear = "";
     gear_sm = "⛭";
+    ghostty = "";
     git = "";
     github = "";
     hint = "";
