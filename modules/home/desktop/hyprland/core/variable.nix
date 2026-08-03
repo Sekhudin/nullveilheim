@@ -13,7 +13,6 @@ let
   inherit (color) mkTokens;
   inherit (extraLib.hyprland) variables mkVar;
 
-  theme = (color.mkTheme cfg.theme);
   tokens = mkTokens cfg.theme;
 in
 {
@@ -55,6 +54,10 @@ in
             gaps_out = 4;
             rounding = 8;
             font_family = font.family.sans_serif;
+            border_size = 1;
+            min_width = 12;
+            padding_x = 8;
+            padding_y = 4;
           };
         }
         variables

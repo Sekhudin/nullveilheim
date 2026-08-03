@@ -2,12 +2,15 @@
   config,
   lib,
   extraLib,
+  color,
+  font,
   ...
 }:
 
 let
   cfg = config.homeDesktopModules.hyprland;
   enableWaybar = (cfg.bar.use == "waybar");
+  inherit (color) mkGtkColor;
   inherit (extraLib.hyprland)
     mkEvent
     getVarRef
@@ -15,12 +18,30 @@ let
     hl
     ;
 
+  toTokenCss =
+    tokens:
+    lib.concatStringsSep "\n" (
+      lib.mapAttrsToList (name: value: "@define-color ${name} ${mkGtkColor value};") tokens
+    );
+
+  composeStyle =
+    {
+      style ? "",
+      includes ? [ ],
+      args ? { },
+    }:
+    lib.concatStringsSep "\n" (
+      lib.filter (s: s != "") ([ style ] ++ map (path: import path args) includes)
+    );
+
   var = getVarRef config;
   monitors = var "monitors";
+  styles = var "styles";
+  tokens = var "tokens";
 in
 {
   imports = [
-    ./modules.nix
+    ./window.nix
   ];
 
   config = lib.mkIf (cfg.enable && enableWaybar) {
@@ -51,14 +72,59 @@ in
             name = "main";
             layer = "bottom";
             position = "top";
-            output = [ monitors.edp_1 ];
+            tooltip = false;
+            output = [
+              monitors.edp_1
+              monitors.hdmia_1
+            ];
+            margin-top = styles.gaps_out;
+            margin-left = styles.gaps_out;
+            margin-right = styles.gaps_out;
+            margin-bottom = styles.gaps_out;
+            spacing = styles.gaps_in;
             modules-left = [
               "hyprland/workspaces"
               "hyprland/submap"
             ];
-            modules-center = [ "hyprland/window" ];
-            modules-right = [ ];
+            modules-center = [
+              "hyprland/window"
+              "mpd"
+            ];
+            modules-right = [ "upower" ];
           };
+        };
+
+        style = composeStyle {
+          includes = [
+            ./window-style.nix
+          ];
+          args = {
+            inherit
+              lib
+              styles
+              ;
+          };
+          style = ''
+            ${toTokenCss tokens}
+
+            * {
+              border: none;
+              border-radius: 0px;
+              font-family: ${font.family.monospace};
+              font-size: ${toString font.sizes.bar}px;
+            }
+
+            window#waybar {
+              border-radius: ${toString styles.rounding}px;
+              background-color: transparent;
+              color: @fg;
+            }
+
+            tooltip {
+              border-radius: ${toString styles.rounding}px;
+              opacity: 0;
+            }
+          '';
         };
       };
     };
