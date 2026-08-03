@@ -21,13 +21,6 @@ in
           icon = false;
           icon-size = 12;
           expand = false;
-          on-click = ''hyprctl dispatch "${
-            dsp.window.fullscreen {
-              mode = "maximized";
-              action = "toggle";
-              layout_aware = true;
-            }
-          }"'';
         };
       };
     };
