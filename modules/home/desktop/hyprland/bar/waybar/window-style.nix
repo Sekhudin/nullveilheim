@@ -15,6 +15,10 @@
     animation-fill-mode: forwards;
   }
 
+  #window:hover {
+    border: ${toString styles.border_size}px solid @primary;
+  }
+
   window#waybar.empty #window {
     padding: 0;
     border-width: 0;
