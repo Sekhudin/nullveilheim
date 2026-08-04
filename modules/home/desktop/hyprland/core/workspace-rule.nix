@@ -1,22 +1,31 @@
 {
   config,
   lib,
+  extraLib,
   ...
 }:
 
 let
   cfg = config.homeDesktopModules.hyprland;
+  inherit (extraLib.hyprland) mkWorkspaceRule;
 in
 {
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       settings = {
-        workspace_rule = [
-          {
-            workspace = "r[1-5]";
+        workspace_rule = mkWorkspaceRule {
+          workspaces = [
+            "1"
+            "2"
+            "3"
+            "4"
+            "5"
+          ];
+          rules = {
             persistent = true;
-          }
-        ];
+          };
+          extraWorkspaceRule = [ ];
+        };
       };
     };
   };

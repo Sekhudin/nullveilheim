@@ -80,6 +80,21 @@
         ];
       };
 
+      mkWorkspaceRule =
+        {
+          workspaces,
+          rules ? { },
+          extraWorkspaceRule ? [ ],
+        }:
+        (map (
+          workspace:
+          rules
+          // {
+            inherit workspace;
+          }
+        ) workspaces)
+        ++ extraWorkspaceRule;
+
       mkBind =
         {
           key,
@@ -474,6 +489,7 @@
         mkLuaStr
         mkVar
         mkEnv
+        mkWorkspaceRule
         mkBind
         mkWorkspaceBind
         mkSubmap

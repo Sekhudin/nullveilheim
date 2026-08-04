@@ -10,7 +10,7 @@
     border-radius: 999px;
 
     animation-name: window-rise;
-    animation-duration: 300ms;
+    animation-duration: ${toString styles.animation_ms}ms;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
   }
