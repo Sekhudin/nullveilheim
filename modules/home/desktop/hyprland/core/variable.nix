@@ -59,6 +59,7 @@ in
             min_height = 16;
             padding_x = 12;
             padding_y = 8;
+            animation_ms = 300;
           };
         }
         variables
