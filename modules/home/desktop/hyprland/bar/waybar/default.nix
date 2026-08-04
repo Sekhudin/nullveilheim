@@ -38,6 +38,19 @@ let
   monitors = var "monitors";
   styles = var "styles";
   tokens = var "tokens";
+
+  basicSettings = {
+    layer = "bottom";
+    position = "top";
+    fixed-center = true;
+    tooltip = false;
+    height = styles.min_height;
+    margin-top = styles.gaps_out;
+    margin-left = styles.gaps_out;
+    margin-right = styles.gaps_out;
+    margin-bottom = styles.gaps_out;
+    spacing = styles.gaps_in;
+  };
 in
 {
   imports = [
@@ -69,32 +82,43 @@ in
         };
 
         settings = {
-          main = {
-            name = "main";
-            layer = "bottom";
-            position = "top";
-            fixed-center = true;
-            tooltip = false;
-            output = [
-              monitors.edp_1
-              monitors.hdmia_1
-            ];
-            height = styles.min_height;
-            margin-top = styles.gaps_out;
-            margin-left = styles.gaps_out;
-            margin-right = styles.gaps_out;
-            margin-bottom = styles.gaps_out;
-            spacing = styles.gaps_in;
-            modules-left = [
-              "hyprland/workspaces"
-              "hyprland/submap"
-            ];
-            modules-center = [
-              "hyprland/window"
-              "mpd"
-            ];
-            modules-right = [ "upower" ];
-          };
+          primary = lib.mkMerge [
+            basicSettings
+            {
+              name = "primary";
+              output = [
+                monitors.edp_1
+              ];
+              modules-left = [
+                "hyprland/workspaces"
+                "hyprland/submap"
+              ];
+              modules-center = [
+                "hyprland/window"
+                "mpd"
+              ];
+              modules-right = [ "upower" ];
+            }
+          ];
+
+          secondary = lib.mkMerge [
+            basicSettings
+            {
+              name = "secondary";
+              output = [
+                monitors.hdmia_1
+              ];
+              modules-left = [
+                "hyprland/workspaces"
+                "hyprland/submap"
+              ];
+              modules-center = [
+                "hyprland/window"
+                "mpd"
+              ];
+              modules-right = [ ];
+            }
+          ];
         };
 
         style = composeStyle {
