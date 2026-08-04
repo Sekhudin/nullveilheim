@@ -39,7 +39,7 @@ let
   styles = var "styles";
   tokens = var "tokens";
 
-  basicSettings = {
+  commonSettings = {
     layer = "bottom";
     position = "top";
     fixed-center = true;
@@ -54,6 +54,7 @@ let
 in
 {
   imports = [
+    ./submap.nix
     ./window.nix
     ./workspaces.nix
   ];
@@ -83,7 +84,7 @@ in
 
         settings = {
           primary = lib.mkMerge [
-            basicSettings
+            commonSettings
             {
               name = "primary";
               output = [
@@ -102,7 +103,7 @@ in
           ];
 
           secondary = lib.mkMerge [
-            basicSettings
+            commonSettings
             {
               name = "secondary";
               output = [
@@ -123,6 +124,7 @@ in
 
         style = composeStyle {
           includes = [
+            ./submap-style.nix
             ./window-style.nix
             ./workspaces-style.nix
           ];
