@@ -7,7 +7,9 @@
 
 let
   cfg = config.homeDesktopModules.hyprland;
-  inherit (extraLib.hyprland) mkWorkspaceRule;
+  inherit (extraLib.hyprland) mkWorkspaceRule getVar;
+
+  edp_1 = getVar "monitors.edp_1";
 in
 {
   config = lib.mkIf cfg.enable {
@@ -23,6 +25,7 @@ in
           ];
           rules = {
             persistent = true;
+            monitor = edp_1;
           };
           extraWorkspaceRule = [ ];
         };

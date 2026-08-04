@@ -54,6 +54,7 @@ in
           outputs = {
             Targets = [
               monitors.edp_1
+              monitors.hdmia_1
             ];
           };
 
