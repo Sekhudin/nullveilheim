@@ -12,7 +12,7 @@
   #workspaces button {
     animation-duration: ${toString styles.animation_ms}ms;
     animation-timing-function: ease-out;
-    animation-fill-mode: both;
+    animation-fill-mode: forwards;
   }
 
   #workspaces button.active,

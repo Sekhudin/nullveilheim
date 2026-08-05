@@ -61,15 +61,18 @@ let
     lang_org = "";
     lang_reason = "";
     lang_vim = "";
+    laugh = "";
     lightbulb = "";
     lightning = "";
     linux = "";
     list_group = "󱡠";
+    m = "󰰐";
     markdown = "";
     minus = "";
     minus_1 = "";
     minus_2 = "";
     minus_3 = "";
+    n = "󰰓";
     notes = "󱇗";
     org = "";
     package = "";
@@ -81,6 +84,7 @@ let
     plus_2 = "洛";
     plus_3 = "";
     plus_4 = "⊕";
+    r = "󰰟";
     recent = "";
     refresh = "";
     reload = "";
