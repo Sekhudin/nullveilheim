@@ -32,8 +32,8 @@ in
           };
 
           submaps = mkVar {
-            monitor = "monitor";
-            resize = "resize";
+            monitor = "M";
+            resize = "R";
           };
 
           apps = mkVar {
@@ -52,7 +52,7 @@ in
           styles = mkVar {
             gaps_in = 4;
             gaps_out = 4;
-            rounding = 8;
+            rounding = 12;
             font_family = font.family.sans_serif;
             border_size = 2;
             min_width = 16;
