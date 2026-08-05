@@ -158,11 +158,6 @@ in
               min-height: 0;
               text-shadow: none;
             }
-
-            tooltip {
-              border-radius: ${toString styles.rounding}px;
-              opacity: 0;
-            }
           '';
         };
       };
