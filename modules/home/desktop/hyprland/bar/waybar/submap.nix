@@ -16,9 +16,9 @@ in
       waybar.settings = rec {
         primary = {
           "hyprland/submap" = {
-            format = "{}";
+            format = "<b>{}</b>";
             justify = "center";
-            default-submap = "normal";
+            default-submap = "N";
             align = 0.5;
             max-length = 10;
             tooltip = false;
@@ -26,21 +26,21 @@ in
             expand = false;
             on-click = ''
               case "$(hyprctl submap)" in
-                default|normal"")
+                default|N"")
                   hyprctl dispatch '${
                     dsp.submap {
-                      name = "monitor";
+                      name = "M";
                     }
                   }'
                   ;;
-                monitor)
+                M)
                   hyprctl dispatch '${
                     dsp.submap {
-                      name = "resize";
+                      name = "R";
                     }
                   }'
                   ;;
-                resize)
+                R)
                   hyprctl dispatch '${
                     dsp.submap {
                       name = "reset";

@@ -54,6 +54,7 @@ let
 in
 {
   imports = [
+    ./battery.nix
     ./submap.nix
     ./window.nix
     ./workspaces.nix
@@ -98,7 +99,7 @@ in
                 "hyprland/window"
                 "mpd"
               ];
-              modules-right = [ "upower" ];
+              modules-right = [ "battery" ];
             }
           ];
 
@@ -124,6 +125,7 @@ in
 
         style = composeStyle {
           includes = [
+            ./battery-style.nix
             ./submap-style.nix
             ./window-style.nix
             ./workspaces-style.nix
