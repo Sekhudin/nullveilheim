@@ -14,10 +14,26 @@ in
       waybar.settings = rec {
         primary = {
           "battery" = {
-            bat = "BAT2";
-            interval = 60;
+            bat = "BAT0";
+            interval = 1;
+            align = 0.5;
+            justify = "center";
             format = "{capacity}% {icon}";
-            format-icons = {
+            format-charging = "{capacity}% {icon}";
+            format-discharging = "{capacity}% {icon}";
+            tooltip = false;
+            states = {
+              warning = 30;
+              critical = 15;
+            };
+            events = {
+              on-charging = "";
+              on-discharging = "";
+              on-charging-100 = "";
+              on-discharging-warning = "";
+              on-discharging-critical = "";
+            };
+            format-icons = rec {
               default = [
                 "󰂎"
                 "󰁺"
@@ -31,6 +47,7 @@ in
                 "󰂂"
                 "󰁹"
               ];
+              discharging = default;
               charging = [
                 "󰢟"
                 "󰢜"
