@@ -56,6 +56,7 @@ in
   imports = [
     ./battery.nix
     ./clock.nix
+    ./idle-inhibitor.nix
     ./network.nix
     ./pulseaudio.nix
     ./submap.nix
@@ -100,10 +101,10 @@ in
               ];
               modules-center = [
                 "hyprland/window"
-                "mpd"
               ];
               modules-right = [
                 "clock"
+                "idle_inhibitor"
                 "network"
                 "pulseaudio"
                 "battery"
@@ -123,12 +124,14 @@ in
                 "hyprland/submap"
               ];
               modules-center = [
-                "clock"
-                "network"
                 "hyprland/window"
-                "mpd"
               ];
-              modules-right = [ "network" ];
+              modules-right = [
+                "clock"
+                "idle_inhibitor"
+                "network"
+                "pulseaudio"
+              ];
             }
           ];
         };
@@ -137,6 +140,7 @@ in
           includes = [
             ./battery-style.nix
             ./clock-style.nix
+            ./idle-inhibitor-style.nix
             ./network-style.nix
             ./pulseaudio-style.nix
             ./submap-style.nix

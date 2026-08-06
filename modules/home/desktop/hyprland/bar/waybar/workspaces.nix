@@ -21,7 +21,7 @@ in
             persistent-only = false;
             active-only = false;
             disable-scroll = true;
-            tooltip = true;
+            tooltip = false;
           };
         };
         secondary = primary;
