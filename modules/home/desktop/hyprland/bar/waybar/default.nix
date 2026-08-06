@@ -55,6 +55,7 @@ in
 {
   imports = [
     ./battery.nix
+    ./bluetooth.nix
     ./clock.nix
     ./idle-inhibitor.nix
     ./network.nix
@@ -105,6 +106,7 @@ in
               modules-right = [
                 "clock"
                 "idle_inhibitor"
+                "bluetooth"
                 "network"
                 "pulseaudio"
                 "battery"
@@ -129,6 +131,7 @@ in
               modules-right = [
                 "clock"
                 "idle_inhibitor"
+                "bluetooth"
                 "network"
                 "pulseaudio"
               ];
@@ -139,6 +142,7 @@ in
         style = composeStyle {
           includes = [
             ./battery-style.nix
+            ./bluetooth-style.nix
             ./clock-style.nix
             ./idle-inhibitor-style.nix
             ./network-style.nix
@@ -150,6 +154,7 @@ in
           args = {
             inherit
               lib
+              font
               styles
               ;
           };

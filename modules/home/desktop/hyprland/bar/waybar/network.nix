@@ -22,7 +22,7 @@ in
             max-length = 30;
             min-length = 1;
             rfkill = true;
-            format-wifi = "{icon} ";
+            format-wifi = "{icon}";
             format-ethernet = "{icon}";
             format-linked = "{icon}";
             format-disconnected = "󰤭";

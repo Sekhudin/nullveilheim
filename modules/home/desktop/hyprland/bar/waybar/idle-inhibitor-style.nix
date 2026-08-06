@@ -15,12 +15,10 @@
   }
 
   #idle_inhibitor.activated {
-    color: @primary_fg;
-    background: @primary;
+    border: ${toString styles.border_size}px solid @primary;
   }
 
   #idle_inhibitor.deactivated {
-    color: @fg;
-    background: @bg;
+    border: ${toString styles.border_size}px solid @border;
   }
 ''
