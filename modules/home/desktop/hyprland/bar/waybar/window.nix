@@ -33,6 +33,7 @@ in
               "^~.*" = "${icon.ghostty} Ghostty";
               "^/.*" = "${icon.ghostty} Ghostty";
               "^nvim.*" = "${icon.neovim} Neovim > I use vim btw";
+              "^nix.*" = "${icon.lang_nix} Nix > I use nix btw";
             };
             on-double-click = "hyprctl dispatch '${
               dsp.window.fullscreen {
