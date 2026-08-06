@@ -55,6 +55,7 @@ in
 {
   imports = [
     ./battery.nix
+    ./network.nix
     ./submap.nix
     ./window.nix
     ./workspaces.nix
@@ -99,7 +100,10 @@ in
                 "hyprland/window"
                 "mpd"
               ];
-              modules-right = [ "battery" ];
+              modules-right = [
+                "network"
+                "battery"
+              ];
             }
           ];
 
@@ -118,7 +122,7 @@ in
                 "hyprland/window"
                 "mpd"
               ];
-              modules-right = [ ];
+              modules-right = [ "network" ];
             }
           ];
         };
@@ -126,6 +130,7 @@ in
         style = composeStyle {
           includes = [
             ./battery-style.nix
+            ./network-style.nix
             ./submap-style.nix
             ./window-style.nix
             ./workspaces-style.nix
