@@ -18,9 +18,9 @@ in
             interval = 1;
             align = 0.5;
             justify = "center";
-            format = "{capacity}% {icon}";
-            format-charging = "{capacity}% {icon}";
-            format-discharging = "{capacity}% {icon}";
+            format = "{icon} {capacity}%";
+            format-charging = "{icon} {capacity}%";
+            format-discharging = "{icon} {capacity}%";
             tooltip = false;
             states = {
               warning = 30;
