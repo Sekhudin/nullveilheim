@@ -56,6 +56,7 @@ in
   imports = [
     ./battery.nix
     ./network.nix
+    ./pulseaudio.nix
     ./submap.nix
     ./window.nix
     ./workspaces.nix
@@ -101,7 +102,6 @@ in
                 "mpd"
               ];
               modules-right = [
-                "pulseaudio/slider"
                 "pulseaudio"
                 "network"
                 "battery"
@@ -133,6 +133,7 @@ in
           includes = [
             ./battery-style.nix
             ./network-style.nix
+            ./pulseaudio-style.nix
             ./submap-style.nix
             ./window-style.nix
             ./workspaces-style.nix
