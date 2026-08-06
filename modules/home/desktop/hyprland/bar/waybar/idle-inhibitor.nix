@@ -13,15 +13,16 @@ in
     programs = {
       waybar.settings = rec {
         primary = {
-          "hyprland/workspaces" = {
-            format = "{name}";
-            orientation = "horizontal";
-            all-outputs = false;
-            move-to-monitor = false;
-            persistent-only = false;
-            active-only = false;
-            disable-scroll = true;
+          "idle_inhibitor" = {
+            format = "{icon} ";
+            align = 0.5;
+            justify = "center";
+            signal = 8;
             tooltip = false;
+            format-icons = {
+              activated = "";
+              deactivated = "";
+            };
           };
         };
         secondary = primary;
