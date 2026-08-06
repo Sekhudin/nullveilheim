@@ -14,10 +14,9 @@ in
       waybar.settings = rec {
         primary = {
           "pulseaudio" = {
-            format = "{icon}  {volume}%";
-            format-bluetooth = "{icon}  {volume}%";
-            format-muted = "{icon}";
-
+            format = "{icon} ";
+            format-bluetooth = "{icon} ";
+            format-muted = "{icon} ";
             format-icons = {
               default = [
                 ""
@@ -31,9 +30,8 @@ in
               car = "";
               phone = "";
             };
-
-            on-click = "pavucontrol";
             tooltip = false;
+            on-click = "pavucontrol";
           };
         };
         secondary = primary;
