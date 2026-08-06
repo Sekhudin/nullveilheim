@@ -14,28 +14,26 @@ in
       waybar.settings = rec {
         primary = {
           "pulseaudio" = {
-            format = "{volume}% {icon}";
-            format-bluetooth = "{volume}% {icon}";
-            format-muted = "";
+            format = "{icon}  {volume}%";
+            format-bluetooth = "{icon}  {volume}%";
+            format-muted = "{icon}";
 
             format-icons = {
-              "alsa_output.pci-0000_00_1f.3.analog-stereo" = "";
-              "alsa_output.pci-0000_00_1f.3.analog-stereo-muted" = "";
-              headphone = "";
-              hands-free = "󰂑";
-              headset = "󰂑";
-              phone = "";
-              phone-muted = "";
-              portable = "";
-              car = "";
               default = [
                 ""
                 ""
               ];
+              default-muted = "";
+              headphone = "";
+              headset = "󰋎";
+              hands-free = "󰂑";
+              hdmi = "󰡁";
+              car = "";
+              phone = "";
             };
 
-            scroll-step = 1;
             on-click = "pavucontrol";
+            tooltip = false;
           };
         };
         secondary = primary;

@@ -102,8 +102,8 @@ in
                 "mpd"
               ];
               modules-right = [
-                "pulseaudio"
                 "network"
+                "pulseaudio"
                 "battery"
               ];
             }
