@@ -55,6 +55,7 @@ in
 {
   imports = [
     ./battery.nix
+    ./clock.nix
     ./network.nix
     ./pulseaudio.nix
     ./submap.nix
@@ -102,6 +103,7 @@ in
                 "mpd"
               ];
               modules-right = [
+                "clock"
                 "network"
                 "pulseaudio"
                 "battery"
@@ -121,6 +123,8 @@ in
                 "hyprland/submap"
               ];
               modules-center = [
+                "clock"
+                "network"
                 "hyprland/window"
                 "mpd"
               ];
@@ -132,6 +136,7 @@ in
         style = composeStyle {
           includes = [
             ./battery-style.nix
+            ./clock-style.nix
             ./network-style.nix
             ./pulseaudio-style.nix
             ./submap-style.nix

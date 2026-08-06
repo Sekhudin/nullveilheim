@@ -22,9 +22,9 @@ in
             max-length = 30;
             min-length = 1;
             rfkill = true;
-            format-wifi = "{icon} {bandwidthDownBytes:>}";
-            format-ethernet = "{icon} {ifname}";
-            format-linked = "{icon} {ifname}";
+            format-wifi = "{icon} ";
+            format-ethernet = "{icon}";
+            format-linked = "{icon}";
             format-disconnected = "󰤭";
             format-disabled = "󰤭";
             format-alt = "{ipaddr}";
