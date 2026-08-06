@@ -6,7 +6,7 @@
 
 let
   cfg = config.pluginsModules.tools;
-  isImage = (cfg.markdown.use == "image");
+  isImage = (cfg.media.use == "image");
 in
 {
   plugins = lib.mkIf (cfg.enable && isImage) {
