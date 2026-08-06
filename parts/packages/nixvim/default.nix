@@ -38,7 +38,14 @@ in
 
       checks = {
         nvim = testNixvimWith {
-          inherit system modules extraSpecialArgs;
+          inherit system extraSpecialArgs;
+          modules = modules ++ [
+            {
+              plugins = {
+                image.enable = false;
+              };
+            }
+          ];
         };
       };
     };

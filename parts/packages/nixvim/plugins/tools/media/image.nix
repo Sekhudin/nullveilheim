@@ -11,7 +11,7 @@ in
 {
   plugins = lib.mkIf (cfg.enable && isImage) {
     image = {
-      enable = true;
+      enable = lib.mkDefault true;
       settings = { };
     };
 
