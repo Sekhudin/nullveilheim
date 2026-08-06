@@ -16,7 +16,6 @@
 
   #submap.M,
   #submap.R {
-    color: @primary_fg;
-    background: @primary;
+    border: ${toString styles.border_size}px solid @primary;
   }
 ''
