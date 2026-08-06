@@ -73,6 +73,7 @@ let
     minus_2 = "";
     minus_3 = "";
     n = "󰰓";
+    neovim = "";
     notes = "󱇗";
     org = "";
     package = "";
@@ -96,6 +97,7 @@ let
     secret = "";
     server = "";
     settings = "";
+    squin = "";
     star = "";
     still = "";
     tab = "⦙";

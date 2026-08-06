@@ -2,6 +2,7 @@
   config,
   lib,
   extraLib,
+  icon,
   ...
 }:
 
@@ -16,13 +17,23 @@ in
       waybar.settings = rec {
         primary = {
           "hyprland/window" = {
-            format = "{title}";
+            format = "{}";
             max-length = 30;
             separate-outputs = true;
             icon = false;
             icon-size = 12;
             expand = false;
             tooltip = false;
+            rewrite = {
+              "(.*) — Mozilla Firefox" = "${icon.firefox} $1";
+
+              "(.*)Mozilla Firefox" = "${icon.firefox} Firefox";
+              "(.*)Ghostty" = "${icon.ghostty} Ghostty";
+
+              "^~.*" = "${icon.ghostty} Ghostty";
+              "^/.*" = "${icon.ghostty} Ghostty";
+              "^nvim.*" = "${icon.neovim} Neovim > I use vim btw";
+            };
             on-double-click = "hyprctl dispatch '${
               dsp.window.fullscreen {
                 mode = "maximized";
