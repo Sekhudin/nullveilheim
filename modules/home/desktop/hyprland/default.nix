@@ -12,6 +12,7 @@ in
   imports = [
     ./bar
     ./core
+    ./launcher
     ./polkit
     ./wallpaper
   ];
