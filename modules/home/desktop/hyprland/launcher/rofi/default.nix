@@ -31,6 +31,7 @@ in
         terminal = lib.getExe terminal;
         plugins = [ ];
         modes = [
+          "combi"
           "drun"
           "ssh"
           "window"

@@ -13,6 +13,7 @@ in
     programs = {
       rofi.extraConfig = {
         show-icons = true;
+        drun-display-format = "{name}";
         combi-modes = [
           "window"
           "drun"
