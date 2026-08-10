@@ -23,19 +23,8 @@ in
             dispatcher = dsp.exec_cmd {
               cmd = "rofi -show drun";
             };
-          })
-
-          (mkBind {
-            key = combos.mod "S";
-            dispatcher = dsp.exec_cmd {
-              cmd = "rofi -show ssh";
-            };
-          })
-
-          (mkBind {
-            key = combos.mod "W";
-            dispatcher = dsp.exec_cmd {
-              cmd = "rofi -show window";
+            flags = {
+              release = true;
             };
           })
         ];
