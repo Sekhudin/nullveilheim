@@ -16,6 +16,7 @@ in
   imports = [
     ./bind.nix
     ./extra-config.nix
+    ./key-binds.nix
     ./pass.nix
     ./theme.nix
   ];

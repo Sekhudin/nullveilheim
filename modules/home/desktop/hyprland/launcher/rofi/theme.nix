@@ -36,7 +36,7 @@ in
           };
           literal = tokens // {
             bg = color.mkOpacity tokens.bg 0.9;
-            muted = color.mkOpacity tokens.muted 0.8;
+            muted = color.mkOpacity tokens.muted 0.7;
             muted-selected = color.mkOpacity tokens.muted 0.4;
 
             text-color = "@fg";
@@ -82,12 +82,14 @@ in
             enabled = true;
           };
           literal = {
+            text-color = "@fg";
+            background-color = "@muted";
             spacing = "8px";
             margin = "0% 25%";
-            padding = "${toString (styles.padding_y * 2)}px ${toString (styles.padding_x * 1.5)}px";
-            border_radius = "${toString styles.rounding}px";
-            background_color = "@muted";
-            text_color = "@fg";
+            padding = "${toString (styles.padding_y * 1.5)}px ${toString (styles.padding_x * 1.5)}px";
+            border = "${toString styles.border_size}px solid";
+            border-color = "@border";
+            border-radius = "${toString styles.rounding}px";
             children = ''[ "entry" ]'';
           };
         };
@@ -147,6 +149,8 @@ in
         "element selected.normal" = mkStyle {
           literal = {
             background-color = "@muted-selected";
+            border = "${toString styles.border_size}px solid";
+            border-color = "@border";
           };
         };
 
