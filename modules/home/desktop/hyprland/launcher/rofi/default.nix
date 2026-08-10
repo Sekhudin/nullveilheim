@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  extraLib,
   font,
   ...
 }:
@@ -9,19 +10,42 @@
 let
   cfg = config.homeDesktopModules.hyprland;
   enableRofi = (cfg.launcher.use == "rofi");
+  inherit (extraLib.hyprland)
+    mkBind
+    dsp
+    combos
+    ;
 
   terminal = pkgs.${config.homeTerminalModules.use};
 in
 {
   imports = [
-    ./bind.nix
-    ./extra-config.nix
-    ./key-binds.nix
+    ./bindings.nix
     ./pass.nix
     ./theme.nix
   ];
 
   config = lib.mkIf (cfg.enable && enableRofi) {
+    wayland.windowManager.hyprland = {
+      settings = {
+        bind = [
+          (mkBind {
+            key = combos.mod "D";
+            dispatcher = dsp.exec_cmd {
+              cmd = "rofi -show drun";
+            };
+          })
+
+          (mkBind {
+            key = combos.mod "SLASH";
+            dispatcher = dsp.exec_cmd {
+              cmd = "rofi -show drun";
+            };
+          })
+        ];
+      };
+    };
+
     programs = {
       rofi = {
         enable = true;
@@ -32,11 +56,19 @@ in
         terminal = lib.getExe terminal;
         plugins = [ ];
         modes = [
-          "combi"
           "drun"
           "ssh"
           "window"
         ];
+        extraConfig = {
+          show-icons = true;
+          drun-display-format = "{name}";
+          combi-modes = [
+            "window"
+            "drun"
+            "run"
+          ];
+        };
       };
     };
   };
