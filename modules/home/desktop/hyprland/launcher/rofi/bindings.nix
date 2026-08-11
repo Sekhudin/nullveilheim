@@ -9,6 +9,7 @@ let
   enableRofi = (cfg.launcher.use == "rofi");
 
   keys = {
+    mod = "Super";
     ctrl = "Control";
     shift = "Shift";
     insert = "Insert";
@@ -17,6 +18,7 @@ let
     right = "Right";
     up = "Up";
     down = "Down";
+    space = "space";
     bracketleft = "bracketleft";
     bracketright = "bracketright";
   };
@@ -69,7 +71,7 @@ in
 
         kb-cancel = mkBind {
           keys = [
-            keys.ctrl
+            keys.mod
             "q"
           ];
           alternate = [ "Escape" ];
@@ -85,14 +87,14 @@ in
 
         kb-move-front = mkBind {
           keys = [
-            keys.ctrl
+            keys.mod
             "0"
           ];
         };
 
         kb-move-end = mkBind {
           keys = [
-            keys.ctrl
+            keys.mod
             "4"
           ];
         };
@@ -134,14 +136,14 @@ in
         # navigation
         kb-row-left = mkBind {
           keys = [
-            keys.ctrl
+            keys.mod
             "h"
           ];
         };
 
         kb-row-down = mkBind {
           keys = [
-            keys.ctrl
+            keys.mod
             "j"
           ];
           alternate = [ keys.down ];
@@ -149,7 +151,7 @@ in
 
         kb-row-up = mkBind {
           keys = [
-            keys.ctrl
+            keys.mod
             "k"
           ];
           alternate = [ keys.up ];
@@ -157,9 +159,23 @@ in
 
         kb-row-right = mkBind {
           keys = [
-            keys.ctrl
+            keys.mod
             "l"
           ];
+        };
+
+        # mode
+        kb-mode-next = mkBind {
+          keys = [
+            keys.mod
+            keys.space
+          ];
+        };
+
+        # mouse
+        me-select-entry = "";
+        me-accept-entry = mkBind {
+          keys = [ "MousePrimary" ];
         };
 
         # disabled
@@ -176,7 +192,6 @@ in
 
         kb-delete-entry = "";
 
-        kb-mode-next = "";
         kb-mode-previous = "";
         kb-mode-complete = "";
 

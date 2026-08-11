@@ -61,7 +61,10 @@ in
           "window"
         ];
         extraConfig = {
+          global-kb = true;
+          steal-focus = true;
           show-icons = true;
+          hover-select = true;
           drun-display-format = "{name}";
           combi-modes = [
             "window"
