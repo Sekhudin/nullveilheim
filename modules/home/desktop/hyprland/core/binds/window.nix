@@ -26,12 +26,18 @@ in
             dispatcher = dsp.focus {
               direction = directions.left;
             };
+            flags = {
+              description = "move focus left";
+            };
           })
 
           (mkBind {
             key = combos.mod "J";
             dispatcher = dsp.focus {
               direction = directions.down;
+            };
+            flags = {
+              description = "move focus down";
             };
           })
 
@@ -40,12 +46,18 @@ in
             dispatcher = dsp.focus {
               direction = directions.up;
             };
+            flags = {
+              description = "move focus up";
+            };
           })
 
           (mkBind {
             key = combos.mod "L";
             dispatcher = dsp.focus {
               direction = directions.right;
+            };
+            flags = {
+              description = "move focus right";
             };
           })
 
@@ -58,6 +70,9 @@ in
             dispatcher = dsp.window.swap {
               direction = directions.left;
             };
+            flags = {
+              description = "swap window left";
+            };
           })
 
           (mkBind {
@@ -67,6 +82,9 @@ in
             ] "J";
             dispatcher = dsp.window.swap {
               direction = directions.down;
+            };
+            flags = {
+              description = "swap window down";
             };
           })
 
@@ -78,6 +96,9 @@ in
             dispatcher = dsp.window.swap {
               direction = directions.up;
             };
+            flags = {
+              description = "swap window up";
+            };
           })
 
           (mkBind {
@@ -87,6 +108,9 @@ in
             ] "L";
             dispatcher = dsp.window.swap {
               direction = directions.right;
+            };
+            flags = {
+              description = "swap window right";
             };
           })
 
@@ -103,6 +127,7 @@ in
             };
             flags = {
               repeating = true;
+              description = "resize window left";
             };
           })
 
@@ -118,6 +143,7 @@ in
             };
             flags = {
               repeating = true;
+              description = "resize window down";
             };
           })
 
@@ -133,6 +159,7 @@ in
             };
             flags = {
               repeating = true;
+              description = "resize window up";
             };
           })
 
@@ -148,6 +175,7 @@ in
             };
             flags = {
               repeating = true;
+              description = "resize window right";
             };
           })
         ];

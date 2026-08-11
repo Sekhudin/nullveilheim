@@ -29,6 +29,7 @@ in
             flags = {
               mouse = true;
               drag = true;
+              description = "swap window";
             };
           })
 
@@ -41,6 +42,7 @@ in
             flags = {
               mouse = true;
               drag = true;
+              description = "resize window";
             };
           })
         ];

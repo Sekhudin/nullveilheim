@@ -28,6 +28,9 @@ in
             dispatcher = dsp.submap {
               name = resize;
             };
+            flags = {
+              description = "submap resize";
+            };
           })
         ];
 
@@ -45,6 +48,7 @@ in
                 };
                 flags = {
                   repeating = true;
+                  description = "resize left";
                 };
               })
 
@@ -57,6 +61,7 @@ in
                 };
                 flags = {
                   repeating = true;
+                  description = "resize down";
                 };
               })
 
@@ -69,6 +74,7 @@ in
                 };
                 flags = {
                   repeating = true;
+                  description = "resize up";
                 };
               })
 
@@ -81,6 +87,7 @@ in
                 };
                 flags = {
                   repeating = true;
+                  description = "resize right";
                 };
               })
             ];

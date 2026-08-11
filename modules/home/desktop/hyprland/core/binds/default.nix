@@ -31,6 +31,7 @@ in
             dispatcher = dsp.window.close { };
             flags = {
               locked = true;
+              description = "close current window";
             };
           })
 
@@ -41,12 +42,18 @@ in
               action = "toggle";
               layout_aware = true;
             };
+            flags = {
+              description = "window fullscreen toggle";
+            };
           })
 
           (mkBind {
             key = combos.mod "V";
             dispatcher = dsp.window.float {
               action = "toggle";
+            };
+            flags = {
+              description = "window float toggle";
             };
           })
 
@@ -60,11 +67,17 @@ in
                 "monocle"
               ];
             };
+            flags = {
+              description = "change layout toggle";
+            };
           })
 
           (mkBind {
             key = combos.mod "Z";
             dispatcher = dsp.extra.zen_mode { };
+            flags = {
+              description = "zen mode toggle";
+            };
           })
         ];
       };
