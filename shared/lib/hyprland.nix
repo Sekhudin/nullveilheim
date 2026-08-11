@@ -127,6 +127,9 @@
                 dispatcher = dsp.focus {
                   inherit workspace;
                 };
+                flags = {
+                  description = "switch to workspace ${toString workspace}";
+                };
               })
 
               (mkBind {
@@ -136,6 +139,9 @@
                 ] key;
                 dispatcher = dsp.window.move {
                   inherit workspace;
+                };
+                flags = {
+                  description = "move window to workspace ${toString workspace}";
                 };
               })
             ]

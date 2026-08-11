@@ -27,12 +27,18 @@ in
             dispatcher = dsp.exec_cmd {
               cmd = terminal;
             };
+            flags = {
+              description = "open terminal";
+            };
           })
 
           (mkBind {
             key = combos.mod "B";
             dispatcher = dsp.exec_cmd {
               cmd = browser;
+            };
+            flags = {
+              description = "open browser";
             };
           })
         ];

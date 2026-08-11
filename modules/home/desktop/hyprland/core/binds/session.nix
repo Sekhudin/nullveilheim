@@ -26,6 +26,9 @@ in
               keys.shift
             ] "E";
             dispatcher = dsp.exit { };
+            flags = {
+              description = "logout";
+            };
           })
 
           # reload
@@ -36,6 +39,9 @@ in
             ] "R";
             dispatcher = dsp.exec_cmd {
               cmd = "hyprctl reload";
+            };
+            flags = {
+              description = "reload config";
             };
           })
         ];

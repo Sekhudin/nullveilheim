@@ -28,6 +28,9 @@ in
             dispatcher = dsp.submap {
               name = monitor;
             };
+            flags = {
+              description = "submap monitor";
+            };
           })
         ];
 
@@ -42,12 +45,18 @@ in
                 dispatcher = dsp.focus {
                   monitor = "-1";
                 };
+                flags = {
+                  description = "move focus to previous monitor";
+                };
               })
 
               (mkSubmapBind {
                 key = combos.plain "L";
                 dispatcher = dsp.focus {
                   monitor = "+1";
+                };
+                flags = {
+                  description = "move focus to next monitor";
                 };
               })
 
@@ -57,11 +66,17 @@ in
                 dispatcher = dsp.window.move {
                   monitor = "-1";
                 };
+                flags = {
+                  description = "move window to previous monitor";
+                };
               })
               (mkSubmapBind {
                 key = combos.shift "L";
                 dispatcher = dsp.window.move {
                   monitor = "+1";
+                };
+                flags = {
+                  description = "move window to next monitor";
                 };
               })
 
@@ -71,11 +86,17 @@ in
                 dispatcher = dsp.workspace.move {
                   monitor = "-1";
                 };
+                flags = {
+                  description = "move workspace to previous monitor";
+                };
               })
               (mkSubmapBind {
                 key = combos.ctrl "L";
                 dispatcher = dsp.workspace.move {
                   monitor = "+1";
+                };
+                flags = {
+                  description = "move workspace to next monitor";
                 };
               })
             ];
