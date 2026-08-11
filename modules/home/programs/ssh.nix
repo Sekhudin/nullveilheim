@@ -34,7 +34,7 @@ in
       default = false;
     };
 
-    config = lib.mkOption {
+    settings = lib.mkOption {
       type = lib.types.attrs;
       description = "ssh settings";
       default = { };
@@ -57,7 +57,7 @@ in
               HashKnownHosts = true;
             };
           }
-          cfg.config
+          cfg.settings
         ];
       };
     };

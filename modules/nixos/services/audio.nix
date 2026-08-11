@@ -20,58 +20,31 @@ in
       description = "audio server";
       default = "pipewire";
     };
-
-    rtkit = lib.mkOption {
-      type = lib.types.attrs;
-      description = "rtkit settings";
-      default = { };
-    };
-
-    pulseaudio = lib.mkOption {
-      type = lib.types.attrs;
-      description = "pulseaudio settings";
-      default = { };
-    };
-
-    pipewire = lib.mkOption {
-      type = lib.types.attrs;
-      description = "pipewire settings";
-      default = { };
-    };
   };
 
   config = lib.mkIf (masterEnable && cfg.enable) {
     security = {
-      rtkit = lib.mkMerge [
-        {
-          enable = true;
-        }
-        cfg.rtkit
-      ];
+      rtkit = lib.mkIf (cfg.use == "pipewire") {
+        enable = true;
+      };
     };
 
     services = {
-      pulseaudio = lib.mkMerge [
-        {
-          enable = cfg.use == "pulseaudio";
-        }
-        cfg.pulseaudio
-      ];
+      pulseaudio = lib.mkIf (cfg.use == "pulseaudio") {
+        enable = true;
+      };
 
-      pipewire = lib.mkMerge [
-        (lib.mkIf (cfg.use == "pipewire") {
+      pipewire = lib.mkIf (cfg.use == "pipewire") {
+        enable = true;
+        alsa = {
           enable = true;
-          alsa = {
-            enable = true;
-            support32Bit = true;
-          };
+          support32Bit = true;
+        };
 
-          pulse = {
-            enable = true;
-          };
-        })
-        cfg.pipewire
-      ];
+        pulse = {
+          enable = true;
+        };
+      };
     };
   };
 }

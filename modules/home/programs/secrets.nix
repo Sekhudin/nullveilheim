@@ -55,12 +55,6 @@ in
       description = "gpg profiles";
       default = { };
     };
-
-    secrets = lib.mkOption {
-      type = lib.types.attrs;
-      description = "secrets";
-      default = { };
-    };
   };
 
   config = lib.mkIf (masterEnable && cfg.enable) {
@@ -81,7 +75,6 @@ in
         (mkGPGKeySecrets secretProfiles.gpgKeys)
         (mkSSHKeySecrets secretProfiles.sshKeys)
         (mkGitIdentitySecrets secretProfiles.gitIdentities)
-        cfg.secrets
       ];
     };
 

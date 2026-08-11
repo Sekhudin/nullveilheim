@@ -99,18 +99,6 @@ in
       default = config.homeCoreModules.theme;
     };
 
-    workspaces = lib.mkOption {
-      type = lib.types.attrs;
-      description = "List of tmux workspaces configurations";
-      default = { };
-      example = {
-        foo = {
-          session_name = "coding";
-          windows = [ { window_name = "nvim"; } ];
-        };
-      };
-    };
-
     settings = lib.mkOption {
       type = lib.types.attrs;
       description = "tmux settings";
@@ -217,7 +205,7 @@ in
     };
 
     home = {
-      shellAliases = (mkShellAliases (workspaces // cfg.workspaces));
+      shellAliases = (mkShellAliases workspaces);
     };
   };
 }
