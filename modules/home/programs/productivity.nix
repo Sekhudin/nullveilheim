@@ -19,24 +19,6 @@ in
       description = "enable productivity";
       default = true;
     };
-
-    discord = lib.mkOption {
-      type = lib.types.attrs;
-      description = "discord settings";
-      default = { };
-    };
-
-    dbeaver = lib.mkOption {
-      type = lib.types.attrs;
-      description = "dbeaver settings";
-      default = { };
-    };
-
-    firefox = lib.mkOption {
-      type = lib.types.attrs;
-      description = "firefox settings";
-      default = { };
-    };
   };
 
   config = lib.mkIf (masterEnable && cfg.enable) {
@@ -54,31 +36,22 @@ in
     };
 
     programs = {
-      discord = lib.mkMerge [
-        {
-          enable = true;
-        }
-        cfg.discord
-      ];
+      discord = {
+        enable = true;
+      };
 
-      dbeaver = lib.mkMerge [
-        {
-          enable = true;
-          dataSourcesSettings = {
-            connections = { };
-            folders = { };
-          };
-          settings = { };
-        }
-        cfg.dbeaver
-      ];
+      dbeaver = {
+        enable = true;
+        dataSourcesSettings = {
+          connections = { };
+          folders = { };
+        };
+        settings = { };
+      };
 
-      firefox = lib.mkMerge [
-        {
-          enable = true;
-        }
-        cfg.firefox
-      ];
+      firefox = {
+        enable = true;
+      };
     };
 
     xdg.desktopEntries = lib.mkIf openGLEnable {

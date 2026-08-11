@@ -7,18 +7,6 @@ let
 in
 {
   options.nixosDesktopModules.gnome = {
-    gdm = lib.mkOption {
-      type = lib.types.attrs;
-      description = "gdm settings";
-      default = { };
-    };
-
-    xserver = lib.mkOption {
-      type = lib.types.attrs;
-      description = "xserver settings";
-      default = { };
-    };
-
     settings = lib.mkOption {
       type = lib.types.attrs;
       description = "gnome settings";
@@ -29,24 +17,18 @@ in
   config = lib.mkIf enableGnome {
     services = {
       displayManager = {
-        gdm = lib.mkMerge [
-          {
-            enable = true;
-          }
-          cfg.gdm
-        ];
+        gdm = {
+          enable = true;
+        };
       };
 
-      xserver = lib.mkMerge [
-        {
-          enable = true;
-          xkb = {
-            layout = "us";
-            variant = "";
-          };
-        }
-        cfg.xserver
-      ];
+      xserver = {
+        enable = true;
+        xkb = {
+          layout = "us";
+          variant = "";
+        };
+      };
 
       desktopManager = {
         gnome = lib.mkMerge [
