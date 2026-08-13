@@ -138,6 +138,7 @@ in
             border-radius = "${toString styles.rounding}px";
             orientation = "vertical";
             cursor = "pointer";
+            children = ''[ "element-icon", "element-text" ]'';
           };
         };
 
