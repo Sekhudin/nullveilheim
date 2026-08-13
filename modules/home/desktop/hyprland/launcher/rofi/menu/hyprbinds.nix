@@ -1,7 +1,7 @@
 {
   mkBind,
+  mkRofi,
   mkJq,
-  mkDmenu,
   joinPipe,
   pkgs,
   tokens,
@@ -77,8 +77,9 @@ let
         | join("|")
       '';
     })
-    (mkDmenu {
+    (mkRofi {
       args = [
+        "-dmenu"
         "-markup"
         "-sep '|'"
         "-kb-accept-entry ''"

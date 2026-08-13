@@ -21,19 +21,19 @@ let
 
   joinPipe = parts: lib.concatStringsSep " | " (map lib.strings.trim parts);
 
+  mkRofi =
+    {
+      args ? [ ],
+      theme-str ? "",
+    }:
+    "rofi ${lib.concatStringsSep " " args} -theme-str '${theme-str}'";
+
   mkJq =
     {
       args ? [ ],
       query ? ".",
     }:
     "jq ${lib.concatStringsSep " " args} '${lib.strings.trim query}'";
-
-  mkDmenu =
-    {
-      args ? [ ],
-      theme-str ? "",
-    }:
-    "rofi -dmenu ${lib.concatStringsSep " " args} -theme-str '${theme-str}'";
 
   var = getVarRef config;
   styles = var "styles";
@@ -46,8 +46,8 @@ let
     args = {
       inherit
         mkBind
+        mkRofi
         mkJq
-        mkDmenu
         joinPipe
         pkgs
         lib
@@ -104,8 +104,6 @@ in
         plugins = [ ];
         modes = [
           "drun"
-          "ssh"
-          "window"
         ];
         extraConfig = {
           global-kb = true;
@@ -113,11 +111,6 @@ in
           show-icons = true;
           hover-select = true;
           drun-display-format = "{name}";
-          combi-modes = [
-            "window"
-            "drun"
-            "run"
-          ];
         };
       };
     };
