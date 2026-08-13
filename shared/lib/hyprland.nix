@@ -169,7 +169,7 @@
                 else
                   ''
                     ${bind'}
-                    hl.bind("escape", hl.dsp.submap("reset"))
+                    hl.bind("escape", hl.dsp.submap("reset"), { description = "exit from submap" })
                   ''
               )
             ))

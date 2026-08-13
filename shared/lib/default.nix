@@ -36,5 +36,31 @@ in
           defaultHome = "/${if pkgs.stdenv.isDarwin then "Users" else "home"}/${username}";
         in
         if nixosHome != null then nixosHome else defaultHome;
+
+      importModules =
+        {
+          dir,
+          args ? { },
+          recursive ? false,
+          excludeDefault ? true,
+        }:
+        let
+          isNixFile =
+            name: type:
+            type == "regular" && lib.hasSuffix ".nix" name && (!excludeDefault || name != "default.nix");
+
+          readDir =
+            dir:
+            let
+              entries = builtins.readDir dir;
+
+              files = lib.filterAttrs isNixFile entries;
+
+              dirs = lib.filterAttrs (_: type: type == "directory") entries;
+            in
+            (lib.mapAttrsToList (name: _: import (dir + "/${name}") args) files)
+            ++ lib.optionals recursive (lib.concatMap (name: readDir (dir + "/${name}")) (lib.attrNames dirs));
+        in
+        readDir dir;
     };
 }
