@@ -55,7 +55,7 @@ in
 
           tokens = mkVar tokens;
 
-          styles = mkVar {
+          styles = mkVar rec {
             gaps_in = 4;
             gaps_out = 4;
             rounding = 12;
@@ -65,6 +65,7 @@ in
             min_height = 16;
             padding_x = 12;
             padding_y = 8;
+            margin_top = (gaps_out * 8) + min_height;
             animation_ms = 300;
           };
         }

@@ -27,19 +27,20 @@ let
       query = ''
         def key_label:
           {
-            "SPACE": "␣",
-            "RETURN": "↵",
-            "TAB": "Tab",
-            "SLASH": "/",
             "BACKSPACE": "⌫",
             "DELETE": "Del",
+            "RETURN": "↵",
+            "SLASH": "/",
+            "SPACE": "󱁐",
+            "SUPER": "";
+            "TAB": "Tab",
             "LEFT": "←",
             "RIGHT": "→",
             "UP": "↑",
             "DOWN": "↓",
             "escape": "Esc",
-            "mouse:272": "ML",
-            "mouse:273": "MR"
+            "mouse:272": "󰍽",
+            "mouse:273": "󰍽"
           }[.] // .;
 
         def key_shortcut:
