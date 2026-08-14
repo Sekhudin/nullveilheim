@@ -16,6 +16,7 @@ let
     mkBind
     getVarRef
     dsp
+    keys
     combos
     ;
 
@@ -36,6 +37,7 @@ let
     "jq ${lib.concatStringsSep " " args} '${lib.strings.trim query}'";
 
   var = getVarRef config;
+  menus = var "menus";
   styles = var "styles";
   tokens = var "tokens";
 
@@ -51,10 +53,12 @@ let
         joinPipe
         pkgs
         lib
-        tokens
+        menus
         styles
-        combos
+        tokens
         dsp
+        keys
+        combos
         ;
     };
   };

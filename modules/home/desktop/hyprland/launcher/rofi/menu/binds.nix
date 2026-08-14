@@ -33,8 +33,9 @@ let
             "RETURN": "↵",
             "SLASH": "/",
             "SPACE": "󱁐",
-            "SUPER": "",
-            "TAB": "Tab",
+            "SUPER": "⌘",
+            "SUPER_L": "⌘",
+            "TAB": " ",
             "LEFT": "←",
             "RIGHT": "→",
             "UP": "↑",
@@ -46,7 +47,11 @@ let
 
         def key_shortcut:
           {
-          "escape": "Escape",
+            "RETURN": "Enter",
+            "SLASH": "/",
+            "SPACE": "Space",
+            "SUPER_L": "",
+            "escape": "Escape",
             "mouse:272": "Mouse Left",
             "mouse:273": "Mouse Right"
           }[.] // .;
@@ -62,7 +67,10 @@ let
 
         [
           .[]
-          | select(.description != "")
+          | select(
+              .description != ""
+              and (.modmask != 0 or .key != "escape")
+            )
           | (
               .key | key_label
             ) as $key
@@ -110,7 +118,7 @@ let
         element-icon {
           size: 36px;
           vertical-align: 0.5;
-          horizontal-align: 0.0;
+          horizontal-align: 0.5;
           padding: ${toString styles.gaps_in}px;
           background-color: @muted-selected;
           border: ${toString styles.border_size}px solid;

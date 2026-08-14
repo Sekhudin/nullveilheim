@@ -43,9 +43,10 @@ in
           };
 
           menus = mkVar {
-            bluetooth = "bluetooth";
-            network = "network";
-            power = "power";
+            binds = "hypr-binds";
+            bluetooth = "hypr-bluetooth";
+            network = "hypr-network";
+            power = "hypr-power";
           };
 
           cursor = mkVar {

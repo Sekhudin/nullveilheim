@@ -17,6 +17,8 @@ let
     ;
 
   monitor = getVar "submaps.monitor";
+
+  mkDesc = desc: "(M) ${desc}";
 in
 {
   config = lib.mkIf cfg.enable {
@@ -29,7 +31,7 @@ in
               name = monitor;
             };
             flags = {
-              description = "submap monitor";
+              description = mkDesc "enter submap monitor";
             };
           })
         ];
@@ -46,7 +48,7 @@ in
                   monitor = "-1";
                 };
                 flags = {
-                  description = "move focus to previous monitor";
+                  description = mkDesc "move focus to previous monitor";
                 };
               })
 
@@ -56,7 +58,7 @@ in
                   monitor = "+1";
                 };
                 flags = {
-                  description = "move focus to next monitor";
+                  description = mkDesc "move focus to next monitor";
                 };
               })
 
@@ -67,7 +69,7 @@ in
                   monitor = "-1";
                 };
                 flags = {
-                  description = "move window to previous monitor";
+                  description = mkDesc "move window to previous monitor";
                 };
               })
               (mkSubmapBind {
@@ -76,7 +78,7 @@ in
                   monitor = "+1";
                 };
                 flags = {
-                  description = "move window to next monitor";
+                  description = mkDesc "move window to next monitor";
                 };
               })
 
@@ -87,7 +89,7 @@ in
                   monitor = "-1";
                 };
                 flags = {
-                  description = "move workspace to previous monitor";
+                  description = mkDesc "move workspace to previous monitor";
                 };
               })
               (mkSubmapBind {
@@ -96,7 +98,7 @@ in
                   monitor = "+1";
                 };
                 flags = {
-                  description = "move workspace to next monitor";
+                  description = mkDesc "move workspace to next monitor";
                 };
               })
             ];
