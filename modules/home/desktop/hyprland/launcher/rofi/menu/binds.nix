@@ -4,15 +4,16 @@
   mkJq,
   joinPipe,
   pkgs,
-  tokens,
+  menus,
   styles,
+  tokens,
   combos,
   dsp,
   ...
 }:
 
 let
-  name = "rofi-hyprbinds";
+  name = menus.binds;
 
   runtimeInputs = with pkgs; [
     hyprland
@@ -32,7 +33,7 @@ let
             "RETURN": "↵",
             "SLASH": "/",
             "SPACE": "󱁐",
-            "SUPER": "";
+            "SUPER": "",
             "TAB": "Tab",
             "LEFT": "←",
             "RIGHT": "→",
