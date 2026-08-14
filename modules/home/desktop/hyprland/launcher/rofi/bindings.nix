@@ -70,11 +70,7 @@ in
         };
 
         kb-cancel = mkBind {
-          keys = [
-            keys.mod
-            "q"
-          ];
-          alternate = [ "Escape" ];
+          keys = [ "Escape" ];
         };
 
         # input

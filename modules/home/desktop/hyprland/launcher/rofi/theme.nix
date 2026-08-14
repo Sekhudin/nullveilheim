@@ -54,9 +54,7 @@ in
             width = "1368px";
             height = "768px";
             background-color = "@bg";
-            margin = "${
-              toString ((styles.gaps_out * 8) + styles.min_height)
-            }px ${toString styles.gaps_out}px ${toString styles.gaps_out}px ${toString styles.gaps_out}px";
+            margin = "${toString styles.margin_top}px ${toString styles.gaps_out}px ${toString styles.gaps_out}px ${toString styles.gaps_out}px";
             padding = "${toString styles.padding_y}px ${toString styles.padding_x}px";
             border = "${toString styles.border_size}px solid";
             border-color = "@primary";

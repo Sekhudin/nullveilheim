@@ -81,11 +81,12 @@ in
       settings = {
         bind = menu.binds ++ [
           (mkBind {
-            key = combos.mod "D";
+            key = combos.mod "SUPER_L";
             dispatcher = dsp.exec_cmd {
               cmd = "rofi -show drun";
             };
             flags = {
+              release = true;
               description = "open app launcher";
             };
           })
