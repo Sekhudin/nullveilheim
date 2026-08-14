@@ -42,6 +42,12 @@ in
             editor = "nvim";
           };
 
+          menus = mkVar {
+            bluetooth = "bluetooth";
+            network = "network";
+            power = "power";
+          };
+
           cursor = mkVar {
             theme = "Bibata-Modern-Ice";
             size = 24;
