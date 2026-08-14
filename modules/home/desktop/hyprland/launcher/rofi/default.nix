@@ -104,6 +104,7 @@ in
         plugins = [ ];
         modes = [
           "drun"
+          "window"
         ];
         extraConfig = {
           global-kb = true;
@@ -111,6 +112,7 @@ in
           show-icons = true;
           hover-select = true;
           drun-display-format = "{name}";
+          window-format = "{t}";
         };
       };
     };
