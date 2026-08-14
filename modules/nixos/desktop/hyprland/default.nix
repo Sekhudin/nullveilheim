@@ -67,7 +67,6 @@ in
                 user = "greeter";
                 options = [
                   "--time"
-                  "--asterisks"
                 ];
               })
               user

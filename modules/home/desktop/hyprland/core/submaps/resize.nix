@@ -17,6 +17,8 @@ let
     ;
 
   resize = getVar "submaps.resize";
+
+  mkDesc = desc: "(R) ${desc}";
 in
 {
   config = lib.mkIf cfg.enable {
@@ -29,7 +31,7 @@ in
               name = resize;
             };
             flags = {
-              description = "submap resize";
+              description = mkDesc "enter submap resize";
             };
           })
         ];
@@ -48,7 +50,7 @@ in
                 };
                 flags = {
                   repeating = true;
-                  description = "resize left";
+                  description = mkDesc "resize left";
                 };
               })
 
@@ -61,7 +63,7 @@ in
                 };
                 flags = {
                   repeating = true;
-                  description = "resize down";
+                  description = mkDesc "resize down";
                 };
               })
 
@@ -74,7 +76,7 @@ in
                 };
                 flags = {
                   repeating = true;
-                  description = "resize up";
+                  description = mkDesc "resize up";
                 };
               })
 
@@ -87,7 +89,7 @@ in
                 };
                 flags = {
                   repeating = true;
-                  description = "resize right";
+                  description = mkDesc "resize right";
                 };
               })
             ];
