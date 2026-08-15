@@ -29,6 +29,21 @@ in
       default = config.homeCoreModules.theme;
     };
 
+    ecosystem = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          use = lib.mkOption {
+            type = lib.types.enum [
+              "default"
+              "noctalia"
+            ];
+            description = "choose status bar";
+            default = "default";
+          };
+        };
+      };
+    };
+
     bar = lib.mkOption {
       type = lib.types.submodule {
         options = {
@@ -85,21 +100,6 @@ in
             ];
             description = "choose on-screen display";
             default = "swayosd";
-          };
-        };
-      };
-    };
-
-    polkit = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          use = lib.mkOption {
-            type = lib.types.enum [
-              "none"
-              "hyprpolkitagent"
-            ];
-            description = "choose polkit agent";
-            default = "hyprpolkitagent";
           };
         };
       };

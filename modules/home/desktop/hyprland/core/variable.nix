@@ -34,6 +34,7 @@ in
           submaps = mkVar {
             monitor = "M";
             resize = "R";
+            session = "S";
           };
 
           apps = mkVar {
@@ -46,6 +47,11 @@ in
             apps = "hypr-apps";
             binds = "hypr-binds";
             power = "hypr-power";
+          };
+
+          actions = mkVar {
+            lock = "hypr-lock";
+            reload = "hypr-reload";
           };
 
           cursor = mkVar {
