@@ -68,9 +68,9 @@ in
             enabled = true;
           };
           literal = {
-            spacing = "100px";
+            spacing = "92px";
             margin = "0px";
-            padding = "100px 224px";
+            padding = "92px 216px";
             children = ''[ "inputbar", "listview" ]'';
           };
         };
@@ -118,6 +118,7 @@ in
             fixed-columns = true;
           };
           literal = {
+            flow = "horizontal";
             spacing = "0px";
             margin = "0px";
             padding = "0px";
@@ -130,9 +131,9 @@ in
             enabled = true;
           };
           literal = {
-            spacing = "16px";
+            spacing = "12px";
             margin = "0px";
-            padding = "36px 8px";
+            padding = "32px 8px";
             border-radius = "${toString styles.rounding}px";
             orientation = "vertical";
             cursor = "pointer";
@@ -155,7 +156,7 @@ in
 
         element-icon = mkStyle {
           literal = {
-            size = "72px";
+            size = "64px";
             cursor = "inherit";
           };
         };
