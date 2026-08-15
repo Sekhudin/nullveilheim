@@ -43,9 +43,8 @@ in
           };
 
           menus = mkVar {
+            apps = "hypr-apps";
             binds = "hypr-binds";
-            bluetooth = "hypr-bluetooth";
-            network = "hypr-network";
             power = "hypr-power";
           };
 

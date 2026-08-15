@@ -1,5 +1,4 @@
 {
-  mkBind,
   mkRofi,
   mkJq,
   joinPipe,
@@ -7,8 +6,6 @@
   menus,
   styles,
   tokens,
-  combos,
-  dsp,
   ...
 }:
 
@@ -137,16 +134,6 @@ let
   ];
 in
 {
-  bind = mkBind {
-    key = combos.mod "SLASH";
-    dispatcher = dsp.exec_cmd {
-      cmd = name;
-    };
-    flags = {
-      description = "show key bindings";
-    };
-  };
-
   app = pkgs.writeShellApplication {
     inherit name text runtimeInputs;
   };

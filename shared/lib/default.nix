@@ -37,6 +37,15 @@ in
         in
         if nixosHome != null then nixosHome else defaultHome;
 
+      joinPipe = parts: lib.concatStringsSep " | " (map lib.strings.trim parts);
+
+      mkJq =
+        {
+          args ? [ ],
+          query ? ".",
+        }:
+        "jq ${lib.concatStringsSep " " args} '${lib.strings.trim query}'";
+
       importModules =
         {
           dir,

@@ -11,16 +11,13 @@ let
   cfg = config.homeDesktopModules.hyprland;
   enableRofi = (cfg.launcher.use == "rofi");
 
-  inherit (extraLib) importModules;
-  inherit (extraLib.hyprland)
-    mkBind
-    getVarRef
-    dsp
-    keys
-    combos
+  inherit (extraLib)
+    importModules
+    mkJq
+    joinPipe
     ;
 
-  joinPipe = parts: lib.concatStringsSep " | " (map lib.strings.trim parts);
+  inherit (extraLib.hyprland) getVarRef;
 
   mkRofi =
     {
@@ -28,13 +25,6 @@ let
       theme-str ? "",
     }:
     "rofi ${lib.concatStringsSep " " args} -theme-str '${theme-str}'";
-
-  mkJq =
-    {
-      args ? [ ],
-      query ? ".",
-    }:
-    "jq ${lib.concatStringsSep " " args} '${lib.strings.trim query}'";
 
   var = getVarRef config;
   menus = var "menus";
@@ -47,7 +37,6 @@ let
     excludeDefault = true;
     args = {
       inherit
-        mkBind
         mkRofi
         mkJq
         joinPipe
@@ -56,9 +45,6 @@ let
         menus
         styles
         tokens
-        dsp
-        keys
-        combos
         ;
     };
   };
@@ -66,7 +52,6 @@ let
   terminal = pkgs.${config.homeTerminalModules.use};
   menu = {
     apps = map (module: module.app) menuModules;
-    binds = map (module: module.bind) menuModules;
   };
 in
 {
@@ -79,23 +64,6 @@ in
   config = lib.mkIf (cfg.enable && enableRofi) {
     home = {
       packages = menu.apps ++ [ ];
-    };
-
-    wayland.windowManager.hyprland = {
-      settings = {
-        bind = menu.binds ++ [
-          (mkBind {
-            key = combos.mod "SUPER_L";
-            dispatcher = dsp.exec_cmd {
-              cmd = "rofi -show drun";
-            };
-            flags = {
-              release = true;
-              description = "open app launcher";
-            };
-          })
-        ];
-      };
     };
 
     programs = {
