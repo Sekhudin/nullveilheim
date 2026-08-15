@@ -1,5 +1,6 @@
 {
   mkBind,
+  mkRofi,
   joinPipe,
   pkgs,
   menus,
@@ -17,7 +18,25 @@ let
     jq
   ];
 
-  text = joinPipe [ ];
+  text = joinPipe [
+    ''
+      rofi_cmd(){
+        ${mkRofi {
+          args = [
+            "-dmenu"
+            "-markup"
+            "-markup-rows"
+          ];
+          theme-str = ''
+            listview {
+              columns: 6;
+              lines: 1;
+            }
+          '';
+        }}
+      }
+    ''
+  ];
 in
 {
   bind = mkBind {
