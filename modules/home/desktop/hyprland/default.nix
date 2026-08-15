@@ -13,7 +13,6 @@ in
     ./bar
     ./core
     ./launcher
-    ./polkit
     ./wallpaper
   ];
 

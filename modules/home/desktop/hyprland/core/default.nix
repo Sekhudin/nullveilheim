@@ -11,6 +11,7 @@ in
 {
   imports = [
     ./binds
+    ./ecosystem
     ./submaps
     ./config.nix
     ./env.nix
