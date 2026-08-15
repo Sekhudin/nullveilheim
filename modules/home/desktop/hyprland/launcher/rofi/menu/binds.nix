@@ -91,6 +91,7 @@ let
       args = [
         "-dmenu"
         "-markup"
+        "-markup-rows"
         "-sep '|'"
         "-kb-accept-entry ''"
         "-me-accept-entry ''"
