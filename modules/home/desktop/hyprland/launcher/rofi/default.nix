@@ -116,8 +116,8 @@ in
           steal-focus = true;
           show-icons = true;
           hover-select = true;
-          drun-display-format = "{name}";
           window-format = "{t}";
+          drun-display-format = "{name}";
         };
       };
     };
