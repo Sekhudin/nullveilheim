@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 let
   cfg = config.homeDesktopModules.hyprland;
@@ -10,7 +15,6 @@ in
     ./config.nix
     ./env.nix
     ./monitor.nix
-    ./portal.nix
     ./variable.nix
     ./workspace-rule.nix
   ];
@@ -19,6 +23,21 @@ in
     wayland = {
       systemd = {
         target = "hyprland-session.target";
+      };
+    };
+
+    xdg = {
+      portal = {
+        enable = true;
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-hyprland
+          xdg-desktop-portal-gtk
+        ];
+
+        config.common.default = [
+          "hyprland"
+          "gtk"
+        ];
       };
     };
 
