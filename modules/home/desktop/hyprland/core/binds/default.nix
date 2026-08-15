@@ -10,6 +10,7 @@ let
   inherit (extraLib.hyprland)
     mkBind
     dsp
+    keys
     combos
     ;
 in
@@ -70,6 +71,19 @@ in
             };
             flags = {
               description = "change layout toggle";
+            };
+          })
+
+          (mkBind {
+            key = combos.of [
+              keys.mod
+              keys.shift
+            ] "R";
+            dispatcher = dsp.exec_cmd {
+              cmd = "hyprctl reload";
+            };
+            flags = {
+              description = "reload config";
             };
           })
 
