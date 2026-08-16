@@ -49,7 +49,6 @@ in
         options = {
           use = lib.mkOption {
             type = lib.types.enum [
-              "none"
               "ashell"
               "waybar"
             ];
@@ -65,7 +64,6 @@ in
         options = {
           use = lib.mkOption {
             type = lib.types.enum [
-              "none"
               "rofi"
             ];
             description = "choose launcher";
@@ -80,7 +78,6 @@ in
         options = {
           use = lib.mkOption {
             type = lib.types.enum [
-              "none"
               "mako"
             ];
             description = "choose notification";
@@ -95,7 +92,6 @@ in
         options = {
           use = lib.mkOption {
             type = lib.types.enum [
-              "none"
               "swayosd"
             ];
             description = "choose on-screen display";
@@ -110,7 +106,6 @@ in
         options = {
           use = lib.mkOption {
             type = lib.types.enum [
-              "none"
               "hyprpaper"
             ];
             description = "choose wallpaper";
