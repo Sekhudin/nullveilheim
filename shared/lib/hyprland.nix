@@ -277,6 +277,13 @@
       };
 
       dsp = {
+        dpms =
+          p:
+          mkCallAttrs {
+            func = "hl.dsp.dpms";
+            attrs = p;
+          };
+
         exec_cmd =
           p:
           mkCall {
