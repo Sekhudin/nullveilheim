@@ -8,6 +8,8 @@
 
 let
   cfg = config.homeDesktopModules.hyprland;
+  ecosystemEnabled = cfg.ecosystem.use == "default";
+
   inherit (extraLib.hyprland)
     mkEvent
     events
@@ -15,7 +17,7 @@ let
     ;
 in
 {
-  config = lib.mkIf (cfg.enable) {
+  config = lib.mkIf (cfg.enable && ecosystemEnabled) {
     home = {
       packages = with pkgs; [
         hyprpolkitagent
