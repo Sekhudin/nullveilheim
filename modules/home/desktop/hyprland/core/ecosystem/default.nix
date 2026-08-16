@@ -7,6 +7,9 @@
 }:
 
 let
+  cfg = config.homeDesktopModules.hyprland;
+  ecosystemEnabled = cfg.ecosystem.use == "default";
+
   inherit (extraLib)
     importModules
     mkJq
@@ -17,25 +20,6 @@ let
 
   var = getVarRef config;
   actions = var "actions";
-
-  actionModules = importModules {
-    dir = ./actions;
-    recursive = false;
-    excludeDefault = true;
-    args = {
-      inherit
-        mkJq
-        joinPipe
-        pkgs
-        lib
-        actions
-        ;
-    };
-  };
-
-  action = {
-    apps = map (module: module.app) actionModules;
-  };
 in
 {
   imports = [
@@ -44,7 +28,22 @@ in
     ./hyprpolkitagent.nix
   ];
 
-  home = {
-    packages = action.apps ++ [ ];
+  config = lib.mkIf (cfg.enable && ecosystemEnabled) {
+    home = {
+      packages = map (module: module.app) (importModules {
+        dir = ./actions;
+        recursive = false;
+        excludeDefault = true;
+        args = {
+          inherit
+            mkJq
+            joinPipe
+            pkgs
+            lib
+            actions
+            ;
+        };
+      });
+    };
   };
 }
