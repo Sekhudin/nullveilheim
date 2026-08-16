@@ -31,28 +31,7 @@ let
   styles = var "styles";
   tokens = var "tokens";
 
-  menuModules = importModules {
-    dir = ./menu;
-    recursive = false;
-    excludeDefault = true;
-    args = {
-      inherit
-        mkRofi
-        mkJq
-        joinPipe
-        pkgs
-        lib
-        menus
-        styles
-        tokens
-        ;
-    };
-  };
-
   terminal = pkgs.${config.homeTerminalModules.use};
-  menu = {
-    apps = map (module: module.app) menuModules;
-  };
 in
 {
   imports = [
@@ -63,7 +42,23 @@ in
 
   config = lib.mkIf (cfg.enable && enableRofi) {
     home = {
-      packages = menu.apps ++ [ ];
+      packages = map (module: module.app) (importModules {
+        dir = ./menu;
+        recursive = false;
+        excludeDefault = true;
+        args = {
+          inherit
+            mkRofi
+            mkJq
+            joinPipe
+            pkgs
+            lib
+            menus
+            styles
+            tokens
+            ;
+        };
+      });
     };
 
     programs = {
