@@ -32,7 +32,6 @@ in
             key = combos.mod "Q";
             dispatcher = dsp.window.close { };
             flags = {
-              locked = true;
               description = "close current window";
             };
           })
@@ -71,6 +70,20 @@ in
             };
             flags = {
               description = "change layout toggle";
+            };
+          })
+
+          (mkBind {
+            key = combos.of [
+              keys.mod
+              keys.shift
+            ] "O";
+            dispatcher = dsp.dpms {
+              action = "enable";
+            };
+            flags = {
+              locked = true;
+              description = "display on";
             };
           })
 

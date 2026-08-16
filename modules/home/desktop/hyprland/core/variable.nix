@@ -50,8 +50,15 @@ in
           };
 
           actions = mkVar {
+            hibernate = "hypr-hibernate";
             lock = "hypr-lock";
+            logout = "hypr-logout";
+            poweroff = "hypr-poweroff";
+            reboot = "hypr-reboot";
             reload = "hypr-reload";
+            screenoff = "hypr-screenoff";
+            screenon = "hypr-screenon";
+            suspend = "hypr-suspend";
           };
 
           cursor = mkVar {

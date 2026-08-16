@@ -8,7 +8,10 @@
 let
   cfg = config.homeDesktopModules.hyprland;
   enableAshell = (cfg.bar.use == "ashell");
-  inherit (extraLib.hyprland) dsp;
+  inherit (extraLib.hyprland) getVarRef dsp;
+
+  var = getVarRef config;
+  actions = var "actions";
 in
 {
   config = lib.mkIf (cfg.enable && enableAshell) {
@@ -40,11 +43,11 @@ in
         };
 
         settings = {
-          logout_cmd = ''hyprctl dispatch "${(dsp.exit { })}"'';
-          reboot_cmd = "systemctl reboot";
-          lock_cmd = "foo";
-          shutdown_cmd = "shutdown now";
-          suspend_cmd = "systemctl suspend";
+          logout_cmd = actions.logout;
+          reboot_cmd = actions.reboot;
+          lock_cmd = actions.lock;
+          shutdown_cmd = actions.poweroff;
+          suspend_cmd = actions.suspend;
 
           battery_format = "Icon";
           battery_hide_when_full = false;
