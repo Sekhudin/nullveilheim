@@ -11,12 +11,12 @@ let
   ecosystemEnabled = cfg.ecosystem.use == "default";
 
   inherit (extraLib)
-    importModules
     mkJq
+    importModules
     joinPipe
     ;
 
-  inherit (extraLib.hyprland) getVarRef;
+  inherit (extraLib.hyprland) getVarRef dsp;
 
   var = getVarRef config;
   actions = var "actions";
@@ -40,6 +40,7 @@ in
             joinPipe
             pkgs
             lib
+            dsp
             actions
             ;
         };

@@ -5,11 +5,11 @@
 }:
 
 let
-  name = actions.reload;
+  name = actions.hibernate;
 
   runtimeInputs = [ ];
 
-  text = "hyprctl reload";
+  text = "systemctl hibernate";
 in
 {
   app = pkgs.writeShellApplication {

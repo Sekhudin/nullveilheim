@@ -5,11 +5,11 @@
 }:
 
 let
-  name = actions.reload;
+  name = actions.suspend;
 
   runtimeInputs = [ ];
 
-  text = "hyprctl reload";
+  text = "systemctl suspend";
 in
 {
   app = pkgs.writeShellApplication {

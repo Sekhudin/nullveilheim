@@ -5,11 +5,13 @@
 }:
 
 let
-  name = actions.reload;
+  name = actions.logout;
 
-  runtimeInputs = [ ];
+  runtimeInputs = with pkgs; [
+    hyprland
+  ];
 
-  text = "hyprctl reload";
+  text = "hyprctl dispatch 'hl.dsp.exit()'";
 in
 {
   app = pkgs.writeShellApplication {

@@ -5,11 +5,11 @@
 }:
 
 let
-  name = actions.reload;
+  name = actions.poweroff;
 
   runtimeInputs = [ ];
 
-  text = "hyprctl reload";
+  text = "systemctl poweroff";
 in
 {
   app = pkgs.writeShellApplication {
