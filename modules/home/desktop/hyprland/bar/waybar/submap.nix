@@ -43,6 +43,13 @@ in
                 R)
                   hyprctl dispatch '${
                     dsp.submap {
+                      name = "S";
+                    }
+                  }'
+                  ;;
+                S)
+                  hyprctl dispatch '${
+                    dsp.submap {
                       name = "reset";
                     }
                   }'
