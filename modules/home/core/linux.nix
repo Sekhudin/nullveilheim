@@ -21,6 +21,9 @@ in
           xsel
           (writeScriptBin "copy" "xsel -ib")
           (writeScriptBin "paste" "xsel -ob")
+
+          # fuck
+          sysz
         ]
         ++ lib.optionals (!master.enableStandalone) (
           with pkgs;
@@ -28,6 +31,10 @@ in
             docker
           ]
         );
+
+      shellAliases = {
+        fuck-systemctl = lib.getExe pkgs.sysz;
+      };
     };
   };
 }
