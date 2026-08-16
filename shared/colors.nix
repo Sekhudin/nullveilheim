@@ -85,6 +85,20 @@ in
         in
         "${color}${alpha'}";
 
+      mkRgb =
+        color:
+        let
+          cleanColor = lib.removePrefix "#" color;
+        in
+        "rgb(${cleanColor})";
+
+      mkRgba =
+        color: opacity:
+        let
+          cleanColor = lib.removePrefix "#" color;
+        in
+        "rgba(${cleanColor}${mkOpacity "" opacity})";
+
       mkGtkColor =
         color:
         if (isRgba color) then
@@ -150,8 +164,10 @@ in
         themes
         mkTheme
         mkTokens
-        mkGtkColor
         mkOpacity
+        mkRgb
+        mkRgba
+        mkGtkColor
         ;
     };
 }
