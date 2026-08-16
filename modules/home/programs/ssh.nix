@@ -10,15 +10,6 @@ let
 
   inherit (config.homeProgramsModules.secrets) secretProfiles;
   secretsEnable = config.homeProgramsModules.secrets.enable;
-  profileShellAliases = lib.foldl' (
-    acc: profile:
-    acc
-    // {
-      "ssh-${profile}" = "ssh -i ~/.ssh/${profile}";
-      "scp-${profile}" = "scp -i ~/.ssh/${profile}";
-      "sftp-${profile}" = "sftp -i ~/.ssh/${profile}";
-    }
-  ) { } secretProfiles.sshKeys;
 in
 {
   options.homeProgramsModules.ssh = {
@@ -63,7 +54,15 @@ in
     };
 
     home = lib.mkIf (secretsEnable && cfg.enableShellAliases) {
-      shellAliases = profileShellAliases;
+      shellAliases = lib.foldl' (
+        acc: profile:
+        acc
+        // {
+          "ssh-${profile}" = "ssh -i ~/.ssh/${profile}";
+          "scp-${profile}" = "scp -i ~/.ssh/${profile}";
+          "sftp-${profile}" = "sftp -i ~/.ssh/${profile}";
+        }
+      ) { } secretProfiles.sshKeys;
     };
   };
 }
