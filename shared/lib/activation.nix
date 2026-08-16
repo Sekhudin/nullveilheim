@@ -1,6 +1,6 @@
 {
   mkExtraLib =
-    { }:
+    { lib }:
 
     let
       mkFmt =
@@ -37,11 +37,12 @@
         }:
 
         let
-          cat = "${pkgs.coreutils}/bin/cat";
-          chmod = "${pkgs.coreutils}/bin/chmod";
-          dirname = "${pkgs.coreutils}/bin/dirname";
-          mkdir = "${pkgs.coreutils}/bin/mkdir";
-          rm = "${pkgs.coreutils}/bin/rm";
+          coreutils = lib.getExe' pkgs.coreutils;
+          cat = coreutils "cat";
+          chmod = coreutils "chmod";
+          dirname = coreutils "dirname";
+          mkdir = coreutils "mkdir";
+          rm = coreutils "rm";
 
           fmt = mkFmt { inherit context; };
         in

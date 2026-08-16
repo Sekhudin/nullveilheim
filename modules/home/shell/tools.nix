@@ -130,12 +130,12 @@ in
         rm = "rm -i";
 
         # common
-        cat = "${pkgs.bat}/bin/bat";
-        du = "${pkgs.dust}/bin/dust";
-        grep = "${pkgs.ripgrep}/bin/rg";
+        cat = lib.getExe pkgs.bat;
+        du = lib.getExe pkgs.dust;
+        grep = lib.getExe' pkgs.ripgrep "rg";
 
         # criptography
-        age = "${pkgs.rage}/bin/rage";
+        age = lib.getExe pkgs.rage;
 
         # gpg export
         gpg-bp = "gpg --export-options backup --export";

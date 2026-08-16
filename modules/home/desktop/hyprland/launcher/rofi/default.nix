@@ -31,7 +31,7 @@ let
   styles = var "styles";
   tokens = var "tokens";
 
-  terminal = pkgs.${config.homeTerminalModules.use};
+  terminal = config.homeTerminalModules.use;
 in
 {
   imports = [
@@ -68,7 +68,7 @@ in
         xoffset = 0;
         yoffset = 0;
         font = font.family.monospace;
-        terminal = lib.getExe terminal;
+        terminal = terminal;
         plugins = [ ];
         modes = [
           "drun"

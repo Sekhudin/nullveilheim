@@ -11,8 +11,8 @@ let
   masterEnable = config.activationModules.enable;
   inherit (config.homeProgramsModules.secrets) secretProfiles;
 
-  gpg = "${pkgs.gnupg}/bin/gpg";
-  f = extraLib.activation.mkHelper {
+  gpg = lib.getExe' pkgs.gnupg "gpg";
+  h = extraLib.activation.mkHelper {
     context = "import-gpg-keys";
     inherit pkgs;
   };
@@ -39,7 +39,7 @@ in
         importGPGKeys = lib.hm.dag.entryAfter [ "installSSHKeys" ] ''
           set -euo pipefail
 
-          ${f.shell}
+          ${h.shell}
 
           import_key() {
             local key_file="$1"
@@ -59,31 +59,31 @@ in
             local trust_file="$3"
 
             [[ -f "$email_file" ]] || {
-              ${f.fatal} "Missing email secret: $email_file" >&2
+              ${h.fatal} "Missing email secret: $email_file" >&2
             }
 
             [[ -f "$key_file" ]] || {
-              ${f.fatal} "Missing private key secret: $key_file" >&2
+              ${h.fatal} "Missing private key secret: $key_file" >&2
             }
 
             [[ -f "$trust_file" ]] || {
-              ${f.fatal} "Missing ownertrust secret: $trust_file" >&2
+              ${h.fatal} "Missing ownertrust secret: $trust_file" >&2
             }
 
             local email
             email="$(<"$email_file")"
 
             [[ -n "$email" ]] || {
-              ${f.fatal} "Missing email value" >&2
+              ${h.fatal} "Missing email value" >&2
             }
 
-            ${f.log} "Checking GPG identity: $email"
+            ${h.log} "Checking GPG identity: $email"
             if ${gpg} --list-secret-keys "$email" >/dev/null 2>&1; then
-              ${f.log} "GPG identity already exists: $email"
+              ${h.log} "GPG identity already exists: $email"
               return
             fi
 
-            ${f.log} "Importing GPG identity: $email"
+            ${h.log} "Importing GPG identity: $email"
 
             import_key "$key_file"
             import_ownertrust "$trust_file"
