@@ -18,6 +18,10 @@ let
 
   session = getVar "submaps.session";
   lock = getVar "actions.lock";
+  logout = getVar "actions.logout";
+  poweroff = getVar "actions.poweroff";
+  reboot = getVar "actions.reboot";
+  suspend = getVar "actions.suspend";
 
   mkDesc = desc: "(S) ${desc}";
 in
@@ -55,9 +59,45 @@ in
 
               (mkSubmapBind {
                 key = combos.plain "E";
-                dispatcher = dsp.exit { };
+                dispatcher = dsp.exec_cmd {
+                  cmd = logout;
+                };
+
                 flags = {
                   description = mkDesc "session logout";
+                };
+              })
+
+              (mkSubmapBind {
+                key = combos.plain "P";
+                dispatcher = dsp.exec_cmd {
+                  cmd = poweroff;
+                };
+
+                flags = {
+                  description = mkDesc "poweroff";
+                };
+              })
+
+              (mkSubmapBind {
+                key = combos.plain "R";
+                dispatcher = dsp.exec_cmd {
+                  cmd = reboot;
+                };
+
+                flags = {
+                  description = mkDesc "reboot";
+                };
+              })
+
+              (mkSubmapBind {
+                key = combos.plain "S";
+                dispatcher = dsp.exec_cmd {
+                  cmd = suspend;
+                };
+
+                flags = {
+                  description = mkDesc "suspend";
                 };
               })
             ];
