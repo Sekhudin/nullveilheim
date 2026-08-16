@@ -7,9 +7,7 @@
 let
   name = actions.reload;
 
-  runtimeInputs = with pkgs; [
-    hyprland
-  ];
+  runtimeInputs = [ ];
 
   text = "hyprctl reload";
 in
