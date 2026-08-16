@@ -10,7 +10,7 @@ let
   master = config.nixosDesktopModules;
   isHyprland = (master.enable && master.use == "hyprland");
 
-  tuigreet = (lib.getExe pkgs.tuigreet);
+  tuigreet = lib.getExe pkgs.tuigreet;
   mkTuigreet =
     {
       user ? "greeter",

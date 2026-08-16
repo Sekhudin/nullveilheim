@@ -11,7 +11,7 @@ let
   masterEnable = config.activationModules.enable;
   inherit (config.homeProgramsModules.secrets) secretProfiles; # untuk dapetin profile secretProfiles.sshKeys
 
-  ssh_keygen = "${pkgs.openssh}/bin/ssh-keygen";
+  ssh_keygen = lib.getExe' pkgs.openssh "ssh-keygen";
   h = extraLib.activation.mkHelper {
     context = "install-ssh-keys";
     inherit pkgs;
@@ -68,7 +68,7 @@ in
 
             cat "$private_key_file" > "$path"
 
-            ${h.chmod} 700 "$(${pkgs.coreutils}/bin/dirname "$path")"
+            ${h.chmod} 700 "$(${h.dirname} "$path")"
             ${h.chmod} 600 "$path"
 
             ${ssh_keygen} -y -f "$path" > "$path.pub"

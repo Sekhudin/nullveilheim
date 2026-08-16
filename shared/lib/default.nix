@@ -11,7 +11,7 @@ in
     { lib }:
 
     {
-      activation = activation.mkExtraLib { };
+      activation = activation.mkExtraLib { inherit lib; };
 
       devshell = devshell.mkExtraLib { inherit lib; };
 

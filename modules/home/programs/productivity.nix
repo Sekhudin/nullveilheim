@@ -86,7 +86,7 @@ in
         name = "Slack";
         type = "Application";
         icon = "slack";
-        exec = "${openGL.use} ${pkgs.slack}/bin/slack --no-sandbox -s %u";
+        exec = "${openGL.use} slack --no-sandbox -s %u";
         comment = "Slack Desktop";
         mimeType = [ "x-scheme-handler/slack" ];
         settings.StartupWMClass = "Slack";

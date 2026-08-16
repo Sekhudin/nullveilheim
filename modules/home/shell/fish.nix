@@ -51,12 +51,16 @@ in
 
             set -U fish_history_ignore "ls" "ll" "cd" "cd .." "clear" "exit" "history" "jobs" "rm -rf /" "kill -9*"
           '';
-          functions = {
-            g-ignore = "curl -sL https://www.gitignore.io/api/$argv";
-            node-rpkg = ''
-              ${pkgs.nodejs}/bin/node -e "console.log(Object.entries(require('./package.json').$argv[1]).map(([k,v]) => k.concat(\"@\").concat(v)).join(\"\n\") )"
-            '';
-          };
+          functions =
+            let
+              node = lib.getExe' pkgs.nodejs "node";
+            in
+            {
+              g-ignore = "curl -sL https://www.gitignore.io/api/$argv";
+              node-rpkg = ''
+                ${node} -e "console.log(Object.entries(require('./package.json').$argv[1]).map(([k,v]) => k.concat(\"@\").concat(v)).join(\"\n\") )"
+              '';
+            };
         }
         cfg.settings
       ];
