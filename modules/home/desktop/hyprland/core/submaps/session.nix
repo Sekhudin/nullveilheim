@@ -52,6 +52,14 @@ in
                   description = mkDesc "session lock";
                 };
               })
+
+              (mkSubmapBind {
+                key = combos.plain "E";
+                dispatcher = dsp.exit { };
+                flags = {
+                  description = mkDesc "session logout";
+                };
+              })
             ];
           })
         ];
