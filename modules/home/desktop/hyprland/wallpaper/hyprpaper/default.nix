@@ -29,7 +29,7 @@ in
           wallpaper = [
             {
               monitor = monitors.edp_1;
-              path = wp "10.webp";
+              path = wp "08.webp";
               fit_mode = "cover";
             }
             {

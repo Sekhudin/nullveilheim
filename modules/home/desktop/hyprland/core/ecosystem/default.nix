@@ -34,7 +34,6 @@ in
         with pkgs;
         [
           libnotify
-          matugen
         ]
         ++ (map (module: module.app) (importModules {
           dir = ./actions;
