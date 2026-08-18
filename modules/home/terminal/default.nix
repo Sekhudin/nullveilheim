@@ -35,11 +35,5 @@ in
       description = "choose terminal";
       default = "ghostty";
     };
-
-    theme = lib.mkOption {
-      type = lib.types.enum themeNames;
-      description = "theme settings";
-      default = config.homeCoreModules.theme;
-    };
   };
 }

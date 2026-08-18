@@ -32,7 +32,8 @@ let
       palette = palette;
     };
 
-  theme = mkTheme master.theme;
+  theme = config.homeCoreModules.theme;
+  themeColor = mkTheme theme;
   tokens = mkTokens theme;
 in
 {
@@ -52,7 +53,7 @@ in
           enableFishIntegration = config.programs.fish.enable;
           enableZshIntegration = config.programs.zsh.enable;
           settings = {
-            theme = master.theme;
+            theme = theme;
             background-opacity = lib.mkDefault 0.9;
             bold-is-bright = lib.mkDefault true;
             confirm-close-surface = lib.mkDefault false;
@@ -76,9 +77,9 @@ in
             gtk-custom-css = "${config.xdg.configHome}/ghostty/style.css";
           };
           themes = {
-            ${master.theme} = mkThemeGhostty {
+            ${theme} = mkThemeGhostty {
               inherit tokens;
-              palette = theme.lines;
+              palette = themeColor.lines;
             };
           };
         }

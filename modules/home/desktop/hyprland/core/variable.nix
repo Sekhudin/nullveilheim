@@ -13,7 +13,7 @@ let
   inherit (color) mkTokens;
   inherit (extraLib.hyprland) variables mkVar;
 
-  tokens = mkTokens cfg.theme;
+  tokens = mkTokens config.homeCoreModules.theme;
 in
 {
   config = lib.mkIf cfg.enable {
