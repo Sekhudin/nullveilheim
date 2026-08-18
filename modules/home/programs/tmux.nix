@@ -12,8 +12,7 @@ let
   masterEnable = config.homeProgramsModules.enable;
   inherit (color) mkTokens;
 
-  themeNames = lib.attrNames color.themes;
-  tokens = mkTokens cfg.theme;
+  tokens = mkTokens config.homeCoreModules.theme;
 
   inherit (extraLib.tmux)
     mkWindow
@@ -91,12 +90,6 @@ in
       type = lib.types.bool;
       description = "enable tmux";
       default = true;
-    };
-
-    theme = lib.mkOption {
-      type = lib.types.enum themeNames;
-      description = "theme settings";
-      default = config.homeCoreModules.theme;
     };
 
     settings = lib.mkOption {

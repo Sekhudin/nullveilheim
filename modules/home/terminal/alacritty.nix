@@ -15,7 +15,7 @@ let
   isAlacritty = (master.use == "alacritty");
   inherit (color) mkTokens;
 
-  tokens = mkTokens cfg.name;
+  tokens = mkTokens config.homeCoreModules.theme;
 in
 {
   options.homeTerminalModules.alacritty = {
