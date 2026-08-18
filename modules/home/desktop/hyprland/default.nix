@@ -1,18 +1,14 @@
 {
-  config,
   lib,
-  color,
   ...
 }:
 
-let
-  themeNames = lib.attrNames color.themes;
-in
 {
   imports = [
     ./bar
     ./core
     ./launcher
+    ./notification
     ./wallpaper
   ];
 
@@ -21,12 +17,6 @@ in
       type = lib.types.bool;
       description = "enable hyprland modules";
       default = false;
-    };
-
-    theme = lib.mkOption {
-      type = lib.types.enum themeNames;
-      description = "theme settings";
-      default = config.homeCoreModules.theme;
     };
 
     ecosystem = lib.mkOption {
@@ -78,10 +68,10 @@ in
         options = {
           use = lib.mkOption {
             type = lib.types.enum [
-              "mako"
+              "dunst"
             ];
             description = "choose notification";
-            default = "mako";
+            default = "dunst";
           };
         };
       };
