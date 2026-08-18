@@ -53,7 +53,6 @@ in
         ntfs3g
         dnsutils
         brightnessctl
-        wireplumber
         pavucontrol
         # neovim
         btop
