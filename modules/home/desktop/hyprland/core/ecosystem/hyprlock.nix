@@ -59,8 +59,9 @@ in
           background = {
             monitor = "";
             path = "screenshot";
-            blur_passes = 3;
-            blur_size = 6;
+            color = tokens.bg;
+            blur_passes = 2;
+            blur_size = 0;
           };
 
           input-field = {
