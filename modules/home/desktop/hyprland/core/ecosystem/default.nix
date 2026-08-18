@@ -30,21 +30,27 @@ in
 
   config = lib.mkIf (cfg.enable && ecosystemEnabled) {
     home = {
-      packages = map (module: module.app) (importModules {
-        dir = ./actions;
-        recursive = false;
-        excludeDefault = true;
-        args = {
-          inherit
-            mkJq
-            joinPipe
-            pkgs
-            lib
-            dsp
-            actions
-            ;
-        };
-      });
+      packages =
+        with pkgs;
+        [
+          libnotify
+          matugen
+        ]
+        ++ (map (module: module.app) (importModules {
+          dir = ./actions;
+          recursive = false;
+          excludeDefault = true;
+          args = {
+            inherit
+              mkJq
+              joinPipe
+              pkgs
+              lib
+              dsp
+              actions
+              ;
+          };
+        }));
     };
   };
 }

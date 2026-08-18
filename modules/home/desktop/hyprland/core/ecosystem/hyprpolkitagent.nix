@@ -3,6 +3,8 @@
   config,
   lib,
   extraLib,
+  color,
+  font,
   ...
 }:
 
@@ -10,11 +12,17 @@ let
   cfg = config.homeDesktopModules.hyprland;
   ecosystemEnabled = cfg.ecosystem.use == "default";
 
+  inherit (color) mkRgb;
   inherit (extraLib.hyprland)
     mkEvent
+    getVarRef
     events
     hl
     ;
+
+  var = getVarRef config;
+  styles = var "styles";
+  tokens = var "tokens";
 in
 {
   config = lib.mkIf (cfg.enable && ecosystemEnabled) {
@@ -52,9 +60,9 @@ in
       "hyprpolkitagent/hyprpolkitagent.conf" = {
         text = ''
           general {
-              password_field_width = 10
-              window_width         = 10
-              window_height        = 10
+              password_field_width = 250
+              window_width         = 300
+              window_height        = 200
               show_details         = false
           }
         '';
@@ -62,13 +70,9 @@ in
 
       "hypr/hyprtoolkit.conf" = {
         text = ''
-          background = 0xFF181818
+          background = ${mkRgb tokens.bg}
           base = 0xFF202020
-          text = 0xFFDADADA
-          alternate_base = 0xFF272727
-          bright_text = 0xFFFFDEDE
-          accent = 0xFF00FFCC
-          accent_secondary = 0xFF0099F0
+          text = ${mkRgb tokens.fg}
 
           h1_size = 19
           h2_size = 15
@@ -76,12 +80,12 @@ in
           font_size = 11
           small_font_size = 10
 
-          icon_theme =
-          font_family = Sans Serif
-          font_family_monospace = monospace
+          icon_theme = ${config.homeCoreModules.iconTheme.name}
+          font_family = ${font.family.sans_serif}
+          font_family_monospace = ${font.family.monospace}
 
-          rounding_large = 0
-          rounding_small = 0
+          rounding_large = ${toString styles.rounding}
+          rounding_small = ${toString (styles.rounding - 4)}
         '';
       };
     };
