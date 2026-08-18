@@ -78,6 +78,7 @@ in
           global-kb = true;
           steal-focus = true;
           show-icons = true;
+          icon-theme = config.homeCoreModules.iconTheme.name;
           hover-select = true;
           window-format = "{t}";
           drun-display-format = "{name}";

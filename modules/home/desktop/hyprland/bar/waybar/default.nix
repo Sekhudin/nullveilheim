@@ -105,10 +105,10 @@ in
               ];
               modules-right = [
                 "clock"
-                "idle_inhibitor"
-                "bluetooth"
                 "network"
+                "bluetooth"
                 "pulseaudio"
+                "idle_inhibitor"
                 "battery"
               ];
             }
@@ -130,9 +130,9 @@ in
               ];
               modules-right = [
                 "clock"
-                "idle_inhibitor"
-                "bluetooth"
                 "network"
+                "bluetooth"
+                "idle_inhibitor"
                 "pulseaudio"
               ];
             }

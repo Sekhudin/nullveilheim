@@ -27,11 +27,9 @@ in
               critical = 15;
             };
             events = {
-              on-charging = "";
-              on-discharging = "";
-              on-charging-100 = "";
-              on-discharging-warning = "";
-              on-discharging-critical = "";
+              on-discharging-warning = ''notify-send -u normal "Battery" "Battery level is low"'';
+              on-discharging-critical = ''notify-send -u critical "Battery" "Battery level is critically low"'';
+              on-charging-100 = ''notify-send -u normal "Battery" "Battery is fully charged"'';
             };
             format-icons = rec {
               default = [
