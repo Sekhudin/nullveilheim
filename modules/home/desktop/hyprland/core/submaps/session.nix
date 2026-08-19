@@ -16,12 +16,17 @@ let
     combos
     ;
 
-  session = getVar "submaps.session";
-  lock = getVar "actions.lock";
-  logout = getVar "actions.logout";
-  poweroff = getVar "actions.poweroff";
-  reboot = getVar "actions.reboot";
-  suspend = getVar "actions.suspend";
+  submaps = {
+    session = getVar "submaps.session";
+  };
+
+  actions = {
+    lock = getVar "actions.lock";
+    logout = getVar "actions.logout";
+    poweroff = getVar "actions.poweroff";
+    reboot = getVar "actions.reboot";
+    suspend = getVar "actions.suspend";
+  };
 
   mkDesc = desc: "(S) ${desc}";
 in
@@ -33,7 +38,7 @@ in
           (mkBind {
             key = combos.alt "S";
             dispatcher = dsp.submap {
-              name = session;
+              name = submaps.session;
             };
             flags = {
               description = mkDesc "enter submap session";
@@ -43,13 +48,13 @@ in
 
         define_submap = [
           (mkSubmap {
-            name = session;
+            name = submaps.session;
             escape = true;
             bind = [
               (mkSubmapBind {
                 key = combos.plain "L";
                 dispatcher = dsp.exec_cmd {
-                  cmd = lock;
+                  cmd = actions.lock;
                 };
 
                 flags = {
@@ -60,7 +65,7 @@ in
               (mkSubmapBind {
                 key = combos.plain "E";
                 dispatcher = dsp.exec_cmd {
-                  cmd = logout;
+                  cmd = actions.logout;
                 };
 
                 flags = {
@@ -71,7 +76,7 @@ in
               (mkSubmapBind {
                 key = combos.plain "P";
                 dispatcher = dsp.exec_cmd {
-                  cmd = poweroff;
+                  cmd = actions.poweroff;
                 };
 
                 flags = {
@@ -82,7 +87,7 @@ in
               (mkSubmapBind {
                 key = combos.plain "R";
                 dispatcher = dsp.exec_cmd {
-                  cmd = reboot;
+                  cmd = actions.reboot;
                 };
 
                 flags = {
@@ -93,7 +98,7 @@ in
               (mkSubmapBind {
                 key = combos.plain "S";
                 dispatcher = dsp.exec_cmd {
-                  cmd = suspend;
+                  cmd = actions.suspend;
                 };
 
                 flags = {

@@ -14,9 +14,11 @@ let
     combos
     ;
 
-  apps = getVar "menus.apps";
-  binds = getVar "menus.binds";
-  power = getVar "menus.power";
+  menus = {
+    apps = getVar "menus.apps";
+    binds = getVar "menus.binds";
+    power = getVar "menus.power";
+  };
 in
 {
   config = lib.mkIf cfg.enable {
@@ -26,7 +28,7 @@ in
           (mkBind {
             key = combos.mod "SUPER_L";
             dispatcher = dsp.exec_cmd {
-              cmd = apps;
+              cmd = menus.apps;
             };
             flags = {
               release = true;
@@ -37,7 +39,7 @@ in
           (mkBind {
             key = combos.mod "SLASH";
             dispatcher = dsp.exec_cmd {
-              cmd = binds;
+              cmd = menus.binds;
             };
             flags = {
               description = "show key bindings";
@@ -47,7 +49,7 @@ in
           (mkBind {
             key = combos.mod "escape";
             dispatcher = dsp.exec_cmd {
-              cmd = power;
+              cmd = menus.power;
             };
             flags = {
               description = "show powermenu";

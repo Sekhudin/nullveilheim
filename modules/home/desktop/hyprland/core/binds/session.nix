@@ -15,7 +15,9 @@ let
     keys
     ;
 
-  lock = getVar "actions.lock";
+  actions = {
+    lock = getVar "actions.lock";
+  };
 in
 {
   config = lib.mkIf cfg.enable {
@@ -25,7 +27,7 @@ in
           (mkBind {
             key = combos.mod "escape";
             dispatcher = dsp.exec_cmd {
-              cmd = lock;
+              cmd = actions.lock;
             };
             flags = {
               description = "lock screen";

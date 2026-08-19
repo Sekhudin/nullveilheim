@@ -16,7 +16,9 @@ let
     combos
     ;
 
-  resize = getVar "submaps.resize";
+  submaps = {
+    resize = getVar "submaps.resize";
+  };
 
   mkDesc = desc: "(R) ${desc}";
 in
@@ -28,7 +30,7 @@ in
           (mkBind {
             key = combos.alt "R";
             dispatcher = dsp.submap {
-              name = resize;
+              name = submaps.resize;
             };
             flags = {
               description = mkDesc "enter submap resize";
@@ -38,7 +40,7 @@ in
 
         define_submap = [
           (mkSubmap {
-            name = resize;
+            name = submaps.resize;
             escape = true;
             bind = [
               (mkSubmapBind {

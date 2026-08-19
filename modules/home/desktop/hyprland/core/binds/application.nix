@@ -14,8 +14,10 @@ let
     combos
     ;
 
-  terminal = getVar "apps.terminal";
-  browser = getVar "apps.browser";
+  apps = {
+    terminal = getVar "apps.terminal";
+    browser = getVar "apps.browser";
+  };
 in
 {
   config = lib.mkIf cfg.enable {
@@ -25,7 +27,7 @@ in
           (mkBind {
             key = combos.mod "RETURN";
             dispatcher = dsp.exec_cmd {
-              cmd = terminal;
+              cmd = apps.terminal;
             };
             flags = {
               description = "open terminal";
@@ -35,7 +37,7 @@ in
           (mkBind {
             key = combos.mod "B";
             dispatcher = dsp.exec_cmd {
-              cmd = browser;
+              cmd = apps.browser;
             };
             flags = {
               description = "open browser";
