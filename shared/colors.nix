@@ -112,6 +112,12 @@ in
         else
           color;
 
+      toGtkTokenCss =
+        tokens:
+        lib.concatStringsSep "\n" (
+          lib.mapAttrsToList (name: value: "@define-color ${name} ${mkGtkColor value};") tokens
+        );
+
       mkTheme = name: {
         scheme = toColorScheme themes.${name};
         lines = toColorLines themes.${name};
@@ -168,6 +174,7 @@ in
         mkRgb
         mkRgba
         mkGtkColor
+        toGtkTokenCss
         ;
     };
 }
