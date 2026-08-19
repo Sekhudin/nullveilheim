@@ -1,7 +1,7 @@
 {
+  pkgs,
   mkRofi,
   joinPipe,
-  pkgs,
   menus,
   ...
 }:

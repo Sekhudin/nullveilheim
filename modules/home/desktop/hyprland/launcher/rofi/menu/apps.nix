@@ -1,6 +1,6 @@
 {
-  mkRofi,
   pkgs,
+  mkRofi,
   menus,
   ...
 }:

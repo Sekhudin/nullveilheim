@@ -48,11 +48,10 @@ in
         excludeDefault = true;
         args = {
           inherit
+            pkgs
             mkRofi
             mkJq
             joinPipe
-            pkgs
-            lib
             menus
             styles
             tokens

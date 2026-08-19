@@ -9,6 +9,7 @@
     ./core
     ./launcher
     ./notification
+    ./osd
     ./wallpaper
   ];
 
