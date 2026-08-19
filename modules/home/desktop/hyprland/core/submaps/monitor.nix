@@ -16,7 +16,9 @@ let
     combos
     ;
 
-  monitor = getVar "submaps.monitor";
+  submaps = {
+    monitor = getVar "submaps.monitor";
+  };
 
   mkDesc = desc: "(M) ${desc}";
 in
@@ -28,7 +30,7 @@ in
           (mkBind {
             key = combos.alt "M";
             dispatcher = dsp.submap {
-              name = monitor;
+              name = submaps.monitor;
             };
             flags = {
               description = mkDesc "enter submap monitor";
@@ -38,7 +40,7 @@ in
 
         define_submap = [
           (mkSubmap {
-            name = monitor;
+            name = submaps.monitor;
             escape = true;
             bind = [
               # focus monitor

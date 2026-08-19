@@ -59,6 +59,26 @@ in
             screenoff = "hypr-screenoff";
             screenon = "hypr-screenon";
             suspend = "hypr-suspend";
+
+            # osd
+            brightness-up = "hypr-brightness-up";
+            brightness-down = "hypr-brightness-down";
+
+            media-playback = "hypr-media-playback";
+            media-next = "hypr-media-next";
+            media-prev = "hypr-media-prev";
+
+            mic-up = "hypr-mic-up";
+            mic-down = "hypr-mic-down";
+            mic-mute = "hypr-mic-mute";
+
+            volume-up = "hypr-volume-up";
+            volume-down = "hypr-volume-down";
+            volume-mute = "hypr-volume-mute";
+
+            capslock = "hypr-capslock";
+            numlock = "hypr-numlock";
+            scrolllock = "hypr-scrolllock";
           };
 
           cursor = mkVar {

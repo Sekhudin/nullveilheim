@@ -9,10 +9,15 @@ let
   cfg = config.homeDesktopModules.hyprland;
   inherit (extraLib.hyprland)
     mkBind
+    getVar
     dsp
     keys
     combos
     ;
+
+  actions = {
+    reload = getVar "actions.reload";
+  };
 in
 {
   imports = [
@@ -93,7 +98,7 @@ in
               keys.shift
             ] "R";
             dispatcher = dsp.exec_cmd {
-              cmd = "hyprctl reload";
+              cmd = actions.reload;
             };
             flags = {
               description = "reload config";
