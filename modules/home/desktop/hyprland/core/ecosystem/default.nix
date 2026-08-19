@@ -10,11 +10,7 @@ let
   cfg = config.homeDesktopModules.hyprland;
   ecosystemEnabled = cfg.ecosystem.use == "default";
 
-  inherit (extraLib)
-    mkJq
-    importModules
-    joinPipe
-    ;
+  inherit (extraLib) importModules;
 
   inherit (extraLib.hyprland) getVarRef dsp;
 
@@ -41,10 +37,7 @@ in
           excludeDefault = true;
           args = {
             inherit
-              mkJq
-              joinPipe
               pkgs
-              lib
               dsp
               actions
               ;

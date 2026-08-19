@@ -10,19 +10,13 @@
 let
   cfg = config.homeDesktopModules.hyprland;
   enableWaybar = (cfg.bar.use == "waybar");
-  inherit (color) mkGtkColor;
+  inherit (color) toGtkTokenCss;
   inherit (extraLib.hyprland)
     mkEvent
     getVarRef
     events
     hl
     ;
-
-  toTokenCss =
-    tokens:
-    lib.concatStringsSep "\n" (
-      lib.mapAttrsToList (name: value: "@define-color ${name} ${mkGtkColor value};") tokens
-    );
 
   composeStyle =
     {
@@ -159,7 +153,7 @@ in
               ;
           };
           style = ''
-            ${toTokenCss tokens}
+            ${toGtkTokenCss tokens}
 
             window#waybar {
               color: @fg;
