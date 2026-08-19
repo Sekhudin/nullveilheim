@@ -1,8 +1,8 @@
 {
+  pkgs,
   mkRofi,
   mkJq,
   joinPipe,
-  pkgs,
   menus,
   styles,
   tokens,
