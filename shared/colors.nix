@@ -101,14 +101,16 @@ in
 
       mkGtkColor =
         color:
-        if (isRgba color) then
+        if isRgba color then
           let
             rgb = lib.substring 0 7 color;
             alphaHex = lib.substring 7 2 color;
             alpha = lib.fromHexString alphaHex;
-            opacity = builtins.floor ((alpha / 255.0) * 100 + 0.5) / 100;
+            opacity100 = builtins.floor ((alpha / 255.0) * 100 + 0.5);
+            integer = builtins.div opacity100 100;
+            fractional = lib.fixedWidthString 2 "0" (toString (opacity100 - integer * 100));
           in
-          "alpha(${rgb}, ${toString opacity})"
+          "alpha(${rgb}, ${toString integer}.${fractional})"
         else
           color;
 
