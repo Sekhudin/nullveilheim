@@ -4,6 +4,7 @@
   lib,
   extraLib,
   color,
+  font,
   ...
 }:
 
@@ -39,7 +40,7 @@ in
       swayosd = {
         enable = true;
         stylePath = "${config.xdg.configHome}/swayosd/style.css";
-        topMargin = 0.5;
+        topMargin = 0.9;
       };
     };
 
@@ -48,6 +49,10 @@ in
         tokens
         // {
           bg = mkOpacity tokens.bg 0.8;
+          fg = mkOpacity tokens.fg 0.8;
+          progressbar = mkOpacity tokens.fg 0.3;
+          segment = mkOpacity tokens.fg 0.2;
+          segment-active = mkOpacity tokens.fg 0.6;
         }
       )}
 
@@ -55,42 +60,47 @@ in
         background: @bg;
         padding: ${toString styles.gaps_out}px;
         border: 1px solid @border;
-        border-radius: 0px;
+        border-radius: ${toString styles.rounding}px;
       }
 
       window#osd #container {
-        margin: 2px;
-        background: @primary;
+        margin: ${toString styles.gaps_in}px;
       }
 
       window#osd image {
-      }
-
-      window#osd label {
-      }
-
-      window#osd progressbar:disabled {
+        -gtk-icon-transform: scale(0.8);
+        color: @fg;
       }
 
       window#osd image:disabled {
+        color: @fg;
+        opacity: 1;
       }
 
+      window#osd label {
+        color: @fg;
+        font-family: ${font.family.sans_serif};
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      window#osd segmentedprogress,
       window#osd progressbar {
+        min-height: 6px;
+        background: @progressbar;
+        border: none;
+        border-radius: 999px;
       }
 
-      window#osd segmentedprogress {
-      }
-
-      window#osd trough {
-      }
-
+      window#osd trough,
       window#osd segment {
+        background: @segment;
+        opacity: 1;
       }
 
-      window#osd progress {
-      }
-
+      window#osd progress,
       window#osd segment.active {
+        background: @segment-active;
       }
 
       window#osd segment:first-child {
