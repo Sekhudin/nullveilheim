@@ -61,20 +61,20 @@ in
             suspend = "hypr-suspend";
 
             # osd
-            brightness-up = "hypr-brightness-up";
-            brightness-down = "hypr-brightness-down";
+            brightness_up = "hypr-brightness-up";
+            brightness_down = "hypr-brightness-down";
 
-            media-playback = "hypr-media-playback";
-            media-next = "hypr-media-next";
-            media-prev = "hypr-media-prev";
+            media_playback = "hypr-media-playback";
+            media_next = "hypr-media-next";
+            media_prev = "hypr-media-prev";
 
-            mic-up = "hypr-mic-up";
-            mic-down = "hypr-mic-down";
-            mic-mute = "hypr-mic-mute";
+            mic_up = "hypr-mic-up";
+            mic_down = "hypr-mic-down";
+            mic_mute = "hypr-mic-mute";
 
-            volume-up = "hypr-volume-up";
-            volume-down = "hypr-volume-down";
-            volume-mute = "hypr-volume-mute";
+            volume_up = "hypr-volume-up";
+            volume_down = "hypr-volume-down";
+            volume_mute = "hypr-volume-mute";
 
             capslock = "hypr-capslock";
             numlock = "hypr-numlock";

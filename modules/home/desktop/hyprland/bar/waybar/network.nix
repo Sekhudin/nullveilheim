@@ -16,30 +16,30 @@ in
           "network" = {
             interface = "wlp0s20f3";
             family = "ipv4_6";
-            interval = 1;
+            interval = 2;
             align = 0.5;
             justify = "center";
-            max-length = 30;
+            max-length = 50;
             min-length = 1;
             rfkill = true;
             format-wifi = "{icon}";
             format-ethernet = "{icon}";
             format-linked = "{icon}";
-            format-disconnected = "󰤭";
+            format-disconnected = "";
             format-disabled = "󰤭";
-            format-alt = "{ipaddr}";
-            format-alt-click = "left";
+            format-alt = "{icon} {essid} | ip: {ipaddr} | down: {bandwidthDownBytes}";
+            format-alt-click = "click-right";
             format-icons = {
               wifi = [
-                "󰤯"
-                "󰤟"
-                "󰤢"
-                "󰤥"
-                "󰤨"
+                "󰤯 "
+                "󰤟 "
+                "󰤢 "
+                "󰤥 "
+                "󰤨 "
               ];
-              ethernet = "󰈀";
-              disconnected = "󰤭";
-              disabled = "󰤭";
+              ethernet = "󰈀 ";
+              disconnected = "";
+              disabled = "󰤭 ";
             };
 
             tooltip = false;

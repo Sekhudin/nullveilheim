@@ -93,16 +93,16 @@ in
               modules-left = [
                 "hyprland/workspaces"
                 "hyprland/submap"
+                "clock"
               ];
               modules-center = [
                 "hyprland/window"
               ];
               modules-right = [
-                "clock"
+                "idle_inhibitor"
+                "pulseaudio"
                 "network"
                 "bluetooth"
-                "pulseaudio"
-                "idle_inhibitor"
                 "battery"
               ];
             }
@@ -118,16 +118,17 @@ in
               modules-left = [
                 "hyprland/workspaces"
                 "hyprland/submap"
+                "clock"
               ];
               modules-center = [
                 "hyprland/window"
               ];
               modules-right = [
-                "clock"
-                "network"
-                "bluetooth"
                 "idle_inhibitor"
                 "pulseaudio"
+                "network"
+                "bluetooth"
+                "battery"
               ];
             }
           ];

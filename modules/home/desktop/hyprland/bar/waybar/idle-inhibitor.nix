@@ -14,14 +14,14 @@ in
       waybar.settings = rec {
         primary = {
           "idle_inhibitor" = {
-            format = "{icon} ";
+            format = "{icon}";
             align = 0.5;
             justify = "center";
             signal = 8;
             tooltip = false;
             format-icons = {
-              activated = "";
-              deactivated = "";
+              activated = " ";
+              deactivated = " ";
             };
           };
         };

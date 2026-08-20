@@ -14,21 +14,21 @@ in
       waybar.settings = rec {
         primary = {
           "pulseaudio" = {
-            format = "{icon} ";
-            format-bluetooth = "{icon} ";
-            format-muted = "{icon} ";
+            format = "{icon} {volume}%";
+            format-bluetooth = "{icon}";
+            format-muted = "{icon} off";
             format-icons = {
               default = [
-                ""
-                ""
+                " "
+                " "
               ];
-              default-muted = "";
-              headphone = "";
-              headset = "󰋎";
+              default-muted = " ";
+              headphone = " ";
+              headset = "󰋎 ";
               hands-free = "󰂑";
               hdmi = "󰡁";
-              car = "";
-              phone = "";
+              car = " ";
+              phone = " ";
             };
             tooltip = false;
             on-click = "pavucontrol";
