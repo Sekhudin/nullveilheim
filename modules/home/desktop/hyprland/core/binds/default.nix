@@ -24,6 +24,7 @@ in
     ./application.nix
     ./luncher.nix
     ./mouse.nix
+    ./osd.nix
     ./session.nix
     ./window.nix
     ./workspace.nix

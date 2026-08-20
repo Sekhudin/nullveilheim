@@ -15,7 +15,7 @@ in
         primary = {
           "battery" = {
             bat = "BAT0";
-            interval = 1;
+            interval = 2;
             align = 0.5;
             justify = "center";
             format = "{icon} {capacity}%";

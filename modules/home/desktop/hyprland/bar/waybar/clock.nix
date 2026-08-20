@@ -14,7 +14,9 @@ in
       waybar.settings = rec {
         primary = {
           "clock" = {
-            format = "{:%d %b — %H:%M}";
+            format = "{:%H:%M}";
+            format-alt = "{:%b %d - %H:%M}";
+            format-alt-click = "click-right";
             interval = 60;
             max-length = 15;
             tooltip = false;

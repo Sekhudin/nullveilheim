@@ -14,7 +14,7 @@ in
       waybar.settings = rec {
         primary = {
           "bluetooth" = {
-            format = "{icon} ";
+            format = "{icon}";
             format-on = "󰂯";
             format-off = "󰂲";
             format-connected = "󰂯";

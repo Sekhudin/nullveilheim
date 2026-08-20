@@ -39,7 +39,18 @@ let
             "DOWN": "↓",
             "escape": "Esc",
             "mouse:272": "󰍽",
-            "mouse:273": "󰍽"
+            "mouse:273": "󰍽",
+            "XF86MonBrightnessDown": "",
+            "XF86MonBrightnessUp": "󰌵",
+            "XF86AudioNext": "󰒭",
+            "XF86AudioPrev": "󰒮",
+            "XF86AudioPlay": "󰐊",
+            "XF86AudioMicMute": "󰍭",
+            "XF86AudioLowerVolume": "󰝞",
+            "XF86AudioRaiseVolume": "󰝝",
+            "XF86AudioMute": "󰝟",
+            "Caps_Lock": "󰘲",
+            "Num_Lock": "󰎠"
           }[.] // .;
 
         def key_shortcut:
@@ -50,7 +61,18 @@ let
             "SUPER_L": "",
             "escape": "Escape",
             "mouse:272": "Mouse Left",
-            "mouse:273": "Mouse Right"
+            "mouse:273": "Mouse Right",
+            "XF86MonBrightnessDown": "Brightness Down",
+            "XF86MonBrightnessUp": "Brightness Up",
+            "XF86AudioNext": "Audio Next",
+            "XF86AudioPrev": "Audio Prev",
+            "XF86AudioPlay": "Audio Play",
+            "XF86AudioMicMute": "Mic Mute",
+            "XF86AudioLowerVolume": "Volume Down",
+            "XF86AudioRaiseVolume": "Volume Up",
+            "XF86AudioMute": "Volume Mute",
+            "Caps_Lock": "Caps Lock",
+            "Num_Lock": "Num Lock"
           }[.] // .;
 
         def modifier:
