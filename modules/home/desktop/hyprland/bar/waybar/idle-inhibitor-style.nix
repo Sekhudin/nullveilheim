@@ -17,8 +17,4 @@
   #idle_inhibitor.activated {
     border: ${toString styles.border_size}px solid @primary;
   }
-
-  #idle_inhibitor.deactivated {
-    border: ${toString styles.border_size}px solid @border;
-  }
 ''
