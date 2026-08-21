@@ -53,6 +53,8 @@ in
     ./clock.nix
     ./idle-inhibitor.nix
     ./network.nix
+    ./nixosicon.nix
+    ./powerprofile.nix
     ./pulseaudio.nix
     ./submap.nix
     ./window.nix
@@ -91,6 +93,7 @@ in
                 monitors.edp_1
               ];
               modules-left = [
+                "custom/nixosicon"
                 "hyprland/workspaces"
                 "hyprland/submap"
                 "clock"
@@ -103,6 +106,7 @@ in
                 "pulseaudio"
                 "network"
                 "bluetooth"
+                "power-profiles-daemon"
                 "battery"
               ];
             }
@@ -116,6 +120,7 @@ in
                 monitors.hdmia_1
               ];
               modules-left = [
+                "custom/nixosicon"
                 "hyprland/workspaces"
                 "hyprland/submap"
                 "clock"
@@ -128,6 +133,7 @@ in
                 "pulseaudio"
                 "network"
                 "bluetooth"
+                "power-profiles-daemon"
                 "battery"
               ];
             }
@@ -141,6 +147,8 @@ in
             ./clock-style.nix
             ./idle-inhibitor-style.nix
             ./network-style.nix
+            ./nixosicon-style.nix
+            ./powerprofile-style.nix
             ./pulseaudio-style.nix
             ./submap-style.nix
             ./window-style.nix

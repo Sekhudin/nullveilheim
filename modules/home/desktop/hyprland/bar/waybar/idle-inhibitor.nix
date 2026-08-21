@@ -14,7 +14,7 @@ in
       waybar.settings = rec {
         primary = {
           "idle_inhibitor" = {
-            format = "{icon}";
+            format = "<big>{icon}</big>";
             align = 0.5;
             justify = "center";
             signal = 8;
