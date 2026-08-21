@@ -47,7 +47,7 @@ in
             frame_color = tokens.border;
             frame_width = 1;
             font = "${font.family.sans_serif} ${toString font.sizes.desktop}";
-            background = mkOpacity tokens.bg 0.8;
+            background = mkOpacity tokens.bg styles.opacity;
             foreground = tokens.fg;
             corners = "all";
             corner_radius = styles.rounding;

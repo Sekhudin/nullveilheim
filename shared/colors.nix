@@ -178,5 +178,7 @@ in
         mkGtkColor
         toGtkTokenCss
         ;
+
+      opacity = 0.9;
     };
 }

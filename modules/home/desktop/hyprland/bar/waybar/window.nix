@@ -2,7 +2,6 @@
   config,
   lib,
   extraLib,
-  icon,
   ...
 }:
 
@@ -10,6 +9,15 @@ let
   cfg = config.homeDesktopModules.hyprland;
   enableWaybar = (cfg.bar.use == "waybar");
   inherit (extraLib.hyprland) dsp;
+
+  icons = {
+    ai = ''<span size="150%"> </span>'';
+    firefox = ''<span size="150%">󰈹 </span>'';
+    fck = ''<span size="150%"> </span>'';
+    ghostty = ''<span size="150%"> </span>'';
+    neovim = ''<span size="150%"> </span>'';
+    nix = ''<span size="150%"> </span>'';
+  };
 in
 {
   config = lib.mkIf (cfg.enable && enableWaybar) {
@@ -25,15 +33,20 @@ in
             expand = false;
             tooltip = false;
             rewrite = {
-              "(.*) — Mozilla Firefox" = "${icon.firefox} $1";
+              "(.*) — Mozilla Firefox" = "${icons.firefox}$1";
+              "(.*)Mozilla Firefox" = "${icons.firefox}Firefox";
 
-              "(.*)Mozilla Firefox" = "${icon.firefox} Firefox";
-              "(.*)Ghostty" = "${icon.ghostty} Ghostty";
+              "(.*)Ghostty" = "${icons.ghostty}Ghostty";
+              "^~.*" = "${icons.ghostty}Ghostty";
+              "^/.*" = "${icons.ghostty}Ghostty";
 
-              "^~.*" = "${icon.ghostty} Ghostty";
-              "^/.*" = "${icon.ghostty} Ghostty";
-              "^nvim.*" = "${icon.neovim} Neovim > I use vim btw";
-              "^nix.*" = "${icon.lang_nix} Nix > I use nix btw";
+              "fuck-(.*) (.*)" = "${icons.fck}$1";
+              "^sysz.*" = "${icons.fck}systemctl";
+
+              "^nvim.*" = "${icons.neovim}Neovim > I use vim btw";
+
+              "^nix.*" = "${icons.nix}Nix > I use nix btw";
+              "^sudo nix.*" = "${icons.nix}Nix > I use nix btw";
             };
             on-double-click = "hyprctl dispatch '${
               dsp.window.fullscreen {

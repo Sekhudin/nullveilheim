@@ -19,15 +19,15 @@ in
       waybar.settings = rec {
         primary = {
           "power-profiles-daemon" = {
-            format = "<big>{icon}</big>";
+            format = ''<span size="150%">{icon}</span>'';
             tooltip = false;
             expand = false;
             on-click = actions.powerprofile;
             format-icons = {
-              default = "󰏒 ";
-              performance = "󰏒 ";
-              balanced = "󱅻 ";
-              power-saver = " ";
+              default = "󰾅 ";
+              performance = "󰓅 ";
+              balanced = "󰾅 ";
+              power-saver = "󰌪 ";
             };
           };
         };

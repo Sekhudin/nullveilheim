@@ -1,12 +1,14 @@
-{ font, styles, ... }:
+{ styles, ... }:
 
+let
+  padding_x = styles.padding_x - styles.gaps_in;
+in
 ''
   #bluetooth {
     color: @fg;
     background: @bg;
-    font-size: ${toString (font.sizes.bar + 2)}px;
     min-width: ${toString styles.min_width}px;
-    padding: 0px ${toString (styles.padding_x - styles.gaps_in)}px;
+    padding: 0px ${toString padding_x}px;
     border: ${toString styles.border_size}px solid @border;
     border-radius: ${toString styles.rounding}px;
   }

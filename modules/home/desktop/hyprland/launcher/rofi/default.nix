@@ -71,7 +71,6 @@ in
         plugins = [ ];
         modes = [
           "drun"
-          "window"
         ];
         extraConfig = {
           global-kb = true;

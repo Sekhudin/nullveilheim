@@ -54,7 +54,7 @@ in
           enableZshIntegration = config.programs.zsh.enable;
           settings = {
             theme = theme;
-            background-opacity = lib.mkDefault 0.9;
+            background-opacity = lib.mkDefault color.opacity;
             bold-is-bright = lib.mkDefault true;
             confirm-close-surface = lib.mkDefault false;
             shell-integration-features = "no-cursor";

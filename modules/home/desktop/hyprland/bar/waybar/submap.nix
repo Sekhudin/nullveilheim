@@ -16,7 +16,7 @@ in
       waybar.settings = rec {
         primary = {
           "hyprland/submap" = {
-            format = "<b>{}</b>";
+            format = ''<span size="150%" weight="ultrabold">{}</span>'';
             justify = "center";
             default-submap = "N";
             align = 0.5;

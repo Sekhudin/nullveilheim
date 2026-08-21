@@ -35,7 +35,7 @@ in
             window = {
               startup_mode = "Windowed";
               decorations = "none";
-              opacity = 0.95;
+              opacity = color.opacity;
               blur = true;
               dimensions = {
                 columns = 0;

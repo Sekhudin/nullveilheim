@@ -3,7 +3,7 @@
 ''
   #window {
     color: @fg;
-    background: @bg;
+    background: alpha(@bg, ${toString styles.opacity});
     min-width: ${toString styles.min_width}px;
     padding: 0px ${toString styles.padding_x}px;
     border: ${toString styles.border_size}px solid @border;
@@ -13,10 +13,6 @@
     animation-duration: ${toString styles.animation_ms}ms;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
-  }
-
-  #window:hover {
-    border: ${toString styles.border_size}px solid @primary;
   }
 
   window#waybar.empty #window {
