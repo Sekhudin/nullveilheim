@@ -54,6 +54,7 @@ in
     ./idle-inhibitor.nix
     ./network.nix
     ./nixosicon.nix
+    ./power.nix
     ./powerprofile.nix
     ./pulseaudio.nix
     ./submap.nix
@@ -108,6 +109,7 @@ in
                 "bluetooth"
                 "power-profiles-daemon"
                 "battery"
+                "custom/power"
               ];
             }
           ];
@@ -135,6 +137,7 @@ in
                 "bluetooth"
                 "power-profiles-daemon"
                 "battery"
+                "custom/power"
               ];
             }
           ];
@@ -148,6 +151,7 @@ in
             ./idle-inhibitor-style.nix
             ./network-style.nix
             ./nixosicon-style.nix
+            ./power-style.nix
             ./powerprofile-style.nix
             ./pulseaudio-style.nix
             ./submap-style.nix
@@ -165,10 +169,9 @@ in
             ${toGtkTokenCss tokens}
 
             window#waybar {
+              all: unset;
               color: @fg;
               background: transparent;
-              border: none;
-              border-radius: 0px;
               font-family: ${font.family.monospace};
               font-size: ${toString font.sizes.bar}px;
             }

@@ -19,9 +19,9 @@ in
       waybar.settings = rec {
         primary = {
           "custom/nixosicon" = {
-            format = " ";
+            format = ''<span size="150%"> </span>'';
             align = 0.5;
-            justify = 0.5;
+            justify = "center";
             tooltip = false;
             on-click = menus.apps;
             expand = false;

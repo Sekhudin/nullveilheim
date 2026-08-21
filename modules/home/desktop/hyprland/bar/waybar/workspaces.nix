@@ -14,7 +14,7 @@ in
       waybar.settings = rec {
         primary = {
           "hyprland/workspaces" = {
-            format = "{name}";
+            format = "<b>{name}</b>";
             orientation = "horizontal";
             all-outputs = false;
             move-to-monitor = false;

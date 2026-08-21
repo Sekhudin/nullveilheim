@@ -97,9 +97,10 @@ in
             border_size = 2;
             min_width = 16;
             min_height = 16;
+            opacity = color.opacity;
             padding_x = 12;
             padding_y = 8;
-            margin_top = (gaps_out * 8) + min_height;
+            margin_top = (gaps_out * 8) + (min_height + 2);
             animation_ms = 300;
           };
         }

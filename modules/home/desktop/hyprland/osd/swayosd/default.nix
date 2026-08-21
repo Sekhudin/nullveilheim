@@ -48,8 +48,8 @@ in
       ${toGtkTokenCss (
         tokens
         // {
-          bg = mkOpacity tokens.bg 0.8;
-          fg = mkOpacity tokens.fg 0.8;
+          bg = mkOpacity tokens.bg styles.opacity;
+          fg = mkOpacity tokens.fg styles.opacity;
           progressbar = mkOpacity tokens.fg 0.3;
           segment = mkOpacity tokens.fg 0.2;
           segment-active = mkOpacity tokens.fg 0.6;

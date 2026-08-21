@@ -22,12 +22,12 @@ in
             max-length = 50;
             min-length = 1;
             rfkill = true;
-            format-wifi = "<big>{icon}</big>";
-            format-ethernet = "<big>{icon}</big>";
-            format-linked = "<big>{icon}</big>";
-            format-disconnected = "";
-            format-disabled = "<big>{icon}</big>";
-            format-alt = "<big>{icon}</big> {essid} | ip: {ipaddr} | down: {bandwidthDownBytes}";
+            format-wifi = ''<span size="150%">{icon}</span>'';
+            format-ethernet = ''<span size="150%">{icon}</span>'';
+            format-linked = ''<span size="150%">{icon}</span>'';
+            format-disconnected = ''<span size="150%">{icon}</span>'';
+            format-disabled = ''<span size="150%">{icon}</span>'';
+            format-alt = ''<span size="150%">{icon}</span> {essid} | <b>ip</b>: {ipaddr} | <b>down</b>: {bandwidthDownBytes}'';
             format-alt-click = "click-right";
             format-icons = {
               wifi = [
@@ -38,7 +38,7 @@ in
                 "󰤨 "
               ];
               ethernet = "󰈀 ";
-              disconnected = "";
+              disconnected = "󰤯 ";
               disabled = "󰤭 ";
             };
 

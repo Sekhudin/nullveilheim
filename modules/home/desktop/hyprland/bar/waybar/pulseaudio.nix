@@ -14,13 +14,19 @@ in
       waybar.settings = rec {
         primary = {
           "pulseaudio" = {
-            format = "<big>{icon}</big> {volume}%";
-            format-bluetooth = "<big>{icon}</big>";
-            format-muted = "<big>{icon}</big> off";
+            format = ''<span size="150%">{icon}</span>{volume}%'';
+            format-bluetooth = ''<span size="150%">{icon}</span>'';
+            format-muted = ''<span size="150%">{icon}</span> off'';
             format-icons = {
               default = [
+                " "
                 " "
-                " "
+                " "
+                " "
+                " "
+                "  "
+                "  "
+                "  "
               ];
               default-muted = " ";
               headphone = " ";

@@ -14,11 +14,10 @@ in
       waybar.settings = rec {
         primary = {
           "bluetooth" = {
-            format = "<big>{icon}</big>";
-            format-on = "󰂯";
-            format-off = "󰂲";
-            format-connected = "󰂯";
-            format-disabled = "󰂲";
+            format-on = ''<span size="150%">󰂯</span>'';
+            format-off = ''<span size="150%">󰂲</span>'';
+            format-connected = ''<span size="150%">󰂱</span>'';
+            format-disabled = ''<span size="150%">󰂲</span>'';
             align = 0.5;
             justify = "center";
             tooltip = false;

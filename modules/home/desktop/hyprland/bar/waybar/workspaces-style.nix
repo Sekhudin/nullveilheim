@@ -23,11 +23,9 @@
     color: @muted_fg;
     background: @muted;
     min-width: ${
-      toString (styles.min_width - styles.gaps_in)
+      toString ((styles.min_width + 2) - styles.gaps_in)
     }px;
-    padding: ${toString (styles.padding_y - styles.gaps_in)}px ${
-      toString (styles.padding_x - styles.gaps_in)
-    }px;
+    padding:  ${toString styles.gaps_in}px;
     margin-left: ${toString styles.gaps_in}px;
     border: ${toString styles.border_size}px solid @border;
     border-radius: ${
@@ -44,13 +42,13 @@
   }
 
   #workspaces button:not(.empty):not(.active) {
-    color: @primary;
+    color: @primary_fg;
     border: ${toString styles.border_size}px solid @primary;
   }
 
   #workspaces button.active {
     color: @primary_fg;
-    background: @primary;
+    background: alpha(@primary, 0.6);
     border: ${toString styles.border_size}px solid @primary;
     animation-name: workspace-rise;
   }
