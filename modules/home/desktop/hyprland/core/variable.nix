@@ -54,6 +54,7 @@ in
             lock = "hypr-lock";
             logout = "hypr-logout";
             poweroff = "hypr-poweroff";
+            powerprofile = "hypr-powerprofile";
             reboot = "hypr-reboot";
             reload = "hypr-reload";
             screenoff = "hypr-screenoff";

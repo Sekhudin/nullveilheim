@@ -14,9 +14,9 @@ in
       waybar.settings = rec {
         primary = {
           "pulseaudio" = {
-            format = "{icon} {volume}%";
-            format-bluetooth = "{icon}";
-            format-muted = "{icon} off";
+            format = "<big>{icon}</big> {volume}%";
+            format-bluetooth = "<big>{icon}</big>";
+            format-muted = "<big>{icon}</big> off";
             format-icons = {
               default = [
                 " "
