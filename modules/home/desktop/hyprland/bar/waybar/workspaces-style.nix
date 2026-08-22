@@ -1,5 +1,9 @@
 { styles, ... }:
 
+let
+  button_width = (styles.min_width + 2) - styles.gaps_in;
+  button_border_radius = styles.rounding - styles.gaps_in;
+in
 "
   #workspaces {
     color: @fg;
@@ -22,15 +26,11 @@
   #workspaces button.visible {
     color: @muted_fg;
     background: @muted;
-    min-width: ${
-      toString ((styles.min_width + 2) - styles.gaps_in)
-    }px;
+    min-width: ${toString button_width}px;
     padding:  ${toString styles.gaps_in}px;
     margin-left: ${toString styles.gaps_in}px;
     border: ${toString styles.border_size}px solid @border;
-    border-radius: ${
-      toString (styles.rounding - styles.gaps_in)
-    }px;
+    border-radius: ${toString button_border_radius}px;
   }
 
   #workspaces button.active:first-child,
@@ -48,7 +48,7 @@
 
   #workspaces button.active {
     color: @primary_fg;
-    background: alpha(@primary, 0.6);
+    background: alpha(@primary, ${toString styles.opacity_mid});
     border: ${toString styles.border_size}px solid @primary;
     animation-name: workspace-rise;
   }

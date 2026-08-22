@@ -98,6 +98,8 @@ in
             min_width = 16;
             min_height = 16;
             opacity = color.opacity;
+            opacity_mid = 0.6;
+            opacity_low = 0.4;
             padding_x = 12;
             padding_y = 8;
             margin_top = (gaps_out * 8) + (min_height + 2);

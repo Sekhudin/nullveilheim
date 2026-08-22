@@ -58,6 +58,7 @@ in
     ./powerprofile.nix
     ./pulseaudio.nix
     ./submap.nix
+    ./tray.nix
     ./window.nix
     ./workspaces.nix
   ];
@@ -103,6 +104,7 @@ in
                 "hyprland/window"
               ];
               modules-right = [
+                "tray"
                 "idle_inhibitor"
                 "pulseaudio"
                 "network"
@@ -131,6 +133,7 @@ in
                 "hyprland/window"
               ];
               modules-right = [
+                "tray"
                 "idle_inhibitor"
                 "pulseaudio"
                 "network"
@@ -155,6 +158,7 @@ in
             ./powerprofile-style.nix
             ./pulseaudio-style.nix
             ./submap-style.nix
+            ./tray-style.nix
             ./window-style.nix
             ./workspaces-style.nix
           ];
@@ -168,25 +172,33 @@ in
           style = ''
             ${toGtkTokenCss tokens}
 
-            window#waybar {
-              all: unset;
-              color: @fg;
-              background: transparent;
+            * {
               font-family: ${font.family.monospace};
               font-size: ${toString font.sizes.bar}px;
+              border: none;
+              outline: none;
+              box-shadow: none;
+              text-shadow: none;
+            }
+
+            tooltip {
+              opacity: 0;
+              background: @bg;
+              margin: 0px;
+              padding: ${toString styles.gaps_in}px ${toString styles.padding_x}px;
+              border-radius: ${toString styles.rounding}px;
+            }
+
+            window#waybar {
+              color: @fg;
+              background: transparent;
             }
 
             window#waybar button {
-              color: inherit;
-              background: transparent;
-              border: none;
-              border-radius: 0;
-              box-shadow: none;
               padding: 0;
               margin: 0;
               min-width: 0;
               min-height: 0;
-              text-shadow: none;
             }
           '';
         };
