@@ -52,6 +52,7 @@ in
     ./bluetooth.nix
     ./clock.nix
     ./idle-inhibitor.nix
+    ./memory.nix
     ./network.nix
     ./nixosicon.nix
     ./power.nix
@@ -105,6 +106,7 @@ in
               ];
               modules-right = [
                 "tray"
+                "memory"
                 "idle_inhibitor"
                 "pulseaudio"
                 "network"
@@ -134,6 +136,7 @@ in
               ];
               modules-right = [
                 "tray"
+                "memory"
                 "idle_inhibitor"
                 "pulseaudio"
                 "network"
@@ -152,6 +155,7 @@ in
             ./bluetooth-style.nix
             ./clock-style.nix
             ./idle-inhibitor-style.nix
+            ./memory-style.nix
             ./network-style.nix
             ./nixosicon-style.nix
             ./power-style.nix

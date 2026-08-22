@@ -10,6 +10,5 @@
   }
 
   #clock:hover {
-    border: ${toString styles.border_size}px solid @primary;
   }
 ''

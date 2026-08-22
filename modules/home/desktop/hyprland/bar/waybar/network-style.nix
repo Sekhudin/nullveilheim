@@ -1,8 +1,8 @@
 { styles, ... }:
 
 let
-  padding_right = styles.padding_x - (styles.gaps_in + 2);
-  padding_left = styles.padding_x - styles.gaps_in;
+  padding_right = styles.padding_x - (styles.gaps_in + 1.5);
+  padding_left = (styles.padding_x + 1) - styles.gaps_in;
 in
 ''
   #network {
