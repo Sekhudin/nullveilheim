@@ -52,7 +52,7 @@ in
           fg = mkOpacity tokens.fg styles.opacity;
           progressbar = mkOpacity tokens.fg 0.3;
           segment = mkOpacity tokens.fg 0.2;
-          segment-active = mkOpacity tokens.fg 0.6;
+          segment-active = mkOpacity tokens.fg styles.opacity_mid;
         }
       )}
 

@@ -35,9 +35,9 @@ in
             font = "${font.family.sans_serif} ${toString font.sizes.desktop}";
           };
           literal = tokens // {
-            bg = color.mkOpacity tokens.bg color.opacity;
-            muted = color.mkOpacity tokens.muted 0.6;
-            muted-selected = color.mkOpacity tokens.muted 0.4;
+            bg = color.mkOpacity tokens.bg styles.opacity;
+            muted = color.mkOpacity tokens.muted styles.opacity_mid;
+            muted-selected = color.mkOpacity tokens.muted styles.opacity_low;
 
             text-color = "@fg";
             background-color = "transparent";
