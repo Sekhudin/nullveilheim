@@ -1,7 +1,7 @@
 { styles, ... }:
 
 ''
-  #clock {
+  #memory {
     color: @fg;
     background: @bg;
     padding: 0px ${toString styles.padding_x}px;
@@ -9,6 +9,6 @@
     border-radius: ${toString styles.rounding}px;
   }
 
-  #clock:hover {
+  #memory:hover {
   }
 ''

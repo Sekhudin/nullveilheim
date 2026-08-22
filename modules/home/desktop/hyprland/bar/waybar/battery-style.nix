@@ -10,7 +10,6 @@
   }
 
   #battery:hover {
-    border: ${toString styles.border_size}px solid @primary;
   }
 
   #battery.charging {
