@@ -31,6 +31,38 @@ let
           '';
         }}
       }
+
+      shutdown=" "
+      reboot=" "
+      suspend=" "
+      hibernate="󰤄 "
+      logout="󰈆 "
+      lock=" "
+
+      options="$lock\n$suspend\n$hibernate\n$reboot\n$shutdown\n$logout"
+
+      chosen="$(echo -e "$options" | rofi_cmd)"
+
+      case $chosen in
+          "$shutdown")
+              systemctl poweroff
+              ;;
+          "$reboot")
+              systemctl reboot
+              ;;
+          "$suspend")
+              systemctl suspend
+              ;;
+          "$hibernate")
+              systemctl hibernate
+              ;;
+          "$logout")
+              hyprctl dispatch exit
+              ;;
+          "$lock")
+              hyprlock
+              ;;
+      esac
     ''
   ];
 in

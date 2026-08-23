@@ -20,6 +20,6 @@ in
   #submap.M,
   #submap.R,
   #submap.S {
-    border: ${toString styles.border_size}px solid @info;
+    border: ${toString styles.border_size}px solid @secondary;
   }
 ''

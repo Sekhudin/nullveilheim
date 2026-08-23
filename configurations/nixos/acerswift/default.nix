@@ -20,9 +20,10 @@
       ignoreShellProgramCheck = true;
       extraGroups = [
         "networkmanager"
+        "adbusers"
+        "input"
         "wheel"
         "kvm"
-        "adbusers"
       ];
       subUidRanges = [
         {
