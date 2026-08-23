@@ -40,9 +40,9 @@ in
   }
 
   #tray widget.needs-attention > image {
-    color: @info_fg;
-    background: alpha(@info, ${toString styles.opacity_mid});
-    border: ${toString styles.border_size}px solid @info;
+    color: @secondary_fg;
+    background: alpha(@secondary, ${toString styles.opacity_mid});
+    border: ${toString styles.border_size}px solid @secondary;
   }
 
   #tray widget.active:hover > image,

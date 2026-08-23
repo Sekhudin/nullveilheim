@@ -23,7 +23,7 @@ in
   }
 
   #power-profiles-daemon.performance {
-    border: ${toString styles.border_size}px solid @primary;
+    border: ${toString styles.border_size}px solid @secondary;
   }
 
   #power-profiles-daemon:hover,

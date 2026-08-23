@@ -14,7 +14,7 @@ in
       waybar.settings = rec {
         primary = {
           "memory" = {
-            format = ''<span size="150%">󰍛 </span>{percentage}%'';
+            format = ''<span size="150%"> </span>{percentage}%'';
             interval = 5;
             max-length = 15;
             align = 0.5;
