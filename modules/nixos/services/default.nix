@@ -19,6 +19,17 @@
 
   config = {
     services = {
+      logind = {
+        enable = true;
+        settings = {
+          Login = {
+            HandlePowerKey = "ignore";
+            HandleLidSwitch = "ignore";
+            KillUserProcesses = false;
+          };
+        };
+      };
+
       upower = {
         enable = true;
       };
