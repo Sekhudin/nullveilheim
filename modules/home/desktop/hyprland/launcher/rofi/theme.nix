@@ -53,7 +53,8 @@ in
           literal = {
             background-color = "@bg";
             margin = "${toString styles.margin_top}px ${toString styles.gaps_out}px ${toString styles.gaps_out}px ${toString styles.gaps_out}px";
-            padding = "${toString styles.padding_y}px ${toString styles.padding_x}px";
+            padding = "0px";
+            spacing = "0px";
             border = "${toString styles.border_size}px solid";
             border-color = "@primary";
             border-radius = "${toString styles.rounding}px";
@@ -66,9 +67,9 @@ in
             enabled = true;
           };
           literal = {
-            spacing = "92px";
             margin = "0px";
             padding = "92px 216px";
+            spacing = "92px";
             children = ''[ "inputbar", "listview" ]'';
           };
         };
@@ -80,9 +81,9 @@ in
           literal = {
             text-color = "@fg";
             background-color = "@muted";
-            spacing = "8px";
             margin = "0% 25%";
             padding = "${toString (styles.padding_y * 1.5)}px ${toString (styles.padding_x * 1.5)}px";
+            spacing = "0px";
             border = "${toString styles.border_size}px solid";
             border-color = "@border";
             border-radius = "${toString styles.rounding}px";
@@ -96,6 +97,9 @@ in
             placeholder = "Search";
           };
           literal = {
+            margin = "0px";
+            padding = "0px";
+            spacing = "0px";
             text-color = "inherit";
             cursor = "text";
             placeholder-color = "inherit";
@@ -105,22 +109,18 @@ in
         listview = mkStyle {
           style = {
             enabled = true;
+            cycle = false;
             columns = 8;
             lines = 4;
-            cycle = false;
-            dynamic = true;
-            scrollbar = false;
-            reverse = false;
-            fixed-height = true;
-            fixed-columns = true;
           };
           literal = {
-            layout = "vertical";
-            flow = "horizontal";
-            spacing = "0px";
             margin = "0px";
             padding = "0px";
+            spacing = "${toString styles.gaps_in}px";
+            layout = "vertical";
+            flow = "horizontal";
             cursor = "default";
+            children = ''[ "element" ]'';
           };
         };
 
@@ -129,12 +129,12 @@ in
             enabled = true;
           };
           literal = {
-            spacing = "12px";
+            orientation = "vertical";
             margin = "0px";
             padding = "32px 8px";
-            border-radius = "${toString styles.rounding}px";
-            orientation = "vertical";
+            spacing = "${toString (styles.gaps_in * 2.0 )}px";
             cursor = "pointer";
+            border-radius = "${toString styles.rounding}px";
             children = ''[ "element-icon", "element-text" ]'';
           };
         };
@@ -154,14 +154,12 @@ in
 
         element-icon = mkStyle {
           literal = {
-            size = "64px";
-            cursor = "inherit";
+            size = "60px";
           };
         };
 
         element-text = mkStyle {
           literal = {
-            highlight = "inherit";
             cursor = "inherit";
             vertical-align = "0.5";
             horizontal-align = "0.5";

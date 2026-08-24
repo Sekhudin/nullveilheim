@@ -129,6 +129,7 @@ let
           spacing: 8px;
           padding: ${toString styles.padding_y}px ${toString styles.padding_x}px;
           orientation: horizontal;
+          cursor: "default";
           children: [ element-icon, element-text ];
         }
 
