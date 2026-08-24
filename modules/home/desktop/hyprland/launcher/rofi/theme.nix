@@ -51,8 +51,6 @@ in
             cursor = cursor.theme;
           };
           literal = {
-            width = "1368px";
-            height = "768px";
             background-color = "@bg";
             margin = "${toString styles.margin_top}px ${toString styles.gaps_out}px ${toString styles.gaps_out}px ${toString styles.gaps_out}px";
             padding = "${toString styles.padding_y}px ${toString styles.padding_x}px";
@@ -112,12 +110,12 @@ in
             cycle = false;
             dynamic = true;
             scrollbar = false;
-            layout = "vertical";
             reverse = false;
             fixed-height = true;
             fixed-columns = true;
           };
           literal = {
+            layout = "vertical";
             flow = "horizontal";
             spacing = "0px";
             margin = "0px";

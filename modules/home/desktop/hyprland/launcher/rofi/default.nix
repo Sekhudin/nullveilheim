@@ -27,6 +27,7 @@ let
     "rofi ${lib.concatStringsSep " " args} -theme-str '${theme-str}'";
 
   var = getVarRef config;
+  actions = var "actions";
   menus = var "menus";
   styles = var "styles";
   tokens = var "tokens";
@@ -52,9 +53,11 @@ in
             mkRofi
             mkJq
             joinPipe
+            actions
             menus
             styles
             tokens
+            font
             ;
         };
       });
