@@ -1,8 +1,8 @@
 { styles, ... }:
 
 let
-  padding_right = (styles.padding_x + 2) - styles.gaps_in;
-  padding_left = styles.padding_x - styles.gaps_in;
+  padding_right = styles.padding_x - styles.gaps_in;
+  padding_left = styles.padding_x - (styles.gaps_in + 1);
 in
 ''
   #pulseaudio {
