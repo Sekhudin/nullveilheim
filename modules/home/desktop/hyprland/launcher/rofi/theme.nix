@@ -110,6 +110,8 @@ in
           style = {
             enabled = true;
             cycle = false;
+            fixed-height = true;
+            fixed-columns = true;
             columns = 8;
             lines = 4;
           };
@@ -132,7 +134,7 @@ in
             orientation = "vertical";
             margin = "0px";
             padding = "32px 8px";
-            spacing = "${toString (styles.gaps_in * 2.0 )}px";
+            spacing = "${toString (styles.gaps_in * 2.0)}px";
             cursor = "pointer";
             border-radius = "${toString styles.rounding}px";
             children = ''[ "element-icon", "element-text" ]'';
