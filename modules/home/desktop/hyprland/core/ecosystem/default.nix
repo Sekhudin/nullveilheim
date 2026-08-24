@@ -22,6 +22,7 @@ in
     ./hypridle.nix
     ./hyprlock.nix
     ./hyprpolkitagent.nix
+    ./hyprtoolkit.nix
   ];
 
   config = lib.mkIf (cfg.enable && ecosystemEnabled) {
