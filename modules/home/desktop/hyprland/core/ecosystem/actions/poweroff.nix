@@ -7,9 +7,11 @@
 let
   name = actions.poweroff;
 
-  runtimeInputs = [ ];
+  runtimeInputs = with pkgs; [
+    hyprshutdown
+  ];
 
-  text = "systemctl poweroff";
+  text = ''hyprshutdown -t "Shutting down..." --post-cmd "systemctl poweroff"'';
 in
 {
   app = pkgs.writeShellApplication {
