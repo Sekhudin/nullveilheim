@@ -7,9 +7,11 @@
 let
   name = actions.reboot;
 
-  runtimeInputs = [ ];
+  runtimeInputs = with pkgs; [
+    hyprshutdown
+  ];
 
-  text = "systemctl reboot";
+  text = ''hyprshutdown -t "Restarting..." --post-cmd "systemctl reboot"'';
 in
 {
   app = pkgs.writeShellApplication {

@@ -22,6 +22,8 @@ in
     ./hypridle.nix
     ./hyprlock.nix
     ./hyprpolkitagent.nix
+    ./hyprqt.nix
+    ./hyprshutdown.nix
     ./hyprtoolkit.nix
   ];
 
