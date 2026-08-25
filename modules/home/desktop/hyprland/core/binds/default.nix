@@ -18,13 +18,18 @@ let
   actions = {
     reload = getVar "actions.reload";
   };
+
+  menus = {
+    apps = getVar "menus.apps";
+    binds = getVar "menus.binds";
+  };
 in
 {
   imports = [
     ./application.nix
-    ./luncher.nix
     ./mouse.nix
     ./osd.nix
+    ./screenshot.nix
     ./session.nix
     ./window.nix
     ./workspace.nix
@@ -34,6 +39,27 @@ in
     wayland.windowManager.hyprland = {
       settings = {
         bind = [
+          (mkBind {
+            key = combos.mod "SUPER_L";
+            dispatcher = dsp.exec_cmd {
+              cmd = menus.apps;
+            };
+            flags = {
+              release = true;
+              description = "show apps";
+            };
+          })
+
+          (mkBind {
+            key = combos.mod "SLASH";
+            dispatcher = dsp.exec_cmd {
+              cmd = menus.binds;
+            };
+            flags = {
+              description = "show key bindings";
+            };
+          })
+
           (mkBind {
             key = combos.mod "Q";
             dispatcher = dsp.window.close { };
