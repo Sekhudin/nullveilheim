@@ -143,7 +143,7 @@ let
           vertical-align: 0.5;
           horizontal-align: 0.5;
           padding: ${toString styles.gaps_in}px;
-          background-color: @muted-selected;
+          background-color: @selected;
           border: ${toString styles.border_size}px solid;
           border-radius: ${toString styles.rounding}px;
           border-color: @border;
