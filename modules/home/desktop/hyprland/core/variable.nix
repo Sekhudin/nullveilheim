@@ -35,6 +35,7 @@ in
             monitor = "M";
             resize = "R";
             session = "S";
+            whiteboard = "W";
           };
 
           apps = mkVar {
@@ -47,6 +48,7 @@ in
             apps = "hypr-apps";
             binds = "hypr-binds";
             power = "hypr-power";
+            screenshot = "hypr-screenshot";
           };
 
           actions = mkVar {
@@ -80,6 +82,10 @@ in
             capslock = "hypr-capslock";
             numlock = "hypr-numlock";
             scrolllock = "hypr-scrolllock";
+
+            # misc
+            screenshot_fullscreen = "hypr-screenshot-fullscreen";
+            screenshot_region = "hypr-screenshot-region";
           };
 
           cursor = mkVar {
