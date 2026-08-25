@@ -25,6 +25,7 @@ in
     ./hyprqt.nix
     ./hyprshutdown.nix
     ./hyprtoolkit.nix
+    ./screenshot.nix
   ];
 
   config = lib.mkIf (cfg.enable && ecosystemEnabled) {
