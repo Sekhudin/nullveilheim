@@ -86,6 +86,7 @@ in
             # misc
             screenshot_fullscreen = "hypr-screenshot-fullscreen";
             screenshot_region = "hypr-screenshot-region";
+            screenshot_window = "hypr-screenshot-window";
           };
 
           cursor = mkVar {
