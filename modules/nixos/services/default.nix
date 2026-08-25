@@ -25,6 +25,8 @@
           Login = {
             HandlePowerKey = "ignore";
             HandleLidSwitch = "ignore";
+            HandleSuspendKey = "ignore";
+            HandleHibernateKey = "ignore";
             KillUserProcesses = false;
           };
         };
