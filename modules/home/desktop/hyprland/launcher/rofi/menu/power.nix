@@ -13,7 +13,6 @@ let
   name = menus.power;
 
   runtimeInputs = with pkgs; [
-    hyprland
     rofi
   ];
 
@@ -62,7 +61,7 @@ let
             element {
               enabled: true;
               margin: 0px;
-              padding: 10px 18px 10px 0px;
+              padding: 10px 10px 10px 0px;
               spacing: 0px;
               border-radius: ${toString button_border_radius}px;
               children: [ "element-text" ];
@@ -72,11 +71,13 @@ let
             }
 
             element selected.normal {
+              background-color: @primary-selected;
+              border-color: @primary;
             }
 
             element-text {
               highlight: inherit;
-              font: "${font.family.sans_serif} 48";
+              font: "${font.family.sans_serif} 32";
               padding: 0px;
             }
           '';

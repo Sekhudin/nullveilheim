@@ -9,7 +9,7 @@ let
   name = menus.apps;
 
   runtimeInputs = with pkgs; [
-    hyprland
+    rofi
   ];
 
   text = mkRofi {

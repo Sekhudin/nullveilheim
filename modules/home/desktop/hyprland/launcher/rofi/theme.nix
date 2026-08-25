@@ -36,8 +36,9 @@ in
           };
           literal = tokens // {
             bg = color.mkOpacity tokens.bg styles.opacity;
-            muted = color.mkOpacity tokens.muted styles.opacity_mid;
-            muted-selected = color.mkOpacity tokens.muted styles.opacity_low;
+            input = color.mkOpacity tokens.input styles.opacity_mid;
+            selected = color.mkOpacity tokens.muted styles.opacity_low;
+            primary-selected = color.mkOpacity tokens.primary styles.opacity_low;
 
             text-color = "@fg";
             background-color = "transparent";
@@ -80,7 +81,7 @@ in
           };
           literal = {
             text-color = "@fg";
-            background-color = "@muted";
+            background-color = "@input";
             margin = "0% 25%";
             padding = "${toString (styles.padding_y * 1.5)}px ${toString (styles.padding_x * 1.5)}px";
             spacing = "0px";
@@ -148,7 +149,7 @@ in
 
         "element selected.normal" = mkStyle {
           literal = {
-            background-color = "@muted-selected";
+            background-color = "@selected";
             border = "${toString styles.border_size}px solid";
             border-color = "@border";
           };
