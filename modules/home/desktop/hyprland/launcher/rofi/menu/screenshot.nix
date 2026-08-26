@@ -77,7 +77,7 @@ let
 
             element-text {
               highlight: inherit;
-              font: "${font.family.sans_serif} 32";
+              font: "${font.family.monospace} 32";
               padding: 0px;
             }
           '';
