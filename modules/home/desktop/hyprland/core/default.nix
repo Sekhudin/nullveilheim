@@ -16,6 +16,7 @@ in
     ./submaps
     ./config.nix
     ./env.nix
+    ./gtk.nix
     ./monitor.nix
     ./variable.nix
     ./workspace-rule.nix

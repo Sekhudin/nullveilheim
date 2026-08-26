@@ -32,7 +32,7 @@ in
             event = events.config.reloaded;
             action = [
               (hl.exec_cmd {
-                cmd = "systemctl --user start ashell.service";
+                cmd = "systemctl --user enable --now ashell.service";
               })
             ];
           })

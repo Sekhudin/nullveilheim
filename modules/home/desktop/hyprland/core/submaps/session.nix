@@ -41,7 +41,7 @@ in
               name = submaps.session;
             };
             flags = {
-              description = mkDesc "enter submap session";
+              description = mkDesc "enter session submap";
             };
           })
         ];
