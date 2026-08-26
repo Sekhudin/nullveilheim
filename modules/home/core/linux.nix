@@ -13,24 +13,16 @@ in
 
   config = lib.mkIf (master.enable && pkgs.stdenv.isLinux) {
     home = {
-      packages =
-        with pkgs;
-        [
-          fswatch
-          copyq
-          xsel
-          (writeScriptBin "copy" "xsel -ib")
-          (writeScriptBin "paste" "xsel -ob")
+      packages = with pkgs; [
+        fswatch
+        copyq
+        xsel
+        (writeScriptBin "copy" "xsel -ib")
+        (writeScriptBin "paste" "xsel -ob")
 
-          # fuck
-          sysz
-        ]
-        ++ lib.optionals (!master.enableStandalone) (
-          with pkgs;
-          [
-            docker
-          ]
-        );
+        # fuck
+        sysz
+      ];
 
       shellAliases = {
         fuck-systemctl = lib.getExe pkgs.sysz;
