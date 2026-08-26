@@ -72,7 +72,7 @@ in
             event = events.config.reloaded;
             action = [
               (hl.exec_cmd {
-                cmd = "systemctl --user start waybar.service";
+                cmd = "systemctl --user enable --now waybar.service";
               })
             ];
           })

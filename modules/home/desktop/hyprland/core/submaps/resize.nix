@@ -33,7 +33,7 @@ in
               name = submaps.resize;
             };
             flags = {
-              description = mkDesc "enter submap resize";
+              description = mkDesc "enter resize submap";
             };
           })
         ];

@@ -33,7 +33,7 @@ in
               name = submaps.monitor;
             };
             flags = {
-              description = mkDesc "enter submap monitor";
+              description = mkDesc "enter monitor submap";
             };
           })
         ];
