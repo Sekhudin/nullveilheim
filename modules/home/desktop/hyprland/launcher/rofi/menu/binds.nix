@@ -50,6 +50,7 @@ let
             "XF86AudioLowerVolume": "󰝞",
             "XF86AudioRaiseVolume": "󰝝",
             "XF86AudioMute": "󰝟",
+            "Print": "Prt",
             "Caps_Lock": "󰘲",
             "Num_Lock": "󰎠"
           }[.] // .;
@@ -73,6 +74,7 @@ let
             "XF86AudioLowerVolume": "Volume Down",
             "XF86AudioRaiseVolume": "Volume Up",
             "XF86AudioMute": "Volume Mute",
+            "Print": "Prt",
             "Caps_Lock": "Caps Lock",
             "Num_Lock": "Num Lock"
           }[.] // .;

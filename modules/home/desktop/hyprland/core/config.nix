@@ -2,6 +2,7 @@
   config,
   lib,
   extraLib,
+  font,
   ...
 }:
 
@@ -10,7 +11,6 @@ let
   inherit (extraLib.hyprland) getVar;
 
   rounding = getVar "styles.rounding";
-  font_family = getVar "styles.font_family";
   gaps_in = getVar "styles.gaps_in";
   gaps_out = getVar "styles.gaps_out";
   border_size = getVar "styles.border_size";
@@ -104,7 +104,7 @@ in
         };
 
         misc = {
-          font_family = font_family;
+          font_family = font.family.sans_serif;
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
         };

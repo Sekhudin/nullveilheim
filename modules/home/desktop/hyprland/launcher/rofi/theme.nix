@@ -32,7 +32,6 @@ in
       rofi.theme = {
         "*" = mkStyle {
           style = {
-            font = "${font.family.sans_serif} ${toString font.sizes.desktop}";
           };
           literal = tokens // {
             bg = color.mkOpacity tokens.bg styles.opacity;
@@ -78,6 +77,7 @@ in
         inputbar = mkStyle {
           style = {
             enabled = true;
+            font = "${font.family.sans_serif} ${toString font.sizes.desktop}";
           };
           literal = {
             text-color = "@fg";
@@ -95,6 +95,7 @@ in
         entry = mkStyle {
           style = {
             enabled = true;
+            font = "${font.family.sans_serif} ${toString font.sizes.desktop}";
             placeholder = "Search";
           };
           literal = {
@@ -162,6 +163,9 @@ in
         };
 
         element-text = mkStyle {
+          style = {
+            font = "${font.family.sans_serif} ${toString font.sizes.desktop}";
+          };
           literal = {
             cursor = "inherit";
             vertical-align = "0.5";
