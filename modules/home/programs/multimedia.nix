@@ -70,13 +70,6 @@ in
           "ALT+k" = "add geometry +5";
         };
       };
-
-      yazi = {
-        enable = true;
-        enableFishIntegration = config.programs.fish.enable;
-        enableZshIntegration = config.programs.zsh.enable;
-        settings = { };
-      };
     };
 
     xdg.desktopEntries = lib.mkIf openGLEnable {
