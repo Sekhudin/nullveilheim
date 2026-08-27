@@ -34,13 +34,13 @@ in
             monitor = "M";
             resize = "R";
             session = "S";
-            whiteboard = "W";
           };
 
           apps = mkVar {
             terminal = config.homeTerminalModules.use;
             browser = "firefox";
             editor = "nvim";
+            windowboard = "wayscriber --daemon-toggle";
           };
 
           menus = mkVar {

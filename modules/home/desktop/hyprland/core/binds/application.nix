@@ -17,6 +17,7 @@ let
   apps = {
     terminal = getVar "apps.terminal";
     browser = getVar "apps.browser";
+    windowboard = getVar "apps.windowboard";
   };
 in
 {
@@ -41,6 +42,16 @@ in
             };
             flags = {
               description = "open browser";
+            };
+          })
+
+          (mkBind {
+            key = combos.mod "W";
+            dispatcher = dsp.exec_cmd {
+              cmd = apps.windowboard;
+            };
+            flags = {
+              description = "windowboard toggle";
             };
           })
         ];
