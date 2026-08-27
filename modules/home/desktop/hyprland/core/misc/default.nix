@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./hyprfm.nix
-    ./whiteboard.nix
+    ./windowboard.nix
+    ./filemanager.nix
   ];
 }
