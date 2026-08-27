@@ -25,6 +25,9 @@
     nixvim.inputs.nixpkgs.follows = "nixpkgs-unstable";
     nixvim.inputs.flake-parts.follows = "flake-parts";
 
+    # nixos apps
+    hyprfm.url = "github:soyeb-jim285/hyprfm";
+
     process-compose-flake.url = "github:Platonic-Systems/process-compose-flake";
 
     services-flake.url = "github:juspay/services-flake";

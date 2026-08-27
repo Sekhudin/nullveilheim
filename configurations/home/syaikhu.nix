@@ -9,7 +9,6 @@
 }:
 
 let
-  selfPkgs = inputs.self.packages.${pkgs.stdenv.system};
   enableConfig = path: lib.attrByPath path false osConfig;
 
   enableHyprland = (
@@ -31,10 +30,10 @@ in
       inherit pkgs username osConfig;
     };
     packages = [
-      selfPkgs.nvim
+      inputs.self.packages.${pkgs.stdenv.system}.nvim
     ];
     sessionVariables = {
-      EDITOR = (lib.getExe' selfPkgs.nvim "nvim");
+      EDITOR = (lib.getExe' inputs.self.packages.${pkgs.stdenv.system}.nvim "nvim");
     };
   };
 

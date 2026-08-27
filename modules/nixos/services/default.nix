@@ -19,6 +19,10 @@
 
   config = {
     services = {
+      gvfs = {
+        enable = true;
+      };
+
       logind = {
         enable = true;
         settings = {
