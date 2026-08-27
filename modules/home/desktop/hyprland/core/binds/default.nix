@@ -40,7 +40,7 @@ in
       settings = {
         bind = [
           (mkBind {
-            key = combos.mod "SUPER_L";
+            key = combos.mod "SPACE";
             dispatcher = dsp.exec_cmd {
               cmd = menus.apps;
             };
@@ -91,7 +91,10 @@ in
           })
 
           (mkBind {
-            key = combos.mod "SPACE";
+            key = combos.of [
+              keys.mod
+              keys.shift
+            ] "SPACE";
             dispatcher = dsp.extra.layout_toggle {
               layouts = [
                 "dwindle"
