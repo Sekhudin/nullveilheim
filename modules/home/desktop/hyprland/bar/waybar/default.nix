@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   lib,
   extraLib,
@@ -10,6 +11,7 @@
 let
   cfg = config.homeDesktopModules.hyprland;
   enableWaybar = (cfg.bar.use == "waybar");
+  inherit (extraLib) importModules;
   inherit (color) toGtkTokenCss;
   inherit (extraLib.hyprland)
     mkEvent
@@ -18,20 +20,11 @@ let
     hl
     ;
 
-  composeStyle =
-    {
-      style ? "",
-      includes ? [ ],
-      args ? { },
-    }:
-    lib.concatStringsSep "\n" (
-      lib.filter (s: s != "") ([ style ] ++ map (path: import path args) includes)
-    );
-
   var = getVarRef config;
   monitors = var "monitors";
   styles = var "styles";
   tokens = var "tokens";
+  actions = var "actions";
 
   commonSettings = {
     layer = "bottom";
@@ -45,6 +38,23 @@ let
     margin-bottom = styles.gaps_out;
     spacing = styles.gaps_in;
   };
+
+  composeStyle =
+    {
+      dir,
+      style ? "",
+      args ? { },
+    }:
+    let
+      styleFiles = builtins.attrNames (
+        lib.filterAttrs (name: type: type == "regular" && lib.hasSuffix "-style.nix" name) (
+          builtins.readDir dir
+        )
+      );
+    in
+    lib.concatStringsSep "\n" (
+      lib.filter (s: s != "") ([ style ] ++ map (name: import "${dir}/${name}" args) styleFiles)
+    );
 in
 {
   imports = [
@@ -58,6 +68,7 @@ in
     ./power.nix
     ./powerprofile.nix
     ./pulseaudio.nix
+    ./screen-recorder.nix
     ./submap.nix
     ./tray.nix
     ./window.nix
@@ -65,6 +76,20 @@ in
   ];
 
   config = lib.mkIf (cfg.enable && enableWaybar) {
+    home = {
+      packages = map (module: module.app) (importModules {
+        dir = ./actions;
+        recursive = false;
+        excludeDefault = true;
+        args = {
+          inherit
+            pkgs
+            actions
+            ;
+        };
+      });
+    };
+
     wayland.windowManager.hyprland = {
       settings = {
         on = [
@@ -99,6 +124,7 @@ in
                 "custom/nixosicon"
                 "hyprland/workspaces"
                 "hyprland/submap"
+                "group/screen-recorder"
                 "clock"
               ];
               modules-center = [
@@ -150,22 +176,7 @@ in
         };
 
         style = composeStyle {
-          includes = [
-            ./battery-style.nix
-            ./bluetooth-style.nix
-            ./clock-style.nix
-            ./idle-inhibitor-style.nix
-            ./memory-style.nix
-            ./network-style.nix
-            ./nixosicon-style.nix
-            ./power-style.nix
-            ./powerprofile-style.nix
-            ./pulseaudio-style.nix
-            ./submap-style.nix
-            ./tray-style.nix
-            ./window-style.nix
-            ./workspaces-style.nix
-          ];
+          dir = ./.;
           args = {
             inherit
               lib
