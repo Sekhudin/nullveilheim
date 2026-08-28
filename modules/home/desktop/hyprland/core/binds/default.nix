@@ -45,7 +45,6 @@ in
               cmd = menus.apps;
             };
             flags = {
-              release = true;
               description = "show apps";
             };
           })
