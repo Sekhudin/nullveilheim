@@ -61,7 +61,7 @@ in
             path = "screenshot";
             color = tokens.bg;
             blur_passes = 2;
-            blur_size = 0;
+            blur_size = 1;
           };
 
           input-field = {
