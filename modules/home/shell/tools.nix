@@ -139,8 +139,11 @@ in
 
         # gpg export
         gpg-bp = "gpg --export-options backup --export";
+        gpg-rp = "gpg --import-options restore --import";
+
         gpg-bs = "gpg --export-options backup --export-secret-keys";
-        gpg-r = "gpg --export-options restore --import";
+        gpg-rs = "gpg --pinentry-mode loopback --import-options restore --import";
+
         gpg-bt = "gpg --export-ownertrust";
         gpg-rt = "gpg --import-ownertrust";
 
