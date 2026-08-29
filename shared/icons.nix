@@ -1,6 +1,8 @@
 let
   icons = {
     archlinux = "";
+    block_open = "▐";
+    block_close = "▌";
     bookmark = "";
     bottom = "↓";
     box_drawing_up = "│";

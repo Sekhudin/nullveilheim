@@ -17,6 +17,7 @@ let
   apps = {
     terminal = getVar "apps.terminal";
     browser = getVar "apps.browser";
+    filemanager = getVar "apps.filemanager";
     windowboard = getVar "apps.windowboard";
   };
 in
@@ -42,6 +43,16 @@ in
             };
             flags = {
               description = "open browser";
+            };
+          })
+
+          (mkBind {
+            key = combos.mod "M";
+            dispatcher = dsp.exec_cmd {
+              cmd = apps.filemanager;
+            };
+            flags = {
+              description = "open file manager";
             };
           })
 
