@@ -58,7 +58,7 @@
     enable = true;
     networking = {
       settings = {
-        hostName = "acerswift";
+        hostName = "t14";
         firewall = {
           allowedTCPPorts = [ 22 ];
         };
