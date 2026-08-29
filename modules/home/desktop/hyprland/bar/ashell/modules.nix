@@ -8,7 +8,7 @@
 let
   cfg = config.homeDesktopModules.hyprland;
   enableAshell = (cfg.bar.use == "ashell");
-  inherit (extraLib.hyprland) getVarRef dsp;
+  inherit (extraLib.hyprland) getVarRef;
 
   var = getVarRef config;
   actions = var "actions";

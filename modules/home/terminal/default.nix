@@ -1,13 +1,8 @@
 {
-  config,
   lib,
-  color,
   ...
 }:
 
-let
-  themeNames = lib.attrNames color.themes;
-in
 {
   imports = [
     ./alacritty.nix
