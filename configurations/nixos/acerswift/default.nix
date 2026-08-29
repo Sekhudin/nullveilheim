@@ -14,7 +14,7 @@
 
   users.users = {
     syaikhu = {
-      description = "user syaikhu";
+      description = "syaikhu";
       isNormalUser = true;
       shell = pkgs.fish;
       ignoreShellProgramCheck = true;
@@ -56,12 +56,6 @@
 
   nixosCoreModules = {
     enable = true;
-    boot = {
-      settings = {
-        kernelModules = [ "kvm-intel" ];
-      };
-    };
-
     networking = {
       settings = {
         hostName = "acerswift";

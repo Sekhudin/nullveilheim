@@ -30,6 +30,10 @@
       acerswift = {
         userHomeModules = [ "syaikhu" ];
       };
+
+      t14 = {
+        userHomeModules = [ "syaikhu" ];
+      };
     };
   };
 
