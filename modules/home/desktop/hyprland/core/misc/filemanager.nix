@@ -9,12 +9,19 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
+    services = {
+      udiskie = {
+        enable = true;
+        automount = true;
+        notify = true;
+        tray = "auto";
+        settings = { };
+      };
+    };
+
     programs = {
       yazi = {
         enable = true;
-        enableFishIntegration = config.programs.fish.enable;
-        enableZshIntegration = config.programs.zsh.enable;
-        settings = { };
       };
     };
   };

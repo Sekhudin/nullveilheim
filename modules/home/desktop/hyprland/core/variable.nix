@@ -36,10 +36,11 @@ in
             session = "S";
           };
 
-          apps = mkVar {
+          apps = mkVar rec {
             terminal = config.homeTerminalModules.use;
             browser = "firefox";
             editor = "nvim";
+            filemanager = "${terminal} -e yazi";
             windowboard = "wayscriber --daemon-toggle";
           };
 
