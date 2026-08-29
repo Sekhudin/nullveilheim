@@ -20,7 +20,7 @@ let
   tokens = var "tokens";
 
   fTokens = builtins.mapAttrs (
-    name: val: "0xFF" + (if builtins.substring 0 1 val == "#" then builtins.substring 1 6 val else val)
+    _: val: "0xFF" + (if builtins.substring 0 1 val == "#" then builtins.substring 1 6 val else val)
   ) tokens;
 
   toStringInt = value: toString (builtins.floor value);
