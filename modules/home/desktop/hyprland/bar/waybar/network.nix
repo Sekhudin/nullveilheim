@@ -14,7 +14,7 @@ in
       waybar.settings = rec {
         primary = {
           "network" = {
-            interface = "wlp0s20f3";
+            interface = "w*";
             family = "ipv4_6";
             interval = 2;
             align = 0.5;
