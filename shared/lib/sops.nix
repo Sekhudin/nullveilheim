@@ -71,8 +71,9 @@
                 "email"
                 "signing_key"
                 "ssh_key"
-                "gitdirs/projects"
-                "gitdirs/opensource"
+                "gitdirs/w1"
+                "gitdirs/w2"
+                "gitdirs/w3"
               ];
             }
           ) profiles
