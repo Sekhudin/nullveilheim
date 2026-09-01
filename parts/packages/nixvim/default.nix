@@ -1,7 +1,10 @@
 { inputs, ... }:
 
 let
-  inherit (inputs.nixvim.lib.nixvim.modules) buildNixvimWith testNixvimWith;
+  inherit (inputs.nixvim.lib.nixvim.modules)
+    buildNixvimWith
+    testNixvimWith
+    ;
 in
 {
   perSystem =
@@ -32,13 +35,21 @@ in
     {
       packages = {
         nvim = buildNixvimWith {
-          inherit system modules extraSpecialArgs;
+          inherit
+            system
+            modules
+            extraSpecialArgs
+            ;
         };
       };
 
       checks = {
         nvim = testNixvimWith {
-          inherit system extraSpecialArgs;
+          inherit
+            system
+            extraSpecialArgs
+            ;
+
           modules = modules ++ [
             {
               plugins = {

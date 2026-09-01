@@ -1,5 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, extraLib, ... }:
 
+let
+  inherit (extraLib.nixvim) mkLuaFun;
+in
 {
   globals = {
     mapleader = " ";
@@ -42,6 +45,17 @@
       };
       pbcopy = {
         enable = pkgs.stdenv.isDarwin;
+      };
+    };
+  };
+
+  userCommands = {
+    LspInlay = {
+      desc = "toggle inlay hints";
+      command = {
+        __raw = mkLuaFun ''
+          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        '';
       };
     };
   };
