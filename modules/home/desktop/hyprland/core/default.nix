@@ -11,8 +11,6 @@ in
 {
   imports = [
     ./binds
-    ./ecosystem
-    ./misc
     ./submaps
     ./config.nix
     ./env.nix
@@ -23,6 +21,12 @@ in
   ];
 
   config = lib.mkIf cfg.enable {
+    home = {
+      packages = with pkgs; [
+        libnotify
+      ];
+    };
+
     wayland = {
       systemd = {
         target = "hyprland-session.target";

@@ -23,30 +23,25 @@ in
     ./hyprlock.nix
     ./hyprpolkitagent.nix
     ./hyprqt.nix
+    ./hyprshot.nix
     ./hyprshutdown.nix
     ./hyprtoolkit.nix
-    ./screenshot.nix
   ];
 
   config = lib.mkIf (cfg.enable && ecosystemEnabled) {
     home = {
-      packages =
-        with pkgs;
-        [
-          libnotify
-        ]
-        ++ (map (module: module.app) (importModules {
-          dir = ./actions;
-          recursive = false;
-          excludeDefault = true;
-          args = {
-            inherit
-              pkgs
-              dsp
-              actions
-              ;
-          };
-        }));
+      packages = map (module: module.app) (importModules {
+        dir = ./actions;
+        recursive = false;
+        excludeDefault = true;
+        args = {
+          inherit
+            pkgs
+            dsp
+            actions
+            ;
+        };
+      });
     };
   };
 }

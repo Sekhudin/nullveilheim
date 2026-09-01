@@ -7,7 +7,9 @@
   imports = [
     ./bar
     ./core
+    ./ecosystem
     ./launcher
+    ./misc
     ./notification
     ./osd
     ./wallpaper
