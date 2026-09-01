@@ -9,7 +9,7 @@ let
   masterEnable = config.homeProgramsModules.enable;
 
   inherit (config.homeProgramsModules.secrets) secretProfiles;
-  secretsEnable = config.homeProgramsModules.secrets.enable;
+  enableSecrets = config.homeProgramsModules.secrets.enable;
 in
 {
   options.homeProgramsModules.ssh = {
@@ -53,7 +53,7 @@ in
       };
     };
 
-    home = lib.mkIf (secretsEnable && cfg.enableShellAliases) {
+    home = lib.mkIf (enableSecrets && cfg.enableShellAliases) {
       shellAliases = lib.foldl' (
         acc: profile:
         acc
