@@ -45,50 +45,50 @@ in
           };
 
           menus = mkVar {
-            apps = "hypr-apps";
-            binds = "hypr-binds";
-            power = "hypr-power";
-            screenshot = "hypr-screenshot";
+            apps = "nv-apps";
+            binds = "nv-binds";
+            power = "nv-power";
+            screenshot = "nv-screenshot";
           };
 
           actions = mkVar {
-            hibernate = "hypr-hibernate";
-            lock = "hypr-lock";
-            logout = "hypr-logout";
-            poweroff = "hypr-poweroff";
-            powerprofile = "hypr-powerprofile";
-            reboot = "hypr-reboot";
-            reload = "hypr-reload";
-            screenoff = "hypr-screenoff";
-            screenon = "hypr-screenon";
-            suspend = "hypr-suspend";
+            hibernate = "nv-hibernate";
+            lock = "nv-lock";
+            logout = "nv-logout";
+            poweroff = "nv-poweroff";
+            powerprofile = "nv-powerprofile";
+            reboot = "nv-reboot";
+            reload = "nv-reload";
+            screenoff = "nv-screenoff";
+            screenon = "nv-screenon";
+            suspend = "nv-suspend";
 
             # osd
-            brightness_up = "hypr-brightness-up";
-            brightness_down = "hypr-brightness-down";
+            brightness_up = "nv-brightness-up";
+            brightness_down = "nv-brightness-down";
 
-            media_playback = "hypr-media-playback";
-            media_next = "hypr-media-next";
-            media_prev = "hypr-media-prev";
+            media_playback = "nv-media-playback";
+            media_next = "nv-media-next";
+            media_prev = "nv-media-prev";
 
-            mic_up = "hypr-mic-up";
-            mic_down = "hypr-mic-down";
-            mic_mute = "hypr-mic-mute";
+            mic_up = "nv-mic-up";
+            mic_down = "nv-mic-down";
+            mic_mute = "nv-mic-mute";
 
-            volume_up = "hypr-volume-up";
-            volume_down = "hypr-volume-down";
-            volume_mute = "hypr-volume-mute";
+            volume_up = "nv-volume-up";
+            volume_down = "nv-volume-down";
+            volume_mute = "nv-volume-mute";
 
-            capslock = "hypr-capslock";
-            numlock = "hypr-numlock";
-            scrolllock = "hypr-scrolllock";
+            capslock = "nv-capslock";
+            numlock = "nv-numlock";
+            scrolllock = "nv-scrolllock";
 
             # misc
-            screenshot_fullscreen = "hypr-screenshot-fullscreen";
-            screenshot_region = "hypr-screenshot-region";
-            screenshot_window = "hypr-screenshot-window";
+            screenshot_fullscreen = "nv-screenshot-fullscreen";
+            screenshot_region = "nv-screenshot-region";
+            screenshot_window = "nv-screenshot-window";
 
-            screenrec = "hypr-screenrec";
+            screenrec = "nv-screenrec";
           };
 
           cursor = mkVar {

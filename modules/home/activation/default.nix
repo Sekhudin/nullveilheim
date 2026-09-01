@@ -1,14 +1,20 @@
 {
   lib,
+  extraLib,
   ...
 }:
 
+let
+  inherit (extraLib) mkImports;
+in
 {
-  imports = [
-    ./generate-git-identities.nix
-    ./import-gpg-keys.nix
-    ./install-ssh-keys.nix
-  ];
+  imports = mkImports {
+    recursive = false;
+    excludeDefault = true;
+    dirs = [
+      ./.
+    ];
+  };
 
   options.activationModules = {
     enable = lib.mkOption {

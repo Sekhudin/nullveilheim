@@ -12,6 +12,7 @@ let
   enableRofi = (cfg.launcher.use == "rofi");
 
   inherit (extraLib)
+    mkImports
     importModules
     mkJq
     joinPipe
@@ -35,11 +36,13 @@ let
   terminal = config.homeTerminalModules.use;
 in
 {
-  imports = [
-    ./bindings.nix
-    ./pass.nix
-    ./theme.nix
-  ];
+  imports = mkImports {
+    recursive = false;
+    excludeDefault = true;
+    dirs = [
+      ./.
+    ];
+  };
 
   config = lib.mkIf (cfg.enable && enableRofi) {
     home = {

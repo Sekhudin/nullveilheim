@@ -2,17 +2,22 @@
   config,
   pkgs,
   lib,
+  extraLib,
   ...
 }:
 
 let
   cfg = config.nixosProgramsModules;
+  inherit (extraLib) mkImports;
 in
 {
-  imports = [
-    ./android-studio.nix
-    ./steam.nix
-  ];
+  imports = mkImports {
+    recursive = false;
+    excludeDefault = true;
+    dirs = [
+      ./.
+    ];
+  };
 
   options.nixosProgramsModules = {
     enable = lib.mkOption {

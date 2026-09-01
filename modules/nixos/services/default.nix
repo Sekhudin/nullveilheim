@@ -1,13 +1,16 @@
-{ lib, ... }:
+{ lib, extraLib, ... }:
 
+let
+  inherit (extraLib) mkImports;
+in
 {
-  imports = [
-    ./audio.nix
-    ./openssh.nix
-    ./printing.nix
-    ./tailscale.nix
-    ./virtualisation.nix
-  ];
+  imports = mkImports {
+    recursive = false;
+    excludeDefault = true;
+    dirs = [
+      ./.
+    ];
+  };
 
   options.nixosServicesModules = {
     enable = lib.mkOption {

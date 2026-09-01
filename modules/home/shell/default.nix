@@ -1,11 +1,16 @@
-{ lib, ... }:
+{ lib, extraLib, ... }:
 
+let
+  inherit (extraLib) mkImports;
+in
 {
-  imports = [
-    ./fish.nix
-    ./zsh.nix
-    ./tools.nix
-  ];
+  imports = mkImports {
+    recursive = false;
+    excludeDefault = true;
+    dirs = [
+      ./.
+    ];
+  };
 
   options.homeShellModules = {
     enable = lib.mkOption {

@@ -8,6 +8,7 @@
 let
   cfg = config.homeDesktopModules.hyprland;
   enableAshell = (cfg.bar.use == "ashell");
+  inherit (extraLib) mkImports;
   inherit (extraLib.hyprland)
     mkEvent
     getVarRef
@@ -19,10 +20,13 @@ let
   monitors = var "monitors";
 in
 {
-  imports = [
-    ./custom-modules.nix
-    ./modules.nix
-  ];
+  imports = mkImports {
+    recursive = false;
+    excludeDefault = true;
+    dirs = [
+      ./.
+    ];
+  };
 
   config = lib.mkIf (cfg.enable && enableAshell) {
     wayland.windowManager.hyprland = {

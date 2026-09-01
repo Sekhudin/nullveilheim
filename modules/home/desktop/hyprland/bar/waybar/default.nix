@@ -3,16 +3,16 @@
   config,
   lib,
   extraLib,
-  color,
-  font,
   ...
 }:
 
 let
   cfg = config.homeDesktopModules.hyprland;
   enableWaybar = (cfg.bar.use == "waybar");
-  inherit (extraLib) importModules;
-  inherit (color) toGtkTokenCss;
+  inherit (extraLib)
+    mkImports
+    importModules
+    ;
   inherit (extraLib.hyprland)
     mkEvent
     getVarRef
@@ -23,7 +23,6 @@ let
   var = getVarRef config;
   monitors = var "monitors";
   styles = var "styles";
-  tokens = var "tokens";
   actions = var "actions";
 
   commonSettings = {
@@ -38,42 +37,15 @@ let
     margin-bottom = styles.gaps_out;
     spacing = styles.gaps_in;
   };
-
-  composeStyle =
-    {
-      dir,
-      style ? "",
-      args ? { },
-    }:
-    let
-      styleFiles = builtins.attrNames (
-        lib.filterAttrs (name: type: type == "regular" && lib.hasSuffix "-style.nix" name) (
-          builtins.readDir dir
-        )
-      );
-    in
-    lib.concatStringsSep "\n" (
-      lib.filter (s: s != "") ([ style ] ++ map (name: import "${dir}/${name}" args) styleFiles)
-    );
 in
 {
-  imports = [
-    ./battery.nix
-    ./bluetooth.nix
-    ./clock.nix
-    ./idle-inhibitor.nix
-    ./memory.nix
-    ./network.nix
-    ./nixosicon.nix
-    ./power.nix
-    ./powerprofile.nix
-    ./pulseaudio.nix
-    ./screen-recorder.nix
-    ./submap.nix
-    ./tray.nix
-    ./window.nix
-    ./workspaces.nix
-  ];
+  imports = mkImports {
+    recursive = false;
+    excludeDefault = true;
+    dirs = [
+      ./.
+    ];
+  };
 
   config = lib.mkIf (cfg.enable && enableWaybar) {
     home = {
@@ -173,49 +145,6 @@ in
               ];
             }
           ];
-        };
-
-        style = composeStyle {
-          dir = ./.;
-          args = {
-            inherit
-              lib
-              font
-              styles
-              ;
-          };
-          style = ''
-            ${toGtkTokenCss tokens}
-
-            * {
-              font-family: ${font.family.monospace};
-              font-size: ${toString font.sizes.bar}px;
-              border: none;
-              outline: none;
-              box-shadow: none;
-              text-shadow: none;
-            }
-
-            tooltip {
-              opacity: 0;
-              background: @bg;
-              margin: 0px;
-              padding: ${toString styles.gaps_in}px ${toString styles.padding_x}px;
-              border-radius: ${toString styles.rounding}px;
-            }
-
-            window#waybar {
-              color: @fg;
-              background: transparent;
-            }
-
-            window#waybar button {
-              padding: 0;
-              margin: 0;
-              min-width: 0;
-              min-height: 0;
-            }
-          '';
         };
       };
     };

@@ -1,40 +1,21 @@
-{ lib, ... }:
+{ extraLib, ... }:
 
 let
-  mkImports =
-    dirs:
-    let
-      scan =
-        src:
-        let
-          files = builtins.readDir src;
-        in
-        lib.concatMap (
-          name:
-          let
-            path = "${src}/${name}";
-          in
-          if builtins.match ".*\.nix" name != null then
-            [ (import path) ]
-          else if builtins.pathExists "${path}/default.nix" then
-            [ (import path) ]
-          else if builtins.pathExists path && builtins.readDir path != { } then
-            scan path
-          else
-            [ ]
-        ) (builtins.attrNames files);
-    in
-    lib.concatMap scan dirs;
+  inherit (extraLib) mkImports;
 in
 {
-  imports = mkImports [
-    ./completion
-    ./config
-    ./lsp
-    ./plugins
-    ./tools
-    ./ui
-  ];
+  imports = mkImports {
+    recursive = true;
+    excludeDefault = true;
+    dirs = [
+      ./completion
+      ./config
+      ./lsp
+      ./plugins
+      ./tools
+      ./ui
+    ];
+  };
 
   nixvimDashboard = {
     theme = "hyper";
