@@ -1,160 +1,92 @@
-{ extraLib, ... }:
+{ lib, ... }:
 
 let
-  inherit (extraLib.nixvim) importModules;
+  mkImports =
+    dirs:
+    let
+      scan =
+        src:
+        let
+          files = builtins.readDir src;
+        in
+        lib.concatMap (
+          name:
+          let
+            path = "${src}/${name}";
+          in
+          if builtins.match ".*\.nix" name != null then
+            [ (import path) ]
+          else if builtins.pathExists "${path}/default.nix" then
+            [ (import path) ]
+          else if builtins.pathExists path && builtins.readDir path != { } then
+            scan path
+          else
+            [ ]
+        ) (builtins.attrNames files);
+    in
+    lib.concatMap scan dirs;
 in
 {
-  imports = importModules {
-    modules = [
-      ./config
-      ./plugins
-    ];
+  imports = mkImports [
+    ./completion
+    ./config
+    ./lsp
+    ./plugins
+    ./tools
+    ./ui
+  ];
+
+  nixvimDashboard = {
+    theme = "hyper";
+    configDir = "~/nullveilheim";
+    banner = rec {
+      header = {
+        ascii = "prabski_sawit";
+        head = 16;
+        gap = 1;
+      };
+      footer = {
+        ascii = header.ascii;
+        tail = 5;
+        gap = 1;
+      };
+    };
   };
 
-  configModules = {
-    autocmd = {
-      enable = true;
-      autosave = {
-        enable = true;
-      };
-    };
-
-    colorschemes = {
-      enable = true;
-      scheme = "kanagawa";
-    };
-
-    usercommands = {
-      enable = true;
-    };
+  nixvimConfig = {
+    autosave = true;
+    colorscheme = "kanagawa";
   };
 
-  pluginsModules = {
-    completion = {
-      enable = true;
-      engine = {
-        use = "cmp";
-      };
-      icon = {
-        use = "lspkind";
-      };
-      snippet = {
-        use = "luasnip";
-      };
-    };
+  nixvimCompletion = {
+    engine = "cmp";
+    icon = "lspkind";
+    snippet = "luasnip";
+  };
 
-    database = {
-      enable = true;
-    };
+  nixvimLsp = {
+    formatter = "conform-nvim";
+    interaction = "lspsaga";
+  };
 
-    language-server = {
-      enable = true;
-      formatter = {
-        use = "conform-nvim";
-      };
-      interaction = {
-        use = "lspsaga";
-      };
-    };
+  nixvimUI = {
+    cursor = "smear-cursor";
+    diagnostic = "trouble";
+    focus = "zen-mode";
+    fold = "nvim-ufo";
+    indent = "indent-blankline";
+    overlay = "noice";
+    sidebar = "neo-tree";
+    status = "lualine";
+    syntax = "rainbow-delimiters";
+    tab = "bufferline";
+  };
 
-    sidebar = {
-      enable = true;
-      use = "neo-tree";
-    };
-
-    tools = {
-      enable = true;
-      buffer = {
-        use = "mini-bufremove";
-      };
-      comment = {
-        use = "comment";
-      };
-      encrypt = {
-        use = "sops";
-      };
-      markdown = {
-        use = "markdown-preview";
-      };
-      media = {
-        use = "image";
-      };
-      motion = {
-        use = "hop";
-      };
-      pairs = {
-        use = "nvim-autopairs";
-      };
-      picker = {
-        use = "telescope";
-      };
-      tag = {
-        use = "ts-autotag";
-      };
-      vcs = {
-        use = "git";
-      };
-    };
-
-    ui = {
-      enable = true;
-      diagnostic = {
-        use = "trouble";
-      };
-      focus = {
-        use = "zen-mode";
-      };
-      fold = {
-        use = "nvim-ufo";
-      };
-      indent = {
-        use = "indent-blankline";
-      };
-      motion = {
-        use = "smear-cursor";
-      };
-      overlay = {
-        use = "noice";
-      };
-      status = {
-        use = "lualine";
-      };
-      syntax = {
-        use = "rainbow-delimiters";
-      };
-      tab = {
-        use = "bufferline";
-      };
-    };
-
-    which-key = {
-      enable = true;
-    };
-
-    dashboard = {
-      enable = true;
-      theme = "hyper";
-      configDir = "~/nullveilheim";
-      banner = rec {
-        header = {
-          ascii = "prabski_sawit";
-          head = 16;
-          gap = 1;
-        };
-        footer = {
-          ascii = header.ascii;
-          tail = 5;
-          gap = 1;
-        };
-      };
-    };
-
-    lz-n = {
-      enable = true;
-    };
-
-    treesitter = {
-      enable = true;
-    };
+  nixvimTools = {
+    comment = "comment";
+    markdown = "markdown-preview";
+    motion = "hop";
+    pairs = "nvim-autopairs";
+    picker = "telescope";
   };
 }

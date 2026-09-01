@@ -7,8 +7,12 @@
 }:
 
 let
-  cfg = config.pluginsModules.dashboard;
-  inherit (extraLib.nixvim) asciiArts mkAsciiHeader mkAsciiFooter;
+  cfg = config.nixvimDashboard;
+  inherit (extraLib.nixvim)
+    asciiArts
+    mkAsciiHeader
+    mkAsciiFooter
+    ;
 
   isTheme = theme: cfg.theme == theme;
   asciiArtNames = builtins.attrNames asciiArts;
@@ -59,13 +63,7 @@ let
     );
 in
 {
-  options.pluginsModules.dashboard = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
-      description = "enable dashboard";
-      default = false;
-    };
-
+  options.nixvimDashboard = {
     theme = lib.mkOption {
       type = lib.types.enum [
         "doom"
@@ -148,7 +146,7 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     plugins = {
       dashboard = lib.mkMerge [
         {
