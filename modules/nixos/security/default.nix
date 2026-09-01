@@ -1,9 +1,16 @@
-{ lib, ... }:
+{ lib, extraLib, ... }:
 
+let
+  inherit (extraLib) mkImports;
+in
 {
-  imports = [
-    ./polkit.nix
-  ];
+  imports = mkImports {
+    recursive = false;
+    excludeDefault = true;
+    dirs = [
+      ./.
+    ];
+  };
 
   options.nixosSecurityModules = {
     enable = lib.mkOption {

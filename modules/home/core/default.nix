@@ -1,20 +1,23 @@
 {
   pkgs,
   lib,
+  extraLib,
   color,
   ...
 }:
 
 let
   themeNames = lib.attrNames color.themes;
+  inherit (extraLib) mkImports;
 in
 {
-  imports = [
-    ./cross.nix
-    ./darwin.nix
-    ./linux.nix
-    ./opengl.nix
-  ];
+  imports = mkImports {
+    recursive = false;
+    excludeDefault = true;
+    dirs = [
+      ./.
+    ];
+  };
 
   options.homeCoreModules = {
     enable = lib.mkOption {

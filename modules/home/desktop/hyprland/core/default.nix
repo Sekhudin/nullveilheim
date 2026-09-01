@@ -2,23 +2,22 @@
   pkgs,
   config,
   lib,
+  extraLib,
   ...
 }:
 
 let
   cfg = config.homeDesktopModules.hyprland;
+  inherit (extraLib) mkImports;
 in
 {
-  imports = [
-    ./binds
-    ./submaps
-    ./config.nix
-    ./env.nix
-    ./gtk.nix
-    ./monitor.nix
-    ./variable.nix
-    ./workspace-rule.nix
-  ];
+  imports = mkImports {
+    recursive = true;
+    excludeDefault = true;
+    dirs = [
+      ./.
+    ];
+  };
 
   config = lib.mkIf cfg.enable {
     home = {

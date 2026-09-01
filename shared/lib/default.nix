@@ -50,8 +50,8 @@ in
         {
           dir,
           args ? { },
-          recursive ? false,
-          excludeDefault ? true,
+          recursive ? true,
+          excludeDefault ? false,
         }:
         let
           isNixFile =
@@ -71,5 +71,29 @@ in
             ++ lib.optionals recursive (lib.concatMap (name: readDir (dir + "/${name}")) (lib.attrNames dirs));
         in
         readDir dir;
+
+      mkImports =
+        {
+          dirs,
+          recursive ? true,
+          excludeDefault ? false,
+        }:
+        let
+          scan =
+            dir:
+            let
+              entries = builtins.readDir dir;
+
+              files = lib.filterAttrs (
+                name: type:
+                type == "regular" && lib.hasSuffix ".nix" name && (!excludeDefault || name != "default.nix")
+              ) entries;
+
+              subdirs = lib.filterAttrs (_: type: type == "directory") entries;
+            in
+            (lib.mapAttrsToList (name: _: import "${dir}/${name}") files)
+            ++ lib.optionals recursive (lib.concatMap (name: scan "${dir}/${name}") (lib.attrNames subdirs));
+        in
+        lib.concatMap scan dirs;
     };
 }

@@ -15,7 +15,9 @@ in
     {
       process-compose = {
         pg-sandbox = {
-          imports = [ inputs.services-flake.processComposeModules.default ];
+          imports = [
+            inputs.services-flake.processComposeModules.default
+          ];
 
           services = {
             postgres = {

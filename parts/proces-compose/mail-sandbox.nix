@@ -10,7 +10,9 @@ in
     {
       process-compose = {
         mail-sandbox = {
-          imports = [ (multiService ./services/mailpit.nix) ];
+          imports = [
+            (multiService ./services/mailpit.nix)
+          ];
 
           services = {
             mailpit = {

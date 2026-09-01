@@ -1,8 +1,14 @@
-{ ... }:
+{ extraLib, ... }:
 
+let
+  inherit (extraLib) mkImports;
+in
 {
-  imports = [
-    ./windowboard.nix
-    ./filemanager.nix
-  ];
+  imports = mkImports {
+    recursive = false;
+    excludeDefault = true;
+    dirs = [
+      ./.
+    ];
+  };
 }

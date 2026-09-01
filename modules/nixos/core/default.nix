@@ -1,13 +1,16 @@
-{ lib, ... }:
+{ lib, extraLib, ... }:
 
+let
+  inherit (extraLib) mkImports;
+in
 {
-  imports = [
-    ./boot.nix
-    ./home-manager.nix
-    ./i18n.nix
-    ./networking.nix
-    ./time.nix
-  ];
+  imports = mkImports {
+    recursive = false;
+    excludeDefault = true;
+    dirs = [
+      ./.
+    ];
+  };
 
   options.nixosCoreModules = {
     enable = lib.mkOption {

@@ -1,11 +1,16 @@
-{ lib, ... }:
+{ lib, extraLib, ... }:
 
+let
+  inherit (extraLib) mkImports;
+in
 {
-
-  imports = [
-    ./gnome
-    ./hyprland
-  ];
+  imports = mkImports {
+    recursive = false;
+    excludeDefault = true;
+    dirs = [
+      ./.
+    ];
+  };
 
   options.nixosDesktopModules = {
     enable = lib.mkOption {

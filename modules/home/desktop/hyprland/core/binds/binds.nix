@@ -25,16 +25,6 @@ let
   };
 in
 {
-  imports = [
-    ./application.nix
-    ./mouse.nix
-    ./osd.nix
-    ./screenshot.nix
-    ./session.nix
-    ./window.nix
-    ./workspace.nix
-  ];
-
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       settings = {

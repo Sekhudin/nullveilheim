@@ -1,17 +1,16 @@
-{ lib, ... }:
+{ lib, extraLib, ... }:
 
+let
+  inherit (extraLib) mkImports;
+in
 {
-
-  imports = [
-    ./gpg.nix
-    ./multimedia.nix
-    ./pass.nix
-    ./productivity.nix
-    ./secrets.nix
-    ./ssh.nix
-    ./tmux.nix
-    ./vcs.nix
-  ];
+  imports = mkImports {
+    recursive = false;
+    excludeDefault = true;
+    dirs = [
+      ./.
+    ];
+  };
 
   options.homeProgramsModules = {
     enable = lib.mkOption {

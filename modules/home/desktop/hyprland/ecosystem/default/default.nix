@@ -9,24 +9,27 @@
 let
   cfg = config.homeDesktopModules.hyprland;
   ecosystemEnabled = cfg.ecosystem.use == "default";
+  inherit (extraLib)
+    mkImports
+    importModules
+    ;
 
-  inherit (extraLib) importModules;
-
-  inherit (extraLib.hyprland) getVarRef dsp;
+  inherit (extraLib.hyprland)
+    getVarRef
+    dsp
+    ;
 
   var = getVarRef config;
   actions = var "actions";
 in
 {
-  imports = [
-    ./hypridle.nix
-    ./hyprlock.nix
-    ./hyprpolkitagent.nix
-    ./hyprqt.nix
-    ./hyprshot.nix
-    ./hyprshutdown.nix
-    ./hyprtoolkit.nix
-  ];
+  imports = mkImports {
+    recursive = false;
+    excludeDefault = true;
+    dirs = [
+      ./.
+    ];
+  };
 
   config = lib.mkIf (cfg.enable && ecosystemEnabled) {
     home = {

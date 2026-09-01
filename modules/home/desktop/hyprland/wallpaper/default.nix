@@ -1,5 +1,7 @@
 { ... }:
 
 {
-  imports = [ ./hyprpaper ];
+  imports = [
+    ./hyprpaper
+  ];
 }
