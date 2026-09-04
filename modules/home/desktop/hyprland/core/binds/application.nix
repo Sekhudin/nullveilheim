@@ -12,6 +12,7 @@ let
     getVar
     dsp
     combos
+    keys
     ;
 
   apps = {
@@ -19,6 +20,7 @@ let
     browser = getVar "apps.browser";
     filemanager = getVar "apps.filemanager";
     windowboard = getVar "apps.windowboard";
+    windowboard_freeze = getVar "apps.windowboard_freeze";
   };
 in
 {
@@ -63,6 +65,19 @@ in
             };
             flags = {
               description = "windowboard toggle";
+            };
+          })
+
+          (mkBind {
+            key = combos.of [
+              keys.mod
+              keys.shift
+            ] "W";
+            dispatcher = dsp.exec_cmd {
+              cmd = apps.windowboard_freeze;
+            };
+            flags = {
+              description = "freeze windowboard toggle";
             };
           })
         ];
