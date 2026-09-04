@@ -41,7 +41,8 @@ in
             browser = "firefox";
             editor = "nvim";
             filemanager = "${terminal} -e yazi";
-            windowboard = "wayscriber --daemon-toggle";
+            windowboard = "wayscriber --active";
+            windowboard_freeze = "${windowboard} --freeze";
           };
 
           menus = mkVar {
