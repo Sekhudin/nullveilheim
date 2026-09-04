@@ -37,6 +37,10 @@
 
     nix-env.url = "github:lilyball/nix-env.fish";
     nix-env.flake = false;
+
+    # nixos desktop related packages
+    hibiki.url = "github:linuxmobile/hibiki";
+    hibiki.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =

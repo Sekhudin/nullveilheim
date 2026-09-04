@@ -59,7 +59,7 @@
     },
     "flake-utils": {
       "inputs": {
-        "systems": "systems"
+        "systems": "systems_2"
       },
       "locked": {
         "lastModified": 1731533236,
@@ -72,6 +72,28 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "hibiki": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay",
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1777300303,
+        "narHash": "sha256-LVE/FqQtgqLvPIvgGdg1sFxDaWCgSa9mLfVAjGEIJvk=",
+        "owner": "linuxmobile",
+        "repo": "hibiki",
+        "rev": "252c9e9f6a4996d8a446b77a7471b88e08ece65c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "linuxmobile",
+        "repo": "hibiki",
         "type": "github"
       }
     },
@@ -209,7 +231,7 @@
         "nixpkgs": [
           "nixpkgs-unstable"
         ],
-        "systems": "systems_2"
+        "systems": "systems_3"
       },
       "locked": {
         "lastModified": 1783647864,
@@ -265,6 +287,7 @@
       "inputs": {
         "ez-configs": "ez-configs",
         "flake-parts": "flake-parts",
+        "hibiki": "hibiki",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nix-env": "nix-env",
@@ -279,6 +302,27 @@
         "process-compose-flake": "process-compose-flake",
         "services-flake": "services-flake",
         "sops-nix": "sops-nix"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "hibiki",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773216618,
+        "narHash": "sha256-iZlowevS+xKLGOXtZwpIrz3SWe7PtoGUfEeVZNib+WE=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "07d7dc6fcc5eae76b4fb0e19d4afd939437bec97",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "services-flake": {
@@ -332,6 +376,21 @@
       }
     },
     "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_3": {
       "locked": {
         "lastModified": 1774449309,
         "narHash": "sha256-brhZ8DmuGtzkCYHJg4HEd602amKm89Y9ytsFZ5uWD1w=",
