@@ -1,63 +1,73 @@
-{ inputs, ... }:
+{ extraLib, ... }:
 
 let
-  inherit (inputs.nixvim.lib.nixvim.modules)
-    buildNixvimWith
-    testNixvimWith
-    ;
+  inherit (extraLib) mkImports;
 in
 {
-  perSystem =
-    {
-      system,
-      color,
-      icon,
-      font,
-      extraLib,
-      ...
-    }:
+  imports = mkImports {
+    recursive = true;
+    excludeDefault = true;
+    dirs = [
+      ./completion
+      ./config
+      ./lsp
+      ./plugins
+      ./tools
+      ./ui
+    ];
+  };
 
-    let
-      extraSpecialArgs = {
-        inherit
-          inputs
-          color
-          icon
-          font
-          extraLib
-          ;
+  nixvimDashboard = {
+    theme = "hyper";
+    configDir = "~/nullveilheim";
+    banner = rec {
+      header = {
+        ascii = "prabski_sawit";
+        head = 16;
+        gap = 1;
       };
-
-      modules = [
-        ./nvim.nix
-      ];
-    in
-    {
-      packages = {
-        nvim = buildNixvimWith {
-          inherit
-            system
-            modules
-            extraSpecialArgs
-            ;
-        };
-      };
-
-      checks = {
-        nvim = testNixvimWith {
-          inherit
-            system
-            extraSpecialArgs
-            ;
-
-          modules = modules ++ [
-            {
-              plugins = {
-                image.enable = false;
-              };
-            }
-          ];
-        };
+      footer = {
+        ascii = header.ascii;
+        tail = 5;
+        gap = 1;
       };
     };
+  };
+
+  nixvimConfig = {
+    autosave = true;
+    colorscheme = "kanagawa";
+  };
+
+  nixvimCompletion = {
+    engine = "cmp";
+    icon = "lspkind";
+    snippet = "luasnip";
+  };
+
+  nixvimLsp = {
+    formatter = "conform-nvim";
+    interaction = "lspsaga";
+  };
+
+  nixvimUI = {
+    cursor = "smear-cursor";
+    diagnostic = "trouble";
+    focus = "zen-mode";
+    fold = "nvim-ufo";
+    indent = "indent-blankline";
+    overlay = "noice";
+    sidebar = "neo-tree";
+    status = "lualine";
+    syntax = "rainbow-delimiters";
+    tab = "bufferline";
+  };
+
+  nixvimTools = {
+    comment = "comment";
+    markdown = "markdown-preview";
+    motion = "hop";
+    pairs = "nvim-autopairs";
+    picker = "telescope";
+  };
 }
