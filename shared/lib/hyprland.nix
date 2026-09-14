@@ -80,6 +80,17 @@
         ];
       };
 
+      mkAnimation = p: {
+        _args = [ p ];
+      };
+
+      mkCurve = { name, options }: {
+        _args = [
+          name
+          options
+        ];
+      };
+
       mkWorkspaceRule =
         {
           workspaces,
@@ -502,6 +513,8 @@
         mkLuaStr
         mkVar
         mkEnv
+        mkAnimation
+        mkCurve
         mkWorkspaceRule
         mkBind
         mkWorkspaceBind
