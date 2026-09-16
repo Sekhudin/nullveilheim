@@ -18,6 +18,8 @@ let
 
   button_border_radius = (styles.rounding * 2.0) - styles.gaps_in;
 
+  sleep = "sleep 0.2";
+
   text = joinPipe [
     ''
       rofi_cmd(){
@@ -95,16 +97,16 @@ let
 
       case $chosen in
           "$shutdown")
-              sleep 0.2 && ${actions.poweroff}
+              ${sleep} && ${actions.poweroff}
               ;;
           "$reboot")
-              sleep 0.2 && ${actions.reboot}
+              ${sleep} && ${actions.reboot}
               ;;
           "$suspend")
-              sleep 0.2 && ${actions.suspend}
+              ${sleep} && ${actions.suspend}
               ;;
           "$lock")
-              sleep 0.2 && ${actions.lock}
+              ${sleep} && ${actions.lock}
               ;;
       esac
     ''
