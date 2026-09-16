@@ -10,13 +10,16 @@ let
   inherit (extraLib.hyprland)
     mkAnimation
     mkCurve
+    getVarRef
     ;
 
   beziers = {
     smooth = "smooth";
   };
 
-  speed = 10;
+  var = getVarRef config;
+  styles = var "styles";
+  speed = styles.animation_ms / 100;
 in
 {
   config = lib.mkIf cfg.enable {

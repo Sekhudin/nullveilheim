@@ -112,7 +112,7 @@ in
             padding_x = 12;
             padding_y = 8;
             margin_top = (gaps_out * 8) + (min_height + 2);
-            animation_ms = 300;
+            animation_ms = 800;
           };
         }
         variables

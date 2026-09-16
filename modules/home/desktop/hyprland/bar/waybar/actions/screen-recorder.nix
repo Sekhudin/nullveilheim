@@ -12,6 +12,8 @@ let
     libnotify
   ];
 
+  sleep = "sleep 0.2";
+
   text = ''
     output_dir="''${HOME}/Videos/Recordings"
     state_file="''${XDG_RUNTIME_DIR}/wf-recorder"
@@ -36,7 +38,7 @@ let
         -f "$output" &
       pid="$!"
 
-      sleep 0.1
+      ${sleep}
 
       if ! kill -0 "$pid" 2>/dev/null; then
         wait "$pid" 2>/dev/null || true
@@ -97,7 +99,7 @@ let
       kill -INT "$pid"
 
       while kill -0 "$pid" 2>/dev/null; do
-        sleep 0.1
+        ${sleep}
       done
 
       rm -f "$state_file"

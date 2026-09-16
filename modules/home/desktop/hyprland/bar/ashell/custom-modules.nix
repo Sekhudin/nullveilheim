@@ -28,7 +28,7 @@ in
                 fi
 
                 printf '{"text":"%s","alt":"%s"}\n' "$mode" "$alt"
-                sleep 1
+                sleep 0.2
               done
             '';
           }

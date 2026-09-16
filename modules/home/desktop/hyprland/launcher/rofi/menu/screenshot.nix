@@ -18,6 +18,8 @@ let
 
   button_border_radius = (styles.rounding * 2.0) - styles.gaps_in;
 
+  sleep = "sleep ${toString (styles.animation_ms / 1000.0)}";
+
   text = joinPipe [
     ''
       rofi_cmd(){
@@ -94,13 +96,13 @@ let
 
       case $chosen in
           "$region")
-              sleep 0.2 && ${actions.screenshot_region}
+              ${sleep} && ${actions.screenshot_region}
               ;;
           "$fullscreen")
-              sleep 0.2 && ${actions.screenshot_fullscreen}
+              ${sleep} && ${actions.screenshot_fullscreen}
               ;;
           "$window")
-              sleep 0.2 && ${actions.screenshot_window}
+              ${sleep} && ${actions.screenshot_window}
               ;;
       esac
     ''
