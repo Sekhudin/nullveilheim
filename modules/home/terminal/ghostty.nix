@@ -13,6 +13,8 @@ let
   masterEnable = master.enable;
   openGLEnable = (openGL.use != "default");
   isGhostty = (master.use == "ghostty");
+  configHome = config.xdg.configHome;
+
   inherit (color) mkTheme mkTokens;
 
   whenCustomWM = value: fallback: if master.enableCustomWM then value else fallback;
@@ -74,7 +76,7 @@ in
             window-padding-y = lib.mkDefault 0;
             window-padding-balance = lib.mkDefault true;
             window-padding-color = lib.mkDefault "extend";
-            gtk-custom-css = "${config.xdg.configHome}/ghostty/style.css";
+            gtk-custom-css = "${configHome}/ghostty/style.css";
           };
           themes = {
             ${theme} = mkThemeGhostty {

@@ -30,10 +30,10 @@ in
       inherit pkgs username osConfig;
     };
     packages = [
-      inputs.self.packages.${pkgs.stdenv.system}.nvim
+      inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.nvim
     ];
     sessionVariables = {
-      EDITOR = (lib.getExe' inputs.self.packages.${pkgs.stdenv.system}.nvim "nvim");
+      EDITOR = (lib.getExe' inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.nvim "nvim");
     };
   };
 
