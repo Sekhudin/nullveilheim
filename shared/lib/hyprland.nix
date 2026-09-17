@@ -507,6 +507,13 @@
           ];
         };
       };
+
+      mkRofi =
+        {
+          args ? [ ],
+          theme-str ? "",
+        }:
+        "rofi ${lib.concatStringsSep " " args} -theme-str '${theme-str}'";
     in
     {
       inherit
@@ -522,6 +529,7 @@
         mkSubmapBind
         mkEvent
         mkMonitor
+        mkRofi
         getVar
         getVarRef
         variables

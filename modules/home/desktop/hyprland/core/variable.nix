@@ -36,6 +36,29 @@ in
             session = "S";
           };
 
+          cursor = mkVar {
+            theme = "Bibata-Modern-Ice";
+            size = 24;
+          };
+
+          tokens = mkVar tokens;
+
+          styles = mkVar rec {
+            gaps_in = 4;
+            gaps_out = 4;
+            rounding = 12;
+            border_size = 2;
+            min_width = 16;
+            min_height = 16;
+            opacity = color.opacity;
+            opacity_mid = 0.6;
+            opacity_low = 0.4;
+            padding_x = 12;
+            padding_y = 8;
+            margin_top = (gaps_out * 8) + (min_height + 2);
+            animation_ms = 800;
+          };
+
           apps = mkVar rec {
             terminal = config.homeTerminalModules.use;
             browser = "firefox";
@@ -92,28 +115,7 @@ in
             screenrec = "nv-screenrec";
           };
 
-          cursor = mkVar {
-            theme = "Bibata-Modern-Ice";
-            size = 24;
-          };
-
-          tokens = mkVar tokens;
-
-          styles = mkVar rec {
-            gaps_in = 4;
-            gaps_out = 4;
-            rounding = 12;
-            border_size = 2;
-            min_width = 16;
-            min_height = 16;
-            opacity = color.opacity;
-            opacity_mid = 0.6;
-            opacity_low = 0.4;
-            padding_x = 12;
-            padding_y = 8;
-            margin_top = (gaps_out * 8) + (min_height + 2);
-            animation_ms = 800;
-          };
+          scripts = mkVar { };
         }
         variables
       ];

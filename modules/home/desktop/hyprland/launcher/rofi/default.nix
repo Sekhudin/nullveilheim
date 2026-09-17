@@ -18,14 +18,10 @@ let
     joinPipe
     ;
 
-  inherit (extraLib.hyprland) getVarRef;
-
-  mkRofi =
-    {
-      args ? [ ],
-      theme-str ? "",
-    }:
-    "rofi ${lib.concatStringsSep " " args} -theme-str '${theme-str}'";
+  inherit (extraLib.hyprland)
+    mkRofi
+    getVarRef
+    ;
 
   var = getVarRef config;
   actions = var "actions";
@@ -41,6 +37,7 @@ in
     excludeDefault = true;
     dirs = [
       ./.
+      ./scripts
     ];
   };
 

@@ -11,6 +11,8 @@
 let
   cfg = config.homeDesktopModules.hyprland;
   enableSwayOsd = (cfg.osd.use == "swayosd");
+  configHome = config.xdg.configHome;
+
   inherit (color) mkOpacity toGtkTokenCss;
   inherit (extraLib) importModules;
   inherit (extraLib.hyprland) getVarRef;
@@ -39,7 +41,7 @@ in
     services = {
       swayosd = {
         enable = true;
-        stylePath = "${config.xdg.configHome}/swayosd/style.css";
+        stylePath = "${configHome}/swayosd/style.css";
         topMargin = 0.9;
       };
     };

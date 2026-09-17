@@ -53,6 +53,7 @@ in
       systemd = {
         enable = true;
       };
+      plugins = [ ];
     };
   };
 }
