@@ -84,11 +84,15 @@
         _args = [ p ];
       };
 
-      mkCurve = { name, options }: {
+      mkCurve = p: {
         _args = [
-          name
-          options
+          p.name
+          p.options
         ];
+      };
+
+      mkWindowRule = p: {
+        _args = [ p ];
       };
 
       mkWorkspaceRule =
@@ -522,6 +526,7 @@
         mkEnv
         mkAnimation
         mkCurve
+        mkWindowRule
         mkWorkspaceRule
         mkBind
         mkWorkspaceBind

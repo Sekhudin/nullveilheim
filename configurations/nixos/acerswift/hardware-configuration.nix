@@ -34,7 +34,6 @@
       device = "/dev/disk/by-uuid/78e65e55-3ab2-496b-963a-3091332a8b4f";
       fsType = "ext4";
     };
-
     "/boot" = {
       device = "/dev/disk/by-uuid/7DF1-60CE";
       fsType = "vfat";
@@ -51,18 +50,15 @@
         updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
       };
     };
-
     nvidia = {
       open = false;
       nvidiaSettings = true;
       modesetting = {
         enable = true;
       };
-
       powerManagement = {
         enable = true;
       };
-
       prime = {
         offload = {
           enable = true;

@@ -43,14 +43,10 @@
 
   commonModules = {
     enable = true;
-    nixpkgs = {
-      enableOverlays = true;
-    };
-
     nix = {
-      settings = {
-        trusted-users = [ "syaikhu" ];
-      };
+      trusted-users = [
+        "syaikhu"
+      ];
     };
   };
 
@@ -94,7 +90,6 @@
         };
       };
     };
-
     virtualisation = {
       settings = {
         docker = {

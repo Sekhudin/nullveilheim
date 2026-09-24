@@ -23,16 +23,10 @@
 
   commonModules = {
     enable = true;
-    nixpkgs = {
-      enableOverlays = true;
-    };
-
     nix = {
-      settings = {
-        settings = {
-          trusted-users = [ "syaikhu" ];
-        };
-      };
+      trusted-users = [
+        "syaikhu"
+      ];
     };
   };
 

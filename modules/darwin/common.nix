@@ -5,5 +5,5 @@
 }:
 
 {
-  imports = lib.attrValues self.nullveilheimModules.common;
+  imports = lib.attrValues self.nullveilheim.modules.common;
 }

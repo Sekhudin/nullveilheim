@@ -65,11 +65,9 @@ in
         gitIdentities = gpgKeys;
       };
     };
-
     ssh = {
       enableShellAliases = true;
     };
-
     vcs = {
       jujutsu = {
         settings = {

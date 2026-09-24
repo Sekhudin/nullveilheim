@@ -13,7 +13,7 @@
     globalArgs = {
       inherit inputs;
       inherit (inputs) self;
-      inherit (inputs.self.nullveilheimConfigurations)
+      inherit (inputs.self.nullveilheim)
         color
         icon
         font
