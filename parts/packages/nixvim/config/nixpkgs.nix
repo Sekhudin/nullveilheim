@@ -1,7 +1,7 @@
 { inputs, ... }:
 
 let
-  inherit (inputs.self.nullveilheimConfigurations.nixpkgs) config overlays;
+  inherit (inputs.self.nullveilheim.nixpkgs) config overlays;
 in
 {
   nixpkgs = {

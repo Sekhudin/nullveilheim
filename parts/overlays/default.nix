@@ -21,7 +21,7 @@ let
       inherit inputs lib;
       nixpkgsArgs = {
         inherit system;
-        inherit (inputs.self.nullveilheimConfigurations.nixpkgs) config;
+        inherit (inputs.self.nullveilheim.nixpkgs) config;
       };
     };
 in

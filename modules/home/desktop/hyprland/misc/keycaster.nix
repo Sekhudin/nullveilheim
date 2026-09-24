@@ -25,12 +25,45 @@ let
     pause = mkHotkey "p";
     focus = mkHotkey "f";
   };
+
+  yakc = pkgs.appimageTools.wrapType2 {
+    pname = "yakc";
+    version = "2.8.1";
+    src = pkgs.fetchurl {
+      url = "https://github.com/iammodev/YAKC/releases/download/v2.8.1/YAKC_2.8.1_amd64.AppImage";
+      hash = "sha256-vbCkEzoJDBFA4aewOco3PGj3Oz5PZD1kct9U8m4TQ8c=";
+    };
+
+    extraPkgs =
+      pkgs: with pkgs; [
+        wayland
+        libxkbcommon
+        mesa
+        libglvnd
+        webkitgtk_4_1
+        gtk3
+        glib
+        pango
+        cairo
+        gdk-pixbuf
+      ];
+
+    nativeBuildInputs = with pkgs; [
+      makeWrapper
+    ];
+
+    extraInstallCommands = ''
+      wrapProgram $out/bin/yakc \
+        --set LD_PRELOAD "${pkgs.wayland}/lib/libwayland-client.so"
+    '';
+  };
 in
 {
   config = lib.mkIf cfg.enable {
     home = {
       packages = [
         inputs.hibiki.packages.${pkgs.stdenv.hostPlatform.system}.default
+        yakc
       ];
     };
 

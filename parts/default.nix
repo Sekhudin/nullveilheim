@@ -21,7 +21,7 @@
       formatter = inputs'.nixpkgs.legacyPackages.nixfmt;
 
       _module.args = {
-        inherit (inputs.self.nullveilheimConfigurations)
+        inherit (inputs.self.nullveilheim)
           color
           icon
           font
@@ -29,7 +29,7 @@
           ;
 
         extraModuleArgs = {
-          inherit (inputs.self.nullveilheimConfigurations)
+          inherit (inputs.self.nullveilheim)
             color
             icon
             font

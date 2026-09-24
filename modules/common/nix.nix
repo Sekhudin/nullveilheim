@@ -16,10 +16,10 @@ in
       default = true;
     };
 
-    settings = lib.mkOption {
-      type = lib.types.attrs;
-      description = "nix settings";
-      default = { };
+    trusted-users = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      description = "trusted users";
+      default = [ ];
     };
   };
 
@@ -29,24 +29,23 @@ in
         options = lib.mkDefault "--delete-older-than 7d";
       };
 
-      settings = lib.mkMerge [
-        {
-          experimental-features = [
-            "nix-command"
-            "flakes"
-          ];
-          substituters = [
-            "https://hyprland.cachix.org"
-          ];
-          trusted-substituters = [
-            "https://hyprland.cachix.org"
-          ];
-          trusted-public-keys = [
-            "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-          ];
-        }
-        cfg.settings
-      ];
+      settings = {
+        inherit (cfg) trusted-users;
+
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
+        substituters = [
+          "https://hyprland.cachix.org"
+        ];
+        trusted-substituters = [
+          "https://hyprland.cachix.org"
+        ];
+        trusted-public-keys = [
+          "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+        ];
+      };
     };
   };
 }
