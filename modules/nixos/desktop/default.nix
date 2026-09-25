@@ -1,32 +1,26 @@
-{ lib, extraLib, ... }:
+{
+  lib,
+  extraLib,
+  ...
+}:
 
 let
   inherit (extraLib) mkImports;
 in
 {
   imports = mkImports {
-    recursive = false;
+    recursive = true;
     excludeDefault = true;
     dirs = [
       ./.
     ];
   };
 
-  options.nixosDesktopModules = {
+  options.nixosDesktop = {
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable desktop";
       default = true;
     };
-
-    use = lib.mkOption {
-      type = lib.types.enum [
-        "gnome"
-        "hyprland"
-      ];
-      description = "choose wayland compositor";
-      default = "gnome";
-    };
-
   };
 }
