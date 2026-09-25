@@ -160,9 +160,9 @@ in
             };
             config = {
               inherit header footer;
-              disable_move = lib.mkDefault true;
+              disable_move = true;
               week_header = {
-                enable = lib.mkDefault false;
+                enable = false;
               };
             };
           };
@@ -171,7 +171,7 @@ in
         (lib.mkIf (isTheme "doom") {
           settings = {
             config = {
-              vertical_center = lib.mkDefault true;
+              vertical_center = true;
               center = shortcut;
             };
           };
@@ -183,18 +183,18 @@ in
               inherit shortcut;
 
               project = {
-                enable = lib.mkDefault true;
-                limit = lib.mkDefault 3;
+                enable = true;
+                limit = 3;
               };
 
               mru = {
-                enable = lib.mkDefault true;
-                limit = lib.mkDefault 3;
-                cwd_only = lib.mkDefault true;
+                enable = true;
+                limit = 3;
+                cwd_only = true;
               };
 
               packages = {
-                enable = lib.mkDefault false;
+                enable = false;
               };
             };
           };
