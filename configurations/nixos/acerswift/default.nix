@@ -8,6 +8,9 @@
 {
   imports = lib.attrValues ezModules ++ [
     ./hardware-configuration.nix
+    ./networking.nix
+    ./services.nix
+    ./virtualisation.nix
   ];
 
   system.stateVersion = "26.05";
@@ -41,8 +44,7 @@
     };
   };
 
-  commonModules = {
-    enable = true;
+  common = {
     nix = {
       trusted-users = [
         "syaikhu"
@@ -50,52 +52,11 @@
     };
   };
 
-  nixosCoreModules = {
+  nixosDesktop = {
     enable = true;
-    networking = {
-      settings = {
-        hostName = "acerswift";
-        firewall = {
-          allowedTCPPorts = [ 22 ];
-        };
-      };
-    };
-  };
-
-  nixosDesktopModules = {
-    enable = true;
-    use = "hyprland";
-  };
-
-  nixosHardwareModules = {
-    enable = true;
-  };
-
-  nixosProgramsModules = {
-    enable = true;
-  };
-
-  nixosSecurityModules = {
-    enable = true;
-  };
-
-  nixosServicesModules = {
-    enable = true;
-    openssh = {
-      settings = {
-        ports = [ 22 ];
-        settings = {
-          PasswordAuthentication = true;
-          PermitRootLogin = "no";
-        };
-      };
-    };
-    virtualisation = {
-      settings = {
-        docker = {
-          enable = true;
-        };
-      };
+    apps = {
+      android-studio.enable = true;
+      steam.enable = true;
     };
   };
 }
