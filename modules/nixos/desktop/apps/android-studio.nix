@@ -6,8 +6,8 @@
 }:
 
 let
-  cfg = config.nixosProgramsModules.android-studio;
-  masterEnable = config.nixosProgramsModules.enable;
+  cfg = config.nixosDesktop.apps.android-studio;
+  masterEnable = config.nixosDesktop.enable;
 
   sdk = pkgs.androidenv.composeAndroidPackages {
     inherit (cfg)
@@ -35,7 +35,7 @@ let
   };
 in
 {
-  options.nixosProgramsModules.android-studio = {
+  options.nixosDesktop.apps.android-studio = {
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable android-studio";
