@@ -21,8 +21,8 @@ in
       tokyonight = {
         enable = (cfg.colorscheme == "tokyonight");
         settings = {
-          style = lib.mkDefault "night";
-          transparent = lib.mkDefault false;
+          style = "night";
+          transparent = false;
         };
       };
 

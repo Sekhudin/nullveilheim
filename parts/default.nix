@@ -3,7 +3,6 @@
 {
   imports = [
     ./devshells
-    ./flake
     ./overlays
     ./packages
     ./proces-compose

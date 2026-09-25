@@ -1,19 +1,16 @@
-{
-  lib,
-  ...
-}:
+{ ... }:
 
 {
   plugins = {
     which-key = {
       enable = true;
       settings = {
-        delay = lib.mkDefault 0;
-        expand = lib.mkDefault 1;
-        notify = lib.mkDefault false;
-        preset = lib.mkDefault true;
+        delay = 0;
+        expand = 1;
+        notify = false;
+        preset = true;
         win = {
-          border = lib.mkDefault "single";
+          border = "single";
         };
         triggers = [
           {
