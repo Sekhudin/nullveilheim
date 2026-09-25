@@ -5,17 +5,10 @@
 }:
 
 let
-  cfg = config.commonModules.nix;
-  masterEnable = config.commonModules.enable;
+  cfg = config.common.nix;
 in
 {
-  options.commonModules.nix = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
-      description = "enable nix config";
-      default = true;
-    };
-
+  options.common.nix = {
     trusted-users = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       description = "trusted users";
@@ -23,10 +16,10 @@ in
     };
   };
 
-  config = lib.mkIf (masterEnable && cfg.enable) {
+  config = {
     nix = {
       gc = {
-        options = lib.mkDefault "--delete-older-than 7d";
+        options = "--delete-older-than 7d";
       };
 
       settings = {
@@ -38,12 +31,15 @@ in
         ];
         substituters = [
           "https://hyprland.cachix.org"
+          "https://noctalia.cachix.org"
         ];
         trusted-substituters = [
           "https://hyprland.cachix.org"
+          "https://noctalia.cachix.org"
         ];
         trusted-public-keys = [
           "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+          "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
         ];
       };
     };

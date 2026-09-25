@@ -21,16 +21,12 @@
     };
   };
 
-  commonModules = {
+  common = {
     enable = true;
     nix = {
       trusted-users = [
         "syaikhu"
       ];
     };
-  };
-
-  darwinCoreModules = {
-    enable = true;
   };
 }
