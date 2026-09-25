@@ -63,42 +63,86 @@ in
     { lib }:
 
     let
-      formatColorLine = i: color: "${toString i}=${color}";
-      formatColorScheme = i: color: {
+      toPalette = i: color: "${toString i}=${color}";
+
+      toScheme = i: color: {
         name = "base" + (if i < 16 then "0${lib.toUpper (lib.toHexString i)}" else lib.toHexString i);
         value = color;
       };
 
-      toColorLines = lib.lists.imap0 formatColorLine;
-      toColorScheme = (lib.flip lib.pipe) [
-        (lib.lists.imap0 formatColorScheme)
+      mkPalette = lib.lists.imap0 toPalette;
+
+      mkScheme = lib.flip lib.pipe [
+        (lib.lists.imap0 toScheme)
         lib.attrsets.listToAttrs
       ];
 
+      mkTheme =
+        name:
+        let
+          colors = themes.${name};
+          palette = mkPalette colors;
+          scheme = mkScheme colors;
+          tokens = {
+            bg = scheme.base00;
+            fg = scheme.base07;
+
+            primary = scheme.base05;
+            primary_fg = scheme.base07;
+
+            secondary = scheme.base06;
+            secondary_fg = scheme.base07;
+
+            muted = scheme.base08;
+            muted_fg = scheme.base0F;
+
+            accent = scheme.base0D;
+            accent_fg = scheme.base07;
+
+            destructive = scheme.base01;
+            destructive_fg = scheme.base07;
+
+            success = scheme.base02;
+            success_fg = scheme.base07;
+
+            warning = scheme.base03;
+            warning_fg = scheme.base07;
+
+            info = scheme.base04;
+            info_fg = scheme.base07;
+
+            border = scheme.base08;
+            active_border = scheme.base05;
+
+            input = scheme.base08;
+            ring = scheme.base05;
+          };
+
+          apps.ghostty = {
+            background = tokens.bg;
+            foreground = tokens.fg;
+            cursor-color = tokens.secondary;
+            cursor-text = tokens.secondary_fg;
+            selection-background = tokens.muted;
+            selection-foreground = tokens.muted_fg;
+            palette = palette;
+          };
+
+          opacity = 0.9;
+        in
+        {
+          inherit
+            name
+            colors
+            palette
+            scheme
+            tokens
+            apps
+            opacity
+            ;
+        };
+
       isRgba = color: builtins.match "^#[0-9A-Fa-f]{8}$" color != null;
-
-      mkOpacity =
-        color: opacity:
-        let
-          alpha = lib.toHexString (builtins.floor (opacity * 255));
-          alpha' = if lib.stringLength alpha == 1 then "0${alpha}" else alpha;
-        in
-        "${color}${alpha'}";
-
-      mkRgb =
-        color:
-        let
-          cleanColor = lib.removePrefix "#" color;
-        in
-        "rgb(${cleanColor})";
-
-      mkRgba =
-        color: opacity:
-        let
-          cleanColor = lib.removePrefix "#" color;
-        in
-        "rgba(${cleanColor}${mkOpacity "" opacity})";
-
       mkGtkColor =
         color:
         if isRgba color then
@@ -114,71 +158,27 @@ in
         else
           color;
 
-      toGtkTokenCss =
+      mkGtkTokenCss =
         tokens:
         lib.concatStringsSep "\n" (
           lib.mapAttrsToList (name: value: "@define-color ${name} ${mkGtkColor value};") tokens
         );
 
-      mkTheme = name: {
-        scheme = toColorScheme themes.${name};
-        lines = toColorLines themes.${name};
-      };
-
-      mkTokens =
-        theme:
-
+      withOpacity =
+        color: opacity:
         let
-          theme' = if builtins.isString theme then mkTheme theme else theme;
-          inherit (theme') scheme;
+          alpha = lib.toHexString (builtins.floor (opacity * 255));
+          alpha' = if lib.stringLength alpha == 1 then "0${alpha}" else alpha;
         in
-        {
-          bg = scheme.base00;
-          fg = scheme.base07;
-
-          primary = scheme.base05;
-          primary_fg = scheme.base07;
-
-          secondary = scheme.base06;
-          secondary_fg = scheme.base07;
-
-          muted = scheme.base08;
-          muted_fg = scheme.base0F;
-
-          accent = scheme.base0D;
-          accent_fg = scheme.base07;
-
-          destructive = scheme.base01;
-          destructive_fg = scheme.base07;
-
-          success = scheme.base02;
-          success_fg = scheme.base07;
-
-          warning = scheme.base03;
-          warning_fg = scheme.base07;
-
-          info = scheme.base04;
-          info_fg = scheme.base07;
-
-          border = scheme.base08;
-          active_border = scheme.base05;
-
-          input = scheme.base08;
-          ring = scheme.base05;
-        };
+        "${color}${alpha'}";
     in
     {
       inherit
         themes
         mkTheme
-        mkTokens
-        mkOpacity
-        mkRgb
-        mkRgba
         mkGtkColor
-        toGtkTokenCss
+        mkGtkTokenCss
+        withOpacity
         ;
-
-      opacity = 0.9;
     };
 }
