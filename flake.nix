@@ -39,8 +39,10 @@
     nix-env.flake = false;
 
     # nixos desktop related packages
-    hibiki.url = "github:linuxmobile/hibiki";
-    hibiki.inputs.nixpkgs.follows = "nixpkgs";
+    hyprland.url = "github:hyprwm/Hyprland";
+
+    noctalia.url = "github:noctalia-dev/noctalia";
+    noctalia.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
   outputs =
