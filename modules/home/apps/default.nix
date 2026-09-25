@@ -8,7 +8,7 @@ let
 in
 {
   imports = mkImports {
-    recursive = true;
+    recursive = false;
     excludeDefault = true;
     dirs = [
       ./.

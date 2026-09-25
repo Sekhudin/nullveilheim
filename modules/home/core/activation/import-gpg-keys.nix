@@ -1,0 +1,86 @@
+{
+  pkgs,
+  config,
+  lib,
+  extraLib,
+  ...
+}:
+
+let
+  core = config.homeCore;
+  inherit (core.programs) secrets;
+
+  gpg = lib.getExe' pkgs.gnupg "gpg";
+  h = extraLib.activation.mkHelper {
+    context = "import-gpg-keys";
+    inherit pkgs;
+  };
+
+  mkIdentity = profile: ''
+    import_identity \
+      "${config.sops.secrets."gpg_keys_${profile}_email".path}" \
+      "${config.sops.secrets."gpg_keys_${profile}_private_key".path}" \
+      "${config.sops.secrets."gpg_keys_${profile}_owner_trust".path}"
+  '';
+in
+{
+  home = lib.mkIf core.activation {
+    activation = {
+      importGPGKeys = lib.hm.dag.entryAfter [ "installSSHKeys" ] ''
+        set -euo pipefail
+
+        ${h.shell}
+
+        import_key() {
+          local key_file="$1"
+
+          ${gpg} --batch --import "$key_file"
+        }
+
+        import_ownertrust() {
+          local trust_file="$1"
+
+          ${gpg} --batch --import-ownertrust "$trust_file"
+        }
+
+        import_identity() {
+          local email_file="$1"
+          local key_file="$2"
+          local trust_file="$3"
+
+          [[ -f "$email_file" ]] || {
+            ${h.fatal} "Missing email secret: $email_file" >&2
+          }
+
+          [[ -f "$key_file" ]] || {
+            ${h.fatal} "Missing private key secret: $key_file" >&2
+          }
+
+          [[ -f "$trust_file" ]] || {
+            ${h.fatal} "Missing ownertrust secret: $trust_file" >&2
+          }
+
+          local email
+          email="$(<"$email_file")"
+
+          [[ -n "$email" ]] || {
+            ${h.fatal} "Missing email value" >&2
+          }
+
+          ${h.log} "Checking GPG identity: $email"
+          if ${gpg} --list-secret-keys "$email" >/dev/null 2>&1; then
+            ${h.log} "GPG identity already exists: $email"
+            return
+          fi
+
+          ${h.log} "Importing GPG identity: $email"
+
+          import_key "$key_file"
+          import_ownertrust "$trust_file"
+        }
+
+        ${(lib.concatMapStringsSep "\n" mkIdentity secrets.gpgKeys)}
+      '';
+    };
+  };
+}

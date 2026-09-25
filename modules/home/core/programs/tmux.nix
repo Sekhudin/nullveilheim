@@ -1,0 +1,188 @@
+{
+  config,
+  pkgs,
+  lib,
+  extraLib,
+  ...
+}:
+
+let
+  core = config.homeCore;
+  cfg = core.programs.tmux;
+  theme = core.themeConfig;
+
+  inherit (extraLib.tmux)
+    mkWindow
+    mkEditorWindow
+    mkTmuxColor
+    mkShellAliases
+    ;
+
+  workspaces = {
+    work = {
+      session_name = "work";
+      windows = [
+        (mkEditorWindow {
+          editor = "nvim";
+          start_directory = "~/work";
+          overrides = {
+            focus = true;
+          };
+        })
+
+        (mkWindow {
+          start_directory = "~/work";
+        })
+      ];
+    };
+
+    projects = {
+      session_name = "projects";
+      windows = [
+        (mkEditorWindow {
+          editor = "nvim";
+          start_directory = "~/projects";
+          overrides = {
+            focus = true;
+          };
+        })
+
+        (mkWindow {
+          start_directory = "~/projects";
+        })
+      ];
+    };
+
+    portfolio = {
+      session_name = "portfolio";
+      windows = [
+        (mkEditorWindow {
+          editor = "nvim";
+          start_directory = "~/projects/portfolio";
+          overrides = {
+            focus = true;
+          };
+        })
+
+        (mkWindow {
+          start_directory = "~/projects/portfolio";
+          overrides = {
+            panes = [
+              {
+                focus = true;
+                shell_command = "echo happy working!";
+              }
+              { shell_command = "nix run self#root"; }
+              { shell_command = "npm run dev"; }
+            ];
+          };
+        })
+      ];
+    };
+  };
+in
+{
+  options.homeCore.programs.tmux = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "enable tmux";
+      default = true;
+    };
+  };
+
+  config = {
+    home = lib.mkIf cfg.enable {
+      shellAliases = (mkShellAliases workspaces);
+    };
+
+    programs.tmux = {
+      enable = cfg.enable;
+      mouse = false;
+      newSession = false;
+      reverseSplit = true;
+      customPaneNavigationAndResize = true;
+      prefix = "C-Space";
+      resizeAmount = 10;
+      terminal = "screen-256color";
+      keyMode = "vi";
+      tmuxp = {
+        enable = true;
+      };
+      plugins = with pkgs.tmuxPlugins; [
+        {
+          plugin = yank;
+          extraConfig = ''
+            bind Enter copy-mode # enter copy mode
+
+            set -g @shell_mode 'vi'
+            set -g @yank_selection_mouse 'clipboard'
+
+            run -b 'tmux bind -t vi-copy v begin-selection 2> /dev/null || true'
+            run -b 'tmux bind -T copy-mode-vi v send -X begin-selection 2> /dev/null || true'
+            run -b 'tmux bind -t vi-copy C-v rectangle-toggle 2> /dev/null || true'
+            run -b 'tmux bind -T copy-mode-vi C-v send -X rectangle-toggle 2> /dev/null || true'
+            run -b 'tmux bind -t vi-copy y copy-selection 2> /dev/null || true'
+            run -b 'tmux bind -T copy-mode-vi y send -X copy-selection-and-cancel 2> /dev/null || true'
+            run -b 'tmux bind -t vi-copy Escape cancel 2> /dev/null || true'
+            run -b 'tmux bind -T copy-mode-vi Escape send -X cancel 2> /dev/null || true'
+            run -b 'tmux bind -t vi-copy H start-of-line 2> /dev/null || true'
+            run -b 'tmux bind -T copy-mode-vi H send -X start-of-line 2> /dev/null || true'
+            run -b 'tmux bind -t vi-copy L end-of-line 2> /dev/null || true'
+            run -b 'tmux bind -T copy-mode-vi L send -X end-of-line 2> /dev/null || true'
+          '';
+        }
+
+        { plugin = resurrect; }
+        {
+          plugin = continuum;
+          extraConfig = ''
+            set -g @resurrect-strategy-nvim 'session' 
+            set -g @resurrect-capture-pane-contents 'on'
+            set -g @continuum-restore 'on'
+            set -g @continuum-save-interval '60' # minutes
+          '';
+        }
+      ];
+      extraConfig = ''
+        set -g status off
+
+        set -g pane-border-style "${(mkTmuxColor theme.tokens.border "default")}"
+        set -g pane-active-border-style "${(mkTmuxColor theme.tokens.active_border "default")}"
+        set -sg escape-time 10 
+
+        set -g @continuum-boot on
+
+        bind " " choose-tree -Zw
+        bind s setw synchronize-panes on
+        bind S setw synchronize-panes off
+
+        bind a new-session
+        bind A kill-session
+
+        bind w new-window
+        bind W kill-window
+
+        bind v split-pane -h
+        bind V split-pane -v
+        bind x kill-pane
+
+        bind n previous-window
+        bind N next-window
+
+        bind \, command-prompt "rename-window %%"
+        bind \< command-prompt "rename-session %%"
+
+        bind \? list-keys 
+
+
+        # Temporary workaround for tmux sensible issue
+        set -gu default-command
+        set -g default-shell "$SHELL"
+
+        # Workaround for image
+        set -gq allow-passthrough on
+        set -g visual-activity off
+      '';
+    };
+  };
+}

@@ -10,15 +10,6 @@
 
 let
   enableConfig = path: lib.attrByPath path false osConfig;
-
-  enableHyprland = (
-    pkgs.stdenv.isLinux
-    && enableConfig [
-      "programs"
-      "hyprland"
-      "enable"
-    ]
-  );
 in
 {
   imports = lib.attrValues ezModules ++ [ ];
@@ -37,57 +28,35 @@ in
     };
   };
 
-  activationModules = {
-    enable = true;
-  };
-
-  homeCoreModules = {
-    enable = true;
-    enableStandalone = (extraLib.isStandalone osConfig);
+  homeCore = {
+    activation = true;
+    standalone = (extraLib.isStandalone osConfig);
+    shell = "fish";
+    terminal = "ghostty";
     theme = "zenwritten_dark";
-    openGL = {
-      use = "default";
-    };
-  };
-
-  homeDesktopModules = {
-    hyprland = {
-      enable = enableHyprland;
-    };
-  };
-
-  homeProgramsModules = {
-    enable = true;
-    secrets = {
-      secretProfiles = rec {
+    programs = {
+      secrets = rec {
         gpgKeys = [ "personal" ];
         sshKeys = gpgKeys;
         gitIdentities = gpgKeys;
       };
-    };
-    ssh = {
-      enableShellAliases = true;
-    };
-    vcs = {
       jujutsu = {
-        settings = {
-          user = {
-            name = "sekhudin";
-            email = "sekhudinuap@gmail.com";
-          };
+        user = {
+          name = "sekhudin";
+          email = "sekhudinuap@gmail.com";
         };
       };
     };
   };
 
-  homeShellModules = {
-    enable = true;
-    use = "fish";
-  };
-
-  homeTerminalModules = {
-    enable = true;
-    use = "ghostty";
-    enableCustomWM = enableHyprland;
+  homeDesktop = {
+    enable = (
+      pkgs.stdenv.isLinux
+      && enableConfig [
+        "programs"
+        "hyprland"
+        "enable"
+      ]
+    );
   };
 }
