@@ -1,0 +1,107 @@
+{
+  extraLib,
+  ...
+}:
+
+let
+  inherit (extraLib.hyprland)
+    mkBind
+    mkSubmap
+    mkSubmapBind
+    getVar
+    dsp
+    combos
+    ;
+
+  submaps = {
+    monitor = getVar "submaps.monitor";
+  };
+
+  mkDesc = desc: "(M) ${desc}";
+in
+{
+  wayland.windowManager.hyprland = {
+    settings = {
+      bind = [
+        (mkBind {
+          key = combos.alt "M";
+          dispatcher = dsp.submap {
+            name = submaps.monitor;
+          };
+          flags = {
+            description = mkDesc "enter monitor submap";
+          };
+        })
+      ];
+
+      define_submap = [
+        (mkSubmap {
+          name = submaps.monitor;
+          escape = true;
+          bind = [
+            # focus monitor
+            (mkSubmapBind {
+              key = combos.plain "H";
+              dispatcher = dsp.focus {
+                monitor = "-1";
+              };
+              flags = {
+                description = mkDesc "move focus to previous monitor";
+              };
+            })
+
+            (mkSubmapBind {
+              key = combos.plain "L";
+              dispatcher = dsp.focus {
+                monitor = "+1";
+              };
+              flags = {
+                description = mkDesc "move focus to next monitor";
+              };
+            })
+
+            # move window
+            (mkSubmapBind {
+              key = combos.shift "H";
+              dispatcher = dsp.window.move {
+                monitor = "-1";
+              };
+              flags = {
+                description = mkDesc "move window to previous monitor";
+              };
+            })
+            (mkSubmapBind {
+              key = combos.shift "L";
+              dispatcher = dsp.window.move {
+                monitor = "+1";
+              };
+              flags = {
+                description = mkDesc "move window to next monitor";
+              };
+            })
+
+            # move workspace
+            (mkSubmapBind {
+              key = combos.ctrl "H";
+              dispatcher = dsp.workspace.move {
+                monitor = "-1";
+              };
+              flags = {
+                description = mkDesc "move workspace to previous monitor";
+              };
+            })
+            (mkSubmapBind {
+              key = combos.ctrl "L";
+              dispatcher = dsp.workspace.move {
+                monitor = "+1";
+              };
+              flags = {
+                description = mkDesc "move workspace to next monitor";
+              };
+            })
+          ];
+        })
+      ];
+    };
+  };
+}
