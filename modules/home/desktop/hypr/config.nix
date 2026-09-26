@@ -1,10 +1,12 @@
 {
+  config,
   extraLib,
-  font,
   ...
 }:
 
 let
+  core = config.homeCore;
+  font = core.font;
   inherit (extraLib.hyprland) getVar;
 
   rounding = getVar "styles.rounding";

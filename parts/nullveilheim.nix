@@ -48,7 +48,6 @@ in
       inherit (shareable)
         color
         icon
-        font
         extraLib
         ;
 

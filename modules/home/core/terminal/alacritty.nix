@@ -1,13 +1,13 @@
 {
   config,
   lib,
-  font,
   ...
 }:
 
 let
   core = config.homeCore;
   theme = core.themeConfig;
+  font = core.font;
 in
 {
   programs.alacritty = {
@@ -29,7 +29,7 @@ in
       };
 
       font = rec {
-        size = font.sizes.terminal;
+        size = font.sizes.base;
         normal = {
           family = font.family.monospace;
           style = "Regular";

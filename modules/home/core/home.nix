@@ -1,42 +1,38 @@
 {
   pkgs,
   lib,
-  font,
   ...
 }:
 
 {
 
   home = {
-    packages =
-      with pkgs;
-      [
-        coreutils
-        gnused
-        gawk
-        curl
-        wget
-        tree
-        rage
-        ack
+    packages = with pkgs; [
+      coreutils
+      gnused
+      gawk
+      curl
+      wget
+      tree
+      rage
+      ack
 
-        # multi-media
-        asciinema
-        asciinema-agg
-        ffmpeg
-        imagemagick
+      # multi-media
+      asciinema
+      asciinema-agg
+      ffmpeg
+      imagemagick
 
-        # productivity
-        fzf
-        fzy
-        dust
-        fd
-        jq
-        iamb
-        ripgrep
-        nixfmt
-      ]
-      ++ (font.mkPackages pkgs);
+      # productivity
+      fzf
+      fzy
+      dust
+      fd
+      jq
+      iamb
+      ripgrep
+      nixfmt
+    ];
 
     sessionPath = [
       "$HOME/.yarn/bin"
