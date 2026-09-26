@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  config,
   lib,
   ezModules,
   osConfig,
@@ -10,6 +11,9 @@
 
 let
   enableConfig = path: lib.attrByPath path false osConfig;
+  packages = inputs.self.packages;
+  system = pkgs.stdenv.hostPlatform.system;
+  homeDirectory = config.home.homeDirectory;
 in
 {
   imports = lib.attrValues ezModules ++ [ ];
@@ -19,12 +23,6 @@ in
     stateVersion = "26.05";
     homeDirectory = extraLib.getHomeDir {
       inherit pkgs username osConfig;
-    };
-    packages = [
-      inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.nvim
-    ];
-    sessionVariables = {
-      EDITOR = (lib.getExe' inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.nvim "nvim");
     };
   };
 
@@ -46,6 +44,13 @@ in
           email = "sekhudinuap@gmail.com";
         };
       };
+    };
+    packages = [
+      packages.${system}.nvim
+    ];
+    sessionVariables = {
+      EDITOR = lib.getExe' packages.${system}.nvim "nvim";
+      NH_FLAKE = "${homeDirectory}/.config/nullveilheim";
     };
   };
 

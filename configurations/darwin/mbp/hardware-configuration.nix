@@ -1,7 +1,7 @@
-{ ... }:
+{ lib, ... }:
 
 {
   nixpkgs = {
-    hostPlatform = "aarch64-darwin";
+    hostPlatform = lib.mkDefault "aarch64-darwin";
   };
 }
