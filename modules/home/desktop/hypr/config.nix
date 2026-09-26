@@ -113,7 +113,7 @@ in
 
       binds = {
         pass_mouse_when_bound = false;
-        drag_threshold = 10;
+        drag_threshold = 0;
       };
 
       xwayland = {

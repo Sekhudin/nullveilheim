@@ -23,22 +23,8 @@ in
           ] null;
           dispatcher = dsp.window.drag { };
           flags = {
-            mouse = true;
-            drag = true;
             description = "swap window";
-          };
-        })
-
-        (mkBind {
-          key = combos.of [
-            keys.mod
-            mouse.right
-          ] null;
-          dispatcher = dsp.window.resize { };
-          flags = {
-            mouse = true;
             drag = true;
-            description = "resize window";
           };
         })
       ];
