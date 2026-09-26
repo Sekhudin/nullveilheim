@@ -12,7 +12,7 @@ let
 
   includesFile = config.programs.git.settings.include.path;
   h = extraLib.activation.mkHelper {
-    context = "generate-git-identities";
+    context = "2-generate-git-identities";
     inherit pkgs;
   };
 
@@ -29,34 +29,32 @@ let
   sshPath = profile: config.sops.secrets."ssh_keys_${profile}_path".path;
 
   mkIdentity = profile: ''
-      generate_identity \
-        "${profile}" \
-        "${config.sops.secrets."git_identities_${profile}_name".path}" \
-        "${config.sops.secrets."git_identities_${profile}_email".path}" \
-        "${config.sops.secrets."git_identities_${profile}_signing_key".path}" \
-        "${config.sops.secrets."git_identities_${profile}_ssh_key".path}" \
-    ${lib.concatMapStringsSep " \\\n    " (path: ''"${path}"'') (gitdirPaths profile)}
+    generate_identity \
+      "${profile}" \
+      "${config.sops.secrets."git_identities_${profile}_name".path}" \
+      "${config.sops.secrets."git_identities_${profile}_email".path}" \
+      "${config.sops.secrets."git_identities_${profile}_signing_key".path}" \
+      "${config.sops.secrets."git_identities_${profile}_ssh_key".path}" \
+      ${lib.concatMapStringsSep " \\\n      " (path: ''"${path}"'') (gitdirPaths profile)}
   '';
 in
 {
   home = lib.mkIf core.activation {
     activation = {
-      generateGitIdentities = lib.hm.dag.entryAfter [ "importGPGKeys" ] ''
-        set -euo pipefail
+      ${h.context} = lib.hm.dag.entryAfter [ "1-import-gpg-keys" ] ''
+        ${h.libScript}
 
-        ${h.shell}
+        INCLUDES_FILE="$(${h.expandHome} "${includesFile}")"
+        GITCONFIG_D="$(${h.cu.dirname} "$INCLUDES_FILE")/config.d"
 
         reset_configs() {
           ${h.ensureParent} "$INCLUDES_FILE"
 
-          ${h.mkdir} -p "$GITCONFIG_D"
+          ${h.cu.mkdir} -p "$GITCONFIG_D"
 
           : > "$INCLUDES_FILE"
-          ${h.rm} -f "$GITCONFIG_D"/*.conf 2>/dev/null || true
+          ${h.cu.rm} -f "$GITCONFIG_D"/*.conf 2>/dev/null || true
         }
-
-        INCLUDES_FILE="$(${h.expandHome} "${includesFile}")"
-        GITCONFIG_D="$(${h.dirname} "$INCLUDES_FILE")/config.d"
 
         read_gpg_email() {
           local profile="$1"
@@ -68,7 +66,7 @@ in
             ;;
         '') secrets.gpgKeys}
             *)
-              ${h.fatal} "Unknown GPG profile: $profile"
+              ${h.fmt.fatal} "Unknown GPG profile: $profile"
               ;;
           esac
         }
@@ -83,7 +81,7 @@ in
             ;;
         '') secrets.sshKeys}
             *)
-              ${h.fatal} "Unknown SSH profile: $profile"
+              ${h.fmt.fatal} "Unknown SSH profile: $profile"
               ;;
           esac
         }
@@ -113,23 +111,24 @@ in
 
           local config_file="$GITCONFIG_D/$profile.conf"
 
-          ensure_parent "$config_file"
+          ${h.ensureParent} "$config_file"
           write_git_config \
-           "$name" \
-           "$email" \
-           "$signing_key" \
-           "$ssh_key" \
-           > "$config_file"
+            "$name" \
+            "$email" \
+            "$signing_key" \
+            "$ssh_key" \
+            > "$config_file"
 
-          ${h.log} "Generated config: $config_file"
+          ${h.fmt.log} "Generated config: $config_file"
         }
 
         write_include_config() {
           local gitdir="$1"
           local profile="$2"
 
+          # Memakai gitdir/i: untuk mendukung filesystem case-insensitive di macOS (APFS)
           printf '%s\n' \
-            "[includeIf \"gitdir:$gitdir\"]" \
+            "[includeIf \"gitdir/i:$gitdir\"]" \
             "    path = $GITCONFIG_D/$profile.conf" \
             ""
         }
@@ -138,12 +137,12 @@ in
           local profile="$1"
           local gitdir="$2"
 
-          ${h.log} "Registering gitdir '$gitdir' -> $profile"
+          ${h.fmt.log} "Registering gitdir '$gitdir' -> $profile"
 
           gitdir="$(${h.expandHome} "$gitdir")"
           gitdir="''${gitdir%/}/"
 
-          ${h.mkdir} -p "$gitdir"
+          ${h.cu.mkdir} -p "$gitdir"
 
           write_include_config \
             "$gitdir" \
@@ -160,9 +159,9 @@ in
 
           shift 5
 
-          (($# > 0)) || ${h.fatal} "No gitdir configured for profile: $profile"
+          (($# > 0)) || ${h.fmt.fatal} "No gitdir configured for profile: $profile"
 
-          ${h.log} "Generating Git identity: $profile"
+          ${h.fmt.log} "Generating Git identity: $profile"
 
           local signing_key_profile
           local ssh_key_profile
@@ -191,11 +190,11 @@ in
             append_include \
               "$profile" \
               "$(${h.readSecret} "$1")"
-          
+
             shift
           done
 
-          ${h.log} "Git identity '$profile' generated"
+          ${h.fmt.log} "Git identity '$profile' generated"
         }
 
         reset_configs

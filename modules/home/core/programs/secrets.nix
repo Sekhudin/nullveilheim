@@ -9,6 +9,7 @@
 
 let
   cfg = config.homeCore.programs.secrets;
+  homeDirectory = config.home.homeDirectory;
 
   inherit (extraLib.sops)
     mkGPGKeySecrets
@@ -56,7 +57,7 @@ in
     sops = {
       defaultSopsFile = "${inputs.self}/secrets/secrets.yaml";
       gnupg = {
-        home = "${config.home.homeDirectory}/.gnupg";
+        home = "${homeDirectory}/.gnupg";
         sshKeyPaths = [ ];
       };
       secrets = lib.mkMerge [

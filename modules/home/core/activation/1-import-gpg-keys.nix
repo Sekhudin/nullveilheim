@@ -12,7 +12,7 @@ let
 
   gpg = lib.getExe' pkgs.gnupg "gpg";
   h = extraLib.activation.mkHelper {
-    context = "import-gpg-keys";
+    context = "1-import-gpg-keys";
     inherit pkgs;
   };
 
@@ -26,20 +26,21 @@ in
 {
   home = lib.mkIf core.activation {
     activation = {
-      importGPGKeys = lib.hm.dag.entryAfter [ "installSSHKeys" ] ''
-        set -euo pipefail
+      ${h.context} = lib.hm.dag.entryAfter [ "0-install-ssh-keys" ] ''
+        ${h.libScript}
 
-        ${h.shell}
+        # Pastikan direktori GNUPGHOME ada dengan izin yang aman (cross-platform safe)
+        gnupg_dir="''${GNUPGHOME:-$HOME/.gnupg}"
+        ${h.cu.mkdir} -p "$gnupg_dir"
+        ${h.cu.chmod} 700 "$gnupg_dir"
 
         import_key() {
           local key_file="$1"
-
           ${gpg} --batch --import "$key_file"
         }
 
         import_ownertrust() {
           local trust_file="$1"
-
           ${gpg} --batch --import-ownertrust "$trust_file"
         }
 
@@ -48,32 +49,19 @@ in
           local key_file="$2"
           local trust_file="$3"
 
-          [[ -f "$email_file" ]] || {
-            ${h.fatal} "Missing email secret: $email_file" >&2
-          }
-
-          [[ -f "$key_file" ]] || {
-            ${h.fatal} "Missing private key secret: $key_file" >&2
-          }
-
-          [[ -f "$trust_file" ]] || {
-            ${h.fatal} "Missing ownertrust secret: $trust_file" >&2
-          }
-
+          # Menggunakan readSecret untuk fail-fast validation jika secret hilang/kosong
           local email
-          email="$(<"$email_file")"
+          email="$(${h.readSecret} "$email_file")"
+          ${h.readSecret} "$key_file" >/dev/null
+          ${h.readSecret} "$trust_file" >/dev/null
 
-          [[ -n "$email" ]] || {
-            ${h.fatal} "Missing email value" >&2
-          }
-
-          ${h.log} "Checking GPG identity: $email"
+          ${h.fmt.log} "Checking GPG identity: $email"
           if ${gpg} --list-secret-keys "$email" >/dev/null 2>&1; then
-            ${h.log} "GPG identity already exists: $email"
-            return
+            ${h.fmt.log} "GPG identity already exists: $email"
+            return 0
           fi
 
-          ${h.log} "Importing GPG identity: $email"
+          ${h.fmt.log} "Importing GPG identity: $email"
 
           import_key "$key_file"
           import_ownertrust "$trust_file"
