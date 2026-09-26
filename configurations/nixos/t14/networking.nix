@@ -2,7 +2,7 @@
 
 {
   networking = {
-    hostName = "acerswift";
+    hostName = "t14";
     firewall = {
       enable = true;
       allowedTCPPorts = [ 22 ];

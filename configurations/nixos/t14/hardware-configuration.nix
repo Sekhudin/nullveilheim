@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   modulesPath,
   ...
 }:
@@ -10,7 +11,7 @@
   ];
 
   nixpkgs = {
-    hostPlatform = "x86_64-linux";
+    hostPlatform = lib.mkDefault "x86_64-linux";
   };
 
   boot = {
@@ -55,10 +56,6 @@
   };
 
   hardware = {
-    cpu = {
-      amd = {
-        updateMicrocode = config.hardware.enableRedistributableFirmware;
-      };
-    };
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 }
