@@ -7,6 +7,7 @@
 
 let
   cfg = config.homeCore.programs.git;
+  homeDirectory = config.home.homeDirectory;
 in
 {
   options.homeCore.programs.git = {
@@ -52,7 +53,7 @@ in
           tool = "vimdiff";
         };
         include = {
-          path = "${config.home.homeDirectory}/.config/git/identities.gitconfig";
+          path = "${homeDirectory}/.config/git/identities.gitconfig";
         };
         url = {
           "git@gitlab.com:" = {

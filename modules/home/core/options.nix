@@ -226,14 +226,29 @@ in
       description = "cursor theme";
       default = { };
     };
+
+    packages = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      description = "font packages.";
+      default = [ ];
+    };
+
+    sessionVariables = lib.mkOption {
+      type = lib.types.attrsOf lib.types.str;
+      default = { };
+      description = "environment variables";
+    };
   };
 
   config = {
     home = {
-      packages = core.font.packages ++ [
+      sessionVariables = core.sessionVariables;
+      packages = [
         core.icon.package
         core.cursor.package
-      ];
+      ]
+      ++ core.packages
+      ++ core.font.packages;
     };
 
     homeCore = {

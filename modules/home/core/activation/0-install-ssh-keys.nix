@@ -12,7 +12,7 @@ let
 
   ssh_keygen = lib.getExe' pkgs.openssh "ssh-keygen";
   h = extraLib.activation.mkHelper {
-    context = "install-ssh-keys";
+    context = "0-install-ssh-keys";
     inherit pkgs;
   };
 
@@ -26,46 +26,44 @@ let
   entryList = [
     "installPackages"
     "sops-nix"
-    "reloadSystemd"
     "onFilesChange"
   ];
 in
 {
   home = lib.mkIf core.activation {
     activation = {
-      installSSHKeys = lib.hm.dag.entryAfter entryList ''
-          set -euo pipefail
+      ${h.context} = lib.hm.dag.entryAfter entryList ''
+        ${h.libScript}
 
-          export GPG_TTY=$(tty)
+        if tty -s 2>/dev/null; then
+          export GPG_TTY="$(tty)"
+        fi
 
-          ${h.shell}
-
-          install_ssh_key() {
+        install_ssh_key() {
           local profile="$1"
           local path_file="$2"
           local private_key_file="$3"
 
-          ${h.log} "Installing SSH key: $profile"
+          ${h.fmt.log} "Installing SSH key: $profile"
 
           local path
           path="$(${h.readSecret} "$path_file")"
           path="$(${h.expandHome} "$path")"
 
-          local private_key
-          private_key="$(${h.readSecret} "$private_key_file")"
+          ${h.readSecret} "$private_key_file" >/dev/null
 
           ${h.ensureParent} "$path"
 
-          cat "$private_key_file" > "$path"
+          ${h.cu.cat} "$private_key_file" > "$path"
 
-          ${h.chmod} 700 "$(${h.dirname} "$path")"
-          ${h.chmod} 600 "$path"
+          ${h.cu.chmod} 700 "$(${h.cu.dirname} "$path")"
+          ${h.cu.chmod} 600 "$path"
 
           ${ssh_keygen} -y -f "$path" > "$path.pub"
 
-          ${h.chmod} 644 "$path.pub"
+          ${h.cu.chmod} 644 "$path.pub"
 
-          ${h.log} "SSH key installed: $profile"
+          ${h.fmt.log} "SSH key installed: $profile"
         }
 
         ${(lib.concatMapStringsSep "\n" mkSSHKey secrets.sshKeys)}
