@@ -1,7 +1,6 @@
 let
   sharedLib = import ./lib;
   sharedColors = import ./colors.nix;
-  sharedFonts = import ./fonts.nix;
   sharedIcons = import ./icons.nix;
 in
 {
@@ -18,7 +17,5 @@ in
       };
 
       icon = sharedIcons.mkIcon;
-
-      font = sharedFonts.mkFont;
     };
 }

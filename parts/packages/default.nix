@@ -12,7 +12,6 @@ in
       system,
       color,
       icon,
-      font,
       extraLib,
       ...
     }:
@@ -23,7 +22,6 @@ in
           inputs
           color
           icon
-          font
           extraLib
           ;
       };

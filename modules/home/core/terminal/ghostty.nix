@@ -1,13 +1,13 @@
 {
   config,
   lib,
-  font,
   ...
 }:
 
 let
   core = config.homeCore;
   theme = core.themeConfig;
+  font = core.font;
   configHome = config.xdg.configHome;
 in
 {
@@ -27,7 +27,7 @@ in
       custom-shader-animation = true;
       desktop-notifications = true;
       font-family = font.family.monospace;
-      font-size = font.sizes.terminal;
+      font-size = font.sizes.base;
       font-feature = "liga,calt,dlig";
       font-thicken = true;
       macos-window-shadow = false;

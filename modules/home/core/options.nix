@@ -42,16 +42,94 @@ let
     };
   };
 
+  fontType = lib.types.submodule {
+    options = {
+      packages = lib.mkOption {
+        type = lib.types.listOf lib.types.package;
+        description = "font packages.";
+        default = with pkgs; [
+          inter
+          nerd-fonts.jetbrains-mono
+          noto-fonts
+          noto-fonts-color-emoji
+          noto-fonts-cjk-sans
+        ];
+      };
+      family = lib.mkOption {
+        type = lib.types.submodule {
+          options = {
+            monospace = lib.mkOption {
+              type = lib.types.str;
+              description = "monospace font family.";
+              default = "JetBrainsMono Nerd Font";
+            };
+            sans_serif = lib.mkOption {
+              type = lib.types.str;
+              description = "sans-serif font family.";
+              default = "Inter";
+            };
+            serif = lib.mkOption {
+              type = lib.types.str;
+              description = "serif font family.";
+              default = "Noto Serif";
+            };
+            emoji = lib.mkOption {
+              type = lib.types.str;
+              description = "emoji font family.";
+              default = "Noto Color Emoji";
+            };
+          };
+        };
+        description = "font family configuration.";
+        default = { };
+      };
+      sizes = lib.mkOption {
+        type = lib.types.submodule {
+          options = {
+            xs = lib.mkOption {
+              type = lib.types.float;
+              description = "extra-small font size.";
+              default = 9.0;
+            };
+            sm = lib.mkOption {
+              type = lib.types.float;
+              description = "small font size.";
+              default = 10.0;
+            };
+            base = lib.mkOption {
+              type = lib.types.float;
+              description = "base font size.";
+              default = 11.0;
+            };
+            lg = lib.mkOption {
+              type = lib.types.float;
+              description = "large font size.";
+              default = 13.0;
+            };
+            xl = lib.mkOption {
+              type = lib.types.float;
+              description = "extra-large font size.";
+              default = 16.0;
+            };
+          };
+        };
+        description = "font size scale.";
+        default = { };
+      };
+    };
+  };
+
   iconType = lib.types.submodule {
     options = {
       name = lib.mkOption {
         type = lib.types.str;
         description = "name of icon theme.";
+        default = "Papirus Dark";
       };
-
       package = lib.mkOption {
         type = lib.types.package;
         description = "icon theme package";
+        default = pkgs.papirus-icon-theme;
       };
     };
   };
@@ -61,14 +139,17 @@ let
       theme = lib.mkOption {
         type = lib.types.str;
         description = "name of the cursor theme.";
-      };
-      size = lib.mkOption {
-        type = lib.types.ints.positive;
-        description = "cursor size in pixels.";
+        default = "Bibata-Modern-Ice";
       };
       package = lib.mkOption {
         type = lib.types.package;
         description = "package providing the cursor theme.";
+        default = pkgs.bibata-cursors;
+      };
+      size = lib.mkOption {
+        type = lib.types.ints.positive;
+        description = "cursor size in pixels.";
+        default = 24;
       };
     };
   };
@@ -128,28 +209,28 @@ in
       internal = true;
     };
 
+    font = lib.mkOption {
+      type = fontType;
+      description = "font settings";
+      default = { };
+    };
+
     icon = lib.mkOption {
       type = iconType;
-      default = {
-        name = "Papirus Dark";
-        package = pkgs.papirus-icon-theme;
-      };
+      description = "icon theme";
+      default = { };
     };
 
     cursor = lib.mkOption {
       type = cursorType;
       description = "cursor theme";
-      default = {
-        package = pkgs.bibata-cursors;
-        theme = "Bibata-Modern-Ice";
-        size = 24;
-      };
+      default = { };
     };
   };
 
   config = {
     home = {
-      packages = [
+      packages = core.font.packages ++ [
         core.icon.package
         core.cursor.package
       ];

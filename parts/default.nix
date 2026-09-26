@@ -23,7 +23,6 @@
         inherit (inputs.self.nullveilheim)
           color
           icon
-          font
           extraLib
           ;
 
@@ -31,7 +30,6 @@
           inherit (inputs.self.nullveilheim)
             color
             icon
-            font
             extraLib
             ;
         };
