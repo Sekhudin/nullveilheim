@@ -23,54 +23,36 @@ in
 
       tmux = tmux.mkExtraLib { inherit lib; };
 
-      isStandalone = cfg: cfg == null || builtins.attrNames cfg == [ ];
-
-      getHomeDir =
+      mkHomeContext =
         {
           pkgs,
           username,
-          osConfig ? { },
+          osConfig ? null,
         }:
         let
-          nixosHome = lib.attrByPath [ "users" "users" username "home" ] null osConfig;
-          defaultHome = "/${if pkgs.stdenv.isDarwin then "Users" else "home"}/${username}";
+          standalone = osConfig == null || builtins.attrNames osConfig == [ ];
+          config = if standalone then { } else osConfig;
+
+          homeDirectory = lib.attrByPath [ "users" "users" username "home" ] "/${
+            if pkgs.stdenv.isDarwin then "Users" else "home"
+          }/${username}" config;
+
+          desktop =
+            pkgs.stdenv.isLinux
+            && lib.attrByPath [
+              "programs"
+              "hyprland"
+              "enable"
+            ] false config;
         in
-        if nixosHome != null then nixosHome else defaultHome;
-
-      joinPipe = parts: lib.concatStringsSep " | " (map lib.strings.trim parts);
-
-      mkJq =
         {
-          args ? [ ],
-          query ? ".",
-        }:
-        "jq ${lib.concatStringsSep " " args} '${lib.strings.trim query}'";
-
-      importModules =
-        {
-          dir,
-          args ? { },
-          recursive ? true,
-          excludeDefault ? false,
-        }:
-        let
-          isNixFile =
-            name: type:
-            type == "regular" && lib.hasSuffix ".nix" name && (!excludeDefault || name != "default.nix");
-
-          readDir =
-            dir:
-            let
-              entries = builtins.readDir dir;
-
-              files = lib.filterAttrs isNixFile entries;
-
-              dirs = lib.filterAttrs (_: type: type == "directory") entries;
-            in
-            (lib.mapAttrsToList (name: _: import (dir + "/${name}") args) files)
-            ++ lib.optionals recursive (lib.concatMap (name: readDir (dir + "/${name}")) (lib.attrNames dirs));
-        in
-        readDir dir;
+          inherit
+            username
+            standalone
+            homeDirectory
+            desktop
+            ;
+        };
 
       mkImports =
         {

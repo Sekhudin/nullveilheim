@@ -10,25 +10,27 @@
 }:
 
 let
-  enableConfig = path: lib.attrByPath path false osConfig;
   packages = inputs.self.packages;
   system = pkgs.stdenv.hostPlatform.system;
   homeDirectory = config.home.homeDirectory;
+
+  ctx = extraLib.mkHomeContext {
+    username = "syaikhu";
+    inherit pkgs osConfig;
+  };
 in
 {
   imports = lib.attrValues ezModules ++ [ ];
 
-  home = rec {
-    username = "syaikhu";
+  home = {
     stateVersion = "26.05";
-    homeDirectory = extraLib.getHomeDir {
-      inherit pkgs username osConfig;
-    };
+    username = ctx.username;
+    homeDirectory = ctx.homeDirectory;
   };
 
   homeCore = {
     activation = true;
-    standalone = (extraLib.isStandalone osConfig);
+    standalone = ctx.standalone;
     shell = "fish";
     terminal = "ghostty";
     theme = "zenwritten_dark";
@@ -55,13 +57,6 @@ in
   };
 
   homeDesktop = {
-    enable = (
-      pkgs.stdenv.isLinux
-      && enableConfig [
-        "programs"
-        "hyprland"
-        "enable"
-      ]
-    );
+    enable = ctx.desktop;
   };
 }
