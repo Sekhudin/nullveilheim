@@ -33,7 +33,7 @@ in
   home = lib.mkIf core.activation {
     activation = {
       ${h.context} = lib.hm.dag.entryAfter entryList ''
-        ${h.libScript}
+        ${h.script}
 
         if tty -s 2>/dev/null; then
           export GPG_TTY="$(tty)"
