@@ -1,17 +1,18 @@
 {
+  config,
   extraLib,
   ...
 }:
 
 let
-  inherit (extraLib.hyprland) mkWorkspaceRule getVar;
+  inherit (extraLib.hyprland) hypr;
 
-  edp_1 = getVar "monitors.edp_1";
+  monitors = hypr.getVarRefs config "monitors";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
-      workspace_rule = mkWorkspaceRule {
+      workspace_rule = hypr.mkWorkspaceRule {
         workspaces = [
           "1"
           "2"
@@ -21,7 +22,7 @@ in
         ];
         rules = {
           persistent = true;
-          monitor = edp_1;
+          monitor = monitors.edp_1;
         };
         extraWorkspaceRule = [ ];
       };

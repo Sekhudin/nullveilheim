@@ -1,21 +1,17 @@
 {
+  config,
   extraLib,
   ...
 }:
 
 let
   inherit (extraLib.hyprland)
-    mkBind
-    mkSubmap
-    mkSubmapBind
-    getVar
-    dsp
-    combos
+    hypr
+    ctl
+    hl
     ;
 
-  submaps = {
-    resize = getVar "submaps.resize";
-  };
+  submaps = hypr.getVarRefs config "submaps";
 
   mkDesc = desc: "(R) ${desc}";
 in
@@ -23,9 +19,9 @@ in
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
-        (mkBind {
-          key = combos.alt "R";
-          dispatcher = dsp.submap {
+        (hypr.mkBind {
+          key = ctl.combos.alt "R";
+          dispatcher = hl.dsp.submap {
             name = submaps.resize;
           };
           flags = {
@@ -35,13 +31,13 @@ in
       ];
 
       define_submap = [
-        (mkSubmap {
+        (hypr.mkSubmap {
           name = submaps.resize;
           escape = true;
           bind = [
-            (mkSubmapBind {
-              key = combos.plain "H";
-              dispatcher = dsp.window.resize {
+            (hypr.mkSubmapBind {
+              key = ctl.combos.plain "H";
+              dispatcher = hl.dsp.window.resize {
                 x = -10;
                 y = 0;
                 relative = true;
@@ -52,9 +48,9 @@ in
               };
             })
 
-            (mkSubmapBind {
-              key = combos.plain "J";
-              dispatcher = dsp.window.resize {
+            (hypr.mkSubmapBind {
+              key = ctl.combos.plain "J";
+              dispatcher = hl.dsp.window.resize {
                 x = 0;
                 y = 10;
                 relative = true;
@@ -65,9 +61,9 @@ in
               };
             })
 
-            (mkSubmapBind {
-              key = combos.plain "K";
-              dispatcher = dsp.window.resize {
+            (hypr.mkSubmapBind {
+              key = ctl.combos.plain "K";
+              dispatcher = hl.dsp.window.resize {
                 x = 0;
                 y = -10;
                 relative = true;
@@ -78,9 +74,9 @@ in
               };
             })
 
-            (mkSubmapBind {
-              key = combos.plain "L";
-              dispatcher = dsp.window.resize {
+            (hypr.mkSubmapBind {
+              key = ctl.combos.plain "L";
+              dispatcher = hl.dsp.window.resize {
                 x = 10;
                 y = 0;
                 relative = true;

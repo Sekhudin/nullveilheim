@@ -6,7 +6,11 @@
 }:
 
 let
-  inherit (extraLib.hyprland) variables mkVar;
+  inherit (extraLib.hyprland)
+    hypr
+    variables
+    ;
+
   core = config.homeCore;
   theme = core.themeConfig;
 in
@@ -14,27 +18,27 @@ in
   wayland.windowManager.hyprland = {
     settings = lib.mkMerge [
       {
-        monitors = mkVar {
+        monitors = hypr.mkVar {
           edp_1 = "eDP-1";
           hdmia_1 = "HDMI-A-1";
         };
 
-        submaps = mkVar {
+        submaps = hypr.mkVar {
           monitor = "M";
           resize = "R";
           session = "S";
         };
 
-        cursor = mkVar {
+        cursor = hypr.mkVar {
           inherit (config.homeCore.cursor)
             theme
             size
             ;
         };
 
-        tokens = mkVar theme.tokens;
+        tokens = hypr.mkVar theme.tokens;
 
-        styles = mkVar rec {
+        styles = hypr.mkVar rec {
           gaps_in = 4;
           gaps_out = 4;
           rounding = 12;
@@ -50,7 +54,7 @@ in
           animation_ms = 800;
         };
 
-        apps = mkVar rec {
+        apps = hypr.mkVar rec {
           terminal = config.homeCore.terminal;
           browser = "firefox";
           editor = "nvim";
@@ -59,14 +63,14 @@ in
           windowboard_freeze = "${windowboard} --freeze";
         };
 
-        menus = mkVar {
+        menus = hypr.mkVar {
           apps = "nv-apps";
           binds = "nv-binds";
           power = "nv-power";
           screenshot = "nv-screenshot";
         };
 
-        actions = mkVar {
+        actions = hypr.mkVar {
           hibernate = "nv-hibernate";
           lock = "nv-lock";
           logout = "nv-logout";
@@ -105,8 +109,6 @@ in
 
           screenrec = "nv-screenrec";
         };
-
-        scripts = mkVar { };
       }
       variables
     ];

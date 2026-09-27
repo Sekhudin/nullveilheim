@@ -5,25 +5,20 @@
 }:
 
 let
-  inherit (extraLib.hyprland)
-    mkAnimation
-    mkCurve
-    getVarRef
-    ;
+  inherit (extraLib.hyprland) hypr;
 
   beziers = {
     smooth = "smooth";
   };
 
-  var = getVarRef config;
-  styles = var "styles";
+  styles = hypr.getVarValues config "styles";
   speed = styles.animation_ms / 100;
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       curve = [
-        (mkCurve {
+        (hypr.mkCurve {
           name = beziers.smooth;
           options = {
             type = "bezier";
@@ -42,7 +37,7 @@ in
       ];
 
       animation = [
-        (mkAnimation {
+        (hypr.mkAnimation {
           inherit speed;
           enabled = true;
           leaf = "windows";
@@ -50,7 +45,7 @@ in
           style = "slide";
         })
 
-        (mkAnimation {
+        (hypr.mkAnimation {
           inherit speed;
           enabled = true;
           leaf = "windowsMove";

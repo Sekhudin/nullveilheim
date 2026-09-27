@@ -1,32 +1,27 @@
 {
+  config,
   extraLib,
   ...
 }:
 
 let
   inherit (extraLib.hyprland)
-    mkBind
-    getVar
-    dsp
-    combos
-    keys
+    hypr
+    ctl
+    hl
     ;
 
-  menus = {
-    power = getVar "menus.power";
-  };
+  actions = hypr.getVarRefs config "actions";
+  menus = hypr.getVarRefs config "menus";
 
-  actions = {
-    lock = getVar "actions.lock";
-  };
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
-        (mkBind {
-          key = combos.plain "XF86PowerOff";
-          dispatcher = dsp.exec_cmd {
+        (hypr.mkBind {
+          key = ctl.combos.plain "XF86PowerOff";
+          dispatcher = hl.dsp.exec_cmd {
             cmd = menus.power;
           };
           flags = {
@@ -34,9 +29,9 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.mod "escape";
-          dispatcher = dsp.exec_cmd {
+        (hypr.mkBind {
+          key = ctl.combos.mod "escape";
+          dispatcher = hl.dsp.exec_cmd {
             cmd = actions.lock;
           };
           flags = {
@@ -44,12 +39,12 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.of [
-            keys.mod
-            keys.shift
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
           ] "E";
-          dispatcher = dsp.exit { };
+          dispatcher = hl.dsp.exit { };
           flags = {
             description = "logout session";
           };

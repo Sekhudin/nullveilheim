@@ -5,11 +5,9 @@
 
 let
   inherit (extraLib.hyprland)
-    mkBind
-    dsp
-    combos
-    keys
-    directions
+    hypr
+    ctl
+    hl
     ;
 in
 {
@@ -17,40 +15,40 @@ in
     settings = {
       bind = [
         # focus navigation
-        (mkBind {
-          key = combos.mod "H";
-          dispatcher = dsp.focus {
-            direction = directions.left;
+        (hypr.mkBind {
+          key = ctl.combos.mod "H";
+          dispatcher = hl.dsp.focus {
+            direction = ctl.directions.left;
           };
           flags = {
             description = "move focus left";
           };
         })
 
-        (mkBind {
-          key = combos.mod "J";
-          dispatcher = dsp.focus {
-            direction = directions.down;
+        (hypr.mkBind {
+          key = ctl.combos.mod "J";
+          dispatcher = hl.dsp.focus {
+            direction = ctl.directions.down;
           };
           flags = {
             description = "move focus down";
           };
         })
 
-        (mkBind {
-          key = combos.mod "K";
-          dispatcher = dsp.focus {
-            direction = directions.up;
+        (hypr.mkBind {
+          key = ctl.combos.mod "K";
+          dispatcher = hl.dsp.focus {
+            direction = ctl.directions.up;
           };
           flags = {
             description = "move focus up";
           };
         })
 
-        (mkBind {
-          key = combos.mod "L";
-          dispatcher = dsp.focus {
-            direction = directions.right;
+        (hypr.mkBind {
+          key = ctl.combos.mod "L";
+          dispatcher = hl.dsp.focus {
+            direction = ctl.directions.right;
           };
           flags = {
             description = "move focus right";
@@ -58,52 +56,52 @@ in
         })
 
         # window swap
-        (mkBind {
-          key = combos.of [
-            keys.mod
-            keys.shift
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
           ] "H";
-          dispatcher = dsp.window.swap {
-            direction = directions.left;
+          dispatcher = hl.dsp.window.swap {
+            direction = ctl.directions.left;
           };
           flags = {
             description = "swap window left";
           };
         })
 
-        (mkBind {
-          key = combos.of [
-            keys.mod
-            keys.shift
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
           ] "J";
-          dispatcher = dsp.window.swap {
-            direction = directions.down;
+          dispatcher = hl.dsp.window.swap {
+            direction = ctl.directions.down;
           };
           flags = {
             description = "swap window down";
           };
         })
 
-        (mkBind {
-          key = combos.of [
-            keys.mod
-            keys.shift
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
           ] "K";
-          dispatcher = dsp.window.swap {
-            direction = directions.up;
+          dispatcher = hl.dsp.window.swap {
+            direction = ctl.directions.up;
           };
           flags = {
             description = "swap window up";
           };
         })
 
-        (mkBind {
-          key = combos.of [
-            keys.mod
-            keys.shift
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
           ] "L";
-          dispatcher = dsp.window.swap {
-            direction = directions.right;
+          dispatcher = hl.dsp.window.swap {
+            direction = ctl.directions.right;
           };
           flags = {
             description = "swap window right";
@@ -111,12 +109,12 @@ in
         })
 
         # window resize
-        (mkBind {
-          key = combos.of [
-            keys.mod
-            keys.ctrl
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.ctrl
           ] "H";
-          dispatcher = dsp.window.resize {
+          dispatcher = hl.dsp.window.resize {
             x = -10;
             y = 0;
             relative = true;
@@ -127,12 +125,12 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.of [
-            keys.mod
-            keys.ctrl
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.ctrl
           ] "J";
-          dispatcher = dsp.window.resize {
+          dispatcher = hl.dsp.window.resize {
             x = 0;
             y = 10;
             relative = true;
@@ -143,12 +141,12 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.of [
-            keys.mod
-            keys.ctrl
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.ctrl
           ] "K";
-          dispatcher = dsp.window.resize {
+          dispatcher = hl.dsp.window.resize {
             x = 0;
             y = -10;
             relative = true;
@@ -159,12 +157,12 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.of [
-            keys.mod
-            keys.ctrl
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.ctrl
           ] "L";
-          dispatcher = dsp.window.resize {
+          dispatcher = hl.dsp.window.resize {
             x = 10;
             y = 0;
             relative = true;
