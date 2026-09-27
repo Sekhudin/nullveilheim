@@ -1,5 +1,4 @@
 {
-  self,
   inputs,
   ...
 }:
@@ -17,7 +16,7 @@
 
     {
       pre-commit = {
-        devShell = self.devShells.default;
+        devShell = inputs.self.devShells.default;
         check = {
           enable = true;
         };

@@ -12,7 +12,6 @@
     root = ./.;
     globalArgs = {
       inherit inputs;
-      inherit (inputs) self;
       inherit (inputs.self.nullveilheim)
         color
         icon
@@ -50,9 +49,7 @@
     modulesDirectory = ../modules/home;
     configurationsDirectory = ../configurations/home;
     users = {
-      syaikhu = {
-        nameFunction = (host: "syaikhu_${host}");
-      };
+      syaikhu = { };
     };
   };
 
