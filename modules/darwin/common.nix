@@ -1,9 +1,9 @@
 {
-  self,
+  inputs,
   lib,
   ...
 }:
 
 {
-  imports = lib.attrValues self.nullveilheim.modules.common;
+  imports = lib.attrValues inputs.self.nullveilheim.modules.common;
 }
