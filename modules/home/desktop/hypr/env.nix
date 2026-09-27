@@ -1,23 +1,23 @@
 {
+  config,
   extraLib,
   ...
 }:
 
 let
-  inherit (extraLib.hyprland) getVar mkEnv;
+  inherit (extraLib.hyprland) hypr;
 
-  cursor_theme = getVar "cursor.theme";
-  cursor_size = getVar "cursor.size";
+  cursor = hypr.getVarRefs config "cursor";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       env = [
-        (mkEnv "HYPRCURSOR_THEME" cursor_theme)
-        (mkEnv "HYPRCURSOR_SIZE" cursor_size)
+        (hypr.mkEnv "HYPRCURSOR_THEME" cursor.theme)
+        (hypr.mkEnv "HYPRCURSOR_SIZE" cursor.size)
 
-        (mkEnv "XCURSOR_THEME" cursor_theme)
-        (mkEnv "XCURSOR_SIZE" cursor_size)
+        (hypr.mkEnv "XCURSOR_THEME" cursor.theme)
+        (hypr.mkEnv "XCURSOR_SIZE" cursor.size)
       ];
     };
   };

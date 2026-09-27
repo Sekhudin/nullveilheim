@@ -1,29 +1,18 @@
 {
+  config,
   extraLib,
   ...
 }:
 
 let
   inherit (extraLib.hyprland)
-    mkBind
-    mkSubmap
-    mkSubmapBind
-    getVar
-    dsp
-    combos
+    hypr
+    ctl
+    hl
     ;
 
-  submaps = {
-    session = getVar "submaps.session";
-  };
-
-  actions = {
-    lock = getVar "actions.lock";
-    logout = getVar "actions.logout";
-    poweroff = getVar "actions.poweroff";
-    reboot = getVar "actions.reboot";
-    suspend = getVar "actions.suspend";
-  };
+  actions = hypr.getVarRefs config "actions";
+  submaps = hypr.getVarRefs config "submaps";
 
   mkDesc = desc: "(S) ${desc}";
 in
@@ -31,9 +20,9 @@ in
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
-        (mkBind {
-          key = combos.alt "S";
-          dispatcher = dsp.submap {
+        (hypr.mkBind {
+          key = ctl.combos.alt "S";
+          dispatcher = hl.dsp.submap {
             name = submaps.session;
           };
           flags = {
@@ -43,13 +32,13 @@ in
       ];
 
       define_submap = [
-        (mkSubmap {
+        (hypr.mkSubmap {
           name = submaps.session;
           escape = true;
           bind = [
-            (mkSubmapBind {
-              key = combos.plain "L";
-              dispatcher = dsp.exec_cmd {
+            (hypr.mkSubmapBind {
+              key = ctl.combos.plain "L";
+              dispatcher = hl.dsp.exec_cmd {
                 cmd = actions.lock;
               };
 
@@ -58,9 +47,9 @@ in
               };
             })
 
-            (mkSubmapBind {
-              key = combos.plain "E";
-              dispatcher = dsp.exec_cmd {
+            (hypr.mkSubmapBind {
+              key = ctl.combos.plain "E";
+              dispatcher = hl.dsp.exec_cmd {
                 cmd = actions.logout;
               };
 
@@ -69,9 +58,9 @@ in
               };
             })
 
-            (mkSubmapBind {
-              key = combos.plain "P";
-              dispatcher = dsp.exec_cmd {
+            (hypr.mkSubmapBind {
+              key = ctl.combos.plain "P";
+              dispatcher = hl.dsp.exec_cmd {
                 cmd = actions.poweroff;
               };
 
@@ -80,9 +69,9 @@ in
               };
             })
 
-            (mkSubmapBind {
-              key = combos.plain "R";
-              dispatcher = dsp.exec_cmd {
+            (hypr.mkSubmapBind {
+              key = ctl.combos.plain "R";
+              dispatcher = hl.dsp.exec_cmd {
                 cmd = actions.reboot;
               };
 
@@ -91,9 +80,9 @@ in
               };
             })
 
-            (mkSubmapBind {
-              key = combos.plain "S";
-              dispatcher = dsp.exec_cmd {
+            (hypr.mkSubmapBind {
+              key = ctl.combos.plain "S";
+              dispatcher = hl.dsp.exec_cmd {
                 cmd = actions.suspend;
               };
 

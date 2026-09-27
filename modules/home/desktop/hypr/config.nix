@@ -7,28 +7,23 @@
 let
   core = config.homeCore;
   font = core.font;
-  inherit (extraLib.hyprland) getVar;
+  inherit (extraLib.hyprland) hypr;
 
-  rounding = getVar "styles.rounding";
-  gaps_in = getVar "styles.gaps_in";
-  gaps_out = getVar "styles.gaps_out";
-  border_size = getVar "styles.border_size";
-
-  border = getVar "tokens.border";
-  active_border = getVar "tokens.active_border";
+  styles = hypr.getVarRefs config "styles";
+  tokens = hypr.getVarRefs config "tokens";
 in
 {
   wayland.windowManager.hyprland = {
     settings.config = {
       general = {
-        border_size = border_size;
-        gaps_in = gaps_in;
-        gaps_out = gaps_out;
+        border_size = styles.border_size;
+        gaps_in = styles.gaps_in;
+        gaps_out = styles.gaps_out;
         layout = "dwindle";
         resize_on_border = true;
         col = {
-          active_border = active_border;
-          inactive_border = border;
+          active_border = tokens.active_border;
+          inactive_border = tokens.border;
         };
         snap = {
           enabled = false;
@@ -36,7 +31,7 @@ in
       };
 
       decoration = {
-        rounding = rounding;
+        rounding = styles.rounding;
         active_opacity = 1.0;
         inactive_opacity = 1.0;
         dim_modal = true;

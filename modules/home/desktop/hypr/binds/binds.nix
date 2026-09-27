@@ -1,33 +1,26 @@
 {
+  config,
   extraLib,
   ...
 }:
 
 let
   inherit (extraLib.hyprland)
-    mkBind
-    getVar
-    dsp
-    keys
-    combos
+    hypr
+    ctl
+    hl
     ;
 
-  actions = {
-    reload = getVar "actions.reload";
-  };
-
-  menus = {
-    apps = getVar "menus.apps";
-    binds = getVar "menus.binds";
-  };
+  actions = hypr.getVarRefs config "actions";
+  menus = hypr.getVarRefs config "menus";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
-        (mkBind {
-          key = combos.mod "SPACE";
-          dispatcher = dsp.exec_cmd {
+        (hypr.mkBind {
+          key = ctl.combos.mod "SPACE";
+          dispatcher = hl.dsp.exec_cmd {
             cmd = menus.apps;
           };
           flags = {
@@ -35,9 +28,9 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.mod "SLASH";
-          dispatcher = dsp.exec_cmd {
+        (hypr.mkBind {
+          key = ctl.combos.mod "SLASH";
+          dispatcher = hl.dsp.exec_cmd {
             cmd = menus.binds;
           };
           flags = {
@@ -45,17 +38,17 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.mod "Q";
-          dispatcher = dsp.window.close { };
+        (hypr.mkBind {
+          key = ctl.combos.mod "Q";
+          dispatcher = hl.dsp.window.close { };
           flags = {
             description = "close current window";
           };
         })
 
-        (mkBind {
-          key = combos.mod "F";
-          dispatcher = dsp.window.fullscreen {
+        (hypr.mkBind {
+          key = ctl.combos.mod "F";
+          dispatcher = hl.dsp.window.fullscreen {
             mode = "maximized";
             action = "toggle";
             layout_aware = true;
@@ -65,9 +58,9 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.mod "V";
-          dispatcher = dsp.window.float {
+        (hypr.mkBind {
+          key = ctl.combos.mod "V";
+          dispatcher = hl.dsp.window.float {
             action = "toggle";
           };
           flags = {
@@ -75,12 +68,12 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.of [
-            keys.mod
-            keys.shift
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
           ] "SPACE";
-          dispatcher = dsp.extra.layout_toggle {
+          dispatcher = hl.extra.layout_toggle {
             layouts = [
               "dwindle"
               "master"
@@ -93,12 +86,12 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.of [
-            keys.mod
-            keys.shift
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
           ] "O";
-          dispatcher = dsp.dpms {
+          dispatcher = hl.dsp.dpms {
             action = "enable";
           };
           flags = {
@@ -107,12 +100,12 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.of [
-            keys.mod
-            keys.shift
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
           ] "R";
-          dispatcher = dsp.exec_cmd {
+          dispatcher = hl.dsp.exec_cmd {
             cmd = actions.reload;
           };
           flags = {
@@ -120,9 +113,9 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.mod "Z";
-          dispatcher = dsp.extra.zen_mode { };
+        (hypr.mkBind {
+          key = ctl.combos.mod "Z";
+          dispatcher = hl.extra.zen_mode { };
           flags = {
             description = "zen mode toggle";
           };

@@ -1,32 +1,25 @@
 {
+  config,
   extraLib,
   ...
 }:
 
 let
   inherit (extraLib.hyprland)
-    mkBind
-    getVar
-    dsp
-    combos
-    keys
+    hypr
+    ctl
+    hl
     ;
 
-  apps = {
-    terminal = getVar "apps.terminal";
-    browser = getVar "apps.browser";
-    filemanager = getVar "apps.filemanager";
-    windowboard = getVar "apps.windowboard";
-    windowboard_freeze = getVar "apps.windowboard_freeze";
-  };
+  apps = hypr.getVarRefs config "apps";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
-        (mkBind {
-          key = combos.mod "RETURN";
-          dispatcher = dsp.exec_cmd {
+        (hypr.mkBind {
+          key = ctl.combos.mod "RETURN";
+          dispatcher = hl.dsp.exec_cmd {
             cmd = apps.terminal;
           };
           flags = {
@@ -34,9 +27,9 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.mod "B";
-          dispatcher = dsp.exec_cmd {
+        (hypr.mkBind {
+          key = ctl.combos.mod "B";
+          dispatcher = hl.dsp.exec_cmd {
             cmd = apps.browser;
           };
           flags = {
@@ -44,9 +37,9 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.mod "M";
-          dispatcher = dsp.exec_cmd {
+        (hypr.mkBind {
+          key = ctl.combos.mod "M";
+          dispatcher = hl.dsp.exec_cmd {
             cmd = apps.filemanager;
           };
           flags = {
@@ -54,9 +47,9 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.mod "W";
-          dispatcher = dsp.exec_cmd {
+        (hypr.mkBind {
+          key = ctl.combos.mod "W";
+          dispatcher = hl.dsp.exec_cmd {
             cmd = apps.windowboard;
           };
           flags = {
@@ -64,12 +57,12 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.of [
-            keys.mod
-            keys.shift
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
           ] "W";
-          dispatcher = dsp.exec_cmd {
+          dispatcher = hl.dsp.exec_cmd {
             cmd = apps.windowboard_freeze;
           };
           flags = {

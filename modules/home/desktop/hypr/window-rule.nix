@@ -4,13 +4,13 @@
 }:
 
 let
-  inherit (extraLib.hyprland) mkWindowRule;
+  inherit (extraLib.hyprland) hypr;
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       window_rule = [
-        (mkWindowRule {
+        (hypr.mkWindowRule {
           name = "yakc";
           match = {
             class = "^Yakc$";

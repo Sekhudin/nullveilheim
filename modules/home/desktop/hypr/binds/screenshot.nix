@@ -1,35 +1,26 @@
 {
+  config,
   extraLib,
   ...
 }:
 
 let
   inherit (extraLib.hyprland)
-    mkBind
-    getVar
-    dsp
-    combos
+    hypr
+    ctl
+    hl
     ;
 
-  keys = {
-    printscreen = "Print";
-  };
-
-  actions = {
-    screenshot_fullscreen = getVar "actions.screenshot_fullscreen";
-  };
-
-  menus = {
-    screenshot = getVar "menus.screenshot";
-  };
+  actions = hypr.getVarRefs config "actions";
+  menus = hypr.getVarRefs config "menus";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
-        (mkBind {
-          key = combos.shift keys.printscreen;
-          dispatcher = dsp.exec_cmd {
+        (hypr.mkBind {
+          key = ctl.combos.shift ctl.keys.print;
+          dispatcher = hl.dsp.exec_cmd {
             cmd = actions.screenshot_fullscreen;
           };
           flags = {
@@ -37,9 +28,9 @@ in
           };
         })
 
-        (mkBind {
-          key = combos.plain keys.printscreen;
-          dispatcher = dsp.exec_cmd {
+        (hypr.mkBind {
+          key = ctl.combos.plain ctl.keys.print;
+          dispatcher = hl.dsp.exec_cmd {
             cmd = menus.screenshot;
           };
           flags = {
