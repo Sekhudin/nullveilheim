@@ -30,7 +30,7 @@
           ensureParent = "ensure_parent";
           readSecret = "read_secret";
 
-          libScript = ''
+          script = ''
             set -euo pipefail
 
             ${fmt.log}() {
@@ -77,7 +77,7 @@
             ensureParent
             readSecret
             context
-            libScript
+            script
             ;
         };
     };

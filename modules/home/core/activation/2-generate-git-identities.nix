@@ -42,7 +42,7 @@ in
   home = lib.mkIf core.activation {
     activation = {
       ${h.context} = lib.hm.dag.entryAfter [ "1-import-gpg-keys" ] ''
-        ${h.libScript}
+        ${h.script}
 
         INCLUDES_FILE="$(${h.expandHome} "${includesFile}")"
         GITCONFIG_D="$(${h.cu.dirname} "$INCLUDES_FILE")/config.d"

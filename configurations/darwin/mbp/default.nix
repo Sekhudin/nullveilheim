@@ -22,7 +22,6 @@
   };
 
   common = {
-    enable = true;
     nix = {
       trusted-users = [
         "syaikhu"

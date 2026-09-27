@@ -2,7 +2,7 @@ let
   activation = import ./activation.nix;
   devshell = import ./devshell.nix;
   nixvim = import ./nixvim.nix;
-  hyprland = import ./hyprland.nix;
+  hyprland = import ./hyprland;
   sops = import ./sops.nix;
   tmux = import ./tmux.nix;
 in

@@ -21,7 +21,7 @@ in
   home = lib.mkIf (core.activation && isLinux) {
     activation = {
       ${h.context} = lib.hm.dag.entryAfter [ "2-generate-git-identities" ] ''
-        ${h.libScript}
+        ${h.script}
 
         ${h.fmt.log} "Cleaning up broken symlinks in systemd user units..."
 

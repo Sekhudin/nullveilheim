@@ -27,7 +27,7 @@ in
   home = lib.mkIf core.activation {
     activation = {
       ${h.context} = lib.hm.dag.entryAfter [ "0-install-ssh-keys" ] ''
-        ${h.libScript}
+        ${h.script}
 
         # Pastikan direktori GNUPGHOME ada dengan izin yang aman (cross-platform safe)
         gnupg_dir="''${GNUPGHOME:-$HOME/.gnupg}"
