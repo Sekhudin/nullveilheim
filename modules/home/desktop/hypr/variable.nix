@@ -54,19 +54,17 @@ in
           animation_ms = 800;
         };
 
-        apps = hypr.mkVar rec {
+        apps = hypr.mkVar {
           terminal = config.homeCore.terminal;
           browser = "firefox";
-          editor = "nvim";
-          filemanager = "${terminal} -e yazi";
-          windowboard = "wayscriber --active";
-          windowboard_freeze = "${windowboard} --freeze";
         };
 
         menus = hypr.mkVar {
-          apps = "nv-apps";
           binds = "nv-binds";
+          control_center = "nv-control-center";
+          launcher = "nv-launcher";
           power = "nv-power";
+          settings = "settings";
           screenshot = "nv-screenshot";
         };
 

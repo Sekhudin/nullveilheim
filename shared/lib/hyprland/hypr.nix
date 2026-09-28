@@ -98,15 +98,13 @@ let
       }:
       let
         event' = event {
-          lua = (if builtins.isList action then lib.concatStringsSep "\n" action else action);
+          lua = if builtins.isList action then lib.concatStringsSep "\n" action else action;
         };
-        name = builtins.elemAt event' 0;
-        callback = builtins.elemAt event' 1;
       in
       {
         _args = [
-          name
-          (luaLib.mkLuaInline callback)
+          (builtins.elemAt event' 0)
+          (luaLib.mkLuaInline (builtins.elemAt event' 1))
         ];
       };
 

@@ -21,7 +21,7 @@ in
             direction = ctl.directions.left;
           };
           flags = {
-            description = "move focus left";
+            description = "focus window left";
           };
         })
 
@@ -31,7 +31,7 @@ in
             direction = ctl.directions.down;
           };
           flags = {
-            description = "move focus down";
+            description = "focus window down";
           };
         })
 
@@ -41,7 +41,7 @@ in
             direction = ctl.directions.up;
           };
           flags = {
-            description = "move focus up";
+            description = "focus window up";
           };
         })
 
@@ -51,7 +51,7 @@ in
             direction = ctl.directions.right;
           };
           flags = {
-            description = "move focus right";
+            description = "focus window right";
           };
         })
 

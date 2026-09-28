@@ -135,6 +135,27 @@ in
             description = "numlock";
           };
         })
+
+        (hypr.mkBind {
+          key = ctl.combos.mod "escape";
+          dispatcher = hl.dsp.exec_cmd {
+            cmd = actions.lock;
+          };
+          flags = {
+            description = "lock screen";
+          };
+        })
+
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
+          ] "E";
+          dispatcher = hl.dsp.exit { };
+          flags = {
+            description = "logout session";
+          };
+        })
       ];
     };
   };
