@@ -6,6 +6,18 @@
 }:
 
 let
+  hl = {
+    exec_cmd =
+      p:
+      mkCall {
+        func = "hl.exec_cmd";
+        args = [
+          p.cmd
+          (p.rules or null)
+        ];
+      };
+  };
+
   hl.dsp = {
     dpms =
       p:

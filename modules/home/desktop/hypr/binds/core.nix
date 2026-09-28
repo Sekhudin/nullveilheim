@@ -12,32 +12,11 @@ let
     ;
 
   actions = hypr.getVarRefs config "actions";
-  menus = hypr.getVarRefs config "menus";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
-        (hypr.mkBind {
-          key = ctl.combos.mod "SPACE";
-          dispatcher = hl.dsp.exec_cmd {
-            cmd = menus.apps;
-          };
-          flags = {
-            description = "show apps";
-          };
-        })
-
-        (hypr.mkBind {
-          key = ctl.combos.mod "SLASH";
-          dispatcher = hl.dsp.exec_cmd {
-            cmd = menus.binds;
-          };
-          flags = {
-            description = "show key bindings";
-          };
-        })
-
         (hypr.mkBind {
           key = ctl.combos.mod "Q";
           dispatcher = hl.dsp.window.close { };
@@ -54,7 +33,7 @@ in
             layout_aware = true;
           };
           flags = {
-            description = "window fullscreen toggle";
+            description = "toggle window fullscreen";
           };
         })
 
@@ -64,7 +43,7 @@ in
             action = "toggle";
           };
           flags = {
-            description = "window float toggle";
+            description = "toggle window floating";
           };
         })
 
@@ -82,7 +61,7 @@ in
             ];
           };
           flags = {
-            description = "change layout toggle";
+            description = "cycle window layout";
           };
         })
 
@@ -96,7 +75,7 @@ in
           };
           flags = {
             locked = true;
-            description = "display on";
+            description = "enable displays";
           };
         })
 
@@ -109,7 +88,7 @@ in
             cmd = actions.reload;
           };
           flags = {
-            description = "reload config";
+            description = "reload configuration";
           };
         })
 
@@ -117,7 +96,19 @@ in
           key = ctl.combos.mod "Z";
           dispatcher = hl.extra.zen_mode { };
           flags = {
-            description = "zen mode toggle";
+            description = "toggle zen mode";
+          };
+        })
+
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.mouse.left
+          ] null;
+          dispatcher = hl.dsp.window.drag { };
+          flags = {
+            description = "drag window";
+            drag = true;
           };
         })
       ];
