@@ -1,9 +1,13 @@
-{ lib, ... }:
+{ config, lib, ... }:
 
+let
+  cfg = config.homeDesktop;
+in
 {
 
   imports = [
     ./hypr
+    ./noctalia
   ];
 
   options.homeDesktop = {
@@ -14,17 +18,23 @@
     };
 
     use = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          use = lib.mkOption {
-            type = lib.types.enum [
-              "noctalia"
-            ];
-            description = "choose desktop shell";
-            default = "noctalia";
-          };
-        };
-      };
+      type = lib.types.enum [
+        "noctalia"
+      ];
+      description = "choose desktop shell";
+      default = "noctalia";
+    };
+
+    noctalia.enable = lib.mkOption {
+      type = lib.types.bool;
+      readOnly = true;
+      internal = true;
+    };
+  };
+
+  config = {
+    homeDesktop = {
+      noctalia.enable = cfg.enable && cfg.use == "noctalia";
     };
   };
 }
