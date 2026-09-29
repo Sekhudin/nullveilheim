@@ -196,6 +196,14 @@ in
       default = "ghostty";
     };
 
+    browser = lib.mkOption {
+      type = lib.types.enum [
+        "firefox"
+      ];
+      description = "choose browser";
+      default = "firefox";
+    };
+
     theme = lib.mkOption {
       type = lib.types.enum themeNames;
       description = "theme settings";
