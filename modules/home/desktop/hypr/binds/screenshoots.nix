@@ -11,29 +11,32 @@ let
     hl
     ;
 
-  apps = hypr.getVarRefs config "apps";
+  screenshots = hypr.getVarRefs config "screenshots";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
         (hypr.mkBind {
-          key = ctl.combos.mod ctl.keys.enter;
+          key = ctl.combos.mod ctl.keys.print;
           dispatcher = hl.dsp.exec_cmd {
-            cmd = apps.terminal;
+            cmd = screenshots.region;
           };
           flags = {
-            description = "open terminal";
+            description = "capture selected screen region";
           };
         })
 
         (hypr.mkBind {
-          key = ctl.combos.mod "B";
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
+          ] ctl.keys.print;
           dispatcher = hl.dsp.exec_cmd {
-            cmd = apps.browser;
+            cmd = screenshots.fullscreen;
           };
           flags = {
-            description = "open browser";
+            description = "capture fullscreen screenshot";
           };
         })
       ];

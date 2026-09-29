@@ -51,7 +51,7 @@ in
           key = ctl.combos.of [
             ctl.keys.mod
             ctl.keys.shift
-          ] "SPACE";
+          ] ctl.keys.space;
           dispatcher = hl.extra.layout_toggle {
             layouts = [
               "dwindle"
@@ -68,14 +68,12 @@ in
         (hypr.mkBind {
           key = ctl.combos.of [
             ctl.keys.mod
-            ctl.keys.shift
-          ] "O";
-          dispatcher = hl.dsp.dpms {
-            action = "enable";
+          ] "R";
+          dispatcher = hl.dsp.exec_cmd {
+            cmd = "hyprctl reload config-only";
           };
           flags = {
-            locked = true;
-            description = "enable displays";
+            description = "reload configuration only";
           };
         })
 
@@ -85,7 +83,7 @@ in
             ctl.keys.shift
           ] "R";
           dispatcher = hl.dsp.exec_cmd {
-            cmd = actions.reload;
+            cmd = "hyprctl reload";
           };
           flags = {
             description = "reload configuration";

@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   extraLib,
   ...
 }:
@@ -43,7 +42,7 @@ in
                 monitor = "-1";
               };
               flags = {
-                description = mkDesc "move focus to previous monitor";
+                description = mkDesc "focus previous monitor";
               };
             })
 
@@ -53,7 +52,7 @@ in
                 monitor = "+1";
               };
               flags = {
-                description = mkDesc "move focus to next monitor";
+                description = mkDesc "focus next monitor";
               };
             })
 
@@ -67,6 +66,7 @@ in
                 description = mkDesc "move window to previous monitor";
               };
             })
+
             (hypr.mkSubmapBind {
               key = ctl.combos.shift "L";
               dispatcher = hl.dsp.window.move {
@@ -87,6 +87,7 @@ in
                 description = mkDesc "move workspace to previous monitor";
               };
             })
+
             (hypr.mkSubmapBind {
               key = ctl.combos.ctrl "L";
               dispatcher = hl.dsp.workspace.move {

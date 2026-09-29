@@ -11,7 +11,7 @@ let
   cfg = config.homeDesktop.noctalia;
   inherit (extraLib.hyprland) hypr;
 
-  menus = hypr.getVarValues config "menus";
+  volume = hypr.getVarValues config "volume";
   ipc = cmd: "noctalia msg ${cmd}";
 
   runtimeInputs = [
@@ -23,8 +23,20 @@ in
     packages = [
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
-        name = menus.launcher;
-        text = ipc "panel-toggle launcher";
+        name = volume.up;
+        text = ipc "volume-up";
+      })
+
+      (pkgs.writeShellApplication {
+        inherit runtimeInputs;
+        name = volume.down;
+        text = ipc "volume-down";
+      })
+
+      (pkgs.writeShellApplication {
+        inherit runtimeInputs;
+        name = volume.toggle;
+        text = ipc "volume-mute";
       })
     ];
   };

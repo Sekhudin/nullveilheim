@@ -11,29 +11,32 @@ let
     hl
     ;
 
-  apps = hypr.getVarRefs config "apps";
+  sessions = hypr.getVarRefs config "sessions";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
         (hypr.mkBind {
-          key = ctl.combos.mod ctl.keys.enter;
+          key = ctl.combos.mod ctl.keys.escape;
           dispatcher = hl.dsp.exec_cmd {
-            cmd = apps.terminal;
+            cmd = sessions.lock;
           };
           flags = {
-            description = "open terminal";
+            description = "lock current session";
           };
         })
 
         (hypr.mkBind {
-          key = ctl.combos.mod "B";
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
+          ] "E";
           dispatcher = hl.dsp.exec_cmd {
-            cmd = apps.browser;
+            cmd = sessions.logout;
           };
           flags = {
-            description = "open browser";
+            description = "logout of current session";
           };
         })
       ];

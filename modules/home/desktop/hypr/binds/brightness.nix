@@ -11,29 +11,31 @@ let
     hl
     ;
 
-  apps = hypr.getVarRefs config "apps";
+  brightness = hypr.getVarRefs config "brightness";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
         (hypr.mkBind {
-          key = ctl.combos.mod ctl.keys.enter;
+          key = ctl.combos.plain ctl.keys.brightness_up;
           dispatcher = hl.dsp.exec_cmd {
-            cmd = apps.terminal;
+            cmd = brightness.up;
           };
           flags = {
-            description = "open terminal";
+            repeating = true;
+            description = "increase screen brightness";
           };
         })
 
         (hypr.mkBind {
-          key = ctl.combos.mod "B";
+          key = ctl.combos.plain ctl.keys.brightness_down;
           dispatcher = hl.dsp.exec_cmd {
-            cmd = apps.browser;
+            cmd = brightness.down;
           };
           flags = {
-            description = "open browser";
+            repeating = true;
+            description = "decrease screen brightness";
           };
         })
       ];

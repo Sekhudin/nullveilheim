@@ -44,7 +44,7 @@ in
               };
               flags = {
                 repeating = true;
-                description = mkDesc "resize left";
+                description = mkDesc "resize window left";
               };
             })
 
@@ -57,7 +57,7 @@ in
               };
               flags = {
                 repeating = true;
-                description = mkDesc "resize down";
+                description = mkDesc "resize window down";
               };
             })
 
@@ -70,7 +70,7 @@ in
               };
               flags = {
                 repeating = true;
-                description = mkDesc "resize up";
+                description = mkDesc "resize window up";
               };
             })
 
@@ -83,7 +83,7 @@ in
               };
               flags = {
                 repeating = true;
-                description = mkDesc "resize right";
+                description = mkDesc "resize window right";
               };
             })
           ];

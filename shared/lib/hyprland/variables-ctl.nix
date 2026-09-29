@@ -35,24 +35,25 @@ let
       alt = "ALT";
       ctrl = "CTRL";
       shift = "SHIFT";
-
-      brightness_down = "XF86MonBrightnessDown";
-      brightness_up = "XF86MonBrightnessUp";
-
-      media_next = "XF86AudioNext";
-      media_prev = "XF86AudioPrev";
-      media_playback = "XF86AudioPlay";
-
-      mic_mute = "XF86AudioMicMute";
-
-      volume_down = "XF86AudioLowerVolume";
-      volume_up = "XF86AudioRaiseVolume";
-      volume_mute = "XF86AudioMute";
-
+      tab = "TAB";
+      enter = "RETURN";
+      comma = "comma";
+      escape = "escape";
+      space = "SPACE";
+      slash = "SLASH";
       capslock = "Caps_Lock";
       numlock = "Num_Lock";
-
       print = "Print";
+      brightness_down = "XF86MonBrightnessDown";
+      brightness_up = "XF86MonBrightnessUp";
+      media_next = "XF86AudioNext";
+      media_prev = "XF86AudioPrev";
+      media_toggle = "XF86AudioPlay";
+      volume_down = "XF86AudioLowerVolume";
+      volume_up = "XF86AudioRaiseVolume";
+      volume_toggle = "XF86AudioMute";
+      mic_toggle = "XF86AudioMicMute";
+      poweroff = "XF86PowerOff";
     };
   };
 

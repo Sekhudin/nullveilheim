@@ -11,7 +11,7 @@ let
     hl
     ;
 
-  actions = hypr.getVarRefs config "actions";
+  sessions = hypr.getVarRefs config "sessions";
   submaps = hypr.getVarRefs config "submaps";
 
   mkDesc = desc: "(S) ${desc}";
@@ -39,55 +39,55 @@ in
             (hypr.mkSubmapBind {
               key = ctl.combos.plain "L";
               dispatcher = hl.dsp.exec_cmd {
-                cmd = actions.lock;
+                cmd = sessions.lock;
               };
 
               flags = {
-                description = mkDesc "session lock";
-              };
-            })
-
-            (hypr.mkSubmapBind {
-              key = ctl.combos.plain "E";
-              dispatcher = hl.dsp.exec_cmd {
-                cmd = actions.logout;
-              };
-
-              flags = {
-                description = mkDesc "session logout";
-              };
-            })
-
-            (hypr.mkSubmapBind {
-              key = ctl.combos.plain "P";
-              dispatcher = hl.dsp.exec_cmd {
-                cmd = actions.poweroff;
-              };
-
-              flags = {
-                description = mkDesc "poweroff";
-              };
-            })
-
-            (hypr.mkSubmapBind {
-              key = ctl.combos.plain "R";
-              dispatcher = hl.dsp.exec_cmd {
-                cmd = actions.reboot;
-              };
-
-              flags = {
-                description = mkDesc "reboot";
+                description = mkDesc "lock current session";
               };
             })
 
             (hypr.mkSubmapBind {
               key = ctl.combos.plain "S";
               dispatcher = hl.dsp.exec_cmd {
-                cmd = actions.suspend;
+                cmd = sessions.lock_suspend;
               };
 
               flags = {
-                description = mkDesc "suspend";
+                description = mkDesc "lock and suspend system";
+              };
+            })
+
+            (hypr.mkSubmapBind {
+              key = ctl.combos.plain "E";
+              dispatcher = hl.dsp.exec_cmd {
+                cmd = sessions.logout;
+              };
+
+              flags = {
+                description = mkDesc "logout of current session";
+              };
+            })
+
+            (hypr.mkSubmapBind {
+              key = ctl.combos.plain "R";
+              dispatcher = hl.dsp.exec_cmd {
+                cmd = sessions.reboot;
+              };
+
+              flags = {
+                description = mkDesc "reboot system";
+              };
+            })
+
+            (hypr.mkSubmapBind {
+              key = ctl.combos.plain "P";
+              dispatcher = hl.dsp.exec_cmd {
+                cmd = sessions.shutdown;
+              };
+
+              flags = {
+                description = mkDesc "shut down system";
               };
             })
           ];

@@ -30,10 +30,8 @@ in
         };
 
         cursor = hypr.mkVar {
-          inherit (config.homeCore.cursor)
-            theme
-            size
-            ;
+          theme = core.cursor.theme;
+          size = core.cursor.size;
         };
 
         tokens = hypr.mkVar theme.tokens;
@@ -55,57 +53,54 @@ in
         };
 
         apps = hypr.mkVar {
-          terminal = config.homeCore.terminal;
-          browser = "firefox";
+          terminal = core.terminal;
+          browser = core.browser;
         };
 
         menus = hypr.mkVar {
-          binds = "nv-binds";
-          control_center = "nv-control-center";
-          launcher = "nv-launcher";
-          power = "nv-power";
-          settings = "settings";
-          screenshot = "nv-screenshot";
+          help = "nv-menu-help";
+          launcher = "nv-menu-launcher";
+          control = "nv-menu-control";
+          settings = "nv-menu-settings";
+          window = "nv-menu-window";
+          session = "nv-menu-session";
+          screenshot = "nv-menu-screenshot";
         };
 
-        actions = hypr.mkVar {
-          hibernate = "nv-hibernate";
-          lock = "nv-lock";
-          logout = "nv-logout";
-          poweroff = "nv-poweroff";
-          powerprofile = "nv-powerprofile";
-          reboot = "nv-reboot";
-          reload = "nv-reload";
-          screenoff = "nv-screenoff";
-          screenon = "nv-screenon";
-          suspend = "nv-suspend";
+        sessions = hypr.mkVar {
+          lock = "nv-session-lock";
+          lock_suspend = "nv-session-lock-suspend";
+          logout = "nv-session-logout";
+          reboot = "nv-session-reboot";
+          shutdown = "nv-session-shutdown";
+        };
 
-          # osd
-          brightness_up = "nv-brightness-up";
-          brightness_down = "nv-brightness-down";
+        screenshots = hypr.mkVar {
+          region = "nv-screenshot-region";
+          fullscreen = "nv-screenshot-fullscreen";
+        };
 
-          media_playback = "nv-media-playback";
-          media_next = "nv-media-next";
-          media_prev = "nv-media-prev";
+        brightness = hypr.mkVar {
+          up = "nv-brightness-up";
+          down = "nv-brightness-down";
+        };
 
-          mic_up = "nv-mic-up";
-          mic_down = "nv-mic-down";
-          mic_mute = "nv-mic-mute";
+        media = hypr.mkVar {
+          next = "nv-media-next";
+          prev = "nv-media-prev";
+          toggle = "nv-media-toggle";
+        };
 
-          volume_up = "nv-volume-up";
-          volume_down = "nv-volume-down";
-          volume_mute = "nv-volume-mute";
+        volume = hypr.mkVar {
+          up = "nv-volume-up";
+          down = "nv-volume-down";
+          toggle = "nv-volume-toggle";
+        };
 
-          capslock = "nv-capslock";
-          numlock = "nv-numlock";
-          scrolllock = "nv-scrolllock";
-
-          # misc
-          screenshot_fullscreen = "nv-screenshot-fullscreen";
-          screenshot_region = "nv-screenshot-region";
-          screenshot_window = "nv-screenshot-window";
-
-          screenrec = "nv-screenrec";
+        mic = hypr.mkVar {
+          up = "nv-mic-up";
+          down = "nv-mic-down";
+          toggle = "nv-mic-toggle";
         };
       }
       variables
