@@ -18,9 +18,9 @@ in
     settings = {
       bind = [
         (hypr.mkBind {
-          key = ctl.combos.mod "SLASH";
+          key = ctl.combos.mod ctl.keys.slash;
           dispatcher = hl.dsp.exec_cmd {
-            cmd = menus.binds;
+            cmd = menus.help;
           };
           flags = {
             description = "keybind reference and help";
@@ -28,17 +28,7 @@ in
         })
 
         (hypr.mkBind {
-          key = ctl.combos.mod "SLASH";
-          dispatcher = hl.dsp.exec_cmd {
-            cmd = menus.control_center;
-          };
-          flags = {
-            description = "system control and status";
-          };
-        })
-
-        (hypr.mkBind {
-          key = ctl.combos.mod "SPACE";
+          key = ctl.combos.mod ctl.keys.space;
           dispatcher = hl.dsp.exec_cmd {
             cmd = menus.launcher;
           };
@@ -48,17 +38,17 @@ in
         })
 
         (hypr.mkBind {
-          key = ctl.combos.plain "XF86PowerOff";
+          key = ctl.combos.mod "S";
           dispatcher = hl.dsp.exec_cmd {
-            cmd = menus.power;
+            cmd = menus.control;
           };
           flags = {
-            description = "power and session actions";
+            description = "system control and status";
           };
         })
 
         (hypr.mkBind {
-          key = ctl.combos.mod "S";
+          key = ctl.combos.mod ctl.keys.comma;
           dispatcher = hl.dsp.exec_cmd {
             cmd = menus.settings;
           };
@@ -68,12 +58,32 @@ in
         })
 
         (hypr.mkBind {
-          key = ctl.combos.mod "SLASH";
+          key = ctl.combos.mod ctl.keys.tab;
+          dispatcher = hl.dsp.exec_cmd {
+            cmd = menus.window;
+          };
+          flags = {
+            description = "window switcher";
+          };
+        })
+
+        (hypr.mkBind {
+          key = ctl.combos.plain ctl.keys.poweroff;
+          dispatcher = hl.dsp.exec_cmd {
+            cmd = menus.session;
+          };
+          flags = {
+            description = "session actions";
+          };
+        })
+
+        (hypr.mkBind {
+          key = ctl.combos.plain ctl.keys.print;
           dispatcher = hl.dsp.exec_cmd {
             cmd = menus.screenshot;
           };
           flags = {
-            description = "screenshot and screen capture";
+            description = "capture screenshot";
           };
         })
       ];

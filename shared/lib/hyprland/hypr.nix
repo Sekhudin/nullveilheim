@@ -28,6 +28,10 @@ let
       _args = [ p ];
     };
 
+    mkLayerRule = p: {
+      _args = [ p ];
+    };
+
     mkWorkspaceRule =
       {
         workspaces,

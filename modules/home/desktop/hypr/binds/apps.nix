@@ -18,7 +18,7 @@ in
     settings = {
       bind = [
         (hypr.mkBind {
-          key = ctl.combos.mod "RETURN";
+          key = ctl.combos.mod ctl.keys.enter;
           dispatcher = hl.dsp.exec_cmd {
             cmd = apps.terminal;
           };
