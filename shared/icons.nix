@@ -76,6 +76,7 @@ let
     minus_3 = "";
     n = "󰰓";
     neovim = "";
+    nixos = "";
     notes = "󱇗";
     org = "";
     package = "";
@@ -118,18 +119,25 @@ let
     warning_3 = "";
     word = "󰈭";
   };
+
+  withRightSpace = name: "${icons.${name}} ";
+
+  withLeftSpace = name: " ${icons.${name}}";
+
+  withCollapsed = name: "${icons.chevron_right} ${icons.${name}} ";
+
+  withExpanded = name: "${icons.chevron_down} ${icons.${name}} ";
 in
 {
-  mkIcon = {
-    withLabel = name: label: "${icons.${name}} ${label}";
-
-    withRightSpace = name: "${icons.${name}} ";
-
-    withLeftSpace = name: " ${icons.${name}}";
-
-    withCollapsed = name: "${icons.chevron_right} ${icons.${name}} ";
-
-    withExpanded = name: "${icons.chevron_down} ${icons.${name}} ";
-  }
-  // icons;
+  mkIcon =
+    { ... }:
+    icons
+    // {
+      inherit
+        withRightSpace
+        withLeftSpace
+        withCollapsed
+        withExpanded
+        ;
+    };
 }

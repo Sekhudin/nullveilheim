@@ -42,7 +42,7 @@ in
           padding_x = 12;
           padding_y = 8;
           margin_in = 4;
-          margin_out = 4;
+          margin_out = 8;
           border_size = 2;
           border_radius = 12;
           opacity = theme.opacity;
