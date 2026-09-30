@@ -7,7 +7,7 @@
 }:
 
 let
-  cfg = config.homeDesktop;
+  cfg = config.homeDesktop.noctalia;
   inherit (extraLib.hyprland)
     hypr
     events
@@ -19,7 +19,7 @@ in
     inputs.noctalia.homeModules.default
   ];
 
-  wayland.windowManager.hyprland.settings = lib.optionals cfg.noctalia.enable {
+  wayland.windowManager.hyprland.settings = lib.optionals cfg.enable {
     on = [
       (hypr.mkEvent {
         event = events.hyprland.start;
@@ -56,6 +56,6 @@ in
   };
 
   programs.noctalia = {
-    enable = cfg.noctalia.enable;
+    enable = cfg.enable;
   };
 }
