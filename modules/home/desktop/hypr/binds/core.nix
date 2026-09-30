@@ -66,9 +66,7 @@ in
         })
 
         (hypr.mkBind {
-          key = ctl.combos.of [
-            ctl.keys.mod
-          ] "R";
+          key = ctl.combos.mod "R";
           dispatcher = hl.dsp.exec_cmd {
             cmd = "hyprctl reload config-only";
           };

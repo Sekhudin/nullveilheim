@@ -18,14 +18,14 @@ in
         })
 
         (hypr.mkMonitor {
-          output = monitors.edp_1;
+          output = monitors.primary;
           mode = "1920x1080@60";
           position = "0x0";
           scale = 1;
         })
 
         (hypr.mkMonitor {
-          output = monitors.hdmia_1;
+          output = monitors.secondary;
           mode = "1920x1080@60";
           position = "1920x0";
           scale = 1;
