@@ -47,13 +47,6 @@ in
       provider_prefix = "/";
       auto_paste = "auto";
     };
-    window_switcher = {
-      style = "carousel";
-      mru = false;
-      show_caption = true;
-      show_count = true;
-      show_app_icon = true;
-    };
     screenshot = {
       save_to_file = true;
       copy_to_clipboard = true;
@@ -67,6 +60,7 @@ in
       close_on_save = true;
       pipe_to_command = false;
     };
+    window_switcher.style = "carousel";
     screen_corners = {
       enabled = true;
       size = styles.border_radius + styles.margin_out + styles.border_size;
