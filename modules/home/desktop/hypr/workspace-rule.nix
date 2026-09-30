@@ -22,7 +22,7 @@ in
         ];
         rules = {
           persistent = true;
-          monitor = monitors.edp_1;
+          monitor = monitors.primary;
         };
         extraWorkspaceRule = [ ];
       };

@@ -19,8 +19,8 @@ in
     settings = lib.mkMerge [
       {
         monitors = hypr.mkVar {
-          edp_1 = "eDP-1";
-          hdmia_1 = "HDMI-A-1";
+          primary = "eDP-1";
+          secondary = "HDMI-A-1";
         };
 
         submaps = hypr.mkVar {
@@ -36,19 +36,16 @@ in
 
         tokens = hypr.mkVar theme.tokens;
 
-        styles = hypr.mkVar rec {
-          gaps_in = 4;
-          gaps_out = 4;
-          rounding = 12;
-          border_size = 2;
+        styles = hypr.mkVar {
           min_width = 16;
           min_height = 16;
-          opacity = theme.opacity;
-          opacity_mid = 0.6;
-          opacity_low = 0.4;
           padding_x = 12;
           padding_y = 8;
-          margin_top = (gaps_out * 8) + (min_height + 2);
+          margin_in = 4;
+          margin_out = 4;
+          border_size = 2;
+          border_radius = 12;
+          opacity = theme.opacity;
           animation_ms = 800;
         };
 

@@ -58,5 +58,8 @@ in
 
   homeDesktop = {
     enable = ctx.desktop;
+    noctalia = {
+      desktop.backdrop.enable = true;
+    };
   };
 }

@@ -17,8 +17,8 @@ in
     settings.config = {
       general = {
         border_size = styles.border_size;
-        gaps_in = styles.gaps_in;
-        gaps_out = styles.gaps_out;
+        gaps_in = styles.margin_in;
+        gaps_out = styles.margin_out;
         layout = "dwindle";
         resize_on_border = true;
         col = {
@@ -31,7 +31,7 @@ in
       };
 
       decoration = {
-        rounding = styles.rounding;
+        rounding = styles.border_radius;
         active_opacity = 1.0;
         inactive_opacity = 1.0;
         dim_modal = true;
