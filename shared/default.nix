@@ -16,6 +16,6 @@ in
         inherit lib;
       };
 
-      icon = sharedIcons.mkIcon;
+      icon = sharedIcons.mkIcon { };
     };
 }
