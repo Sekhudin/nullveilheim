@@ -1,8 +1,4 @@
-{
-  config,
-  extraLib,
-  ...
-}:
+{ extraLib, ... }:
 
 let
   inherit (extraLib.hyprland)
@@ -10,15 +6,16 @@ let
     ctl
     hl
     ;
-
-  actions = hypr.getVarRefs config "actions";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
         (hypr.mkBind {
-          key = ctl.combos.mod "Q";
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
+          ] "Q";
           dispatcher = hl.dsp.window.close { };
           flags = {
             description = "close current window";
