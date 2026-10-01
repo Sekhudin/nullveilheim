@@ -40,8 +40,11 @@ let
     };
   };
 
-  mkWallpapers =
-    dir:
+  mkFiles =
+    {
+      dir,
+      exts,
+    }:
     let
       files = builtins.readDir dir;
       isImage =
@@ -49,13 +52,7 @@ let
         let
           ext = lib.toLower (lib.last (lib.splitString "." name));
         in
-        files.${name} == "regular"
-        && lib.elem ext [
-          "png"
-          "jpg"
-          "jpeg"
-          "webp"
-        ];
+        files.${name} == "regular" && lib.elem ext exts;
       toName = name: lib.removeSuffix ".${lib.last (lib.splitString "." name)}" name;
     in
     (
@@ -105,6 +102,13 @@ in
       internal = true;
     };
 
+    svgs = lib.mkOption {
+      type = lib.types.attrsOf lib.types.path;
+      description = "svg paths indexed by filename";
+      readOnly = true;
+      internal = true;
+    };
+
     noctalia.enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable noctalia";
@@ -128,7 +132,19 @@ in
   config = {
     homeDesktop = {
       font = config.homeCore.font;
-      wallpapers = mkWallpapers ./wallpapers;
+      wallpapers = mkFiles {
+        dir = ./wallpapers;
+        exts = [
+          "png"
+          "jpg"
+          "jpeg"
+          "webp"
+        ];
+      };
+      svgs = mkFiles {
+        dir = ./svgs;
+        exts = [ "svg" ];
+      };
       noctalia.enable = cfg.enable && cfg.use == "noctalia";
     };
   };
