@@ -56,8 +56,8 @@ in
       radius_top_right = barStyle.radius;
       radius_bottom_left = barStyle.radius;
       radius_bottom_right = barStyle.radius;
-      margin_ends = 400;
       margin_edge = 0;
+      margin_ends = 400;
       margin_opposite_edge = true;
       padding = barStyle.padding;
       widget_spacing = barStyle.widget_spacing;
