@@ -9,10 +9,7 @@ in
     enabled = true;
     fill_mode = "fit";
     transition = [
-      "fade"
-      "wipe"
       "disc"
-      "stripes"
       "zoom"
       "honeycomb"
     ];

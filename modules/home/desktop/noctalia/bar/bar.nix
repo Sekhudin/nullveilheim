@@ -77,7 +77,9 @@ in
       start = [
         "launcher"
         "workspaces"
+        "k4n4t4/hypr-submap:hypr-submap"
         "wallpaper"
+        "noctalia/screen_recorder:recorder"
         "clock"
       ];
       center = [
