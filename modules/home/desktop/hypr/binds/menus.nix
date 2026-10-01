@@ -86,6 +86,19 @@ in
             description = "capture screenshot";
           };
         })
+
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
+          ] "V";
+          dispatcher = hl.dsp.exec_cmd {
+            cmd = menus.clipboard;
+          };
+          flags = {
+            description = "clipboard panel";
+          };
+        })
       ];
     };
   };

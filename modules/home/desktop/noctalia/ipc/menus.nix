@@ -62,6 +62,12 @@ in
         name = menus.screenshot;
         text = ipc "screenshot-annotate";
       })
+
+      (pkgs.writeShellApplication {
+        inherit runtimeInputs;
+        name = menus.clipboard;
+        text = ipc "panel-toggle clipboard";
+      })
     ];
   };
 }

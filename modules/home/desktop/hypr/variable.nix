@@ -62,6 +62,7 @@ in
           window = "nv-menu-window";
           session = "nv-menu-session";
           screenshot = "nv-menu-screenshot";
+          clipboard = "nv-menu-clipboard";
         };
 
         sessions = hypr.mkVar {
