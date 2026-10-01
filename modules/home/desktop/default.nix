@@ -12,8 +12,18 @@ let
     options = {
       label.enable = lib.mkOption {
         type = lib.types.bool;
-        description = "enable desktop widgets";
+        description = "enable noctalia bar";
         default = false;
+      };
+    };
+  };
+
+  noctaliaDockType = lib.types.submodule {
+    options = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        description = "enable noctalia dock";
+        default = true;
       };
     };
   };
@@ -119,6 +129,12 @@ in
     noctalia.bar = lib.mkOption {
       type = noctaliaBarType;
       description = "noctalia bar settings";
+      default = { };
+    };
+
+    noctalia.dock = lib.mkOption {
+      type = noctaliaDockType;
+      description = "noctalia dock settings";
       default = { };
     };
 

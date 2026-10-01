@@ -68,6 +68,18 @@ in
         name = menus.clipboard;
         text = ipc "panel-toggle clipboard";
       })
+
+      (pkgs.writeShellApplication {
+        inherit runtimeInputs;
+        name = menus.bar;
+        text = ipc "bar-toggle";
+      })
+
+      (pkgs.writeShellApplication {
+        inherit runtimeInputs;
+        name = menus.dock;
+        text = ipc "dock-toggle";
+      })
     ];
   };
 }

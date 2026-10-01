@@ -99,6 +99,29 @@ in
             description = "clipboard panel";
           };
         })
+
+        (hypr.mkBind {
+          key = ctl.combos.mod "D";
+          dispatcher = hl.dsp.exec_cmd {
+            cmd = menus.dock;
+          };
+          flags = {
+            description = "dock toggle";
+          };
+        })
+
+        (hypr.mkBind {
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
+          ] "D";
+          dispatcher = hl.dsp.exec_cmd {
+            cmd = menus.bar;
+          };
+          flags = {
+            description = "bar toggle";
+          };
+        })
       ];
     };
   };

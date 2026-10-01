@@ -10,17 +10,18 @@ in
     launcher.custom_image = svgs.nix-white;
     workspaces = {
       style = "regular";
-      capsule_radius = def.capsule_radius - def.padding;
       pill_scale = 1.0;
       active_pill_size = 1.8;
       inactive_pill_size = 1.0;
+      capsule_radius = def.capsule_radius - def.padding;
     };
     wallpaper.glyph = "library-photo";
     clock.format = "{:%H:%M}";
     media = {
-      rotate_album_art = true;
       album_art_only = false;
       hide_when_no_media = true;
+      scale = 1.0;
+      font_scale = 0.7;
     };
     tray = {
       drawer = true;
