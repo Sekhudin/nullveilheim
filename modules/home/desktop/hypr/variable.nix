@@ -54,17 +54,21 @@ in
           browser = core.browser;
         };
 
-        menus = hypr.mkVar {
-          help = "nv-menu-help";
-          launcher = "nv-menu-launcher";
-          control = "nv-menu-control";
-          settings = "nv-menu-settings";
-          window = "nv-menu-window";
-          session = "nv-menu-session";
-          screenshot = "nv-menu-screenshot";
-          clipboard = "nv-menu-clipboard";
-          bar = "nv-menu-bar";
-          dock = "nv-menu-dock";
+        ipc = hypr.mkVar {
+          help = "nv-ipc-help";
+          keyviz = "nv-ipc-keyviz";
+          bar = "nv-ipc-bar";
+          dock = "nv-ipc-dock";
+        };
+
+        panels = hypr.mkVar {
+          launcher = "nv-panel-launcher";
+          control = "nv-panel-control";
+          settings = "nv-panel-settings";
+          window = "nv-panel-window";
+          session = "nv-panel-session";
+          screenshot = "nv-panel-screenshot";
+          clipboard = "nv-panel-clipboard";
         };
 
         sessions = hypr.mkVar {

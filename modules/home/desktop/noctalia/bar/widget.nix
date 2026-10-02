@@ -11,7 +11,7 @@ in
     workspaces = {
       style = "regular";
       pill_scale = 1.0;
-      active_pill_size = 1.8;
+      active_pill_size = 1.0;
       inactive_pill_size = 1.0;
       capsule_radius = def.capsule_radius - def.padding;
     };
@@ -22,6 +22,8 @@ in
       hide_when_no_media = true;
       scale = 1.0;
       font_scale = 0.7;
+      min_length = 50;
+      max_length = 150;
     };
     tray = {
       drawer = true;

@@ -11,7 +11,7 @@ let
   cfg = config.homeDesktop.noctalia;
   inherit (extraLib.hyprland) hypr;
 
-  menus = hypr.getVarValues config "menus";
+  panels = hypr.getVarValues config "panels";
   ipc = cmd: "noctalia msg ${cmd}";
 
   runtimeInputs = [
@@ -23,62 +23,44 @@ in
     packages = [
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
-        name = menus.help;
-        text = ipc "";
-      })
-
-      (pkgs.writeShellApplication {
-        inherit runtimeInputs;
-        name = menus.launcher;
+        name = panels.launcher;
         text = ipc "panel-toggle launcher";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
-        name = menus.control;
+        name = panels.control;
         text = ipc "panel-toggle control-center";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
-        name = menus.settings;
+        name = panels.settings;
         text = ipc "settings-toggle";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
-        name = menus.window;
+        name = panels.window;
         text = ipc "window-switcher";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
-        name = menus.session;
+        name = panels.session;
         text = ipc "panel-toggle session";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
-        name = menus.screenshot;
+        name = panels.screenshot;
         text = ipc "screenshot-annotate";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
-        name = menus.clipboard;
+        name = panels.clipboard;
         text = ipc "panel-toggle clipboard";
-      })
-
-      (pkgs.writeShellApplication {
-        inherit runtimeInputs;
-        name = menus.bar;
-        text = ipc "bar-toggle";
-      })
-
-      (pkgs.writeShellApplication {
-        inherit runtimeInputs;
-        name = menus.dock;
-        text = ipc "dock-toggle";
       })
     ];
   };

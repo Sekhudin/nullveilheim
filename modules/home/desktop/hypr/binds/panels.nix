@@ -11,26 +11,16 @@ let
     hl
     ;
 
-  menus = hypr.getVarRefs config "menus";
+  panels = hypr.getVarRefs config "panels";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
         (hypr.mkBind {
-          key = ctl.combos.mod ctl.keys.slash;
-          dispatcher = hl.dsp.exec_cmd {
-            cmd = menus.help;
-          };
-          flags = {
-            description = "keybind reference and help";
-          };
-        })
-
-        (hypr.mkBind {
           key = ctl.combos.mod ctl.keys.space;
           dispatcher = hl.dsp.exec_cmd {
-            cmd = menus.launcher;
+            cmd = panels.launcher;
           };
           flags = {
             description = "application launcher";
@@ -40,7 +30,7 @@ in
         (hypr.mkBind {
           key = ctl.combos.mod "S";
           dispatcher = hl.dsp.exec_cmd {
-            cmd = menus.control;
+            cmd = panels.control;
           };
           flags = {
             description = "system control and status";
@@ -50,7 +40,7 @@ in
         (hypr.mkBind {
           key = ctl.combos.mod ctl.keys.comma;
           dispatcher = hl.dsp.exec_cmd {
-            cmd = menus.settings;
+            cmd = panels.settings;
           };
           flags = {
             description = "desktop settings";
@@ -60,7 +50,7 @@ in
         (hypr.mkBind {
           key = ctl.combos.mod ctl.keys.tab;
           dispatcher = hl.dsp.exec_cmd {
-            cmd = menus.window;
+            cmd = panels.window;
           };
           flags = {
             description = "window switcher";
@@ -70,7 +60,7 @@ in
         (hypr.mkBind {
           key = ctl.combos.plain ctl.keys.poweroff;
           dispatcher = hl.dsp.exec_cmd {
-            cmd = menus.session;
+            cmd = panels.session;
           };
           flags = {
             description = "session actions";
@@ -80,7 +70,7 @@ in
         (hypr.mkBind {
           key = ctl.combos.plain ctl.keys.print;
           dispatcher = hl.dsp.exec_cmd {
-            cmd = menus.screenshot;
+            cmd = panels.screenshot;
           };
           flags = {
             description = "capture screenshot";
@@ -93,33 +83,10 @@ in
             ctl.keys.shift
           ] "V";
           dispatcher = hl.dsp.exec_cmd {
-            cmd = menus.clipboard;
+            cmd = panels.clipboard;
           };
           flags = {
             description = "clipboard panel";
-          };
-        })
-
-        (hypr.mkBind {
-          key = ctl.combos.mod "D";
-          dispatcher = hl.dsp.exec_cmd {
-            cmd = menus.dock;
-          };
-          flags = {
-            description = "dock toggle";
-          };
-        })
-
-        (hypr.mkBind {
-          key = ctl.combos.of [
-            ctl.keys.mod
-            ctl.keys.shift
-          ] "D";
-          dispatcher = hl.dsp.exec_cmd {
-            cmd = menus.bar;
-          };
-          flags = {
-            description = "bar toggle";
           };
         })
       ];
