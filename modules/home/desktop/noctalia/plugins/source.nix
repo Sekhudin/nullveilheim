@@ -16,6 +16,12 @@
         kind = "git";
         location = "https://github.com/noctalia-dev/community-plugins";
       }
+      {
+        enabled = true;
+        name = "local";
+        kind = "path";
+        location = ../local-plugins;
+      }
     ];
   };
 }
