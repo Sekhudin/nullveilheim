@@ -24,7 +24,7 @@ in
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = ipc.help;
-        text = msg "";
+        text = msg "panel-toggle syaikhu/hypr-cheatsheet:cheatsheet";
       })
 
       (pkgs.writeShellApplication {
