@@ -20,7 +20,7 @@ let
     in
     {
       font_family = cfg.font.family.sans_serif;
-      widget_spacing = 0;
+      widget_spacing = 4;
       background_opacity = styles.opacity;
       capsule_opacity = styles.opacity;
       inherit
@@ -77,10 +77,8 @@ in
       start = [
         "launcher"
         "workspaces"
-        "k4n4t4/hypr-submap:hypr-submap"
-        "wallpaper"
-        "noctalia/screen_recorder:recorder"
         "clock"
+        "k4n4t4/hypr-submap:hypr-submap"
       ];
       center = [
         "media"
@@ -88,6 +86,8 @@ in
       end = [
         "tray"
         "notifications"
+        "noctalia/screen_recorder:recorder"
+        "wallpaper"
         "network"
         "bluetooth"
         "volume"
