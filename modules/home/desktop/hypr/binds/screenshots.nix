@@ -40,6 +40,7 @@ in
           };
           flags = {
             description = "capture fullscreen screenshot";
+            locked = true;
           };
         })
       ];
