@@ -12,12 +12,14 @@ let
     ;
 
   screenshots = hypr.getVarRefs config "screenshots";
+  bindGroup = "screnshots";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.mod ctl.keys.print;
           dispatcher = hl.dsp.exec_cmd {
             cmd = screenshots.region;
@@ -28,6 +30,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.of [
             ctl.keys.mod
             ctl.keys.shift

@@ -12,12 +12,14 @@ let
     ;
 
   volume = hypr.getVarRefs config "volume";
+  bindGroup = "volume";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.plain ctl.keys.volume_up;
           dispatcher = hl.dsp.exec_cmd {
             cmd = volume.up;
@@ -29,6 +31,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.plain ctl.keys.volume_down;
           dispatcher = hl.dsp.exec_cmd {
             cmd = volume.down;
@@ -40,6 +43,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.plain ctl.keys.volume_toggle;
           dispatcher = hl.dsp.exec_cmd {
             cmd = volume.toggle;

@@ -11,6 +11,8 @@ let
     hl
     ;
 
+  bindGroup = "workspace";
+
   mkWorkspaceBind =
     {
       count,
@@ -25,6 +27,7 @@ let
         in
         [
           (hypr.mkBind {
+            group = bindGroup;
             key = ctl.combos.mod key;
             dispatcher = hl.dsp.focus {
               inherit workspace;
@@ -35,6 +38,7 @@ let
           })
 
           (hypr.mkBind {
+            group = bindGroup;
             key = ctl.combos.of [
               ctl.keys.mod
               ctl.keys.shift

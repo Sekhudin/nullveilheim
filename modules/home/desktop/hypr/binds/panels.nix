@@ -12,12 +12,14 @@ let
     ;
 
   panels = hypr.getVarRefs config "panels";
+  bindGroup = "panels";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.mod ctl.keys.space;
           dispatcher = hl.dsp.exec_cmd {
             cmd = panels.launcher;
@@ -28,6 +30,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.mod "S";
           dispatcher = hl.dsp.exec_cmd {
             cmd = panels.control;
@@ -38,6 +41,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.mod ctl.keys.comma;
           dispatcher = hl.dsp.exec_cmd {
             cmd = panels.settings;
@@ -48,6 +52,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.mod ctl.keys.tab;
           dispatcher = hl.dsp.exec_cmd {
             cmd = panels.window;
@@ -58,6 +63,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.plain ctl.keys.poweroff;
           dispatcher = hl.dsp.exec_cmd {
             cmd = panels.session;
@@ -68,6 +74,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.plain ctl.keys.print;
           dispatcher = hl.dsp.exec_cmd {
             cmd = panels.screenshot;
@@ -78,6 +85,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.of [
             ctl.keys.mod
             ctl.keys.shift

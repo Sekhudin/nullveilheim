@@ -31,9 +31,6 @@ in
     enable = cfg.enable;
     package = packages.hyprland;
     configType = "lua";
-    systemd = {
-      enable = true;
-    };
-    plugins = [ ];
+    systemd.enable = true;
   };
 }

@@ -12,12 +12,14 @@ let
     ;
 
   brightness = hypr.getVarRefs config "brightness";
+  bindGroup = "brightness";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.plain ctl.keys.brightness_up;
           dispatcher = hl.dsp.exec_cmd {
             cmd = brightness.up;
@@ -29,6 +31,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.plain ctl.keys.brightness_down;
           dispatcher = hl.dsp.exec_cmd {
             cmd = brightness.down;
