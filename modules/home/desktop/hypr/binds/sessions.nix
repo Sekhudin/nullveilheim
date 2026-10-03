@@ -12,12 +12,14 @@ let
     ;
 
   sessions = hypr.getVarRefs config "sessions";
+  bindGroup = "sessions";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.mod ctl.keys.escape;
           dispatcher = hl.dsp.exec_cmd {
             cmd = sessions.lock;
@@ -28,6 +30,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.of [
             ctl.keys.mod
             ctl.keys.shift

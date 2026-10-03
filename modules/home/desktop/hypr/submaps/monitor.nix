@@ -12,89 +12,96 @@ let
     ;
 
   submaps = hypr.getVarRefs config "submaps";
-
-  mkDesc = desc: "(M) ${desc}";
+  bindGroup = "submap - monitor";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.alt "M";
           dispatcher = hl.dsp.submap {
             name = submaps.monitor;
           };
           flags = {
-            description = mkDesc "enter monitor submap";
+            description = "enter monitor submap";
           };
         })
       ];
 
       define_submap = [
         (hypr.mkSubmap {
+          group = bindGroup;
           name = submaps.monitor;
           escape = true;
           bind = [
             # focus monitor
             (hypr.mkSubmapBind {
+              group = bindGroup;
               key = ctl.combos.plain "H";
               dispatcher = hl.dsp.focus {
                 monitor = "-1";
               };
               flags = {
-                description = mkDesc "focus previous monitor";
+                description = "focus previous monitor";
               };
             })
 
             (hypr.mkSubmapBind {
+              group = bindGroup;
               key = ctl.combos.plain "L";
               dispatcher = hl.dsp.focus {
                 monitor = "+1";
               };
               flags = {
-                description = mkDesc "focus next monitor";
+                description = "focus next monitor";
               };
             })
 
             # move window
             (hypr.mkSubmapBind {
+              group = bindGroup;
               key = ctl.combos.shift "H";
               dispatcher = hl.dsp.window.move {
                 monitor = "-1";
               };
               flags = {
-                description = mkDesc "move window to previous monitor";
+                description = "move window to previous monitor";
               };
             })
 
             (hypr.mkSubmapBind {
+              group = bindGroup;
               key = ctl.combos.shift "L";
               dispatcher = hl.dsp.window.move {
                 monitor = "+1";
               };
               flags = {
-                description = mkDesc "move window to next monitor";
+                description = "move window to next monitor";
               };
             })
 
             # move workspace
             (hypr.mkSubmapBind {
+              group = bindGroup;
               key = ctl.combos.ctrl "H";
               dispatcher = hl.dsp.workspace.move {
                 monitor = "-1";
               };
               flags = {
-                description = mkDesc "move workspace to previous monitor";
+                description = "move workspace to previous monitor";
               };
             })
 
             (hypr.mkSubmapBind {
+              group = bindGroup;
               key = ctl.combos.ctrl "L";
               dispatcher = hl.dsp.workspace.move {
                 monitor = "+1";
               };
               flags = {
-                description = mkDesc "move workspace to next monitor";
+                description = "move workspace to next monitor";
               };
             })
           ];

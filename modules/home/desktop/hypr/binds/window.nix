@@ -9,6 +9,8 @@ let
     ctl
     hl
     ;
+
+  bindGroup = "window";
 in
 {
   wayland.windowManager.hyprland = {
@@ -16,6 +18,7 @@ in
       bind = [
         # focus navigation
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.mod "H";
           dispatcher = hl.dsp.focus {
             direction = ctl.directions.left;
@@ -26,6 +29,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.mod "J";
           dispatcher = hl.dsp.focus {
             direction = ctl.directions.down;
@@ -36,6 +40,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.mod "K";
           dispatcher = hl.dsp.focus {
             direction = ctl.directions.up;
@@ -46,6 +51,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.mod "L";
           dispatcher = hl.dsp.focus {
             direction = ctl.directions.right;
@@ -57,6 +63,7 @@ in
 
         # window swap
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.of [
             ctl.keys.mod
             ctl.keys.shift
@@ -70,6 +77,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.of [
             ctl.keys.mod
             ctl.keys.shift
@@ -83,6 +91,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.of [
             ctl.keys.mod
             ctl.keys.shift
@@ -96,6 +105,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.of [
             ctl.keys.mod
             ctl.keys.shift
@@ -110,6 +120,7 @@ in
 
         # window resize
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.of [
             ctl.keys.mod
             ctl.keys.ctrl
@@ -126,6 +137,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.of [
             ctl.keys.mod
             ctl.keys.ctrl
@@ -142,6 +154,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.of [
             ctl.keys.mod
             ctl.keys.ctrl
@@ -158,6 +171,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.of [
             ctl.keys.mod
             ctl.keys.ctrl

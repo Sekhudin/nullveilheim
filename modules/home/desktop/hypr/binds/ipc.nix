@@ -12,12 +12,14 @@ let
     ;
 
   ipc = hypr.getVarRefs config "ipc";
+  bindGroup = "ipc";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.mod ctl.keys.slash;
           dispatcher = hl.dsp.exec_cmd {
             cmd = ipc.help;
@@ -28,6 +30,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.of [
             ctl.keys.mod
             ctl.keys.shift
@@ -41,6 +44,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.mod "D";
           dispatcher = hl.dsp.exec_cmd {
             cmd = ipc.dock;
@@ -51,6 +55,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.of [
             ctl.keys.mod
             ctl.keys.shift

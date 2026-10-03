@@ -12,12 +12,14 @@ let
     ;
 
   media = hypr.getVarRefs config "media";
+  bindGroup = "media";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.plain ctl.keys.media_next;
           dispatcher = hl.dsp.exec_cmd {
             cmd = media.next;
@@ -29,6 +31,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.plain ctl.keys.media_prev;
           dispatcher = hl.dsp.exec_cmd {
             cmd = media.prev;
@@ -40,6 +43,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.plain ctl.keys.media_toggle;
           dispatcher = hl.dsp.exec_cmd {
             cmd = media.toggle;

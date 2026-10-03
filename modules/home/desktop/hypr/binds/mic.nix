@@ -12,12 +12,14 @@ let
     ;
 
   mic = hypr.getVarRefs config "mic";
+  bindGroup = "mic";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.ctrl ctl.keys.volume_down;
           dispatcher = hl.dsp.exec_cmd {
             cmd = mic.down;
@@ -29,6 +31,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.ctrl ctl.keys.volume_up;
           dispatcher = hl.dsp.exec_cmd {
             cmd = mic.up;
@@ -40,6 +43,7 @@ in
         })
 
         (hypr.mkBind {
+          group = bindGroup;
           key = ctl.combos.plain ctl.keys.mic_toggle;
           dispatcher = hl.dsp.exec_cmd {
             cmd = mic.toggle;

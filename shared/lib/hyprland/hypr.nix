@@ -51,13 +51,19 @@ let
       {
         key,
         dispatcher,
+        group ? "other",
         flags ? { },
       }:
+      let
+        finalFlags = flags // {
+          description = "[${group}] ${flags.description or ""}";
+        };
+      in
       {
         _args = [
           (luaLib.mkLuaInline key)
           (luaLib.mkLuaInline dispatcher)
-          flags
+          finalFlags
         ];
       };
 
@@ -65,6 +71,7 @@ let
       {
         name,
         bind,
+        group ? "other",
         escape ? true,
       }:
       let
@@ -80,7 +87,7 @@ let
               else
                 ''
                   ${bind'}
-                  hl.bind("escape", hl.dsp.submap("reset"), { description = "exit from submap" })
+                  hl.bind("escape", hl.dsp.submap("reset"), { description = "[${group}] exit from submap" })
                 ''
             )
           ))
@@ -91,9 +98,16 @@ let
       {
         key,
         dispatcher,
+        group ? "other",
         flags ? { },
       }:
-      "hl.bind(${key}, ${dispatcher}, ${luaLib.toLua flags})";
+      let
+        description = flags.description or "";
+        finalFlags = flags // {
+          description = if description == "" then "[${group}]" else "[${group}] ${description}";
+        };
+      in
+      "hl.bind(${key}, ${dispatcher}, ${luaLib.toLua finalFlags})";
 
     mkEvent =
       {
