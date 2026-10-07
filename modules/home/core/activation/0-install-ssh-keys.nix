@@ -7,8 +7,8 @@
 }:
 
 let
-  core = config.homeCore;
-  inherit (core.programs) secrets;
+  activation = config.homeCore.activation;
+  secrets = config.sops.secrets;
 
   ssh_keygen = lib.getExe' pkgs.openssh "ssh-keygen";
   h = extraLib.activation.mkHelper {
@@ -19,8 +19,8 @@ let
   mkSSHKey = profile: ''
     install_ssh_key \
       "${profile}" \
-      "${config.sops.secrets."ssh_keys_${profile}_path".path}" \
-      "${config.sops.secrets."ssh_keys_${profile}_private_key".path}"
+      "${secrets."ssh_keys_${profile}_path".path}" \
+      "${secrets."ssh_keys_${profile}_private_key".path}"
   '';
 
   entryList = [
@@ -30,7 +30,7 @@ let
   ];
 in
 {
-  home = lib.mkIf core.activation {
+  home = lib.mkIf activation.enable {
     activation = {
       ${h.context} = lib.hm.dag.entryAfter entryList ''
         ${h.script}
@@ -66,7 +66,7 @@ in
           ${h.fmt.log} "SSH key installed: $profile"
         }
 
-        ${(lib.concatMapStringsSep "\n" mkSSHKey secrets.sshKeys)}
+        ${(lib.concatMapStringsSep "\n" mkSSHKey activation.sshKeys)}
       '';
     };
   };

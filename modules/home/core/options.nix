@@ -153,15 +153,34 @@ let
       };
     };
   };
+
+  activationType = lib.types.submodule {
+    options = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        description = "enable secrets";
+        default = true;
+      };
+      gpgKeys = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        description = "gpg key profiles";
+        default = [ ];
+      };
+      sshKeys = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        description = "ssh key profiles";
+        default = [ ];
+      };
+      gitIdentities = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        description = "git identity profiles";
+        default = [ ];
+      };
+    };
+  };
 in
 {
   options.homeCore = {
-    activation = lib.mkOption {
-      type = lib.types.bool;
-      description = "enable activation script";
-      default = true;
-    };
-
     standalone = lib.mkOption {
       type = lib.types.bool;
       description = "enable standalone";
@@ -232,6 +251,12 @@ in
     cursor = lib.mkOption {
       type = cursorType;
       description = "cursor theme";
+      default = { };
+    };
+
+    activation = lib.mkOption {
+      type = activationType;
+      description = "activation settings";
       default = { };
     };
 
