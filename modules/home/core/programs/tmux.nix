@@ -8,6 +8,7 @@
 
 let
   core = config.homeCore;
+  desktop = config.homeDesktop;
   cfg = core.programs.tmux;
   theme = core.themeConfig;
 
@@ -146,8 +147,16 @@ in
       extraConfig = ''
         set -g status off
 
-        set -g pane-border-style "${(mkTmuxColor theme.tokens.border "default")}"
-        set -g pane-active-border-style "${(mkTmuxColor theme.tokens.active_border "default")}"
+        ${
+          if (!desktop.enable) then
+            ''
+              set -g pane-border-style "${(mkTmuxColor theme.tokens.border "default")}"
+              set -g pane-active-border-style "${(mkTmuxColor theme.tokens.active_border "default")}"
+            ''
+          else
+            ""
+        }
+
         set -sg escape-time 10 
 
         set -g @continuum-boot on

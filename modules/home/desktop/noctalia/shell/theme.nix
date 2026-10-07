@@ -4,7 +4,7 @@ let
   inherit (extraLib.hyprland) hypr;
 
   tokens = hypr.getVarValues config "tokens";
-  community_palette = "Custom";
+  custom_palette = "Custom";
 in
 {
   programs.noctalia.settings.theme = {
@@ -14,10 +14,10 @@ in
     builtin = "Nord";
     community_palette = "ADW";
     wallpaper_scheme = "m3-monochrome";
-    custom_palette = community_palette;
+    custom_palette = custom_palette;
   };
 
-  xdg.configFile."noctalia/palettes/${community_palette}.json" = {
+  xdg.configFile."noctalia/palettes/${custom_palette}.json" = {
     text = builtins.toJSON rec {
       light = dark;
       dark = {

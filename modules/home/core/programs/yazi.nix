@@ -8,6 +8,7 @@
 
 let
   core = config.homeCore;
+  desktop = config.homeDesktop;
   cfg = core.programs.yazi;
   theme = core.themeConfig;
   mkLuaInline = lib.generators.mkLuaInline;
@@ -31,7 +32,7 @@ in
       ];
       theme = {
         app = {
-          overall = {
+          overall = lib.mkIf (!desktop.enable) {
             bg = theme.tokens.bg;
           };
         };
@@ -89,7 +90,7 @@ in
               open = icon.resource;
               close = icon.resource;
             };
-            style_c = {
+            style_c = lib.mkIf (!desktop.enable) {
               fg = theme.tokens.fg;
               bg = theme.tokens.bg;
             };
