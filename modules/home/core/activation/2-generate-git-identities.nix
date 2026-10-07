@@ -18,15 +18,15 @@ let
 
   gitdirPaths =
     profile:
-    lib.pipe (builtins.attrNames config.sops.secrets) [
+    lib.pipe (builtins.attrNames secrets) [
       (builtins.filter (name: lib.hasPrefix "git_identities_${profile}_gitdirs_" name))
       (names: builtins.sort (a: b: a < b) names)
-      (map (name: config.sops.secrets.${name}.path))
+      (map (name: secrets.${name}.path))
     ];
 
-  gpgEmailPath = profile: config.sops.secrets."gpg_keys_${profile}_email".path;
+  gpgEmailPath = profile: secrets."gpg_keys_${profile}_email".path;
 
-  sshPath = profile: config.sops.secrets."ssh_keys_${profile}_path".path;
+  sshPath = profile: secrets."ssh_keys_${profile}_path".path;
 
   mkIdentity = profile: ''
     generate_identity \
@@ -64,7 +64,7 @@ in
           ${profile})
             ${h.readSecret} "${gpgEmailPath profile}"
             ;;
-        '') secrets.gpgKeys}
+        '') activation.gpgKeys}
             *)
               ${h.fmt.fatal} "Unknown GPG profile: $profile"
               ;;
@@ -79,7 +79,7 @@ in
           ${profile})
             ${h.readSecret} "${sshPath profile}"
             ;;
-        '') secrets.sshKeys}
+        '') activation.sshKeys}
             *)
               ${h.fmt.fatal} "Unknown SSH profile: $profile"
               ;;
