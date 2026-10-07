@@ -6,6 +6,7 @@
 
 let
   core = config.homeCore;
+  desktop = config.homeDesktop;
   theme = core.themeConfig;
   font = core.font;
 in
@@ -48,7 +49,7 @@ in
         };
       };
 
-      colors = {
+      colors = lib.mkIf (!desktop.enable) {
         primary = {
           background = theme.tokens.bg;
           foreground = theme.tokens.fg;

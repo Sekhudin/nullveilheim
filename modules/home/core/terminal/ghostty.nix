@@ -6,6 +6,7 @@
 
 let
   core = config.homeCore;
+  desktop = config.homeDesktop;
   theme = core.themeConfig;
   font = core.font;
   configHome = config.xdg.configHome;
@@ -16,7 +17,7 @@ in
     enableFishIntegration = config.programs.fish.enable;
     enableZshIntegration = config.programs.zsh.enable;
     settings = {
-      theme = theme.name;
+      theme = if desktop.enable then desktop.use else theme.name;
       background-opacity = theme.opacity;
       bold-is-bright = true;
       confirm-close-surface = false;
@@ -45,19 +46,14 @@ in
   };
 
   xdg = lib.mkIf (core.terminal == "ghostty") {
-    configFile = {
-      "ghostty/style.css".text = (
-        if config.wayland.windowManager.hyprland.enable then
-          ""
-        else
-          ''
-            window {
-                border: 2px solid ${theme.tokens.border};
-                border-radius: 8px;
-                margin: 4px;
-            }
-          ''
-      );
+    configFile = lib.mkIf (!desktop.enable) {
+      "ghostty/style.css".text = ''
+        window {
+            border: 2px solid ${theme.tokens.border};
+            border-radius: 8px;
+            margin: 4px;
+        }
+      '';
     };
 
     desktopEntries = lib.mkIf (core.opengl != "") {
