@@ -29,17 +29,17 @@ in
   };
 
   homeCore = {
-    activation = true;
     standalone = ctx.standalone;
     shell = "fish";
     terminal = "ghostty";
     theme = "zenwritten_dark";
+    activation = rec {
+      enable = true;
+      gpgKeys = [ "personal" ];
+      sshKeys = gpgKeys;
+      gitIdentities = gpgKeys;
+    };
     programs = {
-      secrets = rec {
-        gpgKeys = [ "personal" ];
-        sshKeys = gpgKeys;
-        gitIdentities = gpgKeys;
-      };
       jujutsu = {
         user = {
           name = "sekhudin";

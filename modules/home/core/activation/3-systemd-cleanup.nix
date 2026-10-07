@@ -7,7 +7,7 @@
 }:
 
 let
-  core = config.homeCore;
+  activation = config.homeCore.activation;
   h = extraLib.activation.mkHelper {
     context = "3-systemd-cleanup";
     inherit pkgs;
@@ -18,7 +18,7 @@ let
   systemctl = lib.optionalString isLinux (lib.getExe' pkgs.systemd "systemctl");
 in
 {
-  home = lib.mkIf (core.activation && isLinux) {
+  home = lib.mkIf (activation.enable && isLinux) {
     activation = {
       ${h.context} = lib.hm.dag.entryAfter [ "2-generate-git-identities" ] ''
         ${h.script}

@@ -6,7 +6,6 @@
 
 let
   cfg = config.homeCore.programs.ssh;
-  secrets = config.homeCore.programs.secrets;
 in
 {
   options.homeCore.programs.ssh = {
@@ -31,18 +30,6 @@ in
           HashKnownHosts = true;
         };
       };
-    };
-
-    home = lib.mkIf (secrets.enable && cfg.enable) {
-      shellAliases = lib.foldl' (
-        acc: profile:
-        acc
-        // {
-          "ssh-${profile}" = "ssh -i ~/.ssh/${profile}";
-          "scp-${profile}" = "scp -i ~/.ssh/${profile}";
-          "sftp-${profile}" = "sftp -i ~/.ssh/${profile}";
-        }
-      ) { } secrets.sshKeys;
     };
   };
 }

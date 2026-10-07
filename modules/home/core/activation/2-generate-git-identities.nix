@@ -7,8 +7,8 @@
 }:
 
 let
-  core = config.homeCore;
-  inherit (core.programs) secrets;
+  activation = config.homeCore.activation;
+  secrets = config.sops.secrets;
 
   includesFile = config.programs.git.settings.include.path;
   h = extraLib.activation.mkHelper {
@@ -31,15 +31,15 @@ let
   mkIdentity = profile: ''
     generate_identity \
       "${profile}" \
-      "${config.sops.secrets."git_identities_${profile}_name".path}" \
-      "${config.sops.secrets."git_identities_${profile}_email".path}" \
-      "${config.sops.secrets."git_identities_${profile}_signing_key".path}" \
-      "${config.sops.secrets."git_identities_${profile}_ssh_key".path}" \
+      "${secrets."git_identities_${profile}_name".path}" \
+      "${secrets."git_identities_${profile}_email".path}" \
+      "${secrets."git_identities_${profile}_signing_key".path}" \
+      "${secrets."git_identities_${profile}_ssh_key".path}" \
       ${lib.concatMapStringsSep " \\\n      " (path: ''"${path}"'') (gitdirPaths profile)}
   '';
 in
 {
-  home = lib.mkIf core.activation {
+  home = lib.mkIf activation.enable {
     activation = {
       ${h.context} = lib.hm.dag.entryAfter [ "1-import-gpg-keys" ] ''
         ${h.script}
@@ -199,7 +199,7 @@ in
 
         reset_configs
 
-        ${lib.concatMapStringsSep "\n" mkIdentity secrets.gitIdentities}
+        ${lib.concatMapStringsSep "\n" mkIdentity activation.gitIdentities}
       '';
     };
   };

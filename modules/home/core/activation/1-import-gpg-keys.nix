@@ -7,8 +7,8 @@
 }:
 
 let
-  core = config.homeCore;
-  inherit (core.programs) secrets;
+  activation = config.homeCore.activation;
+  secrets = config.sops.secrets;
 
   gpg = lib.getExe' pkgs.gnupg "gpg";
   h = extraLib.activation.mkHelper {
@@ -18,13 +18,13 @@ let
 
   mkIdentity = profile: ''
     import_identity \
-      "${config.sops.secrets."gpg_keys_${profile}_email".path}" \
-      "${config.sops.secrets."gpg_keys_${profile}_private_key".path}" \
-      "${config.sops.secrets."gpg_keys_${profile}_owner_trust".path}"
+      "${secrets."gpg_keys_${profile}_email".path}" \
+      "${secrets."gpg_keys_${profile}_private_key".path}" \
+      "${secrets."gpg_keys_${profile}_owner_trust".path}"
   '';
 in
 {
-  home = lib.mkIf core.activation {
+  home = lib.mkIf activation.enable {
     activation = {
       ${h.context} = lib.hm.dag.entryAfter [ "0-install-ssh-keys" ] ''
         ${h.script}
@@ -67,7 +67,7 @@ in
           import_ownertrust "$trust_file"
         }
 
-        ${(lib.concatMapStringsSep "\n" mkIdentity secrets.gpgKeys)}
+        ${(lib.concatMapStringsSep "\n" mkIdentity activation.gpgKeys)}
       '';
     };
   };
