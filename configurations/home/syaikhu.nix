@@ -39,14 +39,6 @@ in
       sshKeys = gpgKeys;
       gitIdentities = gpgKeys;
     };
-    programs = {
-      jujutsu = {
-        user = {
-          name = "sekhudin";
-          email = "sekhudinuap@gmail.com";
-        };
-      };
-    };
     packages = [
       packages.${system}.nvim
     ];
