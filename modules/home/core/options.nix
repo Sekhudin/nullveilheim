@@ -8,6 +8,7 @@
 
 let
   core = config.homeCore;
+
   themeNames = lib.attrNames color.themes;
   themeConfigType = lib.types.submodule {
     options = {
