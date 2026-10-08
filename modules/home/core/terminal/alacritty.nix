@@ -76,24 +76,4 @@ in
       };
     };
   };
-
-  xdg.desktopEntries = lib.mkIf (core.terminal == "alacritty" && core.opengl != "") {
-    Alacritty = {
-      name = "Alacritty";
-      genericName = "Terminal";
-      type = "Application";
-      icon = "Alacritty";
-      exec = "${core.opengl} alacritty";
-      comment = "A fast, cross-platform, OpenGL terminal emulator";
-      startupNotify = true;
-      terminal = false;
-      actions.new.name = "New Terminal";
-      actions.new.exec = "${core.opengl} alacritty";
-      settings.StartupWMClass = "Alacritty";
-      categories = [
-        "System"
-        "TerminalEmulator"
-      ];
-    };
-  };
 }

@@ -1,5 +1,4 @@
 {
-  lib,
   extraLib,
   ...
 }:
@@ -14,13 +13,5 @@ in
     dirs = [
       ./.
     ];
-  };
-
-  options.nixosDesktop = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
-      description = "enable desktop";
-      default = true;
-    };
   };
 }

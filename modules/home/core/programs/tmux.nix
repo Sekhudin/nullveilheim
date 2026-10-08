@@ -6,9 +6,8 @@
 }:
 
 let
-  core = config.homeCore;
   desktop = config.homeDesktop;
-  theme = core.themeConfig;
+  theme = config.homeCore.themeConfig;
 
   inherit (extraLib.tmux)
     mkWindow

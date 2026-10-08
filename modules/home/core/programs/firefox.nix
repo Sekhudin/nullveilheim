@@ -1,11 +1,6 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ config, ... }:
 
 let
-  cfg = config.homeApps.firefox;
   stateVersion = config.home.stateVersion;
   urls = {
     github = "https://github.com/";
@@ -42,16 +37,8 @@ let
   };
 in
 {
-  options.homeApps.firefox = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
-      description = "enable firefox";
-      default = true;
-    };
-  };
-
-  config.programs.firefox = {
-    enable = cfg.enable;
+  programs.firefox = {
+    enable = true;
     policies = {
       OverrideFirstRunPage = "";
       OverridePostUpdatePage = "";
@@ -72,7 +59,7 @@ in
     };
   };
 
-  config.programs.firefox.profiles.personal = {
+  programs.firefox.profiles.personal = {
     id = 0;
     isDefault = true;
     bookmarks = {

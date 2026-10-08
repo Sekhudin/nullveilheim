@@ -63,7 +63,6 @@ in
         };
 
         overlays = lib.attrValues inputs.self.overlays ++ [
-          inputs.nixgl.overlay
         ];
       };
 
