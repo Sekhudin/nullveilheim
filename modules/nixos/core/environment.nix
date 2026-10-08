@@ -3,7 +3,6 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      nh
       git
       curl
       wget

@@ -188,16 +188,6 @@ in
       default = false;
     };
 
-    opengl = lib.mkOption {
-      type = lib.types.enum [
-        ""
-        "nixGLMesa"
-        "nixGLIntel"
-      ];
-      description = "choose opengl";
-      default = "";
-    };
-
     shell = lib.mkOption {
       type = lib.types.enum [
         "fish"

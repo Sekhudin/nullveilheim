@@ -5,8 +5,7 @@
 }:
 
 let
-  core = config.homeCore;
-  font = core.font;
+  font = config.homeCore.font;
   inherit (extraLib.hyprland) hypr;
 
   styles = hypr.getVarRefs config "styles";

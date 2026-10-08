@@ -54,9 +54,5 @@
 
   nixosDesktop = {
     enable = true;
-    apps = {
-      android-studio.enable = true;
-      steam.enable = true;
-    };
   };
 }

@@ -7,9 +7,8 @@
 }:
 
 let
-  core = config.homeCore;
   desktop = config.homeDesktop;
-  theme = core.themeConfig;
+  theme = config.homeCore.themeConfig;
   mkLuaInline = lib.generators.mkLuaInline;
 in
 {

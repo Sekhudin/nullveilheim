@@ -55,31 +55,5 @@ in
         }
       '';
     };
-
-    desktopEntries = lib.mkIf (core.opengl != "") {
-      "com.mitchellh.ghostty" = {
-        name = "Ghostty";
-        type = "Application";
-        icon = "com.mitchellh.ghostty";
-        exec = "${core.opengl} ghostty";
-        comment = "A terminal emulator";
-        terminal = false;
-        startupNotify = true;
-        actions.new-window.name = "New Window";
-        actions.new-window.exec = "${core.opengl} ghostty";
-        settings.Keywords = "terminal;tty;pty";
-        settings.StartupWMClass = "com.mitchellh.ghostty";
-        settings.X-GNOME-UsesNotifications = "true";
-        settings.X-TerminalArgExec = "-e";
-        settings.X-TerminalArgTitle = "--title=";
-        settings.X-TerminalArgAppId = "--class=";
-        settings.X-TerminalArgDir = "--working-directory=";
-        settings.X-TerminalArgHold = "--wait-after-command";
-        categories = [
-          "System"
-          "TerminalEmulator"
-        ];
-      };
-    };
   };
 }
