@@ -8,16 +8,9 @@
   home = lib.mkIf pkgs.stdenv.isLinux {
     packages = with pkgs; [
       fswatch
-      xsel
-      (writeScriptBin "copy" "xsel -ib")
-      (writeScriptBin "paste" "xsel -ob")
-
-      # fuck
-      sysz
+      shellApplication.copy
+      shellApplication.paste
+      shellApplication.fuck-systemctl
     ];
-
-    shellAliases = {
-      fuck-systemctl = lib.getExe pkgs.sysz;
-    };
   };
 }

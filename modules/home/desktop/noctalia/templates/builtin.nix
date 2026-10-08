@@ -39,7 +39,7 @@ in
         "gtk4"
         "hyprland"
         "qt"
-        #        "starship"
+        "starship"
       ];
     };
   };
