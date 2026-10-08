@@ -5,7 +5,7 @@
     ./devshells
     ./overlays
     ./packages
-    ./proces-compose
+    ./process-compose
     ./ez-config.nix
     ./nullveilheim.nix
   ];

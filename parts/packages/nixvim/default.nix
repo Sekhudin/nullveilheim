@@ -1,73 +1,59 @@
-{ extraLib, ... }:
+{ inputs, ... }:
 
 let
-  inherit (extraLib) mkImports;
+  inherit (inputs.nixvim.lib.nixvim.modules)
+    buildNixvimWith
+    testNixvimWith
+    ;
 in
 {
-  imports = mkImports {
-    recursive = true;
-    excludeDefault = true;
-    dirs = [
-      ./completion
-      ./config
-      ./lsp
-      ./plugins
-      ./tools
-      ./ui
-    ];
-  };
+  perSystem =
+    {
+      system,
+      color,
+      icon,
+      extraLib,
+      ...
+    }:
 
-  nixvimDashboard = {
-    theme = "hyper";
-    configDir = "~/nullveilheim";
-    banner = rec {
-      header = {
-        ascii = "prabski_sawit";
-        head = 16;
-        gap = 1;
+    let
+      extraSpecialArgs = {
+        inherit
+          inputs
+          color
+          icon
+          extraLib
+          ;
       };
-      footer = {
-        ascii = header.ascii;
-        tail = 5;
-        gap = 1;
+    in
+    {
+      packages = {
+        nvim = buildNixvimWith {
+          inherit
+            system
+            extraSpecialArgs
+            ;
+
+          modules = [
+            ./modules.nix
+          ];
+        };
+      };
+
+      checks = {
+        nvim = testNixvimWith {
+          inherit
+            system
+            extraSpecialArgs
+            ;
+
+          modules = [
+            ./modules.nix
+            {
+              plugins.image.enable = false;
+            }
+          ];
+        };
       };
     };
-  };
-
-  nixvimConfig = {
-    autosave = true;
-    colorscheme = "kanagawa";
-  };
-
-  nixvimCompletion = {
-    engine = "cmp";
-    icon = "lspkind";
-    snippet = "luasnip";
-  };
-
-  nixvimLsp = {
-    formatter = "conform-nvim";
-    interaction = "lspsaga";
-  };
-
-  nixvimUI = {
-    cursor = "smear-cursor";
-    diagnostic = "trouble";
-    focus = "zen-mode";
-    fold = "nvim-ufo";
-    indent = "indent-blankline";
-    overlay = "noice";
-    sidebar = "neo-tree";
-    status = "lualine";
-    syntax = "rainbow-delimiters";
-    tab = "bufferline";
-  };
-
-  nixvimTools = {
-    comment = "comment";
-    markdown = "markdown-preview";
-    motion = "hop";
-    pairs = "nvim-autopairs";
-    picker = "telescope";
-  };
 }

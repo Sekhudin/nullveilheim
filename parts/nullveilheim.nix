@@ -5,8 +5,7 @@
 }:
 
 let
-  shared = import ../shared;
-  shareable = shared.mkShareable { inherit lib; };
+  shareable = (import ../shared).mkShareable { inherit lib; };
 
   toModuleEntry =
     dir: name: type:
