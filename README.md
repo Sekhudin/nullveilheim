@@ -1,66 +1,251 @@
 # nullveilheim
 
-My Nix configurations for Linux and macOS.
+Personal Nix configurations for Linux and macOS.
 
-This repository contains my system and user configurations built with [Nix](https://nixos.org/), including [NixOS](https://nixos.org/), [Home Manager](https://github.com/nix-community/home-manager), and [nix-darwin](https://github.com/nix-darwin/nix-darwin).
+This repository contains my system and user environment built with
+[Nix](https://nixos.org/), including [NixOS](https://nixos.org/),
+[Home Manager](https://github.com/nix-community/home-manager), and
+[nix-darwin](https://github.com/nix-darwin/nix-darwin).
 
-I'm continuously tweaking and improving my setup, experimenting with different tools, desktop components, and ways to make more of my environment declarative and reproducible.
+The setup is actively evolving. It is designed primarily for my own machines and
+workflow, but parts of it may be useful as references for other Nix setups.
+
+## Overview
+
+The repository is organized around a few main layers:
+
+- `configurations/`
+  - Host and user entrypoints.
+  - Contains NixOS hosts, nix-darwin hosts, and Home Manager users.
+
+- `modules/`
+  - Reusable NixOS, Home Manager, Darwin, and common modules.
+  - Most system and user behavior is expressed here.
+
+- `parts/`
+  - Flake-parts modules.
+  - Contains packages, overlays, development shells, process-compose services,
+    and flake-level wiring.
+
+- `shared/`
+  - Shared helpers, colors, icons, and small internal libraries.
+  - Used by modules and packages to keep common logic centralized.
+
+- `secrets/`
+  - Encrypted secrets managed with SOPS.
+  - Secret contents are intentionally not documented here.
+
+## Hosts
+
+| Host        | Platform   | Notes         |
+| ----------- | ---------- | ------------- |
+| `acerswift` | NixOS      | Linux desktop |
+| `t14`       | NixOS      | Linux desktop |
+| `mbp`       | nix-darwin | macOS machine |
 
 ## Highlights
 
-In no particular order:
+### Flakes
 
-- [Flakes](./flake.nix)
-  - All external dependencies are managed through flakes.
-  - NixOS configurations for my Linux machines.
-  - nix-darwin configuration for macOS.
-  - Home Manager configuration for user-level programs and environments.
-  - Custom packages, overlays, and development shells.
+All external dependencies are managed through `flake.nix` and `flake.lock`.
 
-- Modular configuration
-  - Reusable NixOS, Home Manager, and Darwin modules.
-  - Host-specific configuration is separated from reusable modules.
-  - Shared functionality is kept under [`modules/`](./modules/).
+The flake provides:
 
-- [Hyprland](https://hyprland.org/) desktop configuration
-  - Wayland-based desktop environment for my NixOS systems.
-  - Declaratively configured through NixOS and Home Manager modules.
+- NixOS configurations
+- nix-darwin configurations
+- Home Manager configurations
+- custom packages
+- overlays
+- development shells
+- process-compose services
+- checks
 
-- [sops-nix](https://github.com/Mic92/sops-nix)
-  - Encrypted secrets managed declaratively.
-  - SSH keys, GPG keys, Git identities, and other sensitive configuration are kept encrypted.
+### Modular Configuration
 
-- [Nixvim](https://github.com/nix-community/nixvim)
-  - Declarative Neovim configuration.
+The configuration is split between host-specific entrypoints and reusable
+modules.
 
-- Shell environment
-  - [Fish](https://fishshell.com/) as my primary shell.
-  - [Ghostty](https://ghostty.org/) as my terminal emulator.
-  - CLI tools and their configuration managed through Home Manager.
+Host files stay small and mostly define machine-specific details, while shared
+behavior lives under `modules/`.
 
-- Development environments
-  - Reproducible development shells defined through the flake.
-  - Custom packages and overlays for tools that aren't provided directly by nixpkgs.
+### Home Manager
 
-## Structure
+User-level configuration is handled through Home Manager.
+
+The main user configuration currently defines:
+
+- shell preference
+- terminal preference
+- theme selection
+- desktop enablement
+- activation settings
+- user packages
+- session variables
+
+### Hyprland and Noctalia
+
+Linux desktop systems use Hyprland with additional Home Manager configuration.
+
+Noctalia is used as the desktop shell layer, with theme templates and desktop
+integration managed declaratively.
+
+### Secrets
+
+Secrets are managed with `sops-nix`.
+
+The setup supports declarative handling for:
+
+- SSH keys
+- GPG keys
+- Git identities
+- other encrypted values
+
+The encrypted secret file is kept in the repository, but secret values are not
+documented.
+
+### Nixvim
+
+Neovim is configured with [Nixvim](https://github.com/nix-community/nixvim).
+
+The editor configuration is built as a flake package and covered by a flake
+check.
+
+### Development Shells
+
+Development shells are provided through the flake.
+
+The default development shell installs pre-commit hooks for formatting and basic
+static checks.
+
+Available development shells include:
+
+- `default`
+- `bun`
+- `go`, `go125`, `go126`, `goLatest`
+- `nodejs22`, `nodejs24`, `nodejs26`, `nodejsLatest`
+
+## Common Commands
+
+Build or switch a NixOS host:
+
+```sh
+sudo nixos-rebuild switch --flake .#t14
+sudo nixos-rebuild switch --flake .#acerswift
+```
+
+Build or switch the macOS host:
+
+```sh
+darwin-rebuild switch --flake .#mbp
+```
+
+Run flake checks:
+
+```sh
+nix flake check
+```
+
+Run a specific check:
+
+```sh
+nix build .#checks.x86_64-linux.nvim
+nix build .#checks.x86_64-linux.pre-commit
+```
+
+Update flake inputs:
+
+```sh
+nix flake update
+```
+
+Enter the default development shell:
+
+```sh
+nix develop
+```
+
+Enter a specific development shell:
+
+```sh
+nix develop .#go
+nix develop .#nodejs24
+nix develop .#bun
+```
+
+Run a process-compose environment:
+
+```sh
+nix run .#pg-sandbox
+nix run .#mail-sandbox
+```
+
+Build the Neovim package:
+
+```sh
+nix build .#nvim
+```
+
+Format the repository:
+
+```sh
+nix fmt
+```
+
+Inspect flake outputs:
+
+```sh
+nix flake show
+```
+
+## Repository Structure
 
 ```text
 .
-├── configurations/     # Host and user configurations
-├── modules/            # Reusable NixOS/Home Manager/Darwin modules
-├── parts/              # Flake components, packages, overlays, devshells
-├── secrets/            # Encrypted secrets
-├── shared/             # Shared configuration and helper
+├── configurations/
+│   ├── darwin/
+│   ├── home/
+│   └── nixos/
+├── modules/
+│   ├── common/
+│   ├── darwin/
+│   ├── home/
+│   └── nixos/
+├── parts/
+│   ├── devshells/
+│   ├── overlays/
+│   ├── packages/
+│   └── process-compose/
+├── secrets/
+├── shared/
 ├── flake.nix
 └── flake.lock
 ```
 
-## Hosts
+## Flake Outputs
 
-| Host        | Platform   |
-| ----------- | ---------- |
-| `acerswift` | NixOS      |
-| `t14`       | NixOS      |
-| `mbp`       | nix-darwin |
+Current notable outputs include:
 
-This is a personal configuration, so some parts may be specific to my hardware, workflow, or preferences. Feel free to take anything useful from it and adapt it to your own setup.
+- `nixosConfigurations.acerswift`
+- `nixosConfigurations.t14`
+- `packages.*.nvim`
+- `packages.*.pg-sandbox`
+- `packages.*.mail-sandbox`
+- `checks.*.nvim`
+- `checks.*.pre-commit`
+- `devShells.*.default`
+- `devShells.*.bun`
+- `devShells.*.go`
+- `devShells.*.nodejs24`
+- `overlays.branches`
+- `overlays.fish`
+- `overlays.shellApplication`
+- `overlays.tree-sitter`
+- `overlays.vim`
+
+## Status
+
+This is a personal configuration repository and is still under active
+development.
+
+It is not intended to be a drop-in framework. Some modules, paths, secrets,
+hardware assumptions, and workflows are specific to my machines and preferences.
