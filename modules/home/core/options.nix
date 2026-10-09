@@ -268,7 +268,6 @@ in
     home = {
       sessionVariables = core.sessionVariables;
       packages = [
-        core.icon.package
         core.cursor.package
       ]
       ++ core.packages

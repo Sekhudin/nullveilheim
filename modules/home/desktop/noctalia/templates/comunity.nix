@@ -11,6 +11,8 @@ in
 {
   programs = lib.mkIf cfg.enable {
     claude-code.settings.theme = template;
+    obsidian.defaultSettings.appearance.enabledCssSnippets = [ template ];
+    opencode.tui.theme = "matugen";
 
     firefox.policies.ExtensionSettings = {
       "pywalfox@frewacom.org" = {
@@ -25,9 +27,9 @@ in
       enable_community_templates = true;
       community_ids = [
         "claude-code"
-        # "obs"
-        # "obsidian"
-        # "opencode"
+        "obs"
+        "obsidian"
+        "opencode"
         # "papirus-icons"
         "pywalfox"
         # "steam"
