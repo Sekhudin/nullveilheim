@@ -64,6 +64,7 @@ in
           tap_and_drag = true;
           drag_lock = 1;
           middle_button_emulation = false;
+          scroll_factor = 1.0;
         };
         touchdevice = {
           enabled = true;
