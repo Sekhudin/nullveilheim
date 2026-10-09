@@ -8,22 +8,21 @@ in
   options.nixvimConfig = {
     colorscheme = lib.mkOption {
       type = lib.types.enum [
-        "tokyonight"
+        "base16"
         "kanagawa"
+        "tokyonight"
       ];
       description = "choose scheme";
-      default = "nightfox";
+      default = "base16";
     };
   };
 
   config = {
     colorschemes = {
-      tokyonight = {
-        enable = (cfg.colorscheme == "tokyonight");
-        settings = {
-          style = "night";
-          transparent = false;
-        };
+      base16 = {
+        enable = (cfg.colorscheme == "base16");
+        autoLoad = true;
+        colorscheme = null;
       };
 
       kanagawa = {
@@ -44,6 +43,14 @@ in
               all = { };
             };
           };
+        };
+      };
+
+      tokyonight = {
+        enable = (cfg.colorscheme == "tokyonight");
+        settings = {
+          style = "night";
+          transparent = false;
         };
       };
     };
