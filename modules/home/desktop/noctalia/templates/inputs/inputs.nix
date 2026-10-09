@@ -2,6 +2,7 @@
 
 {
   xdg.configFile = {
-    "noctalia/Inputs/obsidian.css".source = ./obsidian.css;
+    "noctalia/inputs/obsidian.css".source = ./obsidian.css;
+    "noctalia/inputs/telegram.tdesktop-theme".source = ./telegram.tdesktop-theme;
   };
 }
