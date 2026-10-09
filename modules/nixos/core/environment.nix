@@ -6,7 +6,6 @@
       git
       curl
       wget
-      fastfetch
       pciutils
       usbutils
       coreutils

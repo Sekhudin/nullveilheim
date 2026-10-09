@@ -20,7 +20,7 @@
 
   nixvimConfig = {
     autosave = true;
-    colorscheme = "kanagawa";
+    colorscheme = "base16";
   };
 
   nixvimCompletion = {
