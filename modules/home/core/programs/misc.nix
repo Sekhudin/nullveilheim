@@ -18,6 +18,14 @@ in
   targets.genericLinux.enable = core.standalone;
   systemd.user.startServices = "sd-switch";
 
+  gtk = {
+    enable = true;
+    iconTheme = {
+      package = core.icon.package;
+      name = core.icon.name;
+    };
+  };
+
   programs = {
     home-manager = {
       enable = true;

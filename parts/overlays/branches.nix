@@ -42,8 +42,9 @@ in
         ;
 
       inherit (branches.unstable)
-        slack
         discord
+        obsidian
+        slack
         wpsoffice
 
         claude-code
