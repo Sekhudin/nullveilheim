@@ -87,6 +87,7 @@ let
       dir,
       exts,
       copy ? false,
+      targetDir ? "Copied",
     }:
     let
       files = builtins.readDir dir;
@@ -99,7 +100,6 @@ let
         files.${name} == "regular" && lib.elem ext exts;
 
       toName = name: lib.removeSuffix ".${lib.last (lib.splitString "." name)}" name;
-
       fileAttrs = lib.listToAttrs (
         map (name: {
           name = toName name;
@@ -109,9 +109,9 @@ let
     in
     {
       files = fileAttrs;
-      dir = if copy then "${homeDirectory}/Pictures/Wallpapers" else dir;
+      dir = if copy then "${homeDirectory}/${targetDir}" else dir;
       homeFile = lib.optionalAttrs copy {
-        "Pictures/Wallpapers" = {
+        ${targetDir} = {
           source = dir;
           recursive = true;
         };
@@ -186,8 +186,9 @@ in
       font = config.homeCore.font;
       noctalia.enable = cfg.enable && cfg.use == "noctalia";
       wallpapers = mkFiles {
-        dir = ./wallpapers;
         copy = true;
+        dir = ./wallpapers;
+        targetDir = "Pictures/Wallpapers";
         exts = [
           "png"
           "jpg"
@@ -196,6 +197,7 @@ in
         ];
       };
       svgs = mkFiles {
+        copy = false;
         dir = ./svgs;
         exts = [ "svg" ];
       };

@@ -118,15 +118,17 @@ in
         };
         nixos-option = fox.mkEngine {
           name = "NixOS Options";
-          urls = [ "${urls.nixos-options}&query=" ];
+          urls = [ "${urls.nixos-options}&query={searchTerms}" ];
           aliases = [
+            "@nixo"
             "@nixos"
           ];
         };
         nixos-pkg = fox.mkEngine {
           name = "NixOS Packages";
-          urls = [ "${urls.nixos-pkgs}&query=" ];
+          urls = [ "${urls.nixos-pkgs}&query={searchTerms}" ];
           aliases = [
+            "@nixp"
             "@pkg"
           ];
         };
