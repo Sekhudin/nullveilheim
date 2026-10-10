@@ -18,8 +18,7 @@
       ripgrep
       fd
       xsel
-      (writeScriptBin "copy" "xsel -ib")
-      (writeScriptBin "paste" "xsel -ob")
+      libinput
     ];
 
     pathsToLink = [

@@ -32,7 +32,7 @@ in
     standalone = ctx.standalone;
     shell = "fish";
     terminal = "ghostty";
-    theme = "zenwritten_dark";
+    theme = "aurora";
     activation = rec {
       enable = true;
       gpgKeys = [ "personal" ];

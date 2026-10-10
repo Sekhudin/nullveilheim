@@ -1,10 +1,14 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 let
-  cfg = config.homeDesktop.noctalia.desktop;
+  cfg = config.homeDesktop.noctalia;
   wallpapers = config.homeDesktop.wallpapers;
 in
 {
+  home = lib.mkIf cfg.enable {
+    file = wallpapers.homeFile;
+  };
+
   programs.noctalia.settings.wallpaper = {
     enabled = true;
     fill_mode = "fit";
@@ -18,9 +22,9 @@ in
     directory = wallpapers.dir;
     transition_on_startup = false;
     per_monitor_directories = false;
-    default.path = wallpapers."02";
+    default.path = wallpapers.files."02";
     automation = {
-      enabled = cfg.wallpaper.automation.enable;
+      enabled = cfg.desktop.wallpaper.automation.enable;
       interval_seconds = 2000;
       order = "random";
       recursive = false;
@@ -28,7 +32,7 @@ in
   };
 
   programs.noctalia.settings.backdrop = {
-    enabled = cfg.backdrop.enable;
+    enabled = cfg.desktop.backdrop.enable;
     blur_intensity = 0.5;
     tint_intensity = 0.3;
   };

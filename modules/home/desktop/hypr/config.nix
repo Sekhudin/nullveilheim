@@ -56,13 +56,14 @@ in
         natural_scroll = true;
         repeat_rate = 45;
         repeat_delay = 300;
+        scroll_method = "2fg";
         touchpad = {
-          disable_while_typing = true;
-          clickfinger_behavior = false;
+          disable_while_typing = false;
+          clickfinger_behavior = true;
           natural_scroll = true;
           tap_to_click = true;
           tap_and_drag = true;
-          drag_lock = 1;
+          drag_lock = 0;
           middle_button_emulation = false;
           scroll_factor = 1.0;
         };
