@@ -7,7 +7,7 @@
 
 let
   cfg = config.homeDesktop;
-
+  homeDirectory = config.home.homeDirectory;
   noctaliaBarType = lib.types.submodule {
     options = {
       label.enable = lib.mkOption {
@@ -50,32 +50,73 @@ let
     };
   };
 
+  filesType = lib.types.submodule {
+    options = {
+      files = lib.mkOption {
+        type = lib.types.attrsOf lib.types.path;
+        default = { };
+        description = "Files indexed by filename.";
+      };
+      dir = lib.mkOption {
+        type = lib.types.either lib.types.path lib.types.str;
+        description = "Directory path.";
+      };
+      homeFile = lib.mkOption {
+        type = lib.types.attrsOf (
+          lib.types.submodule {
+            options = {
+              source = lib.mkOption {
+                type = lib.types.path;
+              };
+
+              recursive = lib.mkOption {
+                type = lib.types.bool;
+                default = false;
+              };
+            };
+          }
+        );
+        default = { };
+        description = "Home Manager file definitions.";
+      };
+    };
+  };
+
   mkFiles =
     {
       dir,
       exts,
+      copy ? false,
     }:
     let
       files = builtins.readDir dir;
-      isImage =
+
+      isFile =
         name:
         let
           ext = lib.toLower (lib.last (lib.splitString "." name));
         in
         files.${name} == "regular" && lib.elem ext exts;
+
       toName = name: lib.removeSuffix ".${lib.last (lib.splitString "." name)}" name;
-    in
-    (
-      lib.listToAttrs (
+
+      fileAttrs = lib.listToAttrs (
         map (name: {
           name = toName name;
           value = dir + "/${name}";
-        }) (lib.filter isImage (builtins.attrNames files))
-      )
-      // {
-        inherit dir;
-      }
-    );
+        }) (lib.filter isFile (builtins.attrNames files))
+      );
+    in
+    {
+      files = fileAttrs;
+      dir = if copy then "${homeDirectory}/Pictures/Wallpapers" else dir;
+      homeFile = lib.optionalAttrs copy {
+        "Pictures/Wallpapers" = {
+          source = dir;
+          recursive = true;
+        };
+      };
+    };
 in
 {
   options.homeDesktop = {
@@ -101,14 +142,14 @@ in
     };
 
     wallpapers = lib.mkOption {
-      type = lib.types.attrsOf lib.types.path;
+      type = filesType;
       description = "wallpaper paths indexed by filename";
       readOnly = true;
       internal = true;
     };
 
     svgs = lib.mkOption {
-      type = lib.types.attrsOf lib.types.path;
+      type = filesType;
       description = "svg paths indexed by filename";
       readOnly = true;
       internal = true;
@@ -146,6 +187,7 @@ in
       noctalia.enable = cfg.enable && cfg.use == "noctalia";
       wallpapers = mkFiles {
         dir = ./wallpapers;
+        copy = true;
         exts = [
           "png"
           "jpg"

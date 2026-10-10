@@ -39,7 +39,7 @@ in
     margin_ends = 0;
     margin_edge = styles.margin_in;
     launcher_position = "start";
-    launcher_custom_image = svgs.nix-white;
+    launcher_custom_image = svgs.files.nix-white;
     pinned = pinnedApps;
   };
 }

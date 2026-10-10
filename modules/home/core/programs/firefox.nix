@@ -31,7 +31,7 @@ let
       name = p.name;
       definedAliases = p.aliases;
       urls = map (url: {
-        template = "${url}{searchTerms}";
+        template = url;
       }) p.urls;
     };
   };
@@ -88,16 +88,32 @@ in
       order = [
         "google"
         "ddg"
-        "home-manager"
+        "hm"
+        "hmp"
+        "hms"
         "nixos-option"
         "nixos-pkg"
       ];
       engines = {
-        home-manager = fox.mkEngine {
-          name = "Home Manager";
-          urls = [ "${urls.home-manager}#opt-" ];
+        hm = fox.mkEngine {
+          name = "HM";
+          urls = [ "${urls.home-manager}#opt-{searchTerms}" ];
           aliases = [
             "@hm"
+          ];
+        };
+        hmp = fox.mkEngine {
+          name = "HM Packages";
+          urls = [ "${urls.home-manager}#opt-programs.{searchTerms}.enable" ];
+          aliases = [
+            "@hmp"
+          ];
+        };
+        hms = fox.mkEngine {
+          name = "HM Services";
+          urls = [ "${urls.home-manager}#opt-services.{searchTerms}.enable" ];
+          aliases = [
+            "@hms"
           ];
         };
         nixos-option = fox.mkEngine {

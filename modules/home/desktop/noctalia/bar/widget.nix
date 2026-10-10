@@ -7,7 +7,7 @@ let
 in
 {
   programs.noctalia.settings.widget = {
-    launcher.custom_image = svgs.nix-white;
+    launcher.custom_image = svgs.files.nix-white;
     workspaces = {
       style = "regular";
       pill_scale = 1.0;
