@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   config,
   lib,
@@ -14,8 +13,8 @@ let
   sessions = hypr.getVarValues config "sessions";
   ipc = cmd: "noctalia msg ${cmd}";
 
-  runtimeInputs = [
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+  runtimeInputs = with pkgs; [
+    noctalia
   ];
 in
 {

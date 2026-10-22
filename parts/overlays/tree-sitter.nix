@@ -5,7 +5,7 @@
     final: _:
 
     {
-      tree-sitter-grammars = final.branches.stable.tree-sitter-grammars // {
+      tree-sitter-grammars = final.branches.unstable.tree-sitter-grammars // {
       };
     };
 }

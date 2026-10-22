@@ -1,6 +1,4 @@
 {
-  inputs,
-  pkgs,
   config,
   lib,
   ...
@@ -8,13 +6,10 @@
 
 let
   cfg = config.homeDesktop.noctalia;
-  packages = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   home = lib.mkIf cfg.enable {
-    packages = [
-      packages.hyprland
-    ];
+    packages = [ ];
   };
 
   programs.noctalia.settings = {
