@@ -30,7 +30,8 @@ in
     _: prev:
 
     let
-      branches = mkBranches prev.stdenv.hostPlatform.system;
+      system = prev.stdenv.hostPlatform.system;
+      branches = mkBranches system;
     in
     {
       inherit branches;
