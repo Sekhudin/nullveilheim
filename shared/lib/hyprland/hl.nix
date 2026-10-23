@@ -16,6 +16,13 @@ let
           (p.rules or null)
         ];
       };
+
+    config =
+      p:
+      mkCallAttrs {
+        func = "hl.config";
+        attrs = p;
+      };
   };
 
   hl.dsp = {
@@ -146,6 +153,35 @@ let
         func = "hl.dsp.workspace.toggle_special";
         attrs = p;
       };
+  };
+
+  hl.plugin = {
+    hyprexpo = {
+      expo =
+        p:
+        luaLib.mkLuaFunc (mkCall {
+          func = "hl.plugin.hyprexpo.expo";
+          args = [
+            p.cmd
+          ];
+        });
+
+      kb_focus =
+        p:
+        luaLib.mkLuaFunc (mkCall {
+          func = "hl.plugin.hyprexpo.kb_focus";
+          args = [
+            p.direction
+          ];
+        });
+
+      kb_confirm =
+        _:
+        luaLib.mkLuaFunc (mkCall {
+          func = "hl.plugin.hyprexpo.kb_confirm";
+          args = [ ];
+        });
+    };
   };
 
   hl.extra = {
