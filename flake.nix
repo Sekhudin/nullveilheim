@@ -36,7 +36,10 @@
     nix-env.flake = false;
 
     # nixos desktop related packages
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "github:hyprwm/Hyprland/v0.56.2";
+
+    hyprexpo.url = "github:sandwichfarm/hyprexpo/master";
+    hyprexpo.inputs.hyprland.follows = "hyprland";
 
     noctalia.url = "github:noctalia-dev/noctalia";
     noctalia.inputs.nixpkgs.follows = "nixpkgs-unstable";

@@ -19,7 +19,7 @@ in
     plugins.enabled = [ "noctalia/screen_recorder" ];
 
     plugin_settings."noctalia/screen_recorder" = {
-      video_source = "portal";
+      video_source = "focused";
       directory = "~/Videos/Recordings";
       video_qp = 22;
       color_range = "full";
