@@ -13,6 +13,12 @@ let
   };
 
   fox = {
+    extension = name: {
+      install_url = "https://addons.mozilla.org/firefox/downloads/latest/${name}/latest.xpi";
+      installation_mode = "force_installed";
+      private_browsing = true;
+    };
+
     markAs = name: url: {
       inherit
         name
@@ -44,17 +50,9 @@ in
       OverridePostUpdatePage = "";
       RequestedLocales = [ "en-US" ];
       ExtensionSettings = {
-        "uBlock0@raymondhill.net" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-          installation_mode = "force_installed";
-          private_browsing = true;
-        };
-
-        "{036a55b4-5e72-4d05-a06c-cba2dfcc134a}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/traduzir-paginas-web/latest.xpi";
-          installation_mode = "force_installed";
-          private_browsing = true;
-        };
+        "uBlock0@raymondhill.net" = fox.extension "ublock-origin";
+        "{036a55b4-5e72-4d05-a06c-cba2dfcc134a}" = fox.extension "traduzir-paginas-web";
+        "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = fox.extension "vimium-ff";
       };
     };
   };
