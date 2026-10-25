@@ -22,5 +22,10 @@ in
     plugin_settings."dunarand/tmux-provider" = {
       use_tmuxp = true;
     };
+
+    shell.launcher.providers."dunarand/tmux-provider:provider" = {
+      prefix = "tmx";
+      global = true;
+    };
   };
 }

@@ -22,5 +22,10 @@ in
       config_path = "~/.ssh/config";
       max_results = 10;
     };
+
+    shell.launcher.providers."cleboost/ssh-launcher:launcher" = {
+      prefix = "ssh";
+      global = true;
+    };
   };
 }
