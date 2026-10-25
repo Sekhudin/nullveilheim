@@ -10,6 +10,10 @@ let
     nixos = "https://nixos.org/learn/";
     nixos-options = "https://search.nixos.org/options?channel=${stateVersion}";
     nixos-pkgs = "https://search.nixos.org/packages?channel=${stateVersion}";
+
+    nosignup = "https://nosignups.net/";
+    drawdb = "https://www.drawdb.app/";
+    excalidraw = "https://excalidraw.com/";
   };
 
   fox = {
@@ -69,12 +73,21 @@ in
         "separator"
         {
           name = "Development";
-          toolbar = true;
+          toolbar = false;
           bookmarks = [
             (fox.markAs "MDN" urls.mdn)
             (fox.markAs "Home Manager" urls.home-manager)
             (fox.markAs "NixOS Options" urls.nixos-options)
             (fox.markAs "NixOS Packages" urls.nixos-pkgs)
+          ];
+        }
+        {
+          name = "Tools";
+          toolbar = false;
+          bookmarks = [
+            (fox.markAs "No Sign Up" urls.nosignup)
+            (fox.markAs "Draw DB" urls.drawdb)
+            (fox.markAs "Excalidraw" urls.excalidraw)
           ];
         }
       ];

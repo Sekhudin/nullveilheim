@@ -20,7 +20,6 @@
       asciinema
       asciinema-agg
       ffmpeg
-      imagemagick
 
       # productivity
       fzf
@@ -28,7 +27,6 @@
       dust
       fd
       jq
-      iamb
       ripgrep
       nixfmt
     ];
