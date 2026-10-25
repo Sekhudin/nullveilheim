@@ -12,8 +12,8 @@
           }
           {
             __unkeyed-1 = "<leader>d";
-            icon = icon.database;
             group = "database";
+            icon = icon.database;
           }
           {
             __unkeyed-1 = "<leader>l";

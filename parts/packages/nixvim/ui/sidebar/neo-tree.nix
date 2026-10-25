@@ -52,17 +52,13 @@ in
               command = "toggle_node";
               config.nowait = false;
             };
-            "<C-space>" = {
-              command = "toggle_node";
-              config.nowait = true;
-            };
             "<C-u>" = {
               command = "scroll_preview";
-              config.direction = 10;
+              config.direction = 5;
             };
             "<C-d>" = {
               command = "scroll_preview";
-              config.direction = -10;
+              config.direction = -5;
             };
             "a" = {
               command = "add";
