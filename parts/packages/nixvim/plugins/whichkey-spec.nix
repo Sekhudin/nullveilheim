@@ -101,6 +101,20 @@
             desc = "prev workspace";
           }
 
+          # window size
+          {
+            __unkeyed-1 = "<A-.>";
+            __unkeyed-2 = "<cmd>vertical resize +5<cr>";
+            desc = "move line down";
+            mode = "n";
+          }
+          {
+            __unkeyed-1 = "<A-,>";
+            __unkeyed-2 = "<cmd>vertical resize -5<cr>";
+            desc = "move line up";
+            mode = "n";
+          }
+
           # move code line
           {
             __unkeyed-1 = "<A-j>";
