@@ -55,10 +55,10 @@ in
         };
 
         ipc = hypr.mkVar {
-          help = "nv-ipc-help";
-          keyviz = "nv-ipc-keyviz";
-          bar = "nv-ipc-bar";
-          dock = "nv-ipc-dock";
+          help = "nv-help";
+          keyviz = "nv-keyviz";
+          bar = "nv-bar";
+          dock = "nv-dock";
         };
 
         panels = hypr.mkVar {

@@ -43,6 +43,9 @@
 
     noctalia.url = "github:noctalia-dev/noctalia";
     noctalia.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
+    yakc-src.url = "github:iammodev/YAKC";
+    yakc-src.flake = false;
   };
 
   outputs =

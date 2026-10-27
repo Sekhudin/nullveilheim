@@ -694,7 +694,8 @@
         "pre-commit-hooks": "pre-commit-hooks_2",
         "process-compose-flake": "process-compose-flake",
         "services-flake": "services-flake",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "yakc-src": "yakc-src"
       }
     },
     "services-flake": {
@@ -801,6 +802,22 @@
       "original": {
         "owner": "hyprwm",
         "repo": "xdg-desktop-portal-hyprland",
+        "type": "github"
+      }
+    },
+    "yakc-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790678620,
+        "narHash": "sha256-S4qHbxW8u47qbU8rAECHnYDP0h95P13RiTFWhP1Z3Vk=",
+        "owner": "iammodev",
+        "repo": "YAKC",
+        "rev": "dc4c94631e5bf6c2b91178fd81232c3c1d2de962",
+        "type": "github"
+      },
+      "original": {
+        "owner": "iammodev",
+        "repo": "YAKC",
         "type": "github"
       }
     }
