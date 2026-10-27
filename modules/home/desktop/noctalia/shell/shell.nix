@@ -1,7 +1,7 @@
 { config, extraLib, ... }:
 
 let
-  cfg = config.homeDesktop;
+  font = config.homeCore.font;
   inherit (extraLib.hyprland) hypr;
 
   styles = hypr.getVarValues config "styles";
@@ -14,7 +14,7 @@ in
     popup_borders = true;
     card_borders = true;
     popup_shadows = true;
-    font_family = cfg.font.family.sans_serif;
+    font_family = font.family.sans_serif;
     time_format = "{:%H:%M}";
     date_format = "%A, %x";
     setup_wizard_enabled = false;

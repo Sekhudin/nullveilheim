@@ -5,7 +5,7 @@
 }:
 
 {
-  home = lib.mkIf pkgs.stdenv.isDarwin {
+  home = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
     packages = with pkgs; [
       mas
       m-cli

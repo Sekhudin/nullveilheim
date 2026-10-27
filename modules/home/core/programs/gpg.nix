@@ -20,7 +20,7 @@
     defaultCacheTtl = 3600;
     maxCacheTtl = 999999;
     pinentry = {
-      package = if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-curses;
+      package = if pkgs.stdenv.hostPlatform.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-curses;
     };
   };
 }

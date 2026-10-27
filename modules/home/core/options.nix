@@ -188,6 +188,12 @@ in
       default = false;
     };
 
+    keyboardLayout = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = "us";
+      description = "keyboard layout override";
+    };
+
     shell = lib.mkOption {
       type = lib.types.enum [
         "fish"
