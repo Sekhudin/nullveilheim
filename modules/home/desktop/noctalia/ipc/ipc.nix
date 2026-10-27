@@ -28,12 +28,6 @@ in
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
-        name = ipc.keyviz;
-        text = msg "plugin h-jangra/keyviz:keylistener all toggle";
-      })
-
-      (pkgs.writeShellApplication {
-        inherit runtimeInputs;
         name = ipc.bar;
         text = msg "bar-toggle";
       })
