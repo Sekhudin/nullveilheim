@@ -27,33 +27,29 @@ in
       };
     in
     {
-      packages = {
-        nvim = buildNixvimWith {
-          inherit
-            system
-            extraSpecialArgs
-            ;
+      packages.nixvim = buildNixvimWith {
+        inherit
+          system
+          extraSpecialArgs
+          ;
 
-          modules = [
-            ./modules.nix
-          ];
-        };
+        modules = [
+          ./modules.nix
+        ];
       };
 
-      checks = {
-        nvim = testNixvimWith {
-          inherit
-            system
-            extraSpecialArgs
-            ;
+      checks.nixvim = testNixvimWith {
+        inherit
+          system
+          extraSpecialArgs
+          ;
 
-          modules = [
-            ./modules.nix
-            {
-              plugins.image.enable = false;
-            }
-          ];
-        };
+        modules = [
+          ./modules.nix
+          {
+            plugins.image.enable = false;
+          }
+        ];
       };
     };
 }
