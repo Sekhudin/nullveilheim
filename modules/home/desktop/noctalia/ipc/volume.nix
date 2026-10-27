@@ -11,7 +11,7 @@ let
   inherit (extraLib.hyprland) hypr;
 
   volume = hypr.getVarValues config "volume";
-  ipc = cmd: "noctalia msg ${cmd}";
+  msg = cmd: "noctalia msg ${cmd}";
 
   runtimeInputs = with pkgs; [
     noctalia
@@ -23,19 +23,19 @@ in
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = volume.up;
-        text = ipc "volume-up";
+        text = msg "volume-up";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = volume.down;
-        text = ipc "volume-down";
+        text = msg "volume-down";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = volume.toggle;
-        text = ipc "volume-mute";
+        text = msg "volume-mute";
       })
     ];
   };

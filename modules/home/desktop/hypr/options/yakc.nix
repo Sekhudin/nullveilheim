@@ -71,6 +71,10 @@ in
               "(monitor_w*0.25)"
               "(monitor_h*0.22)"
             ];
+            move = [
+              "(monitor_w*0.75)"
+              "(monitor_h*0.78)"
+            ];
           })
         ];
       };

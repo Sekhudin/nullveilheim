@@ -11,7 +11,7 @@ let
   inherit (extraLib.hyprland) hypr;
 
   screenshots = hypr.getVarValues config "screenshots";
-  ipc = cmd: "noctalia msg ${cmd}";
+  msg = cmd: "noctalia msg ${cmd}";
 
   runtimeInputs = with pkgs; [
     noctalia
@@ -23,13 +23,13 @@ in
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = screenshots.region;
-        text = ipc "screenshot-region";
+        text = msg "screenshot-region";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = screenshots.fullscreen;
-        text = ipc "screenshot-fullscreen";
+        text = msg "screenshot-fullscreen";
       })
     ];
   };

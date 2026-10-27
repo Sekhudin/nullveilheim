@@ -11,7 +11,7 @@ let
   inherit (extraLib.hyprland) hypr;
 
   sessions = hypr.getVarValues config "sessions";
-  ipc = cmd: "noctalia msg ${cmd}";
+  msg = cmd: "noctalia msg ${cmd}";
 
   runtimeInputs = with pkgs; [
     noctalia
@@ -23,31 +23,31 @@ in
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = sessions.lock;
-        text = ipc "session lock";
+        text = msg "session lock";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = sessions.lock_suspend;
-        text = ipc "session lock-and-suspend";
+        text = msg "session lock-and-suspend";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = sessions.logout;
-        text = ipc "session logout";
+        text = msg "session logout";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = sessions.reboot;
-        text = ipc "session reboot";
+        text = msg "session reboot";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = sessions.shutdown;
-        text = ipc "session shutdown";
+        text = msg "session shutdown";
       })
     ];
   };
