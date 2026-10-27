@@ -9,9 +9,10 @@
       hypr = inputs.hyprland.packages.${system};
     in
     {
+      noctalia = inputs.noctalia.packages.${system}.default;
+
       hyprland = inputs.hyprexpo.packages.${system}.hyprland;
       xdg-desktop-portal-hyprland = hypr.xdg-desktop-portal-hyprland;
-      noctalia = inputs.noctalia.packages.${system}.default;
       hyprlandPlugins = prev.hyprlandPlugins // {
         hyprexpo = inputs.hyprexpo.packages.${system}.default;
       };

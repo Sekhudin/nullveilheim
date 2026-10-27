@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   config,
   lib,
@@ -10,10 +9,7 @@
 }:
 
 let
-  packages = inputs.self.packages;
-  system = pkgs.stdenv.hostPlatform.system;
   homeDirectory = config.home.homeDirectory;
-
   ctx = extraLib.mkHomeContext {
     username = "syaikhu";
     inherit pkgs osConfig;
@@ -39,11 +35,11 @@ in
       sshKeys = gpgKeys;
       gitIdentities = gpgKeys;
     };
-    packages = [
-      packages.${system}.nvim
+    packages = with pkgs; [
+      nixvim
     ];
     sessionVariables = {
-      EDITOR = lib.getExe' packages.${system}.nvim "nvim";
+      EDITOR = lib.getExe' pkgs.nixvim "nvim";
       NH_FLAKE = "${homeDirectory}/.config/nullveilheim";
     };
   };

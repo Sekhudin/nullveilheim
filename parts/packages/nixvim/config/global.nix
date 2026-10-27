@@ -41,10 +41,10 @@ in
     register = "unnamedplus";
     providers = {
       xsel = {
-        enable = pkgs.stdenv.isLinux;
+        enable = pkgs.stdenv.hostPlatform.isLinux;
       };
       pbcopy = {
-        enable = pkgs.stdenv.isDarwin;
+        enable = pkgs.stdenv.hostPlatform.isDarwin;
       };
     };
   };
