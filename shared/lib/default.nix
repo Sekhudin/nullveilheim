@@ -34,11 +34,11 @@ in
           config = if standalone then { } else osConfig;
 
           homeDirectory = lib.attrByPath [ "users" "users" username "home" ] "/${
-            if pkgs.stdenv.isDarwin then "Users" else "home"
+            if pkgs.stdenv.hostPlatform.isDarwin then "Users" else "home"
           }/${username}" config;
 
           desktop =
-            pkgs.stdenv.isLinux
+            pkgs.stdenv.hostPlatform.isLinux
             && lib.attrByPath [
               "programs"
               "hyprland"
