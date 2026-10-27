@@ -31,7 +31,7 @@ in
       showSpaceAsUnicode = true;
       textToSymbols = true;
 
-      position = "top-left";
+      position = "bottom-right";
       topOffset = offset + 40;
       bottomOffset = offset;
       leftOffset = offset;

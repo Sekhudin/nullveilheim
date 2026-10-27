@@ -11,7 +11,7 @@ let
   inherit (extraLib.hyprland) hypr;
 
   brightness = hypr.getVarValues config "brightness";
-  ipc = cmd: "noctalia msg ${cmd}";
+  msg = cmd: "noctalia msg ${cmd}";
 
   runtimeInputs = with pkgs; [
     noctalia
@@ -23,13 +23,13 @@ in
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = brightness.up;
-        text = ipc "brightness-up";
+        text = msg "brightness-up";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = brightness.down;
-        text = ipc "brightness-down";
+        text = msg "brightness-down";
       })
     ];
   };

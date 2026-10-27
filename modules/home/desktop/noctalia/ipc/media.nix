@@ -11,7 +11,7 @@ let
   inherit (extraLib.hyprland) hypr;
 
   media = hypr.getVarValues config "media";
-  ipc = cmd: "noctalia msg ${cmd}";
+  msg = cmd: "noctalia msg ${cmd}";
 
   runtimeInputs = with pkgs; [
     noctalia
@@ -23,19 +23,19 @@ in
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = media.next;
-        text = ipc "media next";
+        text = msg "media next";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = media.prev;
-        text = ipc "media previous";
+        text = msg "media previous";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = media.toggle;
-        text = ipc "media toggle";
+        text = msg "media toggle";
       })
     ];
   };

@@ -11,7 +11,7 @@ let
   inherit (extraLib.hyprland) hypr;
 
   panels = hypr.getVarValues config "panels";
-  ipc = cmd: "noctalia msg ${cmd}";
+  msg = cmd: "noctalia msg ${cmd}";
 
   runtimeInputs = with pkgs; [
     noctalia
@@ -23,43 +23,43 @@ in
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = panels.launcher;
-        text = ipc "panel-toggle launcher";
+        text = msg "panel-toggle launcher";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = panels.control;
-        text = ipc "panel-toggle control-center";
+        text = msg "panel-toggle control-center";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = panels.settings;
-        text = ipc "settings-toggle";
+        text = msg "settings-toggle";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = panels.window;
-        text = ipc "window-switcher";
+        text = msg "window-switcher";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = panels.session;
-        text = ipc "panel-toggle session";
+        text = msg "panel-toggle session";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = panels.screenshot;
-        text = ipc "screenshot-annotate";
+        text = msg "screenshot-annotate";
       })
 
       (pkgs.writeShellApplication {
         inherit runtimeInputs;
         name = panels.clipboard;
-        text = ipc "panel-toggle clipboard";
+        text = msg "panel-toggle clipboard";
       })
     ];
   };
