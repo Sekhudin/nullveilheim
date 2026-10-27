@@ -13,7 +13,7 @@ let
     inherit pkgs;
   };
 
-  isLinux = pkgs.stdenv.isLinux;
+  isLinux = pkgs.stdenv.hostPlatform.isLinux;
   find = lib.getExe' pkgs.findutils "find";
   systemctl = lib.optionalString isLinux (lib.getExe' pkgs.systemd "systemctl");
 in

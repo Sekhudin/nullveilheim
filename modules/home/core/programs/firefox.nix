@@ -14,6 +14,9 @@ let
     nosignup = "https://nosignups.net/";
     drawdb = "https://www.drawdb.app/";
     excalidraw = "https://excalidraw.com/";
+
+    nixmap = "https://vimjoyer.com/nixmap/";
+    systemdesign = "https://systemdesign.io/";
   };
 
   fox = {
@@ -88,6 +91,14 @@ in
             (fox.markAs "No Sign Up" urls.nosignup)
             (fox.markAs "Draw DB" urls.drawdb)
             (fox.markAs "Excalidraw" urls.excalidraw)
+          ];
+        }
+        {
+          name = "Sources";
+          toolbar = false;
+          bookmarks = [
+            (fox.markAs "NixMap" urls.nixmap)
+            (fox.markAs "System Design" urls.systemdesign)
           ];
         }
       ];

@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   ...
@@ -134,13 +133,6 @@ in
       default = "noctalia";
     };
 
-    font = lib.mkOption {
-      type = options.homeCore.font.type;
-      description = "desktop font settings";
-      readOnly = true;
-      internal = true;
-    };
-
     wallpapers = lib.mkOption {
       type = filesType;
       description = "wallpaper paths indexed by filename";
@@ -183,7 +175,6 @@ in
 
   config = {
     homeDesktop = {
-      font = config.homeCore.font;
       noctalia.enable = cfg.enable && cfg.use == "noctalia";
       wallpapers = mkFiles {
         copy = true;

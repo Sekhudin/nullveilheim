@@ -6,6 +6,7 @@
 
 let
   cfg = config.homeDesktop;
+  font = config.homeCore.font;
   inherit (extraLib.hyprland) hypr;
 
   styles = hypr.getVarValues config "styles";
@@ -19,7 +20,7 @@ let
       capsule_radius = radius - padding;
     in
     {
-      font_family = cfg.font.family.sans_serif;
+      font_family = font.family.sans_serif;
       widget_spacing = 4;
       background_opacity = styles.opacity;
       capsule_opacity = styles.opacity;
