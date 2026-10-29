@@ -1,31 +1,15 @@
-{
-  pkgs,
-  config,
-  lib,
-  ezModules,
-  osConfig,
-  extraLib,
-  ...
-}:
+{ pkgs, ... }:
 
 let
-  homeDirectory = config.home.homeDirectory;
-  ctx = extraLib.mkHomeContext {
-    username = "syaikhu";
-    inherit pkgs osConfig;
-  };
+  inherit (pkgs.stdenv.hostPlatform) isLinux;
 in
 {
-  imports = lib.attrValues ezModules ++ [ ];
-
-  home = {
-    stateVersion = "26.05";
-    username = ctx.username;
-    homeDirectory = ctx.homeDirectory;
-  };
+  imports = [
+    ./syaikhu-mini.nix
+  ];
 
   homeCore = {
-    standalone = ctx.standalone;
+    standalone = false;
     shell = "fish";
     terminal = "ghostty";
     theme = "aurora";
@@ -35,17 +19,10 @@ in
       sshKeys = gpgKeys;
       gitIdentities = gpgKeys;
     };
-    packages = with pkgs; [
-      nixvim
-    ];
-    sessionVariables = {
-      EDITOR = lib.getExe' pkgs.nixvim "nvim";
-      NH_FLAKE = "${homeDirectory}/.config/nullveilheim";
-    };
   };
 
   homeDesktop = {
-    enable = ctx.desktop;
+    enable = isLinux;
     noctalia = {
       desktop.backdrop.enable = true;
     };
