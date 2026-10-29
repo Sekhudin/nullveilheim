@@ -19,6 +19,7 @@
       # multi-media
       asciinema
       asciinema-agg
+      cliamp
       ffmpeg
 
       # productivity
@@ -29,6 +30,7 @@
       jq
       ripgrep
       nixfmt
+      google-chrome
     ];
 
     sessionPath = [
