@@ -1,10 +1,10 @@
 { inputs, ... }:
 
 let
-  inherit (inputs.self.nullveilheim.nixpkgs) config overlays;
+  inherit (inputs.self.nullveilheim) modules;
 in
 {
-  nixpkgs = {
-    inherit config overlays;
-  };
+  imports = [
+    modules.common.nixpkgs
+  ];
 }

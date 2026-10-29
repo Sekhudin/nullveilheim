@@ -4,6 +4,9 @@
   ...
 }:
 
+let
+  inherit (inputs.self.nullveilheim) modules;
+in
 {
-  imports = lib.attrValues inputs.self.nullveilheim.modules.common;
+  imports = lib.attrValues modules.common;
 }

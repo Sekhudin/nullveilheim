@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   config,
   lib,
@@ -256,32 +257,21 @@ in
       description = "activation settings";
       default = { };
     };
-
-    packages = lib.mkOption {
-      type = lib.types.listOf lib.types.package;
-      description = "font packages.";
-      default = [ ];
-    };
-
-    sessionVariables = lib.mkOption {
-      type = lib.types.attrsOf lib.types.str;
-      default = { };
-      description = "environment variables";
-    };
   };
 
   config = {
-    home = {
-      sessionVariables = core.sessionVariables;
-      packages = [
-        core.cursor.package
-      ]
-      ++ core.packages
-      ++ core.font.packages;
-    };
+    home.packages = [
+      core.cursor.package
+    ]
+    ++ core.font.packages;
 
     homeCore = {
       themeConfig = color.mkTheme core.theme;
+    };
+
+    nix.registry.self.to = {
+      type = "path";
+      path = config.home.sessionVariables.SELF_FLAKE or inputs.self.outPath;
     };
   };
 }

@@ -43,6 +43,7 @@ in
         ;
 
       inherit (branches.unstable)
+        firefox
         discord
         obsidian
         slack

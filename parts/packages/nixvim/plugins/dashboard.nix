@@ -73,12 +73,6 @@ in
       default = "hyper";
     };
 
-    configDir = lib.mkOption {
-      type = lib.types.str;
-      description = "choose theme";
-      default = "~";
-    };
-
     banner = lib.mkOption {
       type = lib.types.submodule {
         options = {

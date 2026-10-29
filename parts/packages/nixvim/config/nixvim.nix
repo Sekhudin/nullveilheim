@@ -3,7 +3,6 @@
 {
   nixvimDashboard = {
     theme = "hyper";
-    configDir = "~/nullveilheim";
     banner = rec {
       header = {
         ascii = "prabski_sawit";
