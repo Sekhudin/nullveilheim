@@ -26,11 +26,15 @@
     configurationsDirectory = ../configurations/nixos;
     hosts = {
       acerswift = {
-        userHomeModules = [ "syaikhu" ];
+        userHomeModules = {
+          syaikhu = "syaikhu";
+        };
       };
 
       t14 = {
-        userHomeModules = [ "syaikhu" ];
+        userHomeModules = {
+          syaikhu = "syaikhu";
+        };
       };
     };
   };
@@ -40,7 +44,9 @@
     configurationsDirectory = ../configurations/darwin;
     hosts = {
       mbp = {
-        userHomeModules = [ "syaikhu" ];
+        userHomeModules = {
+          syaikhu = "syaikhu";
+        };
       };
     };
   };
@@ -50,7 +56,18 @@
     configurationsDirectory = ../configurations/home;
     users = {
       syaikhu = { };
+      syaikhu-sa = {
+        standalone = {
+          enable = true;
+          pkgs = import inputs.nixpkgs {
+            system = "x86_64-linux";
+            inherit (inputs.self.nullveilheim.nixpkgs)
+              config
+              overlays
+              ;
+          };
+        };
+      };
     };
   };
-
 }

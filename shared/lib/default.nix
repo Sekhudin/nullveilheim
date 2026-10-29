@@ -27,31 +27,13 @@ in
         {
           pkgs,
           username,
-          osConfig ? null,
         }:
         let
-          standalone = osConfig == null || builtins.attrNames osConfig == [ ];
-          config = if standalone then { } else osConfig;
-
-          homeDirectory = lib.attrByPath [ "users" "users" username "home" ] "/${
-            if pkgs.stdenv.hostPlatform.isDarwin then "Users" else "home"
-          }/${username}" config;
-
-          desktop =
-            pkgs.stdenv.hostPlatform.isLinux
-            && lib.attrByPath [
-              "programs"
-              "hyprland"
-              "enable"
-            ] false config;
+          inherit (pkgs.stdenv.hostPlatform) isDarwin;
+          homeDirectory = "/${if isDarwin then "Users" else "home"}/${username}";
         in
         {
-          inherit
-            username
-            standalone
-            homeDirectory
-            desktop
-            ;
+          inherit username homeDirectory;
         };
 
       mkImports =
