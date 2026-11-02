@@ -47,7 +47,7 @@ in
       reserve_space = true;
       thickness = barStyle.thickness;
       background_opacity = barStyle.background_opacity;
-      border = "outline";
+      border = "outline_variant";
       border_width = 0.0;
       shadow = true;
       contact_shadow = false;
@@ -67,7 +67,7 @@ in
       font_family = barStyle.font_family;
       font_weight = 500;
       capsule = true;
-      capsule_fill = "surface_variant";
+      capsule_fill = "surface_container";
       capsule_thickness = barStyle.capsule_thickness;
       capsule_radius = barStyle.capsule_radius;
       capsule_opacity = barStyle.capsule_opacity;

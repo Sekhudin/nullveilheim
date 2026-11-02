@@ -19,8 +19,9 @@ in
     plugins.enabled = [ "oldirtty/color_picker" ];
 
     plugin_settings."oldirtty/color_picker" = {
-      hyprpicker-format = "hex";
-      hyprpicker-lowercase = false;
+      picker_tool = "hyprpicker";
+      main-colorspace = "hex";
+      lowercase-hex = false;
     };
   };
 }

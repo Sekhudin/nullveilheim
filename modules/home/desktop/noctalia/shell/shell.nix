@@ -37,6 +37,9 @@ in
       open_near_click_session = true;
     };
     launcher = {
+      layout = "simple";
+      search_position = "top";
+      default_view = "all";
       app_grid = false;
       compact = false;
       categories = false;

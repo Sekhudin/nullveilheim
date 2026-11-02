@@ -8,7 +8,10 @@
       system = prev.stdenv.hostPlatform.system;
     in
     {
-      nixvim = inputs.self.packages.${system}.nixvim;
-      yakc = inputs.self.packages.${system}.yakc;
+      inherit (inputs.self.packages.${system})
+        nixvim
+        recordly
+        yakc
+        ;
     };
 }
