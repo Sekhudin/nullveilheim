@@ -20,7 +20,6 @@
 
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    nixvim.inputs.flake-parts.follows = "flake-parts";
 
     process-compose-flake.url = "github:Platonic-Systems/process-compose-flake";
 
@@ -44,7 +43,10 @@
     noctalia.url = "github:noctalia-dev/noctalia";
     noctalia.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    yakc-src.url = "github:iammodev/YAKC";
+    recordly-src.url = "github:webadderallorg/Recordly/v1.4.0";
+    recordly-src.flake = false;
+
+    yakc-src.url = "github:iammodev/YAKC/v2.8.1";
     yakc-src.flake = false;
   };
 

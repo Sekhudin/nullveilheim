@@ -7,4 +7,6 @@ in
   imports = [
     modules.common.nixpkgs
   ];
+
+  nixpkgs.source = inputs.nixpkgs-unstable;
 }

@@ -9,7 +9,7 @@ let
 in
 {
   home.packages = with pkgs; [
-    gemini-cli
+    antigravity-cli
     slack
     telegram-desktop
     wpsoffice

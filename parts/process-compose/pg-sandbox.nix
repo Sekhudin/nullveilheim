@@ -10,7 +10,7 @@ let
 in
 {
   perSystem =
-    { ... }:
+    { pkgs, ... }:
 
     {
       process-compose = {
@@ -29,7 +29,7 @@ in
                 superuser = username;
                 createDatabase = false;
                 initialScript = {
-                  before = ''
+                  before = pkgs.writeText "pg-sandbox-init-before.sql" ''
                     SET password_encryption = 'scram-sha-256';
 
                     CREATE USER ${username} WITH

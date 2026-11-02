@@ -49,8 +49,8 @@ in
         slack
         wpsoffice
 
+        antigravity-cli
         claude-code
-        gemini-cli
         opencode
 
         androidenv
