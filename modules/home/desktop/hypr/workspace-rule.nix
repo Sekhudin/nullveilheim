@@ -11,21 +11,19 @@ let
 in
 {
   wayland.windowManager.hyprland = {
-    settings = {
-      workspace_rule = hypr.mkWorkspaceRule {
-        workspaces = [
-          "1"
-          "2"
-          "3"
-          "4"
-          "5"
-        ];
-        rules = {
-          persistent = true;
-          monitor = monitors.primary;
-        };
-        extraWorkspaceRule = [ ];
+    settings.workspace_rule = hypr.mkWorkspaceRule {
+      workspaces = [
+        "1"
+        "2"
+        "3"
+        "4"
+        "5"
+      ];
+      rules = {
+        persistent = true;
+        monitor = monitors.primary;
       };
+      extraWorkspaceRule = [ ];
     };
   };
 }

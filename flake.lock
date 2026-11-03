@@ -636,6 +636,26 @@
         "type": "github"
       }
     },
+    "openscreen": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793655381,
+        "narHash": "sha256-bRAwOwQEYy4BM6URFW5GcVc7le0kh7KPd8egepmOGjI=",
+        "owner": "getopenscreen",
+        "repo": "openscreen",
+        "rev": "5e87ff39449229176bafb08687ba6fdd92a231ec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "getopenscreen",
+        "repo": "openscreen",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -694,23 +714,6 @@
         "type": "github"
       }
     },
-    "recordly-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1788832249,
-        "narHash": "sha256-2vyaSpyfjQA8p9sfw5Gksj5jDTGKWu31FDLiPW9F+ow=",
-        "owner": "webadderallorg",
-        "repo": "Recordly",
-        "rev": "dce74ce3be927b42b022471b11c29ad027439ba0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "webadderallorg",
-        "ref": "v1.4.0",
-        "repo": "Recordly",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "ez-configs": "ez-configs",
@@ -727,9 +730,9 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
         "noctalia": "noctalia",
+        "openscreen": "openscreen",
         "pre-commit-hooks": "pre-commit-hooks_2",
         "process-compose-flake": "process-compose-flake",
-        "recordly-src": "recordly-src",
         "services-flake": "services-flake",
         "sops-nix": "sops-nix",
         "yakc-src": "yakc-src"

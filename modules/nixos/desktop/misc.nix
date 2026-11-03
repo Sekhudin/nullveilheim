@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   ...
 }:
 
@@ -10,6 +11,13 @@ in
   networking = {
     networkmanager = {
       enable = cfg.enable;
+    };
+  };
+
+  hardware = {
+    bluetooth = {
+      enable = cfg.enable;
+      powerOnBoot = true;
     };
   };
 
@@ -41,12 +49,17 @@ in
         };
       };
     };
-  };
-
-  hardware = {
-    bluetooth = {
-      enable = cfg.enable;
-      powerOnBoot = true;
+    udev = {
+      packages = [
+        (pkgs.writeTextFile {
+          name = "openscreen-mouse-udev-rules";
+          destination = "/lib/udev/rules.d/70-openscreen-mouse.rules";
+          text = ''
+            KERNEL=="event*", SUBSYSTEM=="input", ENV{ID_INPUT_MOUSE}=="1", ENV{ID_INPUT_KEYBOARD}!="1", TAG+="uaccess"
+            KERNEL=="event*", SUBSYSTEM=="input", ENV{ID_INPUT_TOUCHPAD}=="1", ENV{ID_INPUT_KEYBOARD}!="1", TAG+="uaccess"
+          '';
+        })
+      ];
     };
   };
 }

@@ -58,26 +58,35 @@ in
     };
 
     wayland.windowManager.hyprland = {
-      settings = {
-        window_rule = [
-          (hypr.mkWindowRule {
-            name = "yakc";
-            match.class = "^Yakc$";
-            match.xwayland = true;
-            no_blur = true;
-            float = true;
-            pin = true;
-            size = [
-              "(monitor_w*0.25)"
-              "(monitor_h*0.22)"
-            ];
-            move = [
-              "(monitor_w*0.75)"
-              "(monitor_h*0.78)"
-            ];
-          })
-        ];
-      };
+      settings.window_rule = [
+        (hypr.mkWindowRule {
+          name = "yakc";
+          match = {
+            class = "(?i)^yakc$";
+            title = "(?i)^yakc - yet another key caster$";
+          };
+          pin = true;
+          no_focus = true;
+          size = [
+            "(monitor_w*0.25)"
+            "(monitor_h*0.22)"
+          ];
+          move = [
+            "(monitor_w*0.75)"
+            "(monitor_h*0.78)"
+          ];
+        })
+
+        (hypr.mkWindowRule {
+          name = "yakc-settings";
+          match = {
+            class = "(?i)^yakc$";
+            title = "(?i)^yakc settings$";
+          };
+          float = false;
+          maximize = true;
+        })
+      ];
     };
   };
 }

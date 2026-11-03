@@ -65,7 +65,7 @@ in
       hover_highlight = true;
       scale = barStyle.scale;
       font_family = barStyle.font_family;
-      font_weight = 500;
+      font_weight = 400;
       capsule = true;
       capsule_fill = "surface_container";
       capsule_thickness = barStyle.capsule_thickness;
