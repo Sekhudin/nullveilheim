@@ -4,7 +4,7 @@ let
   cfg = config.homeDesktop;
 in
 {
-  programs.recordly = {
+  programs.openscreen = {
     enable = cfg.enable;
   };
 }
