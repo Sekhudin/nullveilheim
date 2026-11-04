@@ -34,10 +34,6 @@
     nix-env.url = "github:lilyball/nix-env.fish";
     nix-env.flake = false;
 
-    # nixos packages
-    openscreen.url = "github:getopenscreen/openscreen";
-    openscreen.inputs.nixpkgs.follows = "nixpkgs-unstable";
-
     # desktop related packages
     hyprland.url = "github:hyprwm/Hyprland/v0.56.2";
 
@@ -46,6 +42,12 @@
 
     noctalia.url = "github:noctalia-dev/noctalia";
     noctalia.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
+    openscreen.url = "github:getopenscreen/openscreen";
+    openscreen.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
+    spotifast.url = "github:crmne/spotifast";
+    spotifast.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     yakc-src.url = "github:iammodev/YAKC/v2.8.1";
     yakc-src.flake = false;

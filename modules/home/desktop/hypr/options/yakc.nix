@@ -19,7 +19,7 @@ in
     enable = lib.mkEnableOption "yakc";
 
     package = lib.mkPackageOption pkgs "yakc" {
-      nullable = true;
+      nullable = false;
     };
 
     settings = lib.mkOption {
@@ -32,7 +32,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = lib.optionals (cfg.package != null) [
+    home.packages = [
       cfg.package
       (pkgs.writeShellApplication {
         name = ipc.keyviz;
