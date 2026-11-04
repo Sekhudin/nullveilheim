@@ -27,6 +27,11 @@ in
         allows_input = true;
         no_focus = false;
         border_size = 0;
+        move = [
+          "574"
+          "-32"
+        ];
+        suppress_event = "fullscreen maximize fullscreenoutput";
       })
 
       (hypr.mkWindowRule {
