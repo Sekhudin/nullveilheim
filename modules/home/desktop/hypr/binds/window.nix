@@ -1,4 +1,5 @@
 {
+  config,
   extraLib,
   ...
 }:
@@ -10,12 +11,118 @@ let
     hl
     ;
 
+  styles = hypr.getVarValues config "styles";
+  offset = styles.margin_out + styles.border_size;
+
   bindGroup = "window";
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
+        # basic
+        (hypr.mkBind {
+          group = bindGroup;
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
+          ] "Q";
+          dispatcher = hl.dsp.window.close { };
+          flags = {
+            description = "close current window";
+          };
+        })
+
+        (hypr.mkBind {
+          group = bindGroup;
+          key = ctl.combos.mod "F";
+          dispatcher = hl.dsp.window.fullscreen {
+            mode = "maximized";
+            action = "toggle";
+            layout_aware = true;
+          };
+          flags = {
+            description = "toggle window fullscreen";
+          };
+        })
+
+        (hypr.mkBind {
+          group = bindGroup;
+          key = ctl.combos.mod "P";
+          dispatcher = hl.extra.toggle_pin {
+            resize = false;
+          };
+          flags = {
+            description = "toggle window pin";
+          };
+        })
+
+        (hypr.mkBind {
+          group = bindGroup;
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
+          ] "P";
+          dispatcher = hl.extra.toggle_pin {
+            resize = true;
+            x = 0 - offset;
+            y = offset + 36;
+          };
+          flags = {
+            description = "toggle resized window pin";
+          };
+        })
+
+        (hypr.mkBind {
+          group = bindGroup;
+          key = ctl.combos.mod "V";
+          dispatcher = hl.dsp.window.float {
+            action = "toggle";
+          };
+          flags = {
+            description = "toggle window floating";
+          };
+        })
+
+        (hypr.mkBind {
+          group = bindGroup;
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.mouse.left
+          ] null;
+          dispatcher = hl.dsp.window.drag { };
+          flags = {
+            description = "drag window";
+            drag = true;
+          };
+        })
+
+        # window cycle
+        (hypr.mkBind {
+          group = bindGroup;
+          key = ctl.combos.mod "N";
+          dispatcher = hl.dsp.window.cycle_next {
+            next = true;
+          };
+          flags = {
+            description = "focus next window";
+          };
+        })
+
+        (hypr.mkBind {
+          group = bindGroup;
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.shift
+          ] "N";
+          dispatcher = hl.dsp.window.cycle_next {
+            next = false;
+          };
+          flags = {
+            description = "focus previous window";
+          };
+        })
+
         # focus navigation
         (hypr.mkBind {
           group = bindGroup;

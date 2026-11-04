@@ -6,44 +6,12 @@ let
     ctl
     hl
     ;
+
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
-        (hypr.mkBind {
-          key = ctl.combos.of [
-            ctl.keys.mod
-            ctl.keys.shift
-          ] "Q";
-          dispatcher = hl.dsp.window.close { };
-          flags = {
-            description = "close current window";
-          };
-        })
-
-        (hypr.mkBind {
-          key = ctl.combos.mod "F";
-          dispatcher = hl.dsp.window.fullscreen {
-            mode = "maximized";
-            action = "toggle";
-            layout_aware = true;
-          };
-          flags = {
-            description = "toggle window fullscreen";
-          };
-        })
-
-        (hypr.mkBind {
-          key = ctl.combos.mod "V";
-          dispatcher = hl.dsp.window.float {
-            action = "toggle";
-          };
-          flags = {
-            description = "toggle window floating";
-          };
-        })
-
         (hypr.mkBind {
           key = ctl.combos.of [
             ctl.keys.mod
@@ -58,7 +26,7 @@ in
             ];
           };
           flags = {
-            description = "cycle window layout";
+            description = "cycle layout";
           };
         })
 
@@ -90,18 +58,6 @@ in
           dispatcher = hl.extra.zen_mode { };
           flags = {
             description = "toggle zen mode";
-          };
-        })
-
-        (hypr.mkBind {
-          key = ctl.combos.of [
-            ctl.keys.mod
-            ctl.mouse.left
-          ] null;
-          dispatcher = hl.dsp.window.drag { };
-          flags = {
-            description = "drag window";
-            drag = true;
           };
         })
       ];
