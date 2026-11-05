@@ -9,7 +9,6 @@
 let
   desktop = config.homeDesktop;
   theme = config.homeCore.themeConfig;
-  mkLuaInline = lib.generators.mkLuaInline;
 in
 {
   programs.yazi = {
@@ -43,9 +42,8 @@ in
       };
       full-border = {
         package = pkgs.yaziPlugins.full-border;
-        setup = true;
         settings = {
-          type = mkLuaInline "ui.Border.PLAIN";
+          set = "plain";
         };
       };
       jump-to-char = {

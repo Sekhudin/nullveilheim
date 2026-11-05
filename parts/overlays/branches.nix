@@ -58,5 +58,20 @@ in
         android-studio
         android-studio-full
         ;
+
+      # yazi related
+      yazi = branches.unstable.yazi;
+      exiftool = branches.unstable.yazi;
+      yaziPlugins = branches.unstable.yaziPlugins // {
+        yatline = branches.unstable.yaziPlugins.yatline.overrideAttrs (_: {
+          version = "unstable-2026-10-06";
+          src = branches.unstable.fetchFromGitHub {
+            owner = "imsi32";
+            repo = "yatline.yazi";
+            rev = "dc44b737791c07a8e2de54d8838cfe304853d780";
+            hash = "sha256-U7MAZSc0iPiRvLZM8tKbNd749pblarB1Y48lH13uLuU=";
+          };
+        });
+      };
     };
 }
