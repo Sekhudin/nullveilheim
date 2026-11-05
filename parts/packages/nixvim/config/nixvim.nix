@@ -5,13 +5,13 @@
     theme = "hyper";
     banner = rec {
       header = {
-        ascii = "prabski_sawit";
+        ascii = "absolute_cinema";
         head = 16;
         gap = 1;
       };
       footer = {
         ascii = header.ascii;
-        tail = 5;
+        tail = 8;
         gap = 1;
       };
     };
