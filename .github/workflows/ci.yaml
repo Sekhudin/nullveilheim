@@ -25,7 +25,7 @@ jobs:
 
       - name: Check formatting
         run: |
-          nix fmt -- $(git ls-files '*.nix' ':!secrets/**')
+          git ls-files -z '*.nix' ':!secrets/**' | xargs -0 nix fmt --
           git diff --exit-code -- . ':!secrets/**'
 
       - name: Run flake checks
