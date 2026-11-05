@@ -11,6 +11,9 @@
         <a href="https://nixos.org">
             <img alt="NixOS Flakes" src="https://img.shields.io/badge/NixOS-Flakes-blue?style=for-the-badge&logo=NixOS&logoColor=white">
         </a>
+        <a href="https://github.com/Sekhudin/nullveilheim/blob/main/LICENSE">
+            <img alt="MIT License" src="https://img.shields.io/github/license/Sekhudin/nullveilheim?style=for-the-badge&label=License">
+        </a>
     </div>
     <br>
 </div>
