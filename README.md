@@ -202,23 +202,23 @@ desktop setup.
 ### Overview
 
 <p align="center">
-  <img src="docs/images/desktop-overview.png" alt="NullVeilheim desktop overview" width="100%">
+  <img src="docs/images/desktop-overview.webp" alt="NullVeilheim desktop overview" width="100%">
 </p>
 
 <table>
   <tr>
     <td align="center" width="33%">
-      <img src="docs/images/desktop-workspace.png" alt="NullVeilheim desktop workspace" width="100%">
+      <img src="docs/images/desktop-workspace.webp" alt="NullVeilheim desktop workspace" width="100%">
       <br>
       <sub><b>Workspace</b></sub>
     </td>
     <td align="center" width="33%">
-      <img src="docs/images/desktop-cheatsheet.png" alt="Hypr Cheatsheet" width="100%">
+      <img src="docs/images/desktop-cheatsheet.webp" alt="Hypr Cheatsheet" width="100%">
       <br>
       <sub><b>Cheatsheet</b></sub>
     </td>
     <td align="center" width="33%">
-      <img src="docs/images/desktop-launcher.png" alt="Application launcher" width="100%">
+      <img src="docs/images/desktop-launcher.webp" alt="Application launcher" width="100%">
       <br>
       <sub><b>Application Launcher</b></sub>
     </td>
