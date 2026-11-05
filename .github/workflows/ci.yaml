@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Flake checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Set up Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Check formatting
+        run: |
+          nix fmt -- $(git ls-files '*.nix' ':!secrets/**')
+          git diff --exit-code -- . ':!secrets/**'
+
+      - name: Run flake checks
+        run: nix flake check --no-write-lock-file
