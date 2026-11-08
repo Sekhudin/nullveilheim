@@ -71,6 +71,20 @@ During implementation:
 - Prefer explicit, maintainable configuration over clever abstractions.
 - Ask questions when requirements or scope are ambiguous.
 
+## AI Tooling Conventions
+
+- Store project-specific OpenCode configuration under `.opencode/`.
+- Store custom agents under `.opencode/agents/`.
+- Store reusable skills under `.opencode/skills/`.
+- Keep agents and skills focused, documented, and limited to the permissions they need.
+- Prefer read-only permissions for review and analysis agents.
+- Do not store API keys, OAuth tokens, or other credentials in the repository.
+- Keep MCP configuration project-specific unless explicitly intended to be global.
+- Use environment variables or OAuth for MCP credentials.
+- Review agent, skill, MCP, and permission changes like normal code changes.
+- Do not add external agents, skills, plugins, or MCP servers without understanding
+  their source, permissions, and data access.
+
 Before completion:
 
 - Review the diff.
