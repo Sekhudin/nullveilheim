@@ -1,6 +1,7 @@
 ---
 description: Reviews Nix configuration changes for correctness, safety, and consistency
 mode: subagent
+color: "#34a853" # green
 permissions:
   # The reviewer must not modify files.
   - action: edit
