@@ -24,6 +24,7 @@ in
     ];
     sessionVariables = rec {
       EDITOR = lib.getExe' pkgs.nixvim "nvim";
+      BROWSER = lib.getExe' pkgs.firefox "firefox";
       SELF_FLAKE = "${ctx.homeDirectory}/.config/nullveilheim";
       NH_FLAKE = SELF_FLAKE;
     };
