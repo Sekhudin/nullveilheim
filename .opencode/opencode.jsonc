@@ -1,0 +1,54 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  "permissions": [
+    // Protect encrypted secrets.
+    {
+      "action": "read",
+      "resource": "secrets/**",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "secrets/**",
+      "effect": "deny"
+    },
+
+    // Modifying SOPS metadata requires approval.
+    {
+      "action": "edit",
+      "resource": ".sops.yaml",
+      "effect": "ask"
+    },
+
+    // Git operations that affect repository history or remote state
+    // require explicit approval.
+    {
+      "action": "shell",
+      "resource": "git commit *",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "git push *",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "git reset --hard *",
+      "effect": "deny"
+    },
+
+    // System-wide changes require explicit approval.
+    {
+      "action": "shell",
+      "resource": "nixos-rebuild *",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "darwin-rebuild *",
+      "effect": "ask"
+    }
+  ]
+}
