@@ -12,6 +12,7 @@ let
   homeDirectory = config.home.homeDirectory;
 
   inherit (extraLib.sops)
+    mkSecretAttrs
     mkGPGKeySecrets
     mkSSHKeySecrets
     mkGitIdentitySecrets
@@ -37,6 +38,10 @@ in
       (mkGPGKeySecrets activation.gpgKeys)
       (mkSSHKeySecrets activation.sshKeys)
       (mkGitIdentitySecrets activation.gitIdentities)
+      (mkSecretAttrs {
+        path = "tokens.personal";
+        fields = [ "nullveilheim_mcp" ];
+      })
     ];
   };
 
