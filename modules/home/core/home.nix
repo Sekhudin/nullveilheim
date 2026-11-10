@@ -48,9 +48,10 @@
       # criptography
       age = lib.getExe pkgs.rage;
 
-      # gpg export
+      # gpg export-backup
       gpg-bp = "gpg --export-options backup --export";
       gpg-rp = "gpg --import-options restore --import";
+      gpg-armor = "gpg --armor --export"; # gpg-armor <FINGER_PRINT>
 
       gpg-bs = "gpg --export-options backup --export-secret-keys";
       gpg-rs = "gpg --pinentry-mode loopback --import-options restore --import";
