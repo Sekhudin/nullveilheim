@@ -61,7 +61,7 @@ in
 
       # yazi related
       yazi = branches.unstable.yazi;
-      exiftool = branches.unstable.yazi;
+      exiftool = branches.unstable.exiftool;
       yaziPlugins = branches.unstable.yaziPlugins // {
         yatline = branches.unstable.yaziPlugins.yatline.overrideAttrs (_: {
           version = "unstable-2026-10-06";
