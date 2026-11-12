@@ -11,7 +11,7 @@ in
 {
   home = lib.mkIf (core.shell == "fish") {
     packages = with pkgs; [
-      branches.stable.babelfish
+      babelfish
       fishPlugins.colored-man-pages
       fishPlugins.done
       fishPlugins.foreign-env

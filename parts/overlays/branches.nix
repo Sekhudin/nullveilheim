@@ -37,6 +37,7 @@ in
       inherit branches;
 
       inherit (branches.stable)
+        babelfish
         nixd
         nixf
         nixt
