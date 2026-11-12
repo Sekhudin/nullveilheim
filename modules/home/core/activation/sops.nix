@@ -23,12 +23,15 @@ in
     inputs.sops-nix.homeManagerModules.sops
   ];
 
-  home.packages = with pkgs; [
-    sops
-    gnupg
-  ];
+  home.packages = lib.mkIf activation.enable (
+    with pkgs;
+    [
+      sops
+      gnupg
+    ]
+  );
 
-  sops = {
+  sops = lib.mkIf activation.enable {
     defaultSopsFile = "${inputs.self}/secrets/secrets.yaml";
     gnupg = {
       home = "${homeDirectory}/.gnupg";
@@ -45,7 +48,7 @@ in
     ];
   };
 
-  programs.git.settings.diff.sopsdiffer = {
+  programs.git.settings.diff.sopsdiffer = lib.mkIf activation.enable {
     textconv = "sops -d --config /dev/null";
   };
 }
