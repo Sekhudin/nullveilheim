@@ -21,6 +21,7 @@
       asciinema-agg
       cliamp
       ffmpeg
+      spotify-player
 
       # productivity
       fzf
