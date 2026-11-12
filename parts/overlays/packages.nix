@@ -18,7 +18,6 @@
 
       inherit (inputs.self.packages.${system})
         nixvim
-        recordly
         yakc
         ;
     };
