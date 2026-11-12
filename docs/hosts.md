@@ -64,50 +64,53 @@ home-manager switch --flake .#syaikhu-sa
 The integrated `syaikhu` configuration is normally applied through the NixOS
 or nix-darwin host that includes it.
 
-## Installing NixOS with This Flake
+## Recommended Workflow: Install NixOS First
 
-The repository does not use the installer-generated
-`/etc/nixos/configuration.nix` as its main host entrypoint. A new host is
-assembled under `configurations/nixos/<hostname>/` and registered in
+The recommended workflow is to install NixOS normally first, then apply this
+repository after the first boot. The repository does not use the installer-
+generated `/etc/nixos/configuration.nix` as its main host entrypoint. A new
+host is assembled under `configurations/nixos/<hostname>/` and registered in
 `parts/ez-config.nix`.
 
-The standard NixOS installation flow is:
+The workflow is:
 
-1. Boot the NixOS installer ISO in UEFI mode.
-2. Connect to the network and partition the target disk according to the
-   machine's hardware and storage layout.
-3. Mount the target filesystem at `/mnt`, including its boot filesystem at
-   `/mnt/boot` when applicable.
-4. Generate the machine-specific hardware module:
-
-   ```sh
-   sudo nixos-generate-config --root /mnt
-   ```
-
-   This creates temporary installer configuration files in
-   `/mnt/etc/nixos/`, including `hardware-configuration.nix`.
-
-5. Clone this repository in the installer environment and create the new host.
-6. Back up the generated hardware module by renaming it, then copy the backup
+1. Install NixOS using the [official installation
+   guide](https://nixos.org/manual/nixos/stable/#sec-installation).
+2. Boot into the newly installed NixOS system.
+3. Clone this repository and create the new host.
+4. Back up the generated hardware module by renaming it, then copy the backup
    into the new host directory.
-7. Register the host in `parts/ez-config.nix`.
-8. Build or evaluate the flake before installing.
-9. Install with `nixos-install --flake` using the new host output.
-10. Reboot into the installed system, move or clone the repository into the
-   user's normal configuration directory, and use `nixos-rebuild` for future
-   changes.
+5. Create the host's `default.nix`.
+6. Register the host in `parts/ez-config.nix`.
+7. Build and validate the flake.
+8. Apply the host with `nixos-rebuild switch`.
+
+The normal installation creates:
+
+```text
+/etc/nixos/
+├── configuration.nix
+└── hardware-configuration.nix
+```
+
+The repository replaces the generated `configuration.nix` with its own host
+entrypoint. The generated `hardware-configuration.nix` is preserved as a
+backup and copied into the repository host directory.
 
 Disk partitioning and filesystem commands are intentionally not prescribed
 here because they are hardware-specific and can destroy data when copied
-blindly. Verify the target devices and mount points before running any
-installation command.
+blindly. Follow the official NixOS guide and verify the target devices.
 
 ### Prepare the New Host
 
-Choose a unique hostname and create its directory:
+Clone the repository and choose a unique hostname:
 
 ```sh
-hostname=<hostname>
+git clone https://github.com/sekhudin/nullveilheim.git \
+  ~/.config/nullveilheim
+
+cd ~/.config/nullveilheim
+hostname="my-host" # replace with the actual hostname
 mkdir -p "configurations/nixos/$hostname"
 ```
 
@@ -119,31 +122,17 @@ configurations/nixos/<hostname>/
 └── hardware-configuration.nix
 ```
 
-First back up the generated hardware module by renaming it. When installing
-from an ISO with `--root /mnt`, the generated file is under `/mnt/etc/nixos/`:
-
-Run these commands from a root shell. The NixOS installer environment commonly
-starts with root privileges.
-
-```sh
-mv \
-  /mnt/etc/nixos/hardware-configuration.nix \
-  /mnt/etc/nixos/hardware-configuration.bak.nix
-```
-
-Then copy the backup into the repository host directory:
-
-```sh
-cp /mnt/etc/nixos/hardware-configuration.bak.nix \
-  "configurations/nixos/$hostname/hardware-configuration.nix"
-```
-
-On an already installed NixOS system, use `/etc/nixos/` instead of
-`/mnt/etc/nixos/` in these commands:
+Run only the backup operation from a root shell because `/etc/nixos/` is
+normally owned by root:
 
 ```sh
 mv /etc/nixos/hardware-configuration.nix \
   /etc/nixos/hardware-configuration.bak.nix
+```
+
+Return to the regular user shell in the repository, then copy the backup:
+
+```sh
 cp /etc/nixos/hardware-configuration.bak.nix \
   "configurations/nixos/$hostname/hardware-configuration.nix"
 ```
@@ -226,35 +215,40 @@ to the user configuration under
 `configurations/home/syaikhu.nix`. That profile imports the shared user
 configuration and enables the Linux desktop when running on Linux.
 
-### Validate and Install
+### Validate and Apply
 
-From the repository root, validate the new host before switching or
-installing:
+From the repository root, validate and build the new host before switching:
 
 ```sh
 nix flake check --all-systems
 nixos-rebuild build --flake .#<hostname>
-```
-
-While still in the installer environment, install the selected host:
-
-```sh
-sudo nixos-install --flake /path/to/nullveilheim#<hostname>
-```
-
-Use the actual path where the repository was cloned in the installer
-environment. Review the target host, filesystem module, boot settings, and
-user configuration before confirming the installation.
-
-After rebooting into the new system:
-
-```sh
-git clone https://github.com/sekhudin/nullveilheim.git \
-  ~/.config/nullveilheim
-cd ~/.config/nullveilheim
-nix flake check --all-systems
 sudo nixos-rebuild switch --flake .#<hostname>
 ```
+
+The `build` command does not change the active system. Only run `switch` after
+reviewing the build and host configuration.
+
+## Advanced: Install Directly from the Flake
+
+`nixos-install --flake` is also supported by NixOS, but it is an advanced
+workflow and is not required for this repository. Before using it from an
+installer environment, all of the following must already be prepared:
+
+- The target filesystems are mounted under `/mnt`.
+- The repository is available in the installer environment.
+- `configurations/nixos/<hostname>/default.nix` exists.
+- `configurations/nixos/<hostname>/hardware-configuration.nix` exists.
+- The host is registered in `parts/ez-config.nix`.
+
+Then the installation can be started with:
+
+```sh
+nixos-install --flake /path/to/nullveilheim#<hostname>
+```
+
+This command does not generate or discover the hardware configuration by
+itself. The generated hardware module must be prepared and included in the
+flake before running it.
 
 ## Adding a NixOS Host
 

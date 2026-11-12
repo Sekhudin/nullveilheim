@@ -69,6 +69,10 @@ nix flake show
 nix flake check --all-systems
 ```
 
+For a new machine, install NixOS normally first, then clone this repository
+and apply the host flake after the first boot. See the
+[host installation guide](docs/hosts.md#recommended-workflow-install-nixos-first).
+
 Apply a configuration only after reviewing its host and user files:
 
 ```sh
