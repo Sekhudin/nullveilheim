@@ -48,11 +48,15 @@ Preserve existing structure, naming conventions, and module boundaries.
 
 After changing Nix files:
 
-1. Run the relevant formatter.
+1. Run the relevant formatter check.
 2. Run `git diff --check`.
-3. Run `nix flake check` when applicable.
+3. Run `nix flake check --all-systems` when the flake or Nix outputs are
+   affected.
 4. Build or evaluate the affected configuration when practical.
-5. Report validation results and any unrelated pre-existing failures.
+5. Report validation results, warnings, and unrelated pre-existing failures.
+
+Do not report validation as passed when it was skipped, blocked, timed out, or
+only partially completed. Report it as skipped or blocked and explain why.
 
 Do not claim a change is complete without reviewing the resulting diff.
 
@@ -63,6 +67,15 @@ Before editing:
 1. Understand the request and inspect the relevant files.
 2. Create a short implementation plan.
 3. Identify possible risks and affected configurations.
+
+When a task matches a repository-specific skill, load and follow it:
+
+- Package inputs, overlays, or nixpkgs channel selection:
+  `nix-package-overlay`.
+- Hyprland modules, bindings, rules, plugins, or helpers:
+  `nix-hyprland`.
+- Formatting, evaluation, builds, and validation:
+  `nix-validation`.
 
 During implementation:
 
