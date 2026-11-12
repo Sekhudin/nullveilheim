@@ -34,175 +34,89 @@ and workflow.
 > Review the relevant host configuration before applying it to another machine.
 > Do not run `switch` commands blindly.
 
-## Table of Contents
+## What Do You Want to Do?
 
-- [Overview](#overview)
-- [Hosts and Users](#hosts-and-users)
-- [Installation](#installation)
-- [Adding a New Host](#adding-a-new-host)
-- [Desktop Environment](#desktop-environment)
-- [Desktop Screenshots](#desktop-screenshots)
-- [Home Manager](#home-manager)
-- [Secrets](#secrets)
-- [Flakes](#flakes)
-- [Nixvim](#nixvim)
-- [Development Shells](#development-shells)
-- [Process-Compose Services](#process-compose-services)
-- [Common Commands](#common-commands)
-- [Repository Structure](#repository-structure)
-- [Flake Outputs](#flake-outputs)
-- [Status](#status)
+- [Install a new NixOS host](docs/hosts.md#installing-nixos-with-this-flake).
+- [Add a host to the flake](docs/hosts.md#adding-a-nixos-host).
+- [Configure Home Manager](docs/home-manager.md).
+- [Configure Hyprland](docs/hyprland.md).
+- [Develop and validate the repository](docs/development.md).
+
+## Documentation
+
+- [Architecture](docs/architecture.md) — repository layout and module flow.
+- [Hosts](docs/hosts.md) — supported hosts, users, and apply commands.
+- [Home Manager](docs/home-manager.md) — shell, terminal, theme, and activation options.
+- [Hyprland](docs/hyprland.md) — desktop module structure and development workflow.
+- [Development](docs/development.md) — validation, builds, and contribution workflow.
+
+## Quick Start
+
+### Requirements
+
+- Nix with flakes enabled.
+- Git.
+- A supported NixOS, macOS, or Home Manager environment.
+- Access to the required SOPS encryption keys when using secret-dependent
+  activation modules.
+
+Clone the repository and review the relevant configuration before applying it:
+
+```sh
+git clone https://github.com/sekhudin/nullveilheim.git
+cd nullveilheim
+nix flake show
+nix flake check --all-systems
+```
+
+Apply a configuration only after reviewing its host and user files:
+
+```sh
+# NixOS
+sudo nixos-rebuild switch --flake .#t14
+sudo nixos-rebuild switch --flake .#acerswift
+
+# nix-darwin
+darwin-rebuild switch --flake .#mbp
+
+# Standalone Home Manager
+home-manager switch --flake .#syaikhu-sa
+```
+
+See [Hosts](docs/hosts.md) for the complete list, installation process, and
+new-host workflow.
 
 ## Overview
 
 The repository is organized around several layers:
 
-- `configurations/`
-  - Host and user entrypoints.
-  - Contains NixOS hosts, nix-darwin hosts, and Home Manager users.
+- `configurations/` — host and user entrypoints.
+- `modules/` — reusable NixOS, Home Manager, Darwin, and common modules.
+- `parts/` — flake-parts modules, packages, overlays, development shells, and services.
+- `shared/` — reusable helpers, colors, icons, and internal libraries.
+- `secrets/` — encrypted SOPS data; secret values are intentionally not documented.
+- `.opencode/` — repository-specific development instructions and skills.
 
-- `modules/`
-  - Reusable NixOS, Home Manager, Darwin, and common modules.
-  - Most system and user behavior is defined here.
-
-- `parts/`
-  - Flake-parts modules.
-  - Contains packages, overlays, development shells, process-compose services,
-    and flake-level wiring.
-
-- `shared/`
-  - Shared helpers, colors, icons, and internal libraries.
-
-- `secrets/`
-  - Encrypted secrets managed with SOPS.
-  - Secret values are intentionally not documented.
-
-## Hosts and Users
-
-| Name         | Platform     | Type                          | Notes                        |
-| ------------ | ------------ | ----------------------------- | ---------------------------- |
-| `acerswift`  | NixOS        | System host                   | Linux desktop                |
-| `t14`        | NixOS        | System host                   | Linux desktop                |
-| `mbp`        | nix-darwin   | System host                   | macOS machine                |
-| `syaikhu`    | Home Manager | User configuration            | Integrated with system hosts |
-| `syaikhu-sa` | Home Manager | Standalone user configuration | Linux standalone setup       |
-
-## Installation
-
-### Requirements
-
-- Nix with flakes enabled
-- Git
-- A supported NixOS, macOS, or Home Manager environment
-- Access to the required SOPS encryption keys when using secret-dependent
-  activation modules
-
-Clone the repository:
-
-```sh
-git clone https://github.com/sekhudin/nullveilheim.git
-cd nullveilheim
-```
-
-Review the relevant host and user files before applying any configuration.
-
-### Apply a NixOS Host
-
-```sh
-sudo nixos-rebuild switch --flake .#t14
-sudo nixos-rebuild switch --flake .#acerswift
-```
-
-### Apply the nix-darwin Host
-
-```sh
-darwin-rebuild switch --flake .#mbp
-```
-
-### Apply Standalone Home Manager
-
-```sh
-home-manager switch --flake .#syaikhu-sa
-```
-
-### Validate Before Applying
-
-```sh
-nix flake check
-nix flake show
-```
-
-## Adding a New Host
-
-Create a directory under `configurations/nixos/`:
-
-```text
-configurations/nixos/<hostname>/
-```
-
-Add the required host files:
-
-```text
-configurations/nixos/<hostname>/
-├── default.nix
-├── hardware-configuration.nix
-├── networking.nix
-├── services.nix
-└── virtualisation.nix
-```
-
-Register the host in `parts/ez-config.nix`:
-
-```nix
-hosts = {
-  <hostname> = {
-    userHomeModules = {
-      syaikhu = "syaikhu";
-    };
-  };
-};
-```
-
-Generate and review the hardware configuration, then validate the host:
-
-```sh
-nix flake check
-nixos-rebuild build --flake .#<hostname>
-```
-
-Apply it only after reviewing the build result:
-
-```sh
-sudo nixos-rebuild switch --flake .#<hostname>
-```
+For the complete architecture and dependency flow, see
+[Architecture](docs/architecture.md).
 
 ## Desktop Environment
 
 Linux desktop configurations use:
 
-- **Hyprland** as the Wayland compositor and window manager
-- **Noctalia** as the desktop shell layer
-- Home Manager for user-level desktop configuration
-- Shared theme, color, icon, and variable helpers
+- **Hyprland** as the Wayland compositor and window manager.
+- **Noctalia** as the desktop shell layer.
+- Home Manager for user-level desktop configuration.
+- Shared theme, color, icon, and variable helpers.
 
-The desktop configuration includes support for:
-
-- Wallpapers and desktop backdrops
-- Bars, docks, and widgets
-- Application launcher integration
-- Audio and brightness controls
-- Media and microphone controls
-- Notifications and calendar integration
-- Screenshot and session controls
-- Hyprland keybindings, rules, animations, and workspaces
-- Noctalia plugins and local integrations
+The desktop configuration includes wallpapers, bars, docks, launchers, audio
+and brightness controls, notifications, screenshots, session controls,
+Hyprland bindings and rules, and Noctalia integrations.
 
 The desktop configuration is enabled for Linux and disabled for the macOS
-desktop setup.
+desktop setup. See [Hyprland](docs/hyprland.md) for development details.
 
-## Desktop Screenshots
-
-### Overview
+### Screenshots
 
 <p align="center">
   <img src="docs/images/desktop-overview.webp" alt="NullVeilheim desktop overview" width="100%">
@@ -230,205 +144,51 @@ desktop setup.
 
 ## Home Manager
 
-Home Manager manages user-level configuration, including:
+Home Manager manages user-level configuration, including shells, terminals,
+themes, packages, session variables, activation scripts, and user programs.
 
-- Shell configuration
-- Terminal preferences
-- Themes and desktop integration
-- User packages
-- Session variables
-- Activation scripts
-- Git, SSH, GPG, and other user programs
-
-The main user configuration currently uses:
-
-- Fish as the shell
-- Ghostty as the terminal on supported systems
-- Nixvim as the editor
-- Aurora as the selected theme
+The main user configuration currently uses Fish, Ghostty, Nixvim, and the
+Aurora theme. Shell, terminal, and activation settings are configurable; see
+[Home Manager](docs/home-manager.md).
 
 ## Secrets
 
 Secrets are encrypted with [SOPS](https://github.com/getsops/sops) and stored
-in:
+in `secrets/secrets.yaml`. Never commit plaintext secret values.
 
-```text
-secrets/secrets.yaml
+The expected SOPS key names are documented in
+[Home Manager → SOPS Key Structure](docs/home-manager.md#sops-key-structure);
+secret values are intentionally omitted.
+
+Secret-dependent activation can be disabled with:
+
+```nix
+homeCore.activation.enable = false;
 ```
 
-The declared secret structure is:
-
-```text
-secrets/
-└── secrets.yaml
-    ├── gpg_keys/
-    │   └── personal/
-    │       ├── email
-    │       ├── private_key
-    │       └── owner_trust
-    ├── ssh_keys/
-    │   └── personal/
-    │       ├── path
-    │       └── private_key
-    ├── git_identities/
-    │   └── personal/
-    │       ├── name
-    │       ├── email
-    │       ├── signing_key
-    │       ├── ssh_key
-    │       └── gitdirs/
-    │           ├── w1
-    │           ├── w2
-    │           └── w3
-    ├── tokens/
-    ├── passwords/
-    └── certificates/
-```
-
-Edit the encrypted file with:
-
-```sh
-sops secrets/secrets.yaml
-```
-
-When adding a secret:
-
-- Keep the file encrypted.
-- Never commit plaintext secret values.
-- Follow the existing key structure.
-- Ensure the corresponding Nix module expects the new key.
-- Test secret-dependent activation in a safe environment first.
-
-The CI workflow does not decrypt or use repository secrets.
-
-## Flakes
-
-The flake provides:
-
-- NixOS configurations
-- nix-darwin configurations
-- Home Manager configurations
-- Custom packages
-- Overlays
-- Development shells
-- Process-compose services
-- Flake checks
-
-External dependencies are managed through `flake.nix` and `flake.lock`.
-
-## Nixvim
-
-Neovim is configured with
-[Nixvim](https://github.com/nix-community/nixvim).
-
-Build the Nixvim package:
-
-```sh
-nix build .#nixvim
-```
-
-Run the Nixvim check:
-
-```sh
-nix build .#checks.x86_64-linux.nixvim
-```
-
-## Development Shells
-
-Available development shells include:
-
-- `default`
-- `bun`
-- `go`
-- `go125`
-- `go126`
-- `goLatest`
-- `nodejs22`
-- `nodejs24`
-- `nodejs26`
-- `nodejsLatest`
-- `c-general`
-- `c-linux`
-
-Enter a shell with:
-
-```sh
-nix develop
-nix develop .#go
-nix develop .#nodejs24
-nix develop .#bun
-nix develop .#c-linux
-```
-
-The default development shell includes pre-commit checks for GitHub Actions,
-shell scripts, Lua, dead Nix code, and Nix formatting.
-
-## Process-Compose Services
-
-Run the local PostgreSQL sandbox:
-
-```sh
-nix run .#pg-sandbox
-```
-
-Run the local Mailpit sandbox:
-
-```sh
-nix run .#mail-sandbox
-```
-
-## Common Commands
-
-```sh
-nix flake check
-nix fmt -- $(git ls-files '*.nix' ':!secrets/**')
-nix flake update
-nix flake show
-```
-
-## Repository Structure
-
-```text
-.
-├── .github/
-│   └── workflows/
-│       └── ci.yaml
-├── configurations/
-│   ├── darwin/
-│   ├── home/
-│   └── nixos/
-├── docs/
-│   └── images/
-├── modules/
-│   ├── common/
-│   ├── darwin/
-│   ├── home/
-│   └── nixos/
-├── parts/
-│   ├── devshells/
-│   ├── overlays/
-│   ├── packages/
-│   └── process-compose/
-├── secrets/
-├── shared/
-├── flake.nix
-└── flake.lock
-```
+The CI workflow does not decrypt or use repository secrets. See
+[Home Manager](docs/home-manager.md) for activation behavior.
 
 ## Flake Outputs
+
+The flake provides NixOS, nix-darwin, and Home Manager configurations, custom
+packages, overlays, development shells, process-compose services, and checks.
 
 Notable outputs include:
 
 - `nixosConfigurations.acerswift`
 - `nixosConfigurations.t14`
 - `darwinConfigurations.mbp`
+- `homeConfigurations.syaikhu@acerswift`
+- `homeConfigurations.syaikhu@t14`
+- `homeConfigurations.syaikhu@mbp`
+- `homeConfigurations.syaikhu-sa`
 - `packages.*.nixvim`
 - `packages.*.pg-sandbox`
 - `packages.*.mail-sandbox`
 - `checks.*.nixvim`
 - `checks.*.pre-commit`
 - `devShells.*.default`
-- `devShells.*.bun`
 - `devShells.*.go`
 - `devShells.*.nodejs24`
 - `overlays.branches`
@@ -437,11 +197,47 @@ Notable outputs include:
 - `overlays.tree-sitter`
 - `overlays.vim`
 
+Inspect the complete output set with:
+
+```sh
+nix flake show
+```
+
+## Useful Commands
+
+```sh
+nix flake check --all-systems
+nix flake show
+nix build .#nixvim
+nix run .#pg-sandbox
+nix run .#mail-sandbox
+nix develop
+nix develop .#go
+nix develop .#nodejs24
+```
+
+For formatting, diff checks, and the contribution workflow, see
+[Development](docs/development.md).
+
+## Repository Structure
+
+```text
+.
+├── .github/              # CI workflows
+├── .opencode/            # repository-specific agents and skills
+├── configurations/       # host and user entrypoints
+├── docs/                 # detailed documentation and images
+├── modules/              # reusable system and Home Manager modules
+├── parts/                # flake outputs, overlays, packages, and shells
+├── secrets/              # encrypted secrets
+├── shared/               # reusable helper libraries
+├── flake.nix
+└── flake.lock
+```
+
 ## Status
 
 This is a personal configuration repository and is still under active
-development.
-
-It is not intended to be a drop-in framework. Some modules, paths, secrets,
-hardware assumptions, and workflows are specific to my machines and
-preferences.
+development. It is not intended to be a drop-in framework; some modules,
+paths, secrets, hardware assumptions, and workflows are specific to my
+machines and preferences.
