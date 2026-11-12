@@ -2,7 +2,7 @@
 
 > Scope: configuring user-level options, activation, themes, and SOPS key paths.
 
-[`Home Manager`](https://nix-community.github.io/home-manager/) modules provide user-level configuration for shells, terminals,
+[`Home Manager`](https://home-manager.dev/manual/26.05/) modules provide user-level configuration for shells, terminals,
 themes, packages, session variables, activation, and user programs.
 
 The main user configuration is shared by the integrated and standalone
@@ -199,7 +199,7 @@ home-manager switch --flake .#syaikhu-sa
 
 ## References
 
-- [Home Manager manual](https://nix-community.github.io/home-manager/)
+- [Home Manager manual](https://home-manager.dev/manual/26.05/)
 - [SOPS-Nix Home Manager module](https://github.com/Mic92/sops-nix#home-manager-module)
 - [Nixpkgs library manual](https://nixos.org/manual/nixpkgs/stable/#sec-functions-library)
 - [Theme definitions](../shared/colors.nix)

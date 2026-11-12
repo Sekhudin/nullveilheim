@@ -3,7 +3,7 @@
 > Scope: developing Hyprland bindings, rules, plugins, and application integrations.
 
 Linux desktop configurations use [Hyprland](https://wiki.hypr.land/) through
-[Home Manager](https://nix-community.github.io/home-manager/). The main
+[Home Manager](https://home-manager.dev/manual/26.05/). The main
 module is `modules/home/desktop/hypr/hypr.nix`, and the desktop module tree is
 automatically discovered by `modules/home/desktop/default.nix`.
 
@@ -140,7 +140,7 @@ For the complete helper reference, see
 [`../.opencode/skills/nix-hyprland/reference.md`](../.opencode/skills/nix-hyprland/reference.md).
 
 For the underlying Home Manager module options, see the
-[Home Manager manual](https://nix-community.github.io/home-manager/). For
+[Home Manager manual](https://home-manager.dev/manual/26.05/). For
 general Nix module helpers such as `lib.mkIf` and `lib.mkOption`, see the
 [Nixpkgs library manual](https://nixos.org/manual/nixpkgs/stable/#sec-functions-library).
 

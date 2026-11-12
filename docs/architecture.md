@@ -51,7 +51,7 @@ flake.nix
       └── process-compose/
 ```
 
-The [`ez-configs`](https://github.com/ehllie/ez-configs) integration connects
+The [`ez-configs`](https://flake.parts/options/ez-configs.html) integration connects
 configuration entrypoints to reusable modules:
 
 ```text
@@ -66,7 +66,7 @@ modules/common/
 ```
 
 Shared values and helpers are passed through the repository's flake context.
-For example, [Home Manager](https://nix-community.github.io/home-manager/)
+For example, [Home Manager](https://home-manager.dev/manual/26.05/)
 modules use shared theme data and helpers through `extraLib`, while Hyprland
 modules use `extraLib.hyprland`.
 
@@ -101,9 +101,9 @@ The main external libraries that form the repository's configuration
 backbone are:
 
 - [flake-parts](https://flake.parts/) — composes the flake and its outputs.
-- [ez-configs](https://github.com/ehllie/ez-configs) — discovers and registers
+- [ez-configs](https://flake.parts/options/ez-configs.html) — discovers and registers
   system and Home Manager configurations.
-- [Home Manager](https://nix-community.github.io/home-manager/) — manages
+- [Home Manager](https://home-manager.dev/manual/26.05/) — manages
   user-level modules and activation.
 - [sops-nix](https://github.com/Mic92/sops-nix) — integrates encrypted SOPS
   secrets with NixOS and Home Manager.

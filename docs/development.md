@@ -4,8 +4,8 @@
 
 Development should be done on a focused branch and validated before opening a
 pull request. This repository is personal infrastructure built with
-[flake-parts](https://flake.parts/), [ez-configs](https://github.com/ehllie/ez-configs),
-[Home Manager](https://nix-community.github.io/home-manager/), and
+[flake-parts](https://flake.parts/), [ez-configs](https://flake.parts/options/ez-configs.html),
+[Home Manager](https://home-manager.dev/manual/26.05/), and
 [sops-nix](https://github.com/Mic92/sops-nix), so changes should
 preserve existing module boundaries and avoid unrelated modifications.
 
@@ -101,8 +101,8 @@ claiming that validation passed.
 ## Library References
 
 - [flake-parts documentation](https://flake.parts/)
-- [ez-configs repository](https://github.com/ehllie/ez-configs)
-- [Home Manager manual](https://nix-community.github.io/home-manager/)
+- [ez-configs options](https://flake.parts/options/ez-configs.html)
+- [Home Manager manual](https://home-manager.dev/manual/26.05/)
 - [sops-nix documentation](https://github.com/Mic92/sops-nix)
 - [Nixpkgs library manual](https://nixos.org/manual/nixpkgs/stable/#sec-functions-library)
 

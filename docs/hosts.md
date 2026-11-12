@@ -3,7 +3,7 @@
 > Scope: installing NixOS, creating hosts, and applying system or Home Manager configurations.
 
 The available configurations are registered through `parts/ez-config.nix`
-using [ez-configs](https://github.com/ehllie/ez-configs). The system
+using [ez-configs](https://flake.parts/options/ez-configs.html). The system
 configuration is built with [NixOS](https://nixos.org/manual/nixos/stable/)
 and the flake structure is assembled with
 [flake-parts](https://flake.parts/).
@@ -205,7 +205,7 @@ imports = lib.attrValues ezModules ++ [
 ### Register the Host
 
 Add the host to `ezConfigs.nixos.hosts` in `parts/ez-config.nix` and connect
-the [Home Manager](https://nix-community.github.io/home-manager/) user
+the [Home Manager](https://home-manager.dev/manual/26.05/) user
 profile:
 
 ```nix
@@ -221,7 +221,7 @@ ezConfigs.nixos = {
 ```
 
 The `ezConfigs` declaration is provided by
-[ez-configs](https://github.com/ehllie/ez-configs). The `syaikhu` value refers
+[ez-configs](https://flake.parts/options/ez-configs.html). The `syaikhu` value refers
 to the user configuration under
 `configurations/home/syaikhu.nix`. That profile imports the shared user
 configuration and enables the Linux desktop when running on Linux.
