@@ -57,6 +57,12 @@ configuration repository.
 - Prefer existing helpers and shared abstractions.
 - Keep changes minimal and focused.
 - Preserve compatibility across NixOS, nix-darwin, and Home Manager where practical.
+- Use the `nix-package-overlay` skill for flake inputs, package overlays,
+  nixpkgs channel selection, and package placement.
+- Use the `nix-hyprland` skill for Hyprland modules, bindings, rules, plugins,
+  application integration, and shared Hyprland helpers.
+- Read `nix-hyprland/reference.md` when working with the Hyprland helper API or
+  Lua generation patterns.
 - Use the `nix-validation` skill after modifying Nix files.
 - Review the final diff before reporting completion.
 
@@ -83,11 +89,15 @@ configuration repository.
 
 1. Read and follow `AGENTS.md`.
 2. Inspect `git status` and the relevant files.
-3. Identify affected configurations.
-4. Implement the smallest correct change.
-5. Run the `nix-validation` skill.
-6. Review the complete diff.
-7. Report changed files, implementation summary, validation results, warnings,
+3. Load the relevant repository skill:
+   - `nix-package-overlay` for package and overlay work.
+   - `nix-hyprland` for Hyprland work.
+   - `nix-validation` for validation.
+4. Identify affected configurations.
+5. Implement the smallest correct change.
+6. Run the `nix-validation` skill.
+7. Review the complete diff.
+8. Report changed files, implementation summary, validation results, warnings,
    and known limitations.
 
 Do not claim validation passed unless the relevant commands actually completed
