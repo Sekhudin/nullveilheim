@@ -46,9 +46,6 @@
     openscreen.url = "github:getopenscreen/openscreen";
     openscreen.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    spotifast.url = "github:crmne/spotifast";
-    spotifast.inputs.nixpkgs.follows = "nixpkgs-unstable";
-
     yakc-src.url = "github:iammodev/YAKC/v2.8.1";
     yakc-src.flake = false;
   };

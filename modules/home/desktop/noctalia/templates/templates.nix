@@ -25,7 +25,6 @@ in
 {
   xdg.configFile = lib.mkIf cfg.enable {
     "noctalia/inputs/obsidian.css".source = ./inputs/obsidian.css;
-    "noctalia/inputs/spotifast.json".source = ./inputs/spotifast.json;
     "noctalia/inputs/telegram.tdesktop-theme".source = ./inputs/telegram.tdesktop-theme;
     "noctalia/inputs/yakc.json".source = yakcSource;
   };
@@ -34,10 +33,6 @@ in
     obsidian = {
       input_path = "${inputsDirectory}/obsidian.css";
       output_path = "${homeDirectory}/.config/obsidian/noctalia.css";
-    };
-    spotifast = {
-      input_path = "${inputsDirectory}/spotifast.json";
-      output_path = "${homeDirectory}/.config/spotifast/themes/Noctalia.json";
     };
     telegram = {
       input_path = "${inputsDirectory}/telegram.tdesktop-theme";
