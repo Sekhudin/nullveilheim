@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   home.packages = [
@@ -17,6 +17,6 @@
 
   programs.browserpass = {
     enable = true;
-    browsers = [ "firefox" ];
+    browsers = [ config.homeCore.browser ];
   };
 }
