@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 let
   stateVersion = config.home.stateVersion;
@@ -50,120 +50,122 @@ let
   };
 in
 {
-  programs.firefox = {
-    enable = true;
-    policies = {
-      OverrideFirstRunPage = "";
-      OverridePostUpdatePage = "";
-      RequestedLocales = [ "en-US" ];
-      ExtensionSettings = {
-        "uBlock0@raymondhill.net" = fox.extension "ublock-origin";
-        "{036a55b4-5e72-4d05-a06c-cba2dfcc134a}" = fox.extension "traduzir-paginas-web";
-        "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = fox.extension "vimium-ff";
+  config = lib.mkIf (config.homeCore.browser == "firefox") {
+    programs.firefox = {
+      enable = true;
+      policies = {
+        OverrideFirstRunPage = "";
+        OverridePostUpdatePage = "";
+        RequestedLocales = [ "en-US" ];
+        ExtensionSettings = {
+          "uBlock0@raymondhill.net" = fox.extension "ublock-origin";
+          "{036a55b4-5e72-4d05-a06c-cba2dfcc134a}" = fox.extension "traduzir-paginas-web";
+          "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = fox.extension "vimium-ff";
+        };
       };
-    };
-  };
 
-  programs.firefox.profiles.personal = {
-    id = 0;
-    isDefault = true;
-    bookmarks = {
-      force = true;
-      settings = [
-        (fox.markAs "GitHub" urls.github)
-        (fox.markAs "LinkedIn" urls.linkedin)
-        (fox.markAs "NixOS" urls.nixos)
-        "separator"
-        {
-          name = "Development";
-          toolbar = false;
-          bookmarks = [
-            (fox.markAs "MDN" urls.mdn)
-            (fox.markAs "Home Manager" urls.home-manager)
-            (fox.markAs "NixOS Options" urls.nixos-options)
-            (fox.markAs "NixOS Packages" urls.nixos-pkgs)
-          ];
-        }
-        {
-          name = "Tools";
-          toolbar = false;
-          bookmarks = [
-            (fox.markAs "No Sign Up" urls.nosignup)
-            (fox.markAs "Draw DB" urls.drawdb)
-            (fox.markAs "Excalidraw" urls.excalidraw)
-          ];
-        }
-        {
-          name = "Sources";
-          toolbar = false;
-          bookmarks = [
-            (fox.markAs "NixMap" urls.nixmap)
-            (fox.markAs "System Design" urls.systemdesign)
-          ];
-        }
-      ];
-    };
-    search = {
-      force = true;
-      default = "google";
-      privateDefault = "ddg";
-      order = [
-        "google"
-        "ddg"
-        "hm"
-        "hmp"
-        "hms"
-        "nixos-option"
-        "nixos-pkg"
-      ];
-      engines = {
-        hm = fox.mkEngine {
-          name = "HM";
-          urls = [ "${urls.home-manager}#opt-{searchTerms}" ];
-          aliases = [
-            "@hm"
+      profiles.personal = {
+        id = 0;
+        isDefault = true;
+        bookmarks = {
+          force = true;
+          settings = [
+            (fox.markAs "GitHub" urls.github)
+            (fox.markAs "LinkedIn" urls.linkedin)
+            (fox.markAs "NixOS" urls.nixos)
+            "separator"
+            {
+              name = "Development";
+              toolbar = false;
+              bookmarks = [
+                (fox.markAs "MDN" urls.mdn)
+                (fox.markAs "Home Manager" urls.home-manager)
+                (fox.markAs "NixOS Options" urls.nixos-options)
+                (fox.markAs "NixOS Packages" urls.nixos-pkgs)
+              ];
+            }
+            {
+              name = "Tools";
+              toolbar = false;
+              bookmarks = [
+                (fox.markAs "No Sign Up" urls.nosignup)
+                (fox.markAs "Draw DB" urls.drawdb)
+                (fox.markAs "Excalidraw" urls.excalidraw)
+              ];
+            }
+            {
+              name = "Sources";
+              toolbar = false;
+              bookmarks = [
+                (fox.markAs "NixMap" urls.nixmap)
+                (fox.markAs "System Design" urls.systemdesign)
+              ];
+            }
           ];
         };
-        hmp = fox.mkEngine {
-          name = "HM Packages";
-          urls = [ "${urls.home-manager}#opt-programs.{searchTerms}.enable" ];
-          aliases = [
-            "@hmp"
+        search = {
+          force = true;
+          default = "google";
+          privateDefault = "ddg";
+          order = [
+            "google"
+            "ddg"
+            "hm"
+            "hmp"
+            "hms"
+            "nixos-option"
+            "nixos-pkg"
           ];
+          engines = {
+            hm = fox.mkEngine {
+              name = "HM";
+              urls = [ "${urls.home-manager}#opt-{searchTerms}" ];
+              aliases = [
+                "@hm"
+              ];
+            };
+            hmp = fox.mkEngine {
+              name = "HM Packages";
+              urls = [ "${urls.home-manager}#opt-programs.{searchTerms}.enable" ];
+              aliases = [
+                "@hmp"
+              ];
+            };
+            hms = fox.mkEngine {
+              name = "HM Services";
+              urls = [ "${urls.home-manager}#opt-services.{searchTerms}.enable" ];
+              aliases = [
+                "@hms"
+              ];
+            };
+            nixos-option = fox.mkEngine {
+              name = "NixOS Options";
+              urls = [ "${urls.nixos-options}&query={searchTerms}" ];
+              aliases = [
+                "@nixo"
+                "@nixos"
+              ];
+            };
+            nixos-pkg = fox.mkEngine {
+              name = "NixOS Packages";
+              urls = [ "${urls.nixos-pkgs}&query={searchTerms}" ];
+              aliases = [
+                "@nixp"
+                "@pkg"
+              ];
+            };
+          };
         };
-        hms = fox.mkEngine {
-          name = "HM Services";
-          urls = [ "${urls.home-manager}#opt-services.{searchTerms}.enable" ];
-          aliases = [
-            "@hms"
-          ];
-        };
-        nixos-option = fox.mkEngine {
-          name = "NixOS Options";
-          urls = [ "${urls.nixos-options}&query={searchTerms}" ];
-          aliases = [
-            "@nixo"
-            "@nixos"
-          ];
-        };
-        nixos-pkg = fox.mkEngine {
-          name = "NixOS Packages";
-          urls = [ "${urls.nixos-pkgs}&query={searchTerms}" ];
-          aliases = [
-            "@nixp"
-            "@pkg"
+        settings = {
+          "browser.theme.content-theme" = 0;
+          "browser.theme.toolbar-theme" = 0;
+          "browser.bookmarks.showMobileBookmarks" = true;
+          "browser.newtabpage.pinned" = [
+            (fox.pinAs "GitHub" urls.github)
+            (fox.pinAs "LinkedIn" urls.linkedin)
           ];
         };
       };
-    };
-    settings = {
-      "browser.theme.content-theme" = 0;
-      "browser.theme.toolbar-theme" = 0;
-      "browser.bookmarks.showMobileBookmarks" = true;
-      "browser.newtabpage.pinned" = [
-        (fox.pinAs "GitHub" urls.github)
-        (fox.pinAs "LinkedIn" urls.linkedin)
-      ];
     };
   };
 }

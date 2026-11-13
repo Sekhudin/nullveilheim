@@ -269,6 +269,10 @@ in
       themeConfig = color.mkTheme core.theme;
     };
 
+    home.sessionVariables = {
+      BROWSER = lib.getExe' pkgs.${core.browser} core.browser;
+    };
+
     nix.registry.self.to = {
       type = "path";
       path = config.home.sessionVariables.SELF_FLAKE or inputs.self.outPath;
