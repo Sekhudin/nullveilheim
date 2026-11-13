@@ -49,7 +49,8 @@ Run `nixfmt --check` only when Nix files were changed.
 
 ### Standard validation
 
-Use for normal Nix modules, overlays, package definitions, and flake changes:
+Use before commit or push for normal Nix modules, overlays, package
+definitions, and flake changes:
 
 ```sh
 nixfmt --check path/to/changed-file.nix
@@ -59,9 +60,9 @@ nix flake check --all-systems
 
 ### Deep validation
 
-Use when changing flake inputs, `flake.lock`, package overlays, Home Manager
-modules, NixOS or nix-darwin modules, host configurations, or desktop
-integration.
+Use before commit or push when changing flake inputs, `flake.lock`, package
+overlays, Home Manager modules, NixOS or nix-darwin modules, host
+configurations, or desktop integration.
 
 Run standard validation, then evaluate or build the affected package,
 configuration, or flake output.
@@ -71,11 +72,13 @@ configuration, or flake output.
 1. Read `AGENTS.md`.
 2. Inspect the relevant Git status and diff for the current changes.
 3. Identify changed Nix files and affected outputs.
-4. Determine the appropriate validation level.
+4. Determine the appropriate validation level. Use minimal or focused
+   validation during iteration; reserve standard or deep validation for the
+   final check before commit or push.
 5. Run the relevant formatter checks.
 6. Run `git diff --check`.
-7. Run `nix flake check --all-systems` when the flake or Nix outputs are
-   affected.
+7. Run `nix flake check --all-systems` for the final check when the flake or
+   Nix outputs are affected.
 8. Evaluate or build the affected output when practical.
 9. Review the complete diff for unintended changes when no sensitive paths are
    involved. Otherwise, inspect only known changed files.

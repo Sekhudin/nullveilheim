@@ -46,14 +46,24 @@ Preserve existing structure, naming conventions, and module boundaries.
 
 ## Validation
 
-After changing Nix files:
+Use staged validation rather than running the full flake check after every
+small edit.
+
+During iteration after changing Nix files:
 
 1. Run the relevant formatter check.
 2. Run `git diff --check`.
-3. Run `nix flake check --all-systems` when the flake or Nix outputs are
+
+Before commit or push, run the appropriate final validation:
+
+1. Run the relevant formatter check and `git diff --check`.
+2. Run `nix flake check --all-systems` when the flake or Nix outputs are
    affected.
-4. Build or evaluate the affected configuration when practical.
-5. Report validation results, warnings, and unrelated pre-existing failures.
+3. Build or evaluate the affected configuration when practical.
+4. Report validation results, warnings, and unrelated pre-existing failures.
+
+For focused changes, evaluate only the affected output during iteration when
+that provides useful feedback. Do not skip final validation before pushing.
 
 Do not report validation as passed when it was skipped, blocked, timed out, or
 only partially completed. Report it as skipped or blocked and explain why.
