@@ -6,7 +6,7 @@ implementation patterns used by modules under `modules/home/desktop/hypr/`.
 It is used together with:
 
 ```text
-.opencode/skills/nix-hyprland/SKILL.md
+.agents/skills/nix-hyprland/SKILL.md
 ```
 
 ## Helper API
