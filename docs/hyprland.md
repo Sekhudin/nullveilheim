@@ -137,7 +137,7 @@ shared/lib/hyprland/
 ```
 
 For the complete helper reference, see
-[`../.opencode/skills/nix-hyprland/reference.md`](../.opencode/skills/nix-hyprland/reference.md).
+[`../.agents/skills/nix-hyprland/reference.md`](../.agents/skills/nix-hyprland/reference.md).
 
 For the underlying Home Manager module options, see the
 [Home Manager manual](https://home-manager.dev/manual/26.05/). For

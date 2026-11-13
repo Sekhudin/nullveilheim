@@ -98,7 +98,8 @@ During implementation:
 
 - Store project-specific OpenCode configuration under `.opencode/`.
 - Store custom agents under `.opencode/agents/`.
-- Store reusable skills under `.opencode/skills/`.
+- Store reusable, cross-agent skills under `.agents/skills/`.
+- Agent tools should use the shared skills from `.agents/skills/` when supported.
 - Keep agents and skills focused, documented, and limited to the permissions they need.
 - Prefer read-only permissions for review and analysis agents.
 - Do not store API keys, OAuth tokens, or other credentials in the repository.

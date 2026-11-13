@@ -375,7 +375,7 @@ Extend the closest matching module when possible.
 For the complete helper API and implementation examples, read:
 
 ```text
-.opencode/skills/nix-hyprland/reference.md
+.agents/skills/nix-hyprland/reference.md
 ```
 
 The reference covers:
