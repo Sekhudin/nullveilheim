@@ -27,7 +27,11 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ cfg.package ];
+    home.packages = [
+      cfg.package
+      pkgs.wl-clipboard
+      pkgs.xsel
+    ];
 
     xdg.configFile."herdr/config.toml" = lib.mkIf (cfg.settings != { }) {
       source = tomlFormat.generate "herdr-config.toml" cfg.settings;
