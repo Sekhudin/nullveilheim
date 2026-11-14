@@ -43,6 +43,9 @@
     noctalia.url = "github:noctalia-dev/noctalia";
     noctalia.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
+    herdr.url = "github:herdrdev/herdr";
+    herdr.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
     openscreen.url = "github:getopenscreen/openscreen";
     openscreen.inputs.nixpkgs.follows = "nixpkgs-unstable";
 

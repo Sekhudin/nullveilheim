@@ -213,6 +213,14 @@ in
       default = "ghostty";
     };
 
+    multiplexer = lib.mkOption {
+      type = lib.types.enum [
+        "herdr"
+      ];
+      description = "choose terminal multiplexer";
+      default = "herdr";
+    };
+
     browser = lib.mkOption {
       type = lib.types.enum [
         "firefox"

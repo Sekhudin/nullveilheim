@@ -10,6 +10,7 @@
     in
     {
       noctalia = inputs.noctalia.packages.${system}.default;
+      herdr = inputs.herdr.packages.${system}.default;
       hyprland = inputs.hyprexpo.packages.${system}.hyprland;
       xdg-desktop-portal-hyprland = hypr.xdg-desktop-portal-hyprland;
       hyprlandPlugins = prev.hyprlandPlugins // {
