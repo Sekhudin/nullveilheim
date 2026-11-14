@@ -82,6 +82,8 @@ When a task matches a repository-specific skill, load and follow it:
 
 - Package inputs, overlays, or nixpkgs channel selection:
   `nix-package-overlay`.
+- NixOS, nix-darwin, or Home Manager module structure:
+  `nix-module`.
 - Hyprland modules, bindings, rules, plugins, or helpers:
   `nix-hyprland`.
 - Formatting, evaluation, builds, and validation:
