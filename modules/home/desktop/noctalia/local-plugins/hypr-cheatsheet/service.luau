@@ -8,10 +8,6 @@
 -- subprocess.
 
 local noctalia = noctalia
-if noctalia == nil then
-  local host = require("./tests/host_mock")
-  noctalia = host.noctalia
-end
 
 local SNAPSHOT_KEY = "hypr-cheatsheet.snapshot"
 local REFRESH_REQUEST_KEY = "hypr-cheatsheet.refresh-request"
