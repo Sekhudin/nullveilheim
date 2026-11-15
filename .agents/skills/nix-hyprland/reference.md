@@ -195,13 +195,21 @@ let
   styles = hypr.getVarRefs config "styles";
 in
 {
-  wayland.windowManager.hyprland.settings.general = {
+  wayland.windowManager.hyprland.settings.config.general = {
     border_size = styles.border_size;
     gaps_in = styles.margin_in;
     gaps_out = styles.margin_out;
   };
 }
 ```
+
+With `configType = "lua"`, distinguish the core configuration container from
+top-level generated settings. Core sections such as `general`, `decoration`,
+and `input` belong under `settings.config`, as in `hypr.nix`. Feature modules
+use the corresponding top-level path for generated settings such as
+`settings.animation`, `settings.monitor`, `settings.window_rule`, and
+`settings.bind`. Preserve the placement used by the target module rather than
+moving a section between these paths.
 
 ### `hypr.getVarValues`
 
