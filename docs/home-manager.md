@@ -11,7 +11,8 @@ profiles. User-specific selections are made through `homeCore` and
 
 ## Core Options
 
-The options are defined in `modules/home/core/options.nix` using the
+The options are defined in
+[`modules/home/core/options.nix`](../modules/home/core/options.nix) using the
 [Nixpkgs module and library helpers](https://nixos.org/manual/nixpkgs/stable/#sec-functions-library).
 
 ## Option Summary

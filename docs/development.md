@@ -1,49 +1,69 @@
 # Development
 
-> Scope: validating and extending the repository, not installing a host.
+This guide explains how to develop the repository, check your changes, and
+open a pull request. Host installation is covered in
+[Hosts](hosts.md).
 
-Development should be done on a focused branch and validated before opening a
-pull request. This repository is personal infrastructure built with
-[flake-parts](https://flake.parts/), [ez-configs](https://flake.parts/options/ez-configs.html),
+The repository uses [Nix flakes](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake),
+[flake-parts](https://flake.parts/),
+[ez-configs](https://flake.parts/options/ez-configs.html),
 [Home Manager](https://home-manager.dev/manual/26.05/), and
-[sops-nix](https://github.com/Mic92/sops-nix), so changes should
-preserve existing module boundaries and avoid unrelated modifications.
+[sops-nix](https://github.com/Mic92/sops-nix). Before changing a module, look
+at nearby files and follow the patterns already used in the repository.
 
-## Useful Commands
+## Inspecting the Repository
 
-Inspect flake outputs:
+To see the outputs provided by the flake:
 
 ```sh
 nix flake show
 ```
 
-Run all flake checks and systems:
-
-```sh
-nix flake check --all-systems
-```
-
-Check the Git diff for whitespace errors:
+To check the current diff for whitespace errors:
 
 ```sh
 git diff --check
 ```
 
-Check Nix formatting:
+To check the formatting of a Nix file:
 
 ```sh
 nixfmt --check path/to/file.nix
 ```
 
-Build or evaluate an output:
+## Running Validation
+
+The checks you need depend on the type of change.
+
+### Documentation-only changes
+
+For changes to README or Markdown files, run:
 
 ```sh
-nix build .#nixvim
-nix eval --raw .#nixosConfigurations.t14.config.system.stateVersion
+git diff --check
 ```
 
-Use `nix build .#<output>` and `nix eval .#<output>` for other outputs when
-the target is available on the current system.
+### Nix and configuration changes
+
+For changes to Nix modules, packages, overlays, flake inputs, or host
+configurations, run:
+
+```sh
+nixfmt --check path/to/changed.nix
+git diff --check
+nix flake check --all-systems
+```
+
+When a change affects a particular output, evaluate or build that output when
+practical:
+
+```sh
+nix eval .#<output>
+nix build .#<output>
+```
+
+Run `nix flake show` first and replace `<output>` with an output that actually
+exists in the flake.
 
 ## Development Shells
 
@@ -57,46 +77,65 @@ nix develop .#bun
 nix develop .#c-linux
 ```
 
-The default shell includes pre-commit checks for GitHub Actions, shell
-scripts, Lua, dead Nix code, and Nix formatting.
+The default shell installs the repository's pre-commit checks. They cover
+GitHub Actions, shell scripts, Lua, dead Nix code, and Nix formatting.
 
 ## Change Workflow
 
-1. Start from an up-to-date `main` branch.
-2. Create a focused branch, such as `fix/...`, `feat/...`, or `docs/...`.
-3. Inspect the relevant modules and existing conventions.
-4. Implement the smallest change that solves the problem.
-5. Run formatting, `git diff --check`, and the relevant flake checks.
-6. Review the complete diff, including documentation links and examples.
-7. Open a pull request targeting `main`.
-8. Wait for CI and review feedback.
-9. Squash-merge after approval.
+1. Update your local `main` branch.
+2. Create a branch for the change, such as `docs/...`, `fix/...`, or `feat/...`.
+3. Look for existing examples and conventions before adding new configuration.
+4. Make the smallest change that solves the problem.
+5. Run the validation appropriate for the files you changed.
+6. Review the complete diff and confirm that no unrelated files changed.
+7. Create a commit with a clear message.
+8. Push the branch and open a pull request targeting `main`.
+9. Wait for CI and review feedback before merging.
 
-Do not commit or push without explicit approval when working interactively.
-Do not rewrite published history or discard unrelated user changes.
+## Secrets and System Changes
 
-## Secrets and Safety
+Do not include secret values, credentials, tokens, or private keys in commits or
+documentation.
 
-- Do not read, decrypt, or expose files under `secrets/` unless explicitly required.
-- Never include decrypted secret values, credentials, tokens, or private keys in a diff.
-- Keep `.sops.yaml` unchanged unless the change is explicitly requested.
-- Test secret-dependent activation only in a safe environment.
-- Ask for confirmation before applying system-wide changes.
+Files under `secrets/` and `.sops.yaml` should only be changed when they are
+directly part of the work. Test secret-dependent activation in a safe
+environment.
 
-## Validation Checklist
+Before applying a system configuration, review the target host and the build
+result carefully. Do not switch a system using an unreviewed configuration.
 
-Before considering a change complete:
+## Before Opening a Pull Request
+
+- Make sure the branch started from an up-to-date `main`.
+- Review the complete diff.
+- Confirm that only intended files changed.
+- Run the checks appropriate for the change.
+- Check documentation links and configuration examples.
+- Confirm that CI passes.
+- Explain any check that could not be run.
+
+## Useful Evaluation Examples
+
+Evaluate a host option:
 
 ```sh
-nixfmt --check path/to/changed.nix
-git diff --check
-nix flake check --all-systems
-git diff --stat
-git status --short --branch
+nix eval --raw .#nixosConfigurations.t14.config.system.stateVersion
 ```
 
-If a check is skipped, blocked, or times out, report that clearly instead of
-claiming that validation passed.
+Build a Home Manager activation package:
+
+```sh
+nix build '.#homeConfigurations."syaikhu@t14".activationPackage'
+```
+
+Build or evaluate another output with its exact flake path:
+
+```sh
+nix build .#nixvim
+nix eval .#<output>
+```
+
+Run `nix flake show` first when you need to find the exact output name.
 
 ## Library References
 

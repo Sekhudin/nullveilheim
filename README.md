@@ -40,6 +40,7 @@ and workflow.
 - [Add a host to the flake](docs/hosts.md#adding-a-nixos-host).
 - [Configure Home Manager](docs/home-manager.md).
 - [Configure Hyprland](docs/hyprland.md).
+- [Configure Noctalia](docs/noctalia.md).
 - [Develop and validate the repository](docs/development.md).
 
 ## Documentation
