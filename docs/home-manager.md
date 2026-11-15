@@ -18,10 +18,17 @@ The options are defined in `modules/home/core/options.nix` using the
 
 | Option | Supported values | Default |
 | --- | --- | --- |
+| `homeCore.standalone` | `true`, `false` | `false` |
+| `homeCore.keyboardLayout` | nullable string | `us` |
 | `homeCore.shell` | `fish`, `zsh` | `fish` |
 | `homeCore.terminal` | `ghostty`, `alacritty` | `ghostty` |
+| `homeCore.multiplexer` | `herdr` | `herdr` |
+| `homeCore.browser` | `firefox` | `firefox` |
 | `homeCore.theme` | `aurora`, `obsidian`, `nocturne` | `aurora` |
-| `homeCore.activation.enable` | `true`, `false` | `true` |
+| `homeCore.font` | font submodule | `{}` |
+| `homeCore.icon` | icon submodule | `{}` |
+| `homeCore.cursor` | cursor submodule | `{}` |
+| `homeCore.activation` | activation submodule | `{}` |
 
 ### Shell
 
@@ -72,6 +79,100 @@ The available themes are:
 These names are defined in `shared/colors.nix`. The selected theme provides
 colors, semantic tokens, opacity, and application-specific values used by the
 desktop and terminal modules.
+
+### Keyboard Layout
+
+Set the shared keyboard layout override:
+
+```nix
+homeCore.keyboardLayout = "us";
+```
+
+The default is `us`. Set it to `null` when no shared keyboard layout override
+is needed.
+
+### Terminal Multiplexer and Browser
+
+```nix
+homeCore = {
+  multiplexer = "herdr";
+  browser = "firefox";
+};
+```
+
+Currently, `herdr` and `firefox` are the available values for these options.
+
+### Fonts
+
+Font configuration has three parts:
+
+- `packages` — font packages installed by Home Manager;
+- `family` — font family names used by applications;
+- `sizes` — shared font size values.
+
+Example:
+
+```nix
+homeCore.font = {
+  packages = with pkgs; [
+    inter
+    nerd-fonts.jetbrains-mono
+    noto-fonts
+    noto-fonts-color-emoji
+    noto-fonts-cjk-sans
+  ];
+
+  family = {
+    monospace = "JetBrainsMono Nerd Font";
+    sans_serif = "Inter";
+    serif = "Noto Serif";
+    emoji = "Noto Color Emoji";
+  };
+
+  sizes = {
+    xs = 9.0;
+    sm = 10.0;
+    base = 11.0;
+    lg = 13.0;
+    xl = 16.0;
+  };
+};
+```
+
+The default font packages are:
+
+```text
+inter
+nerd-fonts.jetbrains-mono
+noto-fonts
+noto-fonts-color-emoji
+noto-fonts-cjk-sans
+```
+
+The default font families are `JetBrainsMono Nerd Font`, `Inter`, `Noto Serif`,
+and `Noto Color Emoji` for monospace, sans-serif, serif, and emoji text.
+
+The default font sizes are `9.0`, `10.0`, `11.0`, `13.0`, and `16.0` for
+`xs`, `sm`, `base`, `lg`, and `xl`.
+
+### Icon Theme
+
+```nix
+homeCore.icon = {
+  name = "Papirus Dark";
+  package = pkgs.papirus-icon-theme;
+};
+```
+
+### Cursor Theme
+
+```nix
+homeCore.cursor = {
+  theme = "Bibata-Modern-Ice";
+  package = pkgs.bibata-cursors;
+  size = 24;
+};
+```
 
 ## Activation
 
@@ -170,8 +271,11 @@ do not decrypt or copy any secret values into documentation.
 ```nix
 homeCore = {
   standalone = true;
+  keyboardLayout = "us";
   shell = "zsh";
   terminal = "alacritty";
+  multiplexer = "herdr";
+  browser = "firefox";
   theme = "aurora";
   activation = {
     enable = false;
