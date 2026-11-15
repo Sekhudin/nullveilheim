@@ -48,6 +48,7 @@ and workflow.
 - [Hosts](docs/hosts.md) — supported hosts, users, and apply commands.
 - [Home Manager](docs/home-manager.md) — shell, terminal, theme, and activation options.
 - [Hyprland](docs/hyprland.md) — desktop module structure and development workflow.
+- [Noctalia](docs/noctalia.md) — desktop shell, plugins, local plugins, and templates.
 - [Development](docs/development.md) — validation, builds, and contribution workflow.
 
 ## Quick Start
@@ -99,7 +100,9 @@ The repository is organized around several layers:
 - `parts/` — flake-parts modules, packages, overlays, development shells, and services.
 - `shared/` — reusable helpers, colors, icons, and internal libraries.
 - `secrets/` — encrypted SOPS data; secret values are intentionally not documented.
-- `.opencode/` — repository-specific development instructions and skills.
+- `.opencode/` — OpenCode configuration and custom agents.
+- `.agents/skills/` — reusable repository development skills.
+- `AGENTS.md` — project-wide development and safety instructions.
 
 For the complete architecture and dependency flow, see
 [Architecture](docs/architecture.md).
@@ -228,7 +231,9 @@ For formatting, diff checks, and the contribution workflow, see
 ```text
 .
 ├── .github/              # CI workflows
-├── .opencode/            # repository-specific agents and skills
+├── .agents/              # reusable repository skills
+├── .opencode/            # OpenCode configuration and custom agents
+├── AGENTS.md             # project-wide instructions
 ├── configurations/       # host and user entrypoints
 ├── docs/                 # detailed documentation and images
 ├── modules/              # reusable system and Home Manager modules

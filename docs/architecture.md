@@ -34,7 +34,9 @@ NixOS / nix-darwin / Home Manager
 | `shared/` | Reusable helpers, colors, icons, and internal libraries. |
 | `docs/` | Repository documentation and desktop images. |
 | `secrets/` | Encrypted SOPS data. Secret values are not documented here. |
-| `.opencode/` | Repository-specific agents, skills, and development instructions. |
+| `.agents/skills/` | Reusable repository development skills. |
+| `.opencode/` | OpenCode configuration and custom agents. |
+| `AGENTS.md` | Project-wide development and safety instructions. |
 
 ## Entrypoint Wiring
 
