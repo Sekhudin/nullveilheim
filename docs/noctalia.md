@@ -42,11 +42,8 @@ programs.noctalia.enable = true;
 
 ## Available Options
 
-The Noctalia-specific options are defined in:
-
-```text
-modules/home/desktop/options.nix
-```
+The Noctalia-specific options are defined in
+[`modules/home/desktop/options.nix`](../modules/home/desktop/options.nix).
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
