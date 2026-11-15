@@ -19,6 +19,28 @@ wayland.windowManager.hyprland = {
 Hyprland configuration is written declaratively in Nix and converted to Lua by
 Home Manager and the repository's custom helpers.
 
+When `configType = "lua"`, preserve the settings placement used by the
+repository:
+
+```nix
+# Core sections from hypr.nix
+wayland.windowManager.hyprland.settings.config = {
+  general = { };
+  decoration = { };
+};
+
+# Generated sections contributed by feature modules
+wayland.windowManager.hyprland.settings = {
+  animation = [ ];
+  monitor = [ ];
+  window_rule = [ ];
+};
+```
+
+Use `settings.config.<section>` for core configuration sections and the
+appropriate top-level `settings.<section>` path for generated settings. Check
+the target module before adding or moving a setting.
+
 ## Repository Architecture
 
 Hyprland configuration is split into two layers:
@@ -441,16 +463,20 @@ When practical, inspect available outputs:
 nix flake show
 ```
 
-Evaluate the affected Home Manager configuration:
+Evaluate the affected host configuration using an output exposed by this
+flake. This repository exposes hosts through `nixosConfigurations`, not a
+standalone `homeConfigurations` output. For example:
 
 ```sh
-nix eval .#homeConfigurations.<name>.config
+nix eval .#nixosConfigurations.t14.config
+nix eval .#nixosConfigurations.acerswift.config
 ```
 
-Build the affected Home Manager output when appropriate:
+Build the affected host output when appropriate:
 
 ```sh
-nix build .#homeConfigurations.<name>.activationPackage
+nix build .#nixosConfigurations.t14.config.system.build.toplevel
+nix build .#nixosConfigurations.acerswift.config.system.build.toplevel
 ```
 
 Do not run:
