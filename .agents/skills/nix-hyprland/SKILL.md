@@ -462,20 +462,37 @@ When practical, inspect available outputs:
 nix flake show
 ```
 
-Evaluate the affected host configuration using an output exposed by this
-flake. This repository exposes hosts through `nixosConfigurations`, not a
-standalone `homeConfigurations` output. For example:
+Evaluate the affected Home Manager configuration exposed by this flake. For
+integrated Linux profiles, use the host-specific Home Manager output:
 
 ```sh
-nix eval .#nixosConfigurations.t14.config
-nix eval .#nixosConfigurations.acerswift.config
+nix eval \
+  '.#homeConfigurations."syaikhu@t14".config.wayland.windowManager.hyprland.enable'
+
+nix eval \
+  '.#homeConfigurations."syaikhu@acerswift".config.wayland.windowManager.hyprland.enable'
 ```
 
-Build the affected host output when appropriate:
+For the standalone Home Manager profile:
 
 ```sh
-nix build .#nixosConfigurations.t14.config.system.build.toplevel
-nix build .#nixosConfigurations.acerswift.config.system.build.toplevel
+nix eval \
+  '.#homeConfigurations."syaikhu-sa".config.wayland.windowManager.hyprland.enable'
+```
+
+Build the affected Home Manager activation package when appropriate:
+
+```sh
+nix build '.#homeConfigurations."syaikhu@t14".activationPackage'
+nix build '.#homeConfigurations."syaikhu-sa".activationPackage'
+```
+
+When the Hyprland change also affects the integrated NixOS host, build the
+corresponding system output:
+
+```sh
+nix build '.#nixosConfigurations.t14.config.system.build.toplevel'
+nix build '.#nixosConfigurations.acerswift.config.system.build.toplevel'
 ```
 
 Do not run:
