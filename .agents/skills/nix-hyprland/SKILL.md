@@ -441,7 +441,6 @@ duplicating host conditionals.
 - Use generated Nix lists for repetitive configuration.
 - Avoid hardcoding monitor names, paths, colors, or dimensions when existing
   variables provide them.
-- Do not modify generated or runtime files directly.
 - Do not place unrelated application configuration in a Hyprland module.
 
 ## Validation
@@ -503,10 +502,6 @@ Report:
 
 ## Safety Rules
 
-- Do not read, decrypt, modify, or remove files under `secrets/`.
-- Do not modify `.sops.yaml`.
-- Do not expose credentials, tokens, private keys, or sensitive machine data.
-- Do not run system-wide rebuild or switch commands.
-- Do not commit or push changes.
-- Preserve unrelated user changes.
-- Do not revert or discard existing work.
+- Follow the repository-wide safety rules in `AGENTS.md`.
+- Do not modify generated or runtime files directly.
+- Keep Linux-specific configuration out of shared Darwin-compatible modules.

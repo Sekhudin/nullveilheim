@@ -19,20 +19,15 @@ For detailed plugin, Luau, and template patterns, read:
 
 ## Safety Rules
 
-- Read and follow `AGENTS.md`.
+- Follow the repository-wide safety rules in `AGENTS.md`.
 - Preserve the existing Noctalia module and directory structure.
-- Do not read, decrypt, modify, or remove files under `secrets/`.
-- Do not expose secrets, credentials, tokens, or private machine data.
 - Review external plugin sources and permissions before integrating them.
 - Do not add runtime network access to local plugins without a clear
   requirement.
-- Existing official and community plugin sources may use the configured Git
-  sources, but review their source and permissions before integrating them.
+- Review configured Git sources before integrating official or community
+  plugins.
 - Do not add persistent processes or filesystem watchers without a clear
   requirement.
-- Do not apply system-wide changes.
-- Do not commit or push unless explicitly requested.
-- Preserve unrelated user changes.
 
 ## Repository Architecture
 
@@ -90,11 +85,16 @@ Preserve the existing `comunity` directory spelling.
 
 ## Validation
 
-At minimum, run:
+Always run the whitespace check:
+
+```sh
+git diff --check
+```
+
+When Nix files are changed, also run the relevant formatter check:
 
 ```sh
 nixfmt --check path/to/changed-file.nix
-git diff --check
 ```
 
 For affected Nix outputs, evaluate the relevant Home Manager or NixOS
