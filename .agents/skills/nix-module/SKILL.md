@@ -11,15 +11,9 @@ configuration, and Home Manager settings.
 
 ## Safety Rules
 
-- Read and follow `AGENTS.md`.
-- Do not read, decrypt, modify, or remove files under `secrets/`.
-- Do not modify `.sops.yaml`.
-- Do not expose secrets, credentials, tokens, private keys, or sensitive
-  machine data.
-- Do not apply system-wide changes.
-- Do not run `nixos-rebuild switch` or `darwin-rebuild switch`.
-- Do not commit or push changes unless explicitly requested.
-- Preserve unrelated user changes.
+- Follow the repository-wide safety rules in `AGENTS.md`.
+- Keep module changes focused.
+- Preserve existing module boundaries.
 
 ## Workflow
 

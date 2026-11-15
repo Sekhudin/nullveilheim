@@ -493,7 +493,7 @@ After modifying inputs, overlays, or package modules:
 ```sh
 nixfmt --check path/to/changed-file.nix
 git diff --check
-nix flake check
+nix flake check --all-systems
 ```
 
 Build or evaluate the affected package when practical:
@@ -513,12 +513,8 @@ Do not claim validation passed unless commands actually completed successfully.
 
 ## Safety Rules
 
-- Do not read, decrypt, modify, or remove files under `secrets/`.
-- Do not modify `.sops.yaml`.
-- Do not expose credentials, tokens, private keys, or sensitive data.
-- Do not modify unrelated user changes.
-- Do not commit or push.
-- Do not run `nixos-rebuild switch` or `darwin-rebuild switch`.
+- Follow the repository-wide safety rules in `AGENTS.md`.
+
 - Ask for clarification when package source or platform requirements are
   ambiguous.
 

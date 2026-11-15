@@ -13,18 +13,12 @@ configuration changes.
 
 ## Safety Rules
 
-- Read and follow the repository's `AGENTS.md`.
-- Do not read, decrypt, modify, or remove files under `secrets/`.
-- Do not modify `.sops.yaml`.
-- Do not expose secrets, credentials, tokens, private keys, or sensitive data.
-- Do not apply automatic fixes unless explicitly requested.
-- Do not commit or push changes.
-- Do not run `nixos-rebuild switch`.
-- Do not run `darwin-rebuild switch`.
-- Do not apply system-wide changes.
+- Follow the repository-wide safety rules in `AGENTS.md`.
 
-When inspecting Git status or diffs, avoid files under `secrets/` and never
-include sensitive values in logs or reports.
+- Do not apply automatic fixes unless explicitly requested.
+
+- When inspecting Git status or diffs, avoid files under `secrets/` and never
+  include sensitive values in logs or reports.
 
 ## Validation Levels
 
