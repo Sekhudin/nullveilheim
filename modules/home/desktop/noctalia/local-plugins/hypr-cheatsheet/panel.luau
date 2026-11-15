@@ -7,12 +7,6 @@
 local noctalia = noctalia
 local ui = ui
 local panel = panel
-if noctalia == nil then
-  local host = require("./tests/host_mock")
-  noctalia = host.noctalia
-  ui = host.ui
-  panel = host.panel
-end
 
 local PANEL_ID = "syaikhu/hypr-cheatsheet:cheatsheet"
 local SNAPSHOT_KEY = "hypr-cheatsheet.snapshot"

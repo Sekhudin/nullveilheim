@@ -77,6 +77,8 @@ Before editing:
 1. Understand the request and inspect the relevant files.
 2. Create a short implementation plan.
 3. Identify possible risks and affected configurations.
+4. When comparing repository conventions, verify the claim against the actual
+   file path before reporting it.
 
 When a task matches a repository-specific skill, load and follow it:
 
@@ -86,6 +88,8 @@ When a task matches a repository-specific skill, load and follow it:
   `nix-module`.
 - Hyprland modules, bindings, rules, plugins, or helpers:
   `nix-hyprland`.
+- Noctalia plugins, local plugins, or theme templates:
+  `nix-noctalia`.
 - Formatting, evaluation, builds, and validation:
   `nix-validation`.
 
