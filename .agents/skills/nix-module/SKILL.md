@@ -55,6 +55,16 @@ in
 }
 ```
 
+When a module exposes `skipConfigFile`, place it immediately after `package`
+and before `settings`:
+
+```nix
+enable = ...;
+package = ...;
+skipConfigFile = ...;
+settings = ...;
+```
+
 ## Repository Placement
 
 Keep feature modules grouped by domain and feature:
@@ -200,6 +210,32 @@ xdg.configFile."<app>/config".text = ''
   # config content
 '';
 ```
+
+### External configuration ownership
+
+When another tool generates an application's configuration file, expose an
+option that prevents Home Manager from creating a conflicting symlink:
+
+```nix
+skipConfigFile = lib.mkOption {
+  type = lib.types.bool;
+  default = false;
+  description = "Whether to skip creating the application's configuration file.";
+};
+
+xdg.configFile."<app>/config" = lib.mkIf (!cfg.skipConfigFile) {
+  source = generatedConfig;
+};
+```
+
+An integration that owns the file can enable the option:
+
+```nix
+programs.<name>.skipConfigFile = integration.enable;
+```
+
+Keep the default as `false` so the module manages the configuration normally
+when no external integration is enabled.
 
 ### Program configuration
 
