@@ -260,6 +260,46 @@ programs.noctalia.settings.theme.templates.user = {
 
 Use `config.home.homeDirectory` instead of hardcoding `/home/<user>`.
 
+## Noctalia Template Tokens
+
+Noctalia templates expose Material color tokens through expressions such as:
+
+```text
+{{ colors.primary.default.hex }}
+{{ colors.surface_container.default.hex }}
+```
+
+Available built-in groups include:
+
+- `primary`, `secondary`, and `tertiary`, including their `*_container` and
+  fixed variants;
+- `error` and `error_container`;
+- `surface`, `surface_dim`, `surface_container`, and related surface variants;
+- `on_surface`, `on_surface_variant`, `outline`, and `outline_variant`;
+- `background`, inverse colors, and hover colors.
+
+Terminal colors are exposed as dedicated tokens, including:
+
+```text
+terminal_normal_green
+terminal_normal_yellow
+terminal_normal_red
+terminal_normal_blue
+terminal_normal_cyan
+terminal_normal_magenta
+```
+
+For example:
+
+```text
+{{ colors.terminal_normal_green.default.hex }}
+```
+
+Do not assume semantic tokens such as `success`, `warning`, or `info` exist.
+Use the terminal tokens or a documented Material token instead. Consult the
+[official Noctalia template reference](https://docs.noctalia.dev/noctalia/theming/templates/)
+for the complete and current token list.
+
 ## Validation Checklist
 
 Before committing:

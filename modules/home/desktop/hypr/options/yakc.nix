@@ -22,6 +22,12 @@ in
       nullable = false;
     };
 
+    skipConfigFile = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Whether to skip creating the Yakc configuration file.";
+    };
+
     settings = lib.mkOption {
       type = jsonFormat.type;
       default = { };
@@ -53,7 +59,7 @@ in
       })
     ];
 
-    xdg.configFile."dev.iammodev.yakc/config.backup.json" = {
+    xdg.configFile."dev.iammodev.yakc/config.json" = lib.mkIf (!cfg.skipConfigFile) {
       source = jsonFormat.generate "yakc.toml" cfg.settings;
     };
 
