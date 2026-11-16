@@ -19,6 +19,12 @@ in
       description = "Package to use for Herdr.";
     };
 
+    skipConfigFile = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Whether to skip creating the Herdr configuration file.";
+    };
+
     settings = lib.mkOption {
       type = lib.types.attrs;
       default = { };
@@ -33,7 +39,7 @@ in
       pkgs.xsel
     ];
 
-    xdg.configFile."herdr/config.toml" = lib.mkIf (cfg.settings != { }) {
+    xdg.configFile."herdr/config.toml" = lib.mkIf (!cfg.skipConfigFile) {
       source = tomlFormat.generate "herdr-config.toml" cfg.settings;
     };
   };
