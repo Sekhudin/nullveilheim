@@ -30,7 +30,7 @@ let
       theme.custom = {
         accent = "{{ colors.primary.default.hex }}";
         panel_bg = "{{ colors.surface.default.hex }}";
-        sidebar_bg = "{{ colors.surface_container.default.hex }}";
+        sidebar_bg = "{{ colors.surface.default.hex }}";
         active_row_bg = "{{ colors.primary_container.default.hex }}";
         selection_bg = "{{ colors.secondary_container.default.hex }}";
 
