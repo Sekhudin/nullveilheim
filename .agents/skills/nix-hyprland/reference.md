@@ -577,10 +577,10 @@ distinct feature.
 Application integration uses two layers:
 
 ```text
-options/<application>.nix
+apps/<application>/options.nix
     → reusable options, package integration, and conditional rules
 
-configs/<application>.nix
+apps/<application>/<application>.nix
     → application-specific defaults
 ```
 

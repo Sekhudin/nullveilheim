@@ -2,42 +2,44 @@
 
 let
   inherit (extraLib.hyprland) hypr;
+  mkMatchRegex = patterns: "(?i)^(${lib.concatStringsSep "|" patterns})$";
 in
 {
   wayland.windowManager.hyprland = {
     settings.window_rule = [
       (hypr.mkWindowRule {
-        name = "maximize-window";
-        match = {
-          class = "(?i)^(${
-            lib.concatStringsSep "|" [
-              "DBeaver"
-              "discord"
-              "slack"
-              "wps"
-              "wpp"
-              "pdf"
-              "et"
-              "jetbrains-studio"
-              "com.obsproject.Studio"
-              "md.obsidian.Obsidian"
-              "org.telegram.desktop"
-            ]
-          })$";
-        };
+        name = "maximize-by-class";
+        match.class = mkMatchRegex [
+          "DBeaver"
+          "discord"
+          "slack"
+          "wps"
+          "wpp"
+          "pdf"
+          "et"
+          "jetbrains-studio"
+          "com.obsproject.Studio"
+          "md.obsidian.Obsidian"
+          "org.telegram.desktop"
+        ];
         float = false;
         maximize = true;
       })
 
       (hypr.mkWindowRule {
-        name = "loader-window-by-class";
-        match = {
-          class = "(?i)^(${
-            lib.concatStringsSep "|" [
-              "java"
-            ]
-          })$";
-        };
+        name = "float-by-class";
+        match.class = mkMatchRegex [
+          "org.gnupg.pinentry-qt"
+        ];
+        float = true;
+        maximize = false;
+      })
+
+      (hypr.mkWindowRule {
+        name = "float-unfocused-by-class";
+        match.class = mkMatchRegex [
+          "java"
+        ];
         float = true;
         no_focus = true;
         maximize = false;
@@ -45,15 +47,11 @@ in
       })
 
       (hypr.mkWindowRule {
-        name = "loader-window-by-title";
-        match = {
-          title = "(?i)^(${
-            lib.concatStringsSep "|" [
-              "discord updater"
-              "Steam"
-            ]
-          })$";
-        };
+        name = "float-unfocused-by-title";
+        match.title = mkMatchRegex [
+          "discord updater"
+          "Steam"
+        ];
         float = true;
         no_focus = true;
         maximize = false;
@@ -61,10 +59,8 @@ in
       })
 
       (hypr.mkWindowRule {
-        name = "float-window";
-        match = {
-          float = true;
-        };
+        name = "disable-effects-for-floating";
+        match.float = true;
         no_blur = true;
         no_shadow = true;
       })
