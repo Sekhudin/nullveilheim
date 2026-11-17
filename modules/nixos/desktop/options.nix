@@ -99,7 +99,7 @@ in
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable desktop";
-      default = true;
+      default = false;
     };
 
     android-studio = lib.mkOption {

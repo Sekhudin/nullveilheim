@@ -161,7 +161,7 @@ let
       enable = lib.mkOption {
         type = lib.types.bool;
         description = "enable secrets";
-        default = true;
+        default = false;
       };
       gpgKeys = lib.mkOption {
         type = lib.types.listOf lib.types.str;

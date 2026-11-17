@@ -22,7 +22,7 @@ let
       enable = lib.mkOption {
         type = lib.types.bool;
         description = "enable noctalia dock";
-        default = true;
+        default = false;
       };
     };
   };

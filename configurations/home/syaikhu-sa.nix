@@ -9,6 +9,7 @@
     standalone = true;
     shell = "fish";
     terminal = "ghostty";
+    multiplexer = "herdr";
     theme = "aurora";
     activation = rec {
       enable = true;
