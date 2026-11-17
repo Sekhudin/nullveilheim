@@ -177,7 +177,8 @@ homeCore.cursor = {
 
 ## Activation
 
-Activation is enabled by default:
+Secret-dependent activation is disabled by default. Profiles that have access
+to the required SOPS keys can enable it explicitly:
 
 ```nix
 homeCore.activation.enable = true;
@@ -193,15 +194,9 @@ When enabled, the activation modules can:
 - Configure [SOPS-Nix](https://github.com/Mic92/sops-nix) secrets and Git
   `sopsdiffer` integration.
 
-To use the Home Manager configuration without secret-dependent activation:
-
-```nix
-homeCore.activation.enable = false;
-```
-
-When disabled, the activation scripts, SOPS configuration, `sops` and
-`gnupg` packages, secret declarations, and Git SOPS diff integration are not
-enabled. The [SOPS-Nix Home Manager module](https://github.com/Mic92/sops-nix#home-manager-module)
+When disabled (the default), the activation scripts, SOPS configuration, `sops`
+and `gnupg` packages, secret declarations, and Git SOPS diff integration are
+not enabled. The [SOPS-Nix Home Manager module](https://github.com/Mic92/sops-nix#home-manager-module)
 remains imported so its options remain available, but this repository's SOPS
 configuration is guarded by the option.
 

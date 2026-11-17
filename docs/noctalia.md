@@ -50,7 +50,7 @@ The Noctalia-specific options are defined in
 | `homeDesktop.enable` | boolean | `false` | Enable the desktop configuration. |
 | `homeDesktop.use` | enum | `"noctalia"` | Select the desktop shell. |
 | `homeDesktop.noctalia.bar.label.enable` | boolean | `false` | Show labels in the bar. |
-| `homeDesktop.noctalia.dock.enable` | boolean | `true` | Enable the dock. |
+| `homeDesktop.noctalia.dock.enable` | boolean | `false` | Enable the dock. |
 | `homeDesktop.noctalia.desktop.widgets.enable` | boolean | `false` | Enable desktop widgets. |
 | `homeDesktop.noctalia.desktop.wallpaper.automation.enable` | boolean | `false` | Enable wallpaper automation. |
 | `homeDesktop.noctalia.desktop.backdrop.enable` | boolean | `false` | Enable the desktop backdrop. |
