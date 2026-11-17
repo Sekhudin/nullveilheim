@@ -26,8 +26,13 @@ modules/home/desktop/hypr/
 ├── variable.nix         # Hyprland variables
 ├── plugins.nix          # Hyprland plugins
 ├── binds/               # keybindings grouped by purpose
-├── options/             # application/module options
-├── configs/             # application configuration values
+├── apps/                # application-specific integrations
+│   ├── yakc/
+│   │   ├── options.nix  # YAKC module options and implementation
+│   │   └── yakc.nix     # selected YAKC configuration
+│   └── openscreen/
+│       ├── options.nix  # OpenScreen module options and implementation
+│       └── openscreen.nix
 ├── window-rule.nix      # window rules
 └── workspace-rule.nix   # workspace rules
 ```
@@ -100,16 +105,28 @@ Use `hypr.mkWorkspaceRule` when the same rule applies to multiple workspaces.
 Keep matching expressions and rule names descriptive so they remain easy to
 find in the generated configuration.
 
-## Application Options and Configs
+## Application Integrations
 
-Application-specific Hyprland integrations are split between `options/` and
-`configs/`:
+Application-specific Hyprland integrations are grouped by application under
+`apps/`. Each application directory contains:
 
-- `options/` declares Home Manager options and enables packages or rules.
-- `configs/` supplies the selected configuration values.
+- `options.nix` declares Home Manager options, package integration, conditional
+  rules, and the module implementation.
+- `<application>.nix` supplies selected configuration values and defaults.
 
-For example, the YAKC option module declares `programs.yakc`, while its config
-module enables it and derives styling from the active theme and font settings.
+For example, the YAKC module declares `programs.yakc`, while its application
+configuration enables it and derives styling from the active theme and font
+settings. OpenScreen follows the same structure.
+
+```text
+modules/home/desktop/hypr/apps/
+├── yakc/
+│   ├── options.nix
+│   └── yakc.nix
+└── openscreen/
+    ├── options.nix
+    └── openscreen.nix
+```
 
 ## Shared Helpers
 

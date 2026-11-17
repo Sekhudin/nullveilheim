@@ -103,8 +103,7 @@ Therefore, a new `.nix` file placed under:
 ```text
 modules/home/desktop/hypr/
 modules/home/desktop/hypr/binds/
-modules/home/desktop/hypr/options/
-modules/home/desktop/hypr/configs/
+modules/home/desktop/hypr/apps/<application>/
 ```
 
 is normally loaded automatically.
@@ -148,8 +147,7 @@ modules/home/desktop/hypr/
 ├── workspace-rule.nix
 ├── plugins.nix
 ├── binds/
-├── options/
-└── configs/
+└── apps/
 ```
 
 ### Core modules
@@ -212,26 +210,27 @@ Do not create one file per individual keybinding. Create a new binding file
 only when the feature has a distinct domain or is large enough to deserve its
 own module.
 
-### Application options and configurations
+### Application integrations
 
-Application-specific integration uses matching files:
+Application-specific integrations are grouped by application. Each application
+directory contains matching option and configuration files:
 
 ```text
-modules/home/desktop/hypr/options/<application>.nix
-modules/home/desktop/hypr/configs/<application>.nix
+modules/home/desktop/hypr/apps/<application>/options.nix
+modules/home/desktop/hypr/apps/<application>/<application>.nix
 ```
 
 Current examples:
 
 ```text
-options/yakc.nix
-configs/yakc.nix
+apps/yakc/options.nix
+apps/yakc/yakc.nix
 
-options/openscreen.nix
-configs/openscreen.nix
+apps/openscreen/options.nix
+apps/openscreen/openscreen.nix
 ```
 
-Use `options/<application>.nix` for:
+Use `apps/<application>/options.nix` for:
 
 - `options.programs.<application>`.
 - Enable options.
@@ -241,7 +240,7 @@ Use `options/<application>.nix` for:
 - Application-specific window rules.
 - External Home Manager module imports.
 
-Use `configs/<application>.nix` for:
+Use `apps/<application>/<application>.nix` for:
 
 - Application defaults.
 - Theme-derived settings.
@@ -249,9 +248,9 @@ Use `configs/<application>.nix` for:
 - Commands and paths from existing variables.
 - Enabling the application through repository options.
 
-Keep the application name identical in both directories.
+Keep the application name identical in the directory and configuration file.
 
-Do not put reusable option declarations in `configs/`.
+Do not put reusable option declarations in the application configuration file.
 Do not put large application defaults in the core `hypr.nix`.
 
 ### Global rules versus application rules
@@ -355,10 +354,10 @@ Keybinding or submap
     → modules/home/desktop/hypr/binds/<domain>.nix
 
 Application option or package integration
-    → modules/home/desktop/hypr/options/<application>.nix
+    → modules/home/desktop/hypr/apps/<application>/options.nix
 
 Application defaults
-    → modules/home/desktop/hypr/configs/<application>.nix
+    → modules/home/desktop/hypr/apps/<application>/<application>.nix
 
 Reusable Nix or Lua helper
     → shared/lib/hyprland/<responsible-helper>.nix
