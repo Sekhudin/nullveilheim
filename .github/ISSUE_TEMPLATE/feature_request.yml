@@ -1,0 +1,46 @@
+name: Feature request
+description: Propose a new configuration or workflow
+title: "[feat]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include secret values, tokens, private keys, or decrypted SOPS output.
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What problem should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the configuration or workflow you want.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+    validations:
+      required: false
+  - type: checkboxes
+    id: affected
+    attributes:
+      label: Affected configurations
+      options:
+        - label: Home Manager
+        - label: NixOS
+        - label: nix-darwin
+        - label: Repository tooling
+        - label: Documentation
+  - type: checkboxes
+    id: sensitive-data
+    attributes:
+      label: Sensitive data
+      options:
+        - label: I removed secrets, tokens, private keys, and decrypted SOPS values.
+          required: true

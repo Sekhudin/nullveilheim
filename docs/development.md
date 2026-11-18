@@ -43,6 +43,18 @@ For changes to README or Markdown files, run:
 git diff --check
 ```
 
+### GitHub template changes
+
+For changes to `.github/ISSUE_TEMPLATE/` or
+`.github/pull_request_template.md`, run:
+
+```sh
+nix shell nixpkgs#yq --command yq -e '.' .github/ISSUE_TEMPLATE/*.yml
+git diff --check
+```
+
+GitHub also validates issue forms when they are rendered.
+
 ### Nix and configuration changes
 
 For changes to Nix modules, packages, overlays, flake inputs, or host
@@ -113,6 +125,56 @@ result carefully. Do not switch a system using an unreviewed configuration.
 - Check documentation links and configuration examples.
 - Confirm that CI passes.
 - Explain any check that could not be run.
+
+## Issue and Pull Request Conventions
+
+Create one issue or pull request per problem or change. Use the templates in
+`.github/` as a starting point.
+
+Issue forms are rendered by the GitHub web UI. When using `gh issue create`,
+use `--web` to open the form, or provide a title and body manually. When
+creating an issue without `--web`, add labels manually with `--label`. The
+`--template` flag is intended for Markdown templates; use `--web` to open a
+YAML issue form. To start a pull request from the template, use
+`gh pr create --template .github/pull_request_template.md`.
+
+`blank_issues_enabled: false` only hides the blank issue option in the web
+template chooser. Issues created directly through `gh` or the GitHub API can
+still bypass the forms.
+
+### Branch Names
+
+| Change | Pattern | Example |
+| --- | --- | --- |
+| Bug fix for an issue | `fix/issue-<number>` | `fix/issue-25` |
+| Feature for an issue | `feat/issue-<number>` | `feat/issue-25` |
+| Documentation | `docs/<description>` | `docs/home-manager-options` |
+| Refactor | `refactor/<description>` | `refactor/agent-module` |
+| Maintenance | `chore/<description>` | `chore/pr-issue-templates` |
+
+### Pull Requests
+
+- Target `main`.
+- Use a Conventional Commit title because squash merge uses it as the commit
+  subject.
+- Link the related issue with `Closes #<number>`.
+- Keep the change focused and unrelated edits out of the PR.
+- Fill in the validation checklist and mention any check that was skipped.
+- Do not include secret values, tokens, or private keys.
+
+Examples:
+
+```text
+fix(noctalia): correct dock toggle
+feat(home): add agent module
+docs: update activation defaults
+```
+
+### Issues
+
+Use the bug report, feature request, or documentation form that matches the
+request. Include the affected host, profile, and module. Paste relevant command
+output after removing sensitive values.
 
 ## Useful Evaluation Examples
 

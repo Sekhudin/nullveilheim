@@ -33,6 +33,17 @@ Preserve existing structure, naming conventions, and module boundaries.
 - Pull requests should target `main`.
 - CI must pass before merging.
 
+## Issue and Pull Request Conventions
+
+- Use the issue forms under `.github/ISSUE_TEMPLATE/`.
+- Follow the branch naming table in `docs/development.md#branch-names`.
+- Keep each issue and pull request focused on one problem or change.
+- Use Conventional Commit titles for pull requests. Squash merge uses the
+  pull request title as the commit subject on `main`.
+- Link the related issue with `Closes #<number>` in the pull request body.
+- Include validation results and never include secret values, tokens, or
+  private keys.
+
 ## Nix Conventions
 
 - Preserve the existing modular structure.
@@ -48,6 +59,8 @@ Preserve existing structure, naming conventions, and module boundaries.
 
 Use staged validation rather than running the full flake check after every
 small edit.
+
+For documentation or GitHub template changes, run `git diff --check`.
 
 During iteration after changing Nix files:
 

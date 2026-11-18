@@ -1,0 +1,72 @@
+name: Bug report
+description: Report a broken configuration or behavior
+title: "[bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include secret values, tokens, private keys, or decrypted SOPS output.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the observed behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Include the commands you ran and the configuration you used.
+      placeholder: |
+        1. Run ...
+        2. See error ...
+    validations:
+      required: true
+  - type: input
+    id: host
+    attributes:
+      label: Host
+      description: Which host or machine is affected?
+      placeholder: acerswift, t14, ... or N/A
+    validations:
+      required: false
+  - type: input
+    id: profile
+    attributes:
+      label: Home Manager profile
+      description: Which user or profile is affected?
+      placeholder: syaikhu, syaikhu-sa, ...
+    validations:
+      required: false
+  - type: input
+    id: module
+    attributes:
+      label: Affected module or file
+      description: Which module or file is involved?
+      placeholder: modules/home/desktop/noctalia/dock/dock.nix
+    validations:
+      required: false
+  - type: textarea
+    id: output
+    attributes:
+      label: Relevant output
+      description: Paste the failing command and error output. Remove sensitive values.
+      render: shell
+    validations:
+      required: false
+  - type: checkboxes
+    id: sensitive-data
+    attributes:
+      label: Sensitive data
+      options:
+        - label: I removed secrets, tokens, private keys, and decrypted SOPS values.
+          required: true

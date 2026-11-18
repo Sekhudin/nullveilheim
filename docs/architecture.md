@@ -33,6 +33,7 @@ NixOS / nix-darwin / Home Manager
 | `parts/` | Flake-parts modules for outputs, packages, overlays, shells, and services. |
 | `shared/` | Reusable helpers, colors, icons, and internal libraries. |
 | `docs/` | Repository documentation and desktop images. |
+| `.github/` | GitHub workflows, issue forms, and pull request templates. |
 | `secrets/` | Encrypted SOPS data. Secret values are not documented here. |
 | `.agents/skills/` | Reusable repository development skills. |
 | `.opencode/` | OpenCode configuration and custom agents. |

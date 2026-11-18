@@ -1,0 +1,44 @@
+name: Documentation request
+description: Report missing, outdated, or unclear documentation
+title: "[docs]: "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include secret values, tokens, private keys, or decrypted SOPS output.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What needs to change?
+      description: Describe the missing, outdated, or unclear documentation.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the documentation change you want.
+    validations:
+      required: true
+  - type: checkboxes
+    id: affected
+    attributes:
+      label: Affected documentation
+      options:
+        - label: README.md
+        - label: AGENTS.md
+        - label: .agents/skills/
+        - label: docs/architecture.md
+        - label: docs/development.md
+        - label: docs/home-manager.md
+        - label: docs/hosts.md
+        - label: docs/hyprland.md
+        - label: docs/noctalia.md
+  - type: checkboxes
+    id: sensitive-data
+    attributes:
+      label: Sensitive data
+      options:
+        - label: I removed secrets, tokens, private keys, and decrypted SOPS values.
+          required: true
