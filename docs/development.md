@@ -154,8 +154,9 @@ docs: update activation defaults
 
 ### Issues
 
-Include the affected host, profile, and module. Paste relevant command output
-after removing sensitive values.
+Use the bug report, feature request, or documentation form that matches the
+request. Include the affected host, profile, and module. Paste relevant command
+output after removing sensitive values.
 
 ## Useful Evaluation Examples
 

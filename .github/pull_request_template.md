@@ -25,7 +25,7 @@ Closes #ISSUE_NUMBER
 - [ ] `git diff --check`
 - [ ] `nix flake check --all-systems`
 - [ ] Evaluated or built the affected output
-- [ ] Not applicable (documentation only)
+- [ ] Not applicable (documentation or repository tooling only)
 
 ## Risk and rollback
 

@@ -31,6 +31,7 @@ body:
         - label: Home Manager
         - label: NixOS
         - label: nix-darwin
+        - label: Repository tooling
         - label: Documentation
   - type: checkboxes
     id: sensitive-data
