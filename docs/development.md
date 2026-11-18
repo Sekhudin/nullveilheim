@@ -49,10 +49,11 @@ For changes to `.github/ISSUE_TEMPLATE/` or
 `.github/pull_request_template.md`, run:
 
 ```sh
+nix shell nixpkgs#yq --command yq -e '.' .github/ISSUE_TEMPLATE/*.yml
 git diff --check
 ```
 
-GitHub validates issue forms when they are rendered.
+GitHub also validates issue forms when they are rendered.
 
 ### Nix and configuration changes
 

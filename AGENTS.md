@@ -36,8 +36,7 @@ Preserve existing structure, naming conventions, and module boundaries.
 ## Issue and Pull Request Conventions
 
 - Use the issue forms under `.github/ISSUE_TEMPLATE/`.
-- Use `fix/issue-<number>` for bug fixes and `feat/issue-<number>` for
-  features.
+- Follow the branch naming table in `docs/development.md#branch-names`.
 - Keep each issue and pull request focused on one problem or change.
 - Use Conventional Commit titles for pull requests. Squash merge uses the
   pull request title as the commit subject on `main`.

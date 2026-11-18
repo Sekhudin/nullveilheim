@@ -3,6 +3,10 @@ description: Propose a new configuration or workflow
 title: "[feat]: "
 labels: ["enhancement"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include secret values, tokens, private keys, or decrypted SOPS output.
   - type: textarea
     id: goal
     attributes:
