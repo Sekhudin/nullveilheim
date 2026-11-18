@@ -114,6 +114,49 @@ result carefully. Do not switch a system using an unreviewed configuration.
 - Confirm that CI passes.
 - Explain any check that could not be run.
 
+## Issue and Pull Request Conventions
+
+Create one issue or pull request per problem or change. Use the templates in
+`.github/` as a starting point.
+
+Issue forms are rendered by the GitHub web UI. When using `gh issue create`,
+use `--web` to open the form, or provide a title and body manually. Add labels
+manually with `--label`. To start a pull request from the template, use
+`gh pr create --template .github/pull_request_template.md`.
+
+### Branch Names
+
+| Change | Pattern | Example |
+| --- | --- | --- |
+| Bug fix for an issue | `fix/issue-<number>` | `fix/issue-25` |
+| Feature for an issue | `feat/issue-<number>` | `feat/issue-25` |
+| Documentation | `docs/<description>` | `docs/home-manager-options` |
+| Refactor | `refactor/<description>` | `refactor/agent-module` |
+| Maintenance | `chore/<description>` | `chore/pr-issue-templates` |
+
+### Pull Requests
+
+- Target `main`.
+- Use a Conventional Commit title because squash merge uses it as the commit
+  subject.
+- Link the related issue with `Closes #<number>`.
+- Keep the change focused and unrelated edits out of the PR.
+- Fill in the validation checklist and mention any check that was skipped.
+- Do not include secret values, tokens, or private keys.
+
+Examples:
+
+```text
+fix(noctalia): correct dock toggle
+feat(home): add agent module
+docs: update activation defaults
+```
+
+### Issues
+
+Include the affected host, profile, and module. Paste relevant command output
+after removing sensitive values.
+
 ## Useful Evaluation Examples
 
 Evaluate a host option:
