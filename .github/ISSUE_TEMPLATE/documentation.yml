@@ -26,7 +26,9 @@ body:
     attributes:
       label: Affected documentation
       options:
-        - label: README
+        - label: README.md
+        - label: AGENTS.md
+        - label: .agents/skills/
         - label: docs/architecture.md
         - label: docs/development.md
         - label: docs/home-manager.md

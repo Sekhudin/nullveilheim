@@ -232,7 +232,7 @@ For formatting, diff checks, and the contribution workflow, see
 
 ```text
 .
-├── .github/              # CI workflows
+├── .github/              # CI workflows and GitHub templates
 ├── .agents/              # reusable repository skills
 ├── .opencode/            # OpenCode configuration and custom agents
 ├── AGENTS.md             # project-wide instructions

@@ -61,6 +61,8 @@ Preserve existing structure, naming conventions, and module boundaries.
 Use staged validation rather than running the full flake check after every
 small edit.
 
+For documentation or GitHub template changes, run `git diff --check`.
+
 During iteration after changing Nix files:
 
 1. Run the relevant formatter check.

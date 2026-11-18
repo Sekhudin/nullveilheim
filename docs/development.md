@@ -43,6 +43,17 @@ For changes to README or Markdown files, run:
 git diff --check
 ```
 
+### GitHub template changes
+
+For changes to `.github/ISSUE_TEMPLATE/` or
+`.github/pull_request_template.md`, run:
+
+```sh
+git diff --check
+```
+
+GitHub validates issue forms when they are rendered.
+
 ### Nix and configuration changes
 
 For changes to Nix modules, packages, overlays, flake inputs, or host
@@ -120,9 +131,15 @@ Create one issue or pull request per problem or change. Use the templates in
 `.github/` as a starting point.
 
 Issue forms are rendered by the GitHub web UI. When using `gh issue create`,
-use `--web` to open the form, or provide a title and body manually. Add labels
-manually with `--label`. To start a pull request from the template, use
+use `--web` to open the form, or provide a title and body manually. When
+creating an issue without `--web`, add labels manually with `--label`. The
+`--template` flag is intended for Markdown templates; use `--web` to open a
+YAML issue form. To start a pull request from the template, use
 `gh pr create --template .github/pull_request_template.md`.
+
+`blank_issues_enabled: false` only hides the blank issue option in the web
+template chooser. Issues created directly through `gh` or the GitHub API can
+still bypass the forms.
 
 ### Branch Names
 
