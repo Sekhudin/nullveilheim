@@ -5,7 +5,7 @@
 }:
 
 let
-  cfg = config.homeDesktop;
+  cfg = config.homeDesktop.noctalia.bar;
   font = config.homeCore.font;
   inherit (extraLib.hyprland) hypr;
 
@@ -15,7 +15,7 @@ let
       thickness = 36;
       padding = styles.margin_in;
       radius = styles.border_radius;
-      scale = if cfg.noctalia.bar.label.enable then 1.0 else 1.2;
+      scale = if cfg.label.enable then 1.0 else 1.2;
       capsule_thickness = 1.0 - ((padding * 2.0) / thickness);
       capsule_radius = radius - padding;
     in

@@ -1,7 +1,7 @@
 { config, extraLib, ... }:
 
 let
-  cfg = config.homeDesktop.noctalia;
+  cfg = config.homeDesktop.noctalia.dock;
   core = config.homeCore;
   svgs = config.homeDesktop.svgs;
   inherit (extraLib.hyprland) hypr;

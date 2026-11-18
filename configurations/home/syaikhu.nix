@@ -12,6 +12,7 @@ in
     standalone = false;
     shell = "fish";
     terminal = "ghostty";
+    multiplexer = "herdr";
     theme = "aurora";
     activation = rec {
       enable = true;
@@ -24,7 +25,13 @@ in
   homeDesktop = {
     enable = isLinux;
     noctalia = {
-      desktop.backdrop.enable = true;
+      dock.enable = false;
+      bar.label.enable = false;
+      desktop = {
+        widgets.enable = false;
+        wallpaper.automation.enable = false;
+        backdrop.enable = true;
+      };
     };
   };
 }

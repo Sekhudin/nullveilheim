@@ -168,10 +168,11 @@ The expected SOPS key names are documented in
 [Home Manager → SOPS Key Structure](docs/home-manager.md#sops-key-structure);
 secret values are intentionally omitted.
 
-Secret-dependent activation can be disabled with:
+Secret-dependent activation is disabled by default. Enable it where the
+required SOPS keys are available:
 
 ```nix
-homeCore.activation.enable = false;
+homeCore.activation.enable = true;
 ```
 
 The CI workflow does not decrypt or use repository secrets. See

@@ -174,6 +174,9 @@ repository modules:
 }
 ```
 
+`nixosDesktop.enable` defaults to `false`; Linux hosts must enable it
+explicitly.
+
 The exact user, groups, system version, and desktop setting must be adapted to
 the new machine. `hardware-configuration.nix` and `default.nix` are the
 primary host files. The `lib` helpers come from the
