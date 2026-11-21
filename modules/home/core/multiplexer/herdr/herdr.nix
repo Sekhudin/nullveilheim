@@ -6,6 +6,9 @@ in
 {
   programs.herdr = {
     enable = core.multiplexer == "herdr";
+    enableClaudeIntegration = true;
+    enableCodexIntegration = true;
+    enableOpencodeIntegration = true;
     settings = {
       onboarding = false;
       keys = {
