@@ -20,7 +20,7 @@ in
 {
   home = lib.mkIf (activation.enable && isLinux) {
     activation = {
-      ${h.context} = lib.hm.dag.entryAfter [ "2-generate-git-identities" ] ''
+      ${h.context} = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
         ${h.script}
 
         ${h.fmt.log} "Cleaning up broken symlinks in systemd user units..."
