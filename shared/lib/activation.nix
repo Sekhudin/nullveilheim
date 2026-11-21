@@ -79,6 +79,42 @@
             context
             script
             ;
+
+          makeMutableHomeFiles =
+            {
+              paths,
+              lib,
+              mode ? "600",
+            }:
+            lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+              ${script}
+
+              ${lib.concatMapStrings (path: ''
+                target="$HOME"/${lib.escapeShellArg path}
+
+                ${fmt.log} "Checking mutable file: ${path}"
+
+                if [ -L "$target" ]; then
+                  if ! source="$(readlink -f -- "$target")" ||
+                     [ ! -f "$source" ]; then
+                    ${fmt.warn} "Invalid symlink target: ${path}"
+                  else
+                    tmp="$(mktemp "''${target}.hm-tmp.XXXXXX")"
+
+                    if run cp -- "$source" "$tmp" &&
+                       run chmod ${lib.escapeShellArg mode} "$tmp" &&
+                       run mv -f -- "$tmp" "$target"; then
+                      ${fmt.log} "Converted symlink to mutable file: ${path}"
+                    else
+                      rm -f -- "$tmp"
+                      ${fmt.fatal} "Failed to convert symlink: ${path}"
+                    fi
+                  fi
+                else
+                  ${fmt.warn} "Not a symlink, skipping: ${path}"
+                fi
+              '') paths}
+            '';
         };
     };
 }
