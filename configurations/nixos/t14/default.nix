@@ -54,5 +54,8 @@
 
   nixosDesktop = {
     enable = true;
+    android-studio = {
+      enable = true;
+    };
   };
 }
