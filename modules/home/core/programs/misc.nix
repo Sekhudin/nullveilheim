@@ -9,7 +9,6 @@ let
 in
 {
   home.packages = with pkgs; [
-    antigravity-cli
     slack
     telegram-desktop
     wpsoffice

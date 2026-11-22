@@ -52,6 +52,7 @@ in
 
         antigravity-cli
         claude-code
+        codex
         opencode
 
         androidenv
