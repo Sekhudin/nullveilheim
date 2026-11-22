@@ -1,13 +1,15 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }:
 
 let
-  desktop = config.nixosDesktop;
+  cfg = config.nixosDesktop.android-studio;
+
   sdk = pkgs.androidenv.composeAndroidPackages {
-    inherit (desktop.android-studio)
+    inherit (cfg.settings)
       cmdLineToolsVersion
       platformToolsVersion
 
@@ -32,15 +34,17 @@ let
   };
 in
 {
-  environment = {
-    systemPackages = with pkgs; [
-      android-tools
-      (android-studio.withSdk sdk.androidsdk)
-    ];
+  config = lib.mkIf (cfg.enable && config.nixosDesktop.enable) {
+    environment = {
+      systemPackages = with pkgs; [
+        android-tools
+        (android-studio.withSdk sdk.androidsdk)
+      ];
 
-    sessionVariables = rec {
-      ANDROID_HOME = "$HOME/Android/Sdk";
-      ANDROID_NDK_HOME = "${ANDROID_HOME}/ndk-bundle";
+      sessionVariables = rec {
+        ANDROID_HOME = "$HOME/Android/Sdk";
+        ANDROID_NDK_HOME = "${ANDROID_HOME}/ndk-bundle";
+      };
     };
   };
 }

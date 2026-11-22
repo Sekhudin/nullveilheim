@@ -1,7 +1,7 @@
 { lib, ... }:
 
 let
-  androidStudioType = lib.types.submodule {
+  androidStudioSettingsType = lib.types.submodule {
     options = {
       cmdLineToolsVersion = lib.mkOption {
         type = lib.types.str;
@@ -102,10 +102,18 @@ in
       default = false;
     };
 
-    android-studio = lib.mkOption {
-      type = androidStudioType;
-      description = "android-studio-settings";
-      default = { };
+    android-studio = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "enable android studio together with a composed android sdk.";
+      };
+
+      settings = lib.mkOption {
+        type = androidStudioSettingsType;
+        default = { };
+        description = "android sdk settings used to compose the sdk.";
+      };
     };
   };
 }
