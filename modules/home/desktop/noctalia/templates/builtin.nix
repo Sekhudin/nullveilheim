@@ -29,7 +29,7 @@ in
     ];
     btop.settings.color_theme = template;
     ghostty.settings.theme = template;
-    #starship: auto apply
+
     noctalia.settings.theme.templates = {
       enable_builtin_templates = true;
       builtin_ids = [
@@ -40,6 +40,8 @@ in
         "gtk4"
         "hyprland"
         "qt"
+
+        #applied
         "starship"
       ];
     };
