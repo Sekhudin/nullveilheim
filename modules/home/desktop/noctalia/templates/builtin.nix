@@ -40,9 +40,6 @@ in
         "gtk4"
         "hyprland"
         "qt"
-
-        #applied
-        "starship"
       ];
     };
   };

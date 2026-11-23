@@ -54,6 +54,50 @@ let
       };
     }
   );
+
+  starship = config.programs.starship;
+  starshipSource = tomlFormat.generate "starship-template.toml" (
+    starship.settings
+    // {
+      palette = "noctalia";
+
+      palettes.noctalia = {
+        blue = "{{colors.terminal_normal_blue.default.hex}}";
+        red = "{{colors.terminal_normal_red.default.hex}}";
+        green = "{{colors.terminal_normal_green.default.hex}}";
+        yellow = "{{colors.terminal_normal_yellow.default.hex}}";
+        cyan = "{{colors.terminal_normal_cyan.default.hex}}";
+        magenta = "{{colors.terminal_normal_magenta.default.hex}}";
+        white = "{{colors.terminal_normal_white.default.hex}}";
+        black = "{{colors.terminal_normal_black.default.hex}}";
+
+        rosewater = "{{colors.terminal_bright_yellow.default.hex}}";
+        flamingo = "{{colors.terminal_bright_red.default.hex}}";
+        pink = "{{colors.terminal_bright_magenta.default.hex}}";
+        mauve = "{{colors.terminal_normal_magenta.default.hex}}";
+        maroon = "{{colors.terminal_bright_red.default.hex}}";
+        peach = "{{colors.terminal_bright_yellow.default.hex}}";
+        teal = "{{colors.terminal_normal_cyan.default.hex}}";
+        sky = "{{colors.terminal_bright_cyan.default.hex}}";
+        sapphire = "{{colors.terminal_bright_blue.default.hex}}";
+        lavender = "{{colors.terminal_bright_magenta.default.hex}}";
+
+        text = "{{colors.terminal_foreground.default.hex}}";
+        subtext1 = "{{colors.terminal_normal_white.default.hex}}";
+        subtext0 = "{{colors.terminal_bright_black.default.hex}}";
+
+        overlay2 = "{{colors.terminal_bright_black.default.hex}}";
+        overlay1 = "{{colors.terminal_bright_black.default.hex}}";
+        overlay0 = "{{colors.terminal_normal_black.default.hex}}";
+        surface2 = "{{colors.terminal_normal_black.default.hex}}";
+        surface1 = "{{colors.terminal_normal_black.default.hex}}";
+        surface0 = "{{colors.terminal_background.default.hex}}";
+        base = "{{colors.terminal_background.default.hex}}";
+        mantle = "{{colors.terminal_background.default.hex}}";
+        crust = "{{colors.terminal_background.default.hex}}";
+      };
+    }
+  );
 in
 {
   programs.yakc.skipConfigFile = cfg.enable;
@@ -64,6 +108,7 @@ in
     "noctalia/inputs/telegram.tdesktop-theme".source = ./inputs/telegram.tdesktop-theme;
     "noctalia/inputs/yakc.json".source = yakcSource;
     "noctalia/inputs/herdr.toml".source = herdrSource;
+    "noctalia/inputs/starship.toml".source = starshipSource;
   };
 
   programs.noctalia.settings.theme.templates.user = {
@@ -82,6 +127,10 @@ in
     herdr = {
       input_path = "${inputsDirectory}/herdr.toml";
       output_path = "${homeDirectory}/.config/herdr/config.toml";
+    };
+    starship = {
+      input_path = "${inputsDirectory}/starship.toml";
+      output_path = "${homeDirectory}/.config/starship.toml";
     };
   };
 }
