@@ -78,6 +78,7 @@ in
       start = [
         "launcher"
         "workspaces"
+        "profidev/hypr-screen-mirror:widget"
         "clock"
         "k4n4t4/hypr-submap:hypr-submap"
       ];
@@ -90,7 +91,6 @@ in
         "noctalia/screen_recorder:recorder"
         "wallpaper"
         "network"
-        "bluetooth"
         "volume"
         "brightness"
         "battery"
