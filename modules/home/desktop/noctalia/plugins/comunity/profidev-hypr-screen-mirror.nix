@@ -20,5 +20,9 @@ in
 
     plugin_settings."profidev/hypr-screen-mirror" = {
     };
+
+    widget."profidev/hypr-screen-mirror:widget" = {
+      glyph = "screen-share";
+    };
   };
 }
