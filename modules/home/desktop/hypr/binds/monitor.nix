@@ -20,7 +20,10 @@ in
       bind = [
         (hypr.mkBind {
           group = bindGroup;
-          key = ctl.combos.alt "M";
+          key = ctl.combos.of [
+            ctl.keys.mod
+            ctl.keys.alt
+          ] "M";
           dispatcher = hl.dsp.submap {
             name = submaps.monitor;
           };

@@ -46,6 +46,7 @@ let
       print = "Print";
       brightness_down = "XF86MonBrightnessDown";
       brightness_up = "XF86MonBrightnessUp";
+      display = "XF86Display";
       media_next = "XF86AudioNext";
       media_prev = "XF86AudioPrev";
       media_toggle = "XF86AudioPlay";

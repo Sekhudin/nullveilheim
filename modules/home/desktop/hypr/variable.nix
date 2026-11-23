@@ -59,6 +59,7 @@ in
           keyviz = "nv-keyviz";
           bar = "nv-bar";
           dock = "nv-dock";
+          display = "nv-display";
         };
 
         panels = hypr.mkVar {

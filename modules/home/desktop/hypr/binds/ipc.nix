@@ -67,6 +67,17 @@ in
             description = "bar toggle";
           };
         })
+
+        (hypr.mkBind {
+          group = bindGroup;
+          key = ctl.combos.plain ctl.keys.display;
+          dispatcher = hl.dsp.exec_cmd {
+            cmd = ipc.display;
+          };
+          flags = {
+            description = "screen display";
+          };
+        })
       ];
     };
   };

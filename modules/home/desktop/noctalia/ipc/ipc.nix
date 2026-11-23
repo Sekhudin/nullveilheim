@@ -37,6 +37,12 @@ in
         name = ipc.dock;
         text = msg "dock-toggle";
       })
+
+      (pkgs.writeShellApplication {
+        inherit runtimeInputs;
+        name = ipc.display;
+        text = msg "panel-toggle profidev/hypr-screen-mirror:panel";
+      })
     ];
   };
 }
