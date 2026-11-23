@@ -38,11 +38,6 @@ in
       };
     };
 
-    fastfetch = {
-      enable = true;
-      settings = { };
-    };
-
     bat = {
       enable = true;
       config = {

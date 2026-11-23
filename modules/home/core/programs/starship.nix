@@ -1,6 +1,17 @@
-{ config, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  extraLib,
+  ...
+}:
 
 let
+  h = extraLib.activation.mkHelper {
+    context = "starship";
+    inherit pkgs;
+  };
+
   withLeftSpace = s: " ${s}";
   withRightSpace = s: "${s} ";
   defaultFormat = withRightSpace "[$symbol($version)]($style)";
@@ -61,6 +72,14 @@ in
       zig = {
         format = defaultFormat;
       };
+    };
+  };
+
+  home.activation = lib.mkIf config.programs.starship.enable {
+    ${h.context} = h.makeMutableHomeFiles {
+      paths = [ ".config/starship.toml" ];
+      mode = "600";
+      inherit lib;
     };
   };
 }

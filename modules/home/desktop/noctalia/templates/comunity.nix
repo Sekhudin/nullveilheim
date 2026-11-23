@@ -43,7 +43,6 @@ in
         "neovim"
         "obs"
         "telegram"
-
         "fastfetch"
         "papirus-icons"
       ];

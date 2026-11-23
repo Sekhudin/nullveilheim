@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   extraLib,
   ...
 }:
@@ -15,6 +16,11 @@ let
     mkTmuxColor
     mkShellAliases
     ;
+
+  h = extraLib.activation.mkHelper {
+    context = "tmux";
+    inherit pkgs;
+  };
 
   workspaces = {
     work = {
@@ -178,5 +184,13 @@ in
       set -gq allow-passthrough on
       set -g visual-activity off
     '';
+  };
+
+  home.activation = lib.mkIf config.programs.tmux.enable {
+    ${h.context} = h.makeMutableHomeFiles {
+      paths = [ ".config/tmux/tmux.conf" ];
+      mode = "600";
+      inherit lib;
+    };
   };
 }
