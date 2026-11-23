@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    bubblewrap
     antigravity-cli
   ];
 
