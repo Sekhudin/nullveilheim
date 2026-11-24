@@ -19,12 +19,14 @@ in
   config = lib.mkIf (cfg.enable && cfg.enableOpencodeIntegration) {
     programs.opencode = {
       tui.plugin = [ "./herdr-tui-session.js" ];
-      skills = {
-        herdr = "${cfg.assets}/skills/herdr";
-      };
     };
 
     xdg.configFile = {
+      "opencode/skills/herdr" = {
+        source = "${cfg.assets}/skills/herdr";
+        recursive = true;
+      };
+
       "opencode/cli.json" = {
         force = true;
         source = jsonFormat.generate "opencode-cli.json" {

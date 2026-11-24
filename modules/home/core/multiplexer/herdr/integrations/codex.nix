@@ -21,12 +21,13 @@ in
   config = lib.mkIf (cfg.enable && cfg.enableCodexIntegration) {
     programs.codex = {
       settings.features.hooks = true;
-      skills = {
-        herdr = "${cfg.assets}/skills/herdr";
-      };
     };
 
     home.file = {
+      ".codex/skills/herdr" = {
+        source = "${cfg.assets}/skills/herdr";
+      };
+
       ".codex/herdr-agent-state.sh" = {
         force = true;
         executable = true;
