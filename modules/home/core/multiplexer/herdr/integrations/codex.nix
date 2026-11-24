@@ -24,6 +24,10 @@ in
     };
 
     home.file = {
+      ".codex/skills/herdr" = {
+        source = "${cfg.assets}/skills/herdr";
+      };
+
       ".codex/herdr-agent-state.sh" = {
         force = true;
         executable = true;

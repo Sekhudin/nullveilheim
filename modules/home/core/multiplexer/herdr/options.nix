@@ -53,7 +53,7 @@ in
       type = lib.types.package;
       readOnly = true;
       internal = true;
-      description = "Agent integration assets extracted from the installed Herdr package.";
+      description = "Agent integration assets and agent skill extracted from the installed Herdr package.";
     };
   };
 
@@ -73,6 +73,9 @@ in
       ${lib.getExe cfg.package} integration install opencode
 
       mkdir -p $out/claude $out/codex $out/opencode/herdr-opencode
+      mkdir -p $out/skills/herdr
+
+      ${lib.getExe cfg.package} --skill > $out/skills/herdr/SKILL.md
 
       install -m755 "$HOME/.claude/hooks/herdr-agent-state.sh" $out/claude/herdr-agent-state.sh
       install -m755 "$HOME/.codex/herdr-agent-state.sh" $out/codex/herdr-agent-state.sh

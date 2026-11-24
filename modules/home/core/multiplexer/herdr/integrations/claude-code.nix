@@ -34,6 +34,13 @@ in
       ];
     };
 
+    home.file = {
+      ".claude/skills/herdr" = {
+        source = "${cfg.assets}/skills/herdr";
+        recursive = true;
+      };
+    };
+
     home.activation = {
       ${h.context} = h.makeMutableHomeFiles {
         paths = [ ".claude/settings.json" ];
