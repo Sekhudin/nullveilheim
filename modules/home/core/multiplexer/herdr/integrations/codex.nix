@@ -21,6 +21,9 @@ in
   config = lib.mkIf (cfg.enable && cfg.enableCodexIntegration) {
     programs.codex = {
       settings.features.hooks = true;
+      skills = {
+        herdr = "${cfg.assets}/skills/herdr";
+      };
     };
 
     home.file = {

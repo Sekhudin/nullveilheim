@@ -20,6 +20,9 @@ in
   config = lib.mkIf (cfg.enable && cfg.enableClaudeIntegration) {
     programs.claude-code = {
       hooksDir = "${cfg.assets}/claude";
+      skills = {
+        herdr = "${cfg.assets}/skills/herdr";
+      };
       settings.hooks.SessionStart = [
         {
           matcher = "^(startup|resume|clear|compact|fork)$";

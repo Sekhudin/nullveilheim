@@ -19,6 +19,9 @@ in
   config = lib.mkIf (cfg.enable && cfg.enableOpencodeIntegration) {
     programs.opencode = {
       tui.plugin = [ "./herdr-tui-session.js" ];
+      skills = {
+        herdr = "${cfg.assets}/skills/herdr";
+      };
     };
 
     xdg.configFile = {
