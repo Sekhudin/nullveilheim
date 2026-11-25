@@ -76,9 +76,9 @@ in
       settings = {
         spec = [
           {
-            __unkeyed-1 = "<leader>lf";
+            __unkeyed-1 = "<leader>=";
             __unkeyed-2 = "<cmd>lua require('conform').format({ async = false }); vim.cmd('update')<cr>";
-            desc = "[LSP] format buffer";
+            desc = "format buffer";
           }
         ];
       };

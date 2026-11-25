@@ -54,13 +54,13 @@ in
           }
           {
             __unkeyed-1 = "gd";
-            __unkeyed-2 = "<cmd>Lspsaga peek_definition<cr>";
-            desc = "peek definition";
+            __unkeyed-2 = "<cmd>Lspsaga goto_definition<cr>";
+            desc = "go to definition";
           }
           {
             __unkeyed-1 = "gD";
-            __unkeyed-2 = "<cmd>Lspsaga goto_definition<cr>";
-            desc = "go to definition";
+            __unkeyed-2 = "<cmd>Lspsaga peek_definition<cr>";
+            desc = "peek definition";
           }
           {
             __unkeyed-1 = "ga";
@@ -75,22 +75,22 @@ in
           {
             __unkeyed-1 = "gF";
             __unkeyed-2 = "<cmd>Lspsaga finder<cr>";
-            desc = "LSP finder";
+            desc = "lsp finder";
           }
           {
             __unkeyed-1 = "<leader>lo";
             __unkeyed-2 = "<cmd>Lspsaga outline<cr>";
-            desc = "[LSP] outline";
+            desc = "outline";
           }
           {
             __unkeyed-1 = "<leader>lc";
             __unkeyed-2 = "<cmd>Lspsaga incoming_calls<cr>";
-            desc = "[LSP] incoming calls";
+            desc = "incoming calls";
           }
           {
             __unkeyed-1 = "<leader>lC";
             __unkeyed-2 = "<cmd>Lspsaga outgoing_calls<cr>";
-            desc = "[LSP] outgoing calls";
+            desc = "outgoing calls";
           }
         ];
       };

@@ -35,20 +35,25 @@
           {
             __unkeyed-1 = "<leader><Esc>";
             __unkeyed-2 = "<cmd>nohlsearch<cr>";
-            desc = "clear Search Highlight";
+            desc = "clear search highlight";
             mode = [ "n" ];
           }
           {
-            __unkeyed-1 = "<leader>qq";
+            __unkeyed-1 = "<leader>q";
+            __unkeyed-2 = "<cmd>q<cr>";
+            desc = "quit window";
+            icon = icon.cross;
+          }
+          {
+            __unkeyed-1 = "<leader>Q";
             __unkeyed-2 = "<cmd>qa!<cr>";
             desc = "quit all";
             icon = icon.cross;
           }
           {
-            __unkeyed-1 = "<leader>qw";
-            __unkeyed-2 = "<cmd>wqa<cr>";
-            desc = "save & quit all";
-            icon = icon.cross;
+            __unkeyed-1 = "<leader>w";
+            __unkeyed-2 = "<cmd>write<cr>";
+            desc = "write buffer";
           }
 
           # window
@@ -73,7 +78,7 @@
           {
             __unkeyed-1 = "<C-j>";
             __unkeyed-2 = "<cmd>wincmd j<cr>";
-            desc = "move to bellow window";
+            desc = "move to below window";
             mode = [
               "n"
               "t"
@@ -89,29 +94,17 @@
             ];
           }
 
-          # workspace
-          {
-            __unkeyed-1 = "<leader>w";
-            __unkeyed-2 = "gt";
-            desc = "next workspace";
-          }
-          {
-            __unkeyed-1 = "<leader>W";
-            __unkeyed-2 = "gT";
-            desc = "prev workspace";
-          }
-
           # window size
           {
             __unkeyed-1 = "<A-.>";
             __unkeyed-2 = "<cmd>vertical resize -5<cr>";
-            desc = "move line down";
+            desc = "narrow window";
             mode = "n";
           }
           {
             __unkeyed-1 = "<A-,>";
             __unkeyed-2 = "<cmd>vertical resize +5<cr>";
-            desc = "move line up";
+            desc = "widen window";
             mode = "n";
           }
 

@@ -27,11 +27,6 @@ in
       settings = {
         spec = [
           {
-            __unkeyed-1 = "<leader>h";
-            __unkeyed-2 = "<cmd>HopLineStart<cr>";
-            desc = "seek line";
-          }
-          {
             __unkeyed-1 = "sc";
             __unkeyed-2 = "<cmd>HopChar2<cr>";
             desc = "seek char";

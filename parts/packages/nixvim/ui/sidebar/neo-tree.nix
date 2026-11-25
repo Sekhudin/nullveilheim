@@ -124,9 +124,9 @@ in
       settings = {
         spec = [
           {
-            __unkeyed-1 = "<leader>v";
+            __unkeyed-1 = "<leader>e";
             __unkeyed-2 = "<cmd>Neotree toggle<cr>";
-            desc = "neotree toggle";
+            desc = "explorer toggle";
             icon = icon.toggle;
           }
         ];

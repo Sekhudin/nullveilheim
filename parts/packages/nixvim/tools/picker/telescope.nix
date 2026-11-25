@@ -2,7 +2,6 @@
   pkgs,
   config,
   lib,
-  icon,
   ...
 }:
 
@@ -59,86 +58,77 @@ in
         };
       };
       keymaps = {
-        "<leader>ff" = {
+        "<leader>f" = {
           action = "find_files";
           options.desc = "find files";
         };
-        "<leader>fw" = {
+        "<leader>/" = {
           action = "live_grep";
-          options.desc = "find word";
+          options.desc = "live grep";
         };
-        "<leader>fW" = {
+        "<leader>*" = {
           action = "grep_string";
-          options.desc = "find word under cursor";
+          options.desc = "grep word under cursor";
         };
-        "<leader>fb" = {
+        "<leader>b" = {
           action = "buffers";
           options.desc = "find buffers";
         };
-        "<leader>fB" = {
+        "<leader>B" = {
           action = "current_buffer_fuzzy_find";
           options.desc = "fuzzy find in buffer";
         };
-        "<leader>fh" = {
+        "<leader>h" = {
           action = "help_tags";
-          options.desc = "find help";
+          options.desc = "help tags";
         };
-        "<leader>fH" = {
+        "<leader>H" = {
           action = "highlights";
-          options.desc = "find highlights";
+          options.desc = "highlights";
         };
-        "<leader>fc" = {
+        "<leader>c" = {
           action = "colorscheme";
-          options.desc = "find colorscheme";
+          options.desc = "colorscheme";
         };
-        "<leader>fgc" = {
-          action = "git_commits";
-          options.desc = "git commits";
-        };
-
-        "<leader>fgC" = {
-          action = "git_bcommits";
-          options.desc = "buffer git commits";
-        };
-
-        "<leader>fgr" = {
-          action = "git_bcommits_range";
-          options.desc = "buffer git commits (range)";
-        };
-
-        "<leader>fgb" = {
-          action = "git_branches";
-          options.desc = "git branches";
-        };
-
-        "<leader>fgs" = {
+        "<leader>gs" = {
           action = "git_status";
           options.desc = "git status";
         };
-
-        "<leader>fgS" = {
+        "<leader>gb" = {
+          action = "git_branches";
+          options.desc = "git branches";
+        };
+        "<leader>gc" = {
+          action = "git_commits";
+          options.desc = "git commits";
+        };
+        "<leader>gC" = {
+          action = "git_bcommits";
+          options.desc = "buffer commits";
+        };
+        "<leader>gr" = {
+          action = "git_bcommits_range";
+          options.desc = "commits in range";
+        };
+        "<leader>gS" = {
           action = "git_stash";
           options.desc = "git stash";
         };
-
-        "<leader>fGi" = {
+        "<leader>gi" = {
           action = "gh issues";
           options.desc = "github issues";
         };
-
-        "<leader>fGp" = {
+        "<leader>gp" = {
           action = "gh pull_requests";
-          options.desc = "github PRs";
+          options.desc = "github pull requests";
         };
-
-        "<leader>fGr" = {
+        "<leader>ga" = {
           action = "gh run";
-          options.desc = "github actions (run)";
+          options.desc = "github actions";
         };
-
-        "<leader>fGg" = {
+        "<leader>gg" = {
           action = "gh gist";
-          options.desc = "github gist";
+          options.desc = "github gists";
         };
       };
     };
@@ -146,65 +136,41 @@ in
     which-key = {
       settings = {
         spec = [
-          # group
-          {
-            __unkeyed-1 = "<leader>f";
-            group = "telescope";
-          }
-          {
-            __unkeyed-1 = "<leader>fg";
-            group = "git";
-          }
-          {
-            __unkeyed-1 = "<leader>fG";
-            group = "github";
-          }
-          {
-            __unkeyed-1 = "<leader>fl";
-            group = "lsp";
-          }
-
           # keymaps
           {
-            __unkeyed-1 = "<leader>ft";
-            __unkeyed-2 = "<cmd>Telescope<cr>";
-            desc = "open telescope";
-            icon = icon.telescope;
-          }
-          {
-            __unkeyed-1 = "<leader>flr";
+            __unkeyed-1 = "<leader>lr";
             __unkeyed-2 = "<cmd>lua require('telescope.builtin').lsp_references()<cr>";
-            desc = "[LSP] find references";
+            desc = "references";
           }
           {
-            __unkeyed-1 = "<leader>fld";
+            __unkeyed-1 = "<leader>ld";
             __unkeyed-2 = "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>";
-            desc = "[LSP] find definitions";
+            desc = "definitions";
           }
           {
-            __unkeyed-1 = "<leader>fli";
+            __unkeyed-1 = "<leader>li";
             __unkeyed-2 = "<cmd>lua require('telescope.builtin').lsp_implementations()<cr>";
-            desc = "[LSP] find implementations";
+            desc = "implementations";
           }
           {
-            __unkeyed-1 = "<leader>flt";
+            __unkeyed-1 = "<leader>lt";
             __unkeyed-2 = "<cmd>lua require('telescope.builtin').lsp_type_definitions()<cr>";
-            desc = "[LSP] find type Definitions";
+            desc = "type definitions";
           }
           {
-            __unkeyed-1 = "<leader>fls";
+            __unkeyed-1 = "<leader>ls";
             __unkeyed-2 = "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>";
-            desc = "[LSP] find document Symbols";
+            desc = "document symbols";
           }
           {
-            __unkeyed-1 = "<leader>flw";
+            __unkeyed-1 = "<leader>lw";
             __unkeyed-2 = "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>";
-            desc = "[LSP] find workspace Symbols";
+            desc = "workspace symbols";
           }
           {
-            __unkeyed-1 = "<leader>flD";
+            __unkeyed-1 = "<leader>lD";
             __unkeyed-2 = "<cmd>lua require('telescope.builtin').diagnostics()<cr>";
-            desc = "[LSP] find diagnostics";
+            desc = "diagnostics";
           }
         ];
       };

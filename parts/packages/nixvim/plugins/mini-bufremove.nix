@@ -18,7 +18,7 @@
       settings = {
         spec = [
           {
-            __unkeyed-1 = "<leader>bd";
+            __unkeyed-1 = "<leader>D";
             __unkeyed-2 = "<cmd>lua require('mini.bufremove').wipeout()<cr>";
             desc = "close buffer";
           }

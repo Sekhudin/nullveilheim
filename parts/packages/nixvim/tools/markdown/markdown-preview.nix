@@ -23,7 +23,7 @@ in
       settings = {
         spec = [
           {
-            __unkeyed-1 = "<leader>mm";
+            __unkeyed-1 = "<leader>M";
             __unkeyed-2 = "<cmd>MarkdownPreviewToggle<cr>";
             icon = icon.markdown;
             desc = "markdown preview";

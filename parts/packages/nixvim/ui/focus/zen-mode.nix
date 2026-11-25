@@ -24,10 +24,10 @@ in
       settings = {
         spec = [
           {
-            __unkeyed-1 = "<leader>mz";
+            __unkeyed-1 = "<leader>m";
             __unkeyed-2 = "<cmd>ZenMode<cr>";
             icon = icon.philosopher;
-            desc = "cultivation mode";
+            desc = "zen mode";
           }
         ];
       };

@@ -58,18 +58,12 @@ in
     which-key = {
       settings = {
         spec = [
-          # group
-          {
-            __unkeyed-1 = "<leader>b";
-            group = "buffer";
-          }
-
           # keymaps
           {
             __unkeyed-1 = "<Tab>";
             __unkeyed-2 = "<cmd>BufferLineCycleNext<cr>";
             group = "buffer";
-            desc = "first buffer";
+            desc = "next buffer";
           }
           {
             __unkeyed-1 = "<S-Tab>";
@@ -78,29 +72,19 @@ in
             desc = "prev buffer";
           }
           {
-            __unkeyed-1 = "<leader>bf";
+            __unkeyed-1 = "<leader>1";
             __unkeyed-2 = "<cmd>BufferLineGoToBuffer 1<cr>";
             desc = "first buffer";
           }
           {
-            __unkeyed-1 = "<leader>bl";
+            __unkeyed-1 = "<leader>0";
             __unkeyed-2 = "<cmd>BufferLineGoToBuffer -1<cr>";
             desc = "last buffer";
           }
           {
-            __unkeyed-1 = "<leader>bo";
+            __unkeyed-1 = "<leader>O";
             __unkeyed-2 = "<cmd>BufferLineCloseOthers<cr>";
             desc = "close other buffers";
-          }
-          {
-            __unkeyed-1 = "<leader>w";
-            __unkeyed-2 = "gt";
-            desc = "next workspace";
-          }
-          {
-            __unkeyed-1 = "<leader>W";
-            __unkeyed-2 = "gT";
-            desc = "prev workspace";
           }
         ];
       };

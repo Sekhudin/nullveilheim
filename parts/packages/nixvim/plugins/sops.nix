@@ -1,6 +1,5 @@
 {
   pkgs,
-  icon,
   ...
 }:
 
@@ -29,21 +28,14 @@
     which-key = {
       settings = {
         spec = [
-          # group
-          {
-            __unkeyed-1 = "<leader>e";
-            icon = icon.secret;
-            group = "secret";
-          }
-
           # keymaps
           {
-            __unkeyed-1 = "<leader>ee";
+            __unkeyed-1 = "<leader>s";
             __unkeyed-2 = "<cmd>SopsEncrypt<cr>";
             desc = "sops encrypt";
           }
           {
-            __unkeyed-1 = "<leader>ed";
+            __unkeyed-1 = "<leader>S";
             __unkeyed-2 = "<cmd>SopsDecrypt<cr>";
             desc = "sops decrypt";
           }

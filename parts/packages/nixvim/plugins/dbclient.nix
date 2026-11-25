@@ -67,9 +67,9 @@ in
     settings = {
       spec = [
         {
-          __unkeyed-1 = "<leader>du";
+          __unkeyed-1 = "<leader>dt";
           __unkeyed-2 = "<cmd>DBUIToggle<cr>";
-          desc = "dbui toggle";
+          desc = "db toggle";
         }
         {
           __unkeyed-1 = "<leader>da";

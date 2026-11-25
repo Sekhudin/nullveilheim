@@ -270,12 +270,12 @@
             {
               __unkeyed-1 = "<leader>lI";
               __unkeyed-2 = "<cmd>LspInfo<cr>";
-              desc = "[LSP] info";
+              desc = "lsp info";
             }
             {
-              __unkeyed-1 = "<leader>li";
+              __unkeyed-1 = "<leader>lh";
               __unkeyed-2 = "<cmd>LspInlay<cr>";
-              desc = "[LSP] toggle inlay hints";
+              desc = "toggle inlay hints";
             }
           ];
         };
