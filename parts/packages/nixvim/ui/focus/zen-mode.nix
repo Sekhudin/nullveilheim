@@ -7,30 +7,23 @@
 
 let
   cfg = config.nixvimUI;
+  enableZen-mode = cfg.focus == "zen-mode";
 in
 {
-  plugins = lib.mkIf (cfg.focus == "zen-mode") {
-    zen-mode = {
-      enable = true;
-      lazyLoad = {
-        settings = {
-          cmd = [ "ZenMode" ];
-        };
-      };
-      settings = { };
-    };
+  plugins.zen-mode = {
+    enable = enableZen-mode;
+    lazyLoad.settings.cmd = [ "ZenMode" ];
+    settings = { };
+  };
 
-    which-key = {
-      settings = {
-        spec = [
-          {
-            __unkeyed-1 = "<leader>mz";
-            __unkeyed-2 = "<cmd>ZenMode<cr>";
-            icon = icon.philosopher;
-            desc = "cultivation mode";
-          }
-        ];
-      };
-    };
+  plugins.which-key = lib.mkIf enableZen-mode {
+    settings.spec = [
+      {
+        __unkeyed-1 = "<leader>m";
+        __unkeyed-2 = "<cmd>ZenMode<cr>";
+        icon = icon.philosopher;
+        desc = "zen mode";
+      }
+    ];
   };
 }

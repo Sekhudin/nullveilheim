@@ -7,29 +7,26 @@
 
 let
   cfg = config.nixvimTools;
+  enableMarkdown-preview = cfg.markdown == "markdown-preview";
 in
 {
-  plugins = lib.mkIf (cfg.markdown == "markdown-preview") {
-    markdown-preview = {
-      enable = true;
-      settings = {
-        auto_start = 0;
-        theme = "dark";
-        port = "8686";
-      };
+  plugins.markdown-preview = {
+    enable = enableMarkdown-preview;
+    settings = {
+      auto_start = 0;
+      theme = "dark";
+      port = "8686";
     };
+  };
 
-    which-key = {
-      settings = {
-        spec = [
-          {
-            __unkeyed-1 = "<leader>mm";
-            __unkeyed-2 = "<cmd>MarkdownPreviewToggle<cr>";
-            icon = icon.markdown;
-            desc = "markdown preview";
-          }
-        ];
-      };
-    };
+  plugins.which-key = lib.mkIf enableMarkdown-preview {
+    settings.spec = [
+      {
+        __unkeyed-1 = "<leader>M";
+        __unkeyed-2 = "<cmd>MarkdownPreviewToggle<cr>";
+        icon = icon.markdown;
+        desc = "markdown preview";
+      }
+    ];
   };
 }
