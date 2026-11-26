@@ -10,6 +10,7 @@ in
     settings = {
       options = {
         theme = "auto";
+        globalstatus = true;
         icon_enabled = true;
         component_separators = {
           left = "";

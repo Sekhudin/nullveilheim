@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 
 {
   extraFiles."lua/matugen-template.lua".text = ''
@@ -37,17 +37,15 @@
     return M
   '';
 
-  extraConfigLuaPre = ''
+  extraConfigLuaPre = lib.mkAfter ''
     vim.opt.termguicolors = true
 
     package.path = package.path .. ";" ..
       vim.fn.expand("~/.config/nvim/lua/?.lua")
-  '';
 
-  extraConfigLua = ''
     local ok, matugen = pcall(require, "matugen")
-    if ok then
-      matugen.setup()
+    if ok and pcall(matugen.setup) then
+      vim.g.colors_name = "base16"
     else
       vim.cmd.colorscheme("kanagawa")
     end

@@ -1,10 +1,7 @@
 { pkgs, ... }:
 
 {
-  globals = {
-    mapleader = " ";
-    laststatus = 3;
-  };
+  globals.mapleader = " ";
 
   opts = {
     background = "dark";
@@ -23,6 +20,7 @@
     foldenable = false;
     foldlevel = 99;
     foldlevelstart = 99;
+    laststatus = 3;
     mouse = "";
     number = true;
     relativenumber = true;

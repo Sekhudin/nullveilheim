@@ -1,6 +1,7 @@
 { ... }:
 
 {
+  colorscheme = null;
   colorschemes = {
     base16 = {
       enable = true;
@@ -10,6 +11,7 @@
 
     kanagawa = {
       enable = true;
+      autoLoad = true;
       settings = {
         theme = "dragon";
         transparent = false;
