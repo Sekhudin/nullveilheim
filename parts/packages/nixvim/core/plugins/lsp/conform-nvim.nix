@@ -66,5 +66,10 @@
       __unkeyed-2 = "<cmd>lua require('conform').format({ async = false }); vim.cmd('update')<cr>";
       desc = "format buffer";
     }
+    {
+      __unkeyed-1 = "<leader>lf";
+      __unkeyed-2 = "<cmd>lua require('conform').format({ async = false }); vim.cmd('update')<cr>";
+      desc = "format buffer";
+    }
   ];
 }
