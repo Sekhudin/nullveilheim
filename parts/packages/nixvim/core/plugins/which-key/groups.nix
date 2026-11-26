@@ -1,0 +1,32 @@
+{ icon, ... }:
+
+{
+  plugins.which-key.settings.spec = [
+    {
+      __unkeyed-1 = "<leader>d";
+      group = "database";
+      icon = icon.database;
+    }
+    {
+      __unkeyed-1 = "<leader>l";
+      group = "lsp";
+      icon = icon.code;
+    }
+    {
+      __unkeyed-1 = "[";
+      group = "backward";
+    }
+    {
+      __unkeyed-1 = "]";
+      group = "forward";
+    }
+    {
+      __unkeyed-1 = "g";
+      group = "goto";
+    }
+    {
+      __unkeyed-1 = "s";
+      group = "seek";
+    }
+  ];
+}

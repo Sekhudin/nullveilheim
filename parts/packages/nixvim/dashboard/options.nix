@@ -1,0 +1,177 @@
+{
+  config,
+  lib,
+  extraLib,
+  icon,
+  ...
+}:
+
+let
+  cfg = config.nixvimDashboard;
+  inherit (extraLib.nixvim)
+    asciiArts
+    mkAsciiHeader
+    mkAsciiFooter
+    ;
+
+  isTheme = theme: cfg.theme == theme;
+  shortcut = [
+    {
+      key = "Fn";
+      icon = (icon.withRightSpace "plus_1");
+      desc = "New File ";
+      action = "new";
+    }
+    {
+      key = "Ff";
+      icon = (icon.withRightSpace "file");
+      desc = "Find File ";
+      action = "Telescope find_files";
+    }
+    {
+      key = "Fw";
+      icon = "${icon.word} ";
+      desc = "Find Word ";
+      action = "Telescope live_grep";
+    }
+  ];
+
+  mkSpacer = gap: lib.lists.replicate gap "";
+  header =
+    (
+      if cfg.banner.header.custom != null then
+        cfg.banner.header.custom
+      else
+        (mkAsciiHeader {
+          inherit (cfg.banner.header) head;
+          ascii = asciiArts.${cfg.banner.header.ascii}.art;
+        })
+    )
+    ++ (mkSpacer cfg.banner.header.gap);
+
+  footer =
+    (mkSpacer cfg.banner.footer.gap)
+    ++ (
+      if cfg.banner.footer.custom != null then
+        cfg.banner.footer.custom
+      else
+        (mkAsciiFooter {
+          inherit (cfg.banner.footer) tail;
+          ascii = asciiArts.${cfg.banner.footer.ascii}.art;
+        })
+    );
+
+  asciiArtNames = builtins.attrNames asciiArts;
+in
+{
+  options.nixvimDashboard = {
+    theme = lib.mkOption {
+      type = lib.types.enum [
+        "doom"
+        "hyper"
+      ];
+      description = "choose theme";
+      default = "hyper";
+    };
+
+    banner = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          header = lib.mkOption {
+            type = lib.types.submodule {
+              options = {
+                ascii = lib.mkOption {
+                  type = lib.types.enum asciiArtNames;
+                  description = "choose ascii art";
+                  default = "absolute_cinema";
+                };
+                head = lib.mkOption {
+                  type = lib.types.nullOr lib.types.int;
+                  description = "asciii selector";
+                  default = 15;
+                };
+                gap = lib.mkOption {
+                  type = lib.types.int;
+                  description = "bottom gap";
+                  default = 0;
+                };
+                custom = lib.mkOption {
+                  type = lib.types.nullOr (lib.types.listOf lib.types.str);
+                  description = "custom header";
+                  default = null;
+                };
+              };
+            };
+          };
+
+          footer = lib.mkOption {
+            type = lib.types.submodule {
+              options = {
+                ascii = lib.mkOption {
+                  type = lib.types.enum asciiArtNames;
+                  description = "choose ascii art";
+                  default = "absolute_cinema";
+                };
+                tail = lib.mkOption {
+                  type = lib.types.nullOr lib.types.int;
+                  description = "ascii selector";
+                  default = 5;
+                };
+                gap = lib.mkOption {
+                  type = lib.types.int;
+                  description = "bottom gap";
+                  default = 0;
+                };
+                custom = lib.mkOption {
+                  type = lib.types.nullOr (lib.types.listOf lib.types.str);
+                  description = "custom footer";
+                  default = null;
+                };
+              };
+            };
+          };
+        };
+      };
+    };
+  };
+
+  config.plugins.dashboard = lib.mkMerge [
+    {
+      enable = true;
+      settings = {
+        theme = cfg.theme;
+        hide = {
+          tabline = true;
+          statusline = true;
+          winbar = true;
+        };
+        config = {
+          inherit header footer;
+          week_header.enable = false;
+          disable_move = true;
+        };
+      };
+    }
+
+    (lib.mkIf (isTheme "doom") {
+      settings.config = {
+        vertical_center = true;
+        center = shortcut;
+      };
+    })
+
+    (lib.mkIf (isTheme "hyper") {
+      settings.config = {
+        inherit shortcut;
+        project.enable = true;
+        project.limit = 3;
+        packages.enable = false;
+        mru = {
+          enable = true;
+          limit = 3;
+          cwd_only = true;
+        };
+      };
+    })
+  ];
+}

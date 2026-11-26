@@ -1,32 +1,16 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ config, ... }:
 
 let
   cfg = config.nixvimTools;
+  enableComment = cfg.comment == "comment";
 in
 {
-  plugins = lib.mkIf (cfg.comment == "comment") {
-    comment = {
-      enable = true;
-      lazyLoad = {
-        settings = {
-          event = [
-            "BufReadPost"
-            "BufNewFile"
-          ];
-        };
-      };
-      settings = { };
-    };
-
-    which-key = {
-      settings = {
-        spec = [
-        ];
-      };
-    };
+  plugins.comment = {
+    enable = enableComment;
+    lazyLoad.settings.event = [
+      "BufReadPost"
+      "BufNewFile"
+    ];
+    settings = { };
   };
 }

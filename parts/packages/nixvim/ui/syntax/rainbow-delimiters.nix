@@ -1,17 +1,12 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ config, ... }:
 
 let
   cfg = config.nixvimUI;
+  enableRainbow-delimiters = cfg.syntax == "rainbow-delimiters";
 in
 {
-  plugins = lib.mkIf (cfg.syntax == "rainbow-delimiters") {
-    rainbow-delimiters = {
-      enable = true;
-      settings = { };
-    };
+  plugins.rainbow-delimiters = {
+    enable = enableRainbow-delimiters;
+    settings = { };
   };
 }

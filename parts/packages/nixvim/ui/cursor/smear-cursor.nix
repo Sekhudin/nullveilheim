@@ -1,22 +1,17 @@
-{ config, lib, ... }:
+{ config, ... }:
 
 let
   cfg = config.nixvimUI;
+  enableSmear-cursor = cfg.cursor == "smear-cursor";
 in
 {
-  plugins = lib.mkIf (cfg.cursor == "smear-cursor") {
-    smear-cursor = {
-      enable = true;
-      lazyLoad = {
-        settings = {
-          event = [ "InsertEnter" ];
-          cmd = [ "SmearCursorToggle" ];
-        };
-      };
-      settings = {
-        hide_target_hack = true;
-        never_draw_over_target = true;
-      };
+  plugins.smear-cursor = {
+    enable = enableSmear-cursor;
+    lazyLoad.settings.event = [ "InsertEnter" ];
+    lazyLoad.settings.cmd = [ "SmearCursorToggle" ];
+    settings = {
+      hide_target_hack = true;
+      never_draw_over_target = true;
     };
   };
 }

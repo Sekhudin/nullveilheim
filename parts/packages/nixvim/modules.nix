@@ -8,10 +8,8 @@ in
     recursive = true;
     excludeDefault = true;
     dirs = [
-      ./completion
-      ./config
-      ./lsp
-      ./plugins
+      ./core
+      ./dashboard
       ./tools
       ./ui
     ];
