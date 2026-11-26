@@ -4,38 +4,25 @@
   options.nixvimUI = {
     cursor = lib.mkOption {
       type = lib.types.enum [
+        "none"
         "smear-cursor"
       ];
       description = "choose motion";
       default = "smear-cursor";
     };
 
-    diagnostic = lib.mkOption {
-      type = lib.types.enum [
-        "trouble"
-      ];
-      description = "choose diagnostic";
-      default = "trouble";
-    };
-
     focus = lib.mkOption {
       type = lib.types.enum [
+        "none"
         "zen-mode"
       ];
       description = "choose focus";
       default = "zen-mode";
     };
 
-    fold = lib.mkOption {
-      type = lib.types.enum [
-        "nvim-ufo"
-      ];
-      description = "choose fold";
-      default = "nvim-ufo";
-    };
-
     indent = lib.mkOption {
       type = lib.types.enum [
+        "none"
         "indent-blankline"
       ];
       description = "choose indent";
@@ -44,6 +31,7 @@
 
     overlay = lib.mkOption {
       type = lib.types.enum [
+        "none"
         "noice"
       ];
       description = "choose overlay";
@@ -61,22 +49,16 @@
 
     status = lib.mkOption {
       type = lib.types.enum [
+        "none"
         "lualine"
       ];
       description = "choose status";
       default = "lualine";
     };
 
-    syntax = lib.mkOption {
-      type = lib.types.enum [
-        "rainbow-delimiters"
-      ];
-      description = "choose syntax highlighting";
-      default = "rainbow-delimiters";
-    };
-
     tab = lib.mkOption {
       type = lib.types.enum [
+        "none"
         "bufferline"
       ];
       description = "choose tab";

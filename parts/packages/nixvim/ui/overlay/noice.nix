@@ -18,10 +18,6 @@ in
   plugins.which-key = lib.mkIf enableNoice {
     settings.spec = [
       {
-        __unkeyed-1 = "<leader>n";
-        group = "noice";
-      }
-      {
         __unkeyed-1 = "<leader>nt";
         __unkeyed-2 = "<cmd>Noice<cr>";
         desc = "noice toggle";

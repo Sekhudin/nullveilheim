@@ -52,15 +52,13 @@ in
   plugins.which-key = lib.mkIf enableBufferline {
     settings.spec = [
       {
-        __unkeyed-1 = "<Tab>";
+        __unkeyed-1 = "]b";
         __unkeyed-2 = "<cmd>BufferLineCycleNext<cr>";
-        group = "buffer";
         desc = "next buffer";
       }
       {
-        __unkeyed-1 = "<S-Tab>";
+        __unkeyed-1 = "[b";
         __unkeyed-2 = "<cmd>BufferLineCyclePrev<cr>";
-        group = "buffer";
         desc = "prev buffer";
       }
       {
@@ -74,7 +72,7 @@ in
         desc = "last buffer";
       }
       {
-        __unkeyed-1 = "<leader>O";
+        __unkeyed-1 = "<leader>X";
         __unkeyed-2 = "<cmd>BufferLineCloseOthers<cr>";
         desc = "close other buffers";
       }

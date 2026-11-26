@@ -1,12 +1,8 @@
-{ config, ... }:
+{ ... }:
 
-let
-  cfg = config.nixvimTools;
-  enableNvim-autopairs = cfg.pairs == "nvim-autopairs";
-in
 {
   plugins.nvim-autopairs = {
-    enable = enableNvim-autopairs;
+    enable = true;
     lazyLoad.settings.event = [ "InsertEnter" ];
     settings = {
       fast_wrap.map = "<M-e>";

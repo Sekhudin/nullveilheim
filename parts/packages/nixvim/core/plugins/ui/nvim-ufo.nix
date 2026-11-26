@@ -1,12 +1,8 @@
-{ config, lib, ... }:
+{ ... }:
 
-let
-  cfg = config.nixvimUI;
-  enableNvim-ufo = cfg.fold == "nvim-ufo";
-in
 {
   plugins.nvim-ufo = {
-    enable = enableNvim-ufo;
+    enable = true;
     lazyLoad.settings.event = [ "BufEnter" ];
     settings.provider_selector = ''
       function(bufnr, filetype, buftype)
@@ -39,14 +35,5 @@ in
         return { "treesitter", "indent" }
       end
     '';
-  };
-
-  plugins.which-key = lib.mkIf enableNvim-ufo {
-    settings.spec = [
-      {
-        __unkeyed-1 = "z";
-        group = "fold";
-      }
-    ];
   };
 }

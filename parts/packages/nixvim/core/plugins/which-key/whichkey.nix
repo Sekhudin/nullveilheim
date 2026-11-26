@@ -40,6 +40,25 @@
           __unkeyed-1 = "g";
           mode = "n";
         }
+        {
+          __unkeyed-1 = "[";
+          mode = "n";
+        }
+        {
+          __unkeyed-1 = "]";
+          mode = "n";
+        }
+        {
+          __unkeyed-1 = "s";
+          mode = [
+            "n"
+            "v"
+          ];
+        }
+        {
+          __unkeyed-1 = "z";
+          mode = "n";
+        }
       ];
     };
   };

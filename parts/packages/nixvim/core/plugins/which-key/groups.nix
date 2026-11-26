@@ -8,9 +8,21 @@
       icon = icon.database;
     }
     {
+      __unkeyed-1 = "<leader>g";
+      group = "git";
+    }
+    {
       __unkeyed-1 = "<leader>l";
       group = "lsp";
       icon = icon.code;
+    }
+    {
+      __unkeyed-1 = "<leader>n";
+      group = "noice";
+    }
+    {
+      __unkeyed-1 = "<leader>t";
+      group = "toggle";
     }
     {
       __unkeyed-1 = "[";
@@ -27,6 +39,10 @@
     {
       __unkeyed-1 = "s";
       group = "seek";
+    }
+    {
+      __unkeyed-1 = "z";
+      group = "fold";
     }
   ];
 }
